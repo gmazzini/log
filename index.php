@@ -97,7 +97,7 @@ else {
   switch($run){
     case "start":
       echo "ciao\n";
-      $qsostart=date('Y-m-d H:i:s');
+      $qsostart=gmdate('Y-m-d H:i:s');
       break;  
     
     
