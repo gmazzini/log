@@ -60,6 +60,10 @@ else {
   echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\">";
   echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\">";
   echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\">";
+  echo "<br>";
+  
+  echo "<input type=\"submit\" name=\"run\" value=\"insert\">";
+  echo "<br>";
 
   $run=$_POST['run'];
   $page=(int)$_POST['page'];
