@@ -62,7 +62,8 @@ else {
   echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\">";
   echo "<br>";
   
-  echo "<input type=\"submit\" name=\"run\" value=\"insert\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"start\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"end\">";
   echo "<br>";
 
   $run=$_POST['run'];
@@ -77,6 +78,12 @@ else {
   }
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
+    case "start":
+    echo "ciao\n";
+      
+    break;
+      
+      
     case "find":
     echo "<pre>";
     $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
