@@ -68,20 +68,37 @@ else {
 
   $run=$_POST['run'];
   $page=(int)$_POST['page'];
+  $qso_start=$_POST['qso_start'];
   switch($run){
-    case "list": $page=0; break;
-    case "list up": $run="list"; $page+=$mypage; break;
-    case "list dw": $run="list"; $page-=$mypage; break;
-    case "find": $page=0; break;
-    case "find up": $run="find"; $page+=$mypage; break;
-    case "find dw": $run="find"; $page-=$mypage; break;
+    case "list": 
+      $page=0; 
+      break;
+    case "list up": 
+      $run="list"; 
+      $page+=$mypage; 
+      break;
+    case "list dw": 
+      $run="list"; 
+      $page-=$mypage; 
+      break;
+    case "find": 
+      $page=0; 
+      break;
+    case "find up": 
+      $run="find";
+      $page+=$mypage;
+      break;
+    case "find dw":
+      $run="find";
+      $page-=$mypage;
+      break;
   }
-  echo "<h1>$mycall $mygrid $page</h1>";
+  echo "<h1>$mycall $mygrid $page $qso_start</h1>";
   switch($run){
     case "start":
-    echo "ciao\n";
-      
-    break;
+      echo "ciao\n";
+      $qso_start=date('Y-m-d H:i:s');
+      break;
       
       
     case "find":
@@ -139,6 +156,7 @@ else {
     break;
 
   }
+  echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "</form>";
 }
