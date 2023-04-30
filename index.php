@@ -50,9 +50,9 @@ else {
   echo "<input type=\"file\" name=\"myfile\">";
   echo "<br>";
 
-  $Icallsign=$_POST['Icallsign'];
+  $Icallsign=strtoupper($_POST['Icallsign']);
   $Ifreqtx=$_POST['Ifreqtx'];
-  $Imode=$_POST['Imode'];
+  $Imode=strtoupper($_POST['Imode']);
   $Isignaltx=$_POST['Isignaltx'];
   $Isignalrx=$_POST['Isignalrx'];
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\">";
