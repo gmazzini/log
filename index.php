@@ -93,14 +93,15 @@ else {
       $page-=$mypage;
       break;
   }
-  echo "<h1>$mycall $mygrid $page $qso_start</h1>";
+  echo "<h1>$mycall $mygrid $page $qsostart</h1>";
   switch($run){
     case "start":
       echo "ciao\n";
-      $qso_start=date('Y-m-d H:i:s');
-      break;
-      
-      
+      $qsostart=date('Y-m-d H:i:s');
+      break;  
+    
+    
+    
     case "find":
     echo "<pre>";
     $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
