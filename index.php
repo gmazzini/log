@@ -95,10 +95,15 @@ else {
   }
   echo "<h1>$mycall $mygrid $page $qsostart</h1>";
   switch($run){
+    case "end":
+      $qsoend=gmdate('Y-m-d H:i:s');
+      echo "insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$Ifreqtx,$Ifreqtx,'$Isignaltx','$Isignalrx')";
+      break;
+      
     case "start":
       echo "ciao\n";
       $qsostart=gmdate('Y-m-d H:i:s');
-      break;  
+      break; 
     
     
     
