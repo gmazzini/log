@@ -68,7 +68,7 @@ else {
 
   $run=$_POST['run'];
   $page=(int)$_POST['page'];
-  $qso_start=$_POST['qso_start'];
+  $qsostart=$_POST['qsostart'];
   switch($run){
     case "list": 
       $page=0; 
