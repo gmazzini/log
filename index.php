@@ -51,11 +51,15 @@ else {
   echo "<br>";
 
   $Icallsign=$_POST['Icallsign'];
+  $Ifreqtx=$_POST['Ifreqtx'];
+  $Imode=$_POST['Imode'];
+  $Isignaltx=$_POST['Isignaltx'];
+  $Isignalrx=$_POST['Isignalrx'];
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\">";
-  echo "<input type=\"text\" name=\"Ifreqtx\">";
-  echo "<input type=\"text\" name=\"Imode\">";
-  echo "<input type=\"text\" name=\"Isignaltx\">";
-  echo "<input type=\"text\" name=\"Isignalrx\">";
+  echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\">";
+  echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\">";
+  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\">";
+  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\">";
 
   $run=$_POST['run'];
   $page=(int)$_POST['page'];
