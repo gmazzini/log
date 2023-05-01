@@ -9,7 +9,7 @@ fwrite($fp,"IK4LZH");
 while(!feof($fp)){
   $line=trim(fgets($fp,128));
   echo $line."\n";
-  $aux=explode(" ",$line);
+  $aux=preg_split('/\s+/',$line);
   print_r($aux);
   if($aux[0]=="DX"&&$aux[1]=="de"){
     $timespot=gmdate('Y-m-d H:i:s');
