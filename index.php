@@ -244,7 +244,10 @@ else {
         if(substr($line,0,1)=="D"){$dateon=substr($line,1); continue;}
         if(substr($line,0,1)=="F"){$freqtx=substr($line,1)*1000; continue;}
         if(substr($line,0,1)=="M"){$mode=substr($line,1); continue;}
+        echo "qq\n";
+        
         $aux=eplode(" ",$line);
+        
         print_r($aux);
         $timeon=$aux[0]."00";
         $timeoff=$aux[0]."59";
