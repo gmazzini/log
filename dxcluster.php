@@ -7,7 +7,7 @@ mysqli_query($con,"SET time_zone='+00:00'");
 
 fwrite($fp,"IK4LZH");
 while(!feof($fp)){
-  $line=fgets($fp,128);
+  $line=preg_replace('/[\x00-\x1F\x7F-\xFF]/','',fgets($fp,128));
   $aux=explode(" ",$line);
   print_r($aux);
   if($aux[0]=="DX"&&$aux[1]=="de"){
