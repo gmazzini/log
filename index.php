@@ -53,6 +53,7 @@ else {
 
   echo "<input type=\"submit\" name=\"run\" value=\"import\">";
   echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">";
   echo "<input type=\"file\" name=\"myfile\">";
   echo "<br>";
 
@@ -103,6 +104,41 @@ else {
   }
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
+    case "exportcbr":
+      if(!isset($_FILES['myfile']['tmp_name']))break;
+      $name=rand().rand().rand().rand().".cbr";
+      $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
+      fprintf($fp,"START-OF-LOG: 3.0\n");
+      fprintf($fp,"CONTEST: xxxxxx\n");
+      fprintf($fp,"CALLSIGN: $mycall\n");
+      fprintf($fp,"CATEGORY-OPERATOR: SINGLE-OP\n");
+      fprintf($fp,"CATEGORY-ASSISTED: ASSISTED\n");
+      fprintf($fp,"CATEGORY-BAND: ALL\n");
+      fprintf($fp,"CATEGORY-POWER: LOW\n");
+      fprintf($fp,"CATEGORY-TRANSMITTER: ONE\n");
+      fprintf($fp,"CREATED-BY: IK4LZH logger\n");
+      fprintf($fp,"NAME: xxxxxxx xxxxxx\n");
+      fprintf($fp,"ADDRESS: xxxxxx\n");
+      fprintf($fp,"ADDRESS-CITY: xxxxx\n");
+      fprintf($fp,"ADDRESS-POSTALCODE: xxxxxx\n");
+      fprintf($fp,"ADDRESS-COUNTRY: xxxxxx\n");
+      fprintf($fp,"OPERATORS: $mycall\n");
+      $aux=file_get_contents($_FILES['myfile']['tmp_name']);
+      $export_from=myextract($aux,"export_from");
+      $export_to=myextract($aux,"export_to");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
+      $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH");
+      for(;;){
+        $row=mysqli_fetch_array($query);
+        if($row==null)break;
+        fprintf($fp,"QSO: %5d %2s %04d-%02d-%02d ",$row[2]/1000,$mymode[$row[3]],substr($row[0],0,4),substr($row[0],5,2),substr($row[0],8,2));
+        fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row[0],11,2),substr($row[0],14,2),$mycall,$row[4],"",$row[1],$row[5],"");
+      }
+      fclose($fp);
+      echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download ADIF</a><br>";
+      echo "$export_from $export_to\n";
+      break;
+      
     case "exportadi":
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $name=rand().rand().rand().rand().".adi";
@@ -122,7 +158,7 @@ else {
         fprintf($fp,"%s\n",myinsert(substr($row[6],0,4).substr($row[6],5,2).substr($row[6],8,2),"QSO_DATE_OFF"));
         fprintf($fp,"%s\n",myinsert(substr($row[6],11,2).substr($row[6],14,2).substr($row[6],17,2),"TIME_OFF"));
         fprintf($fp,"%s\n",myinsert(sprintf("%7.5f",$row[2]/1000000),"FREQ"));
-        fprintf($fp,"%s\n",myinsert(sprintf("%7.5f",$row[2]/1000000),"FREQ_RX"));
+        fprintf($fp,"%s\n",myinsert(sprintf("%7.5f",$row[7]/1000000),"FREQ_RX"));
         fprintf($fp,"%s\n",myinsert($row[4],"RST_SENT"));
         fprintf($fp,"%s\n",myinsert($row[5],"RST_RCVD"));
         fprintf($fp,"%s\n",myinsert($row[3],"MODE"));                
