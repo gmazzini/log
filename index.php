@@ -127,7 +127,7 @@ else {
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
       $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
-      $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH");
+      $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
@@ -135,7 +135,7 @@ else {
         fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row[0],11,2),substr($row[0],14,2),$mycall,$row[4],"",$row[1],$row[5],"");
       }
       fclose($fp);
-      echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download ADIF</a><br>";
+      echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download Cabrillo</a><br>";
       echo "$export_from $export_to\n";
       break;
       
