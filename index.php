@@ -125,9 +125,9 @@ else {
         $row[6]=$q2->Callsign->country;
         $row[7]=$q2->Callsign->grid;
         $row[8]=$q2->Callsign->email;
-        $row[9]=$q2->Callsign->cqzone;
-        $row[10]=$q2->Callsign->ituzone;
-        $row[11]=$q2->Callsign->born;
+        $row[9]=(int)$q2->Callsign->cqzone;
+        $row[10]=(int)$q2->Callsign->ituzone;
+        $row[11]=(int)$q2->Callsign->born;
         $mynow=gmdate('Y-m-d H:i:s');
         mysqli_query($con,"insert into who (firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,myupdate) value ('$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],'$mynow')");
         echo "insert into who (firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,myupdate) value ('$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],$mynow)";
