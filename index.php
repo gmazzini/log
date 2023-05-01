@@ -96,7 +96,7 @@ else {
       if($page<0)$page=0;
       break;
   }
-  echo "<h1>$mycall $mygrid $page $qsostart</h1>";
+  echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
