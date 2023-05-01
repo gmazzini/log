@@ -237,18 +237,12 @@ else {
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $dateon="";
       $freq="";
-      echo "ciOOO\n";
       while(!feof($hh)){
         $line=strtoupper(trim(fgets($hh)));
-        echo $line."\n";
         if(substr($line,0,1)=="D"){$dateon=substr($line,1); continue;}
         if(substr($line,0,1)=="F"){$freqtx=substr($line,1)*1000; continue;}
         if(substr($line,0,1)=="M"){$mode=substr($line,1); continue;}
-        echo "qq\n";
-        
         $aux=explode(" ",$line);
-        
-        print_r($aux);
         $timeon=$aux[0]."00";
         $timeoff=$aux[0]."59";
         $callsign=$aux[1];
@@ -260,8 +254,7 @@ else {
         $dateoff=$dateon;
         $start=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":".substr($timeon,4,2);
         $end=substr($dateoff,0,4)."-".substr($dateoff,4,2)."-".substr($dateoff,6,2)." ".substr($timeoff,0,2).":".substr($timeoff,2,2).":".substr($timeoff,4,2);
-        // mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx')");
-        echo "insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx')\n";
+        mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx')");
       }
       fclose($hh);
       break;  
