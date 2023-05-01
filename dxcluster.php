@@ -1,5 +1,5 @@
 <?php
-#include "local.php";
+include "local.php";
 
 $fp=pfsockopen($dxcaddr,$dxcport);
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
