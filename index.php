@@ -246,7 +246,7 @@ else {
         if(substr($line,0,1)=="M"){$mode=substr($line,1); continue;}
         echo "qq\n";
         
-        $aux=eplode(" ",$line);
+        $aux=explode(" ",$line);
         
         print_r($aux);
         $timeon=$aux[0]."00";
