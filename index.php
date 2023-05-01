@@ -116,6 +116,7 @@ else {
         print_r($q2->Callsign);
         echo "</pre>";
         $row[0]=$q2->Callsign->fname;
+        if(isset($q2->Callsign->nickname))$row[0].=' "'.$q2->Callsign->nickname.'"';
         $row[1]=$q2->Callsign->name;
         $row[2]=$q2->Callsign->addr1;
         $row[3]=$q2->Callsign->addr2;
