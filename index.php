@@ -80,7 +80,8 @@ else {
       break;
     case "list dw": 
       $run="list"; 
-      $page-=$mypage; 
+      $page-=$mypage;
+      if($page<0)$page=0;
       break;
     case "find": 
       $page=0; 
@@ -92,6 +93,7 @@ else {
     case "find dw":
       $run="find";
       $page-=$mypage;
+      if($page<0)$page=0;
       break;
   }
   echo "<h1>$mycall $mygrid $page $qsostart</h1>";
