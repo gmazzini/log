@@ -48,6 +48,7 @@ else {
   echo "<br>";
 
   echo "<input type=\"submit\" name=\"run\" value=\"import\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">";
   echo "<input type=\"file\" name=\"myfile\">";
   echo "<br>";
 
@@ -98,6 +99,14 @@ else {
   }
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
+    case "exportadi":
+      if(!isset($_FILES['myfile']['tmp_name']))break;
+      $aux=file_get_contents($_FILES['myfile']['tmp_name']);
+      $export_from=myextract($aux,"export_from");
+      $export_from=myextract($aux,"export_to");
+      echo "$export_from $export_to\n";
+      break;
+      
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
       $ftx=$Ifreqtx*1000;
