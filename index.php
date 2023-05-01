@@ -120,7 +120,7 @@ else {
       }
       mysqli_free_result($query);
       echo "<pre>";
-      sprintf("---\n%s %s\n",$row[0],$row[1]);
+      printf("---\n%s %s\n",$row[0],$row[1]);
       echo "</pre>";
       break; 
     
