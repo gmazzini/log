@@ -237,8 +237,10 @@ else {
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $dateon="";
       $freq="";
+      echo "ciOOO\n";
       while(!feof($hh)){
         $line=strtoupper(trim(fgets($hh)));
+        echo $line."\n";
         if(substr($line,0,1)=="D"){$dateon=substr($line,1); continue;}
         if(substr($line,0,1)=="F"){$freqtx=substr($line,1)*1000; continue;}
         if(substr($line,0,1)=="M"){$mode=substr($line,1); continue;}
