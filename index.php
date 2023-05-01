@@ -105,8 +105,10 @@ else {
   switch($run){
     case "exportadi":
       if(!isset($_FILES['myfile']['tmp_name']))break;
-      $name=rand().rand().rand().rand().".cbr";
+      $name=rand().rand().rand().rand().".adi";
       $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
+      fprintf($fp,"%s\n",myinsert("LZHlogger","PROGRAMID"));
+      fprintf($fp,"<EOH>\n\n");
       $aux=file_get_contents($_FILES['myfile']['tmp_name']);
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
