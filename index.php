@@ -110,7 +110,9 @@ else {
       $qsostart=gmdate('Y-m-d H:i:s');
       $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
       $q2=simplexml_load_string($q1);
+      echo "<pre>";
       print_r($q2->Callsign);
+      echo "</pre>";
       break; 
     
     case "find":
