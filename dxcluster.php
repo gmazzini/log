@@ -12,6 +12,7 @@ while(!feof($fp)){
   if($aux[0]=="DX"&&$aux[1]=="de"){
     $timespot=gmdate('Y-m-d H:i:s');
     mysqli_query($con,"insert into dxc (dx,spotter,freq,timespot) value ('$aux[4]','$aux[2]',$aux[3],'$timespot')");
+    echo "insert into dxc (dx,spotter,freq,timespot) value ('$aux[4]','$aux[2]',$aux[3],'$timespot')\n";
   }
 }
 
