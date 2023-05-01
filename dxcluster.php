@@ -9,10 +9,11 @@ fwrite($fp,"IK4LZH");
 while(!feof($fp)){
   $line=fgets($fp,128);
   $aux=explode(" ",$line);
+  print_r($aux);
   if($aux[0]=="DX"&&$aux[1]=="de"){
     $timespot=gmdate('Y-m-d H:i:s');
     mysqli_query($con,"insert into dxc (dx,spotter,freq,timespot) value ('$aux[4]','$aux[2]',$aux[3],'$timespot')");
-    echo "insert into dxc (dx,spotter,freq,timespot) value ('$aux[4]','$aux[2]',$aux[3],'$timespot')\n";
+    echo "insert into dxc (dx,spotter,freq,timespot) value ('$aux[4]','$aux[2]',$aux[3]*1000,'$timespot')\n";
   }
 }
 
