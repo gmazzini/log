@@ -103,7 +103,15 @@ else {
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $aux=file_get_contents($_FILES['myfile']['tmp_name']);
       $export_from=myextract($aux,"export_from");
-      $export_from=myextract($aux,"export_to");
+      $export_to=myextract($aux,"export_to");
+      echo "<pre>";
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start desc");
+      for(;;){
+        $row=mysqli_fetch_array($query);
+        if($row==null)break;
+        printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
+      }
+      echo "</pre>";
       echo "$export_from $export_to\n";
       break;
       
