@@ -105,20 +105,22 @@ else {
   switch($run){
     case "exportadi":
       if(!isset($_FILES['myfile']['tmp_name']))break;
+      $name=rand().rand().rand().rand().".cbr";
+      $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
       $aux=file_get_contents($_FILES['myfile']['tmp_name']);
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
-      echo "<pre>";
       $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
-        printf("%s\n",myinsert($row[1],"CALL"));
-        printf("%s\n",myinsert(substr($row[0],0,4).substr($row[0],5,2).substr($row[0],8,2),"QSO_DATE"));
-        printf("%s\n",myinsert(substr($row[0],11,2).substr($row[0],14,2).substr($row[0],17,2),"TIME_ON"));
-        printf("<EOR>\n\n");
+        fprintf($fp,"%s\n",myinsert($row[1],"CALL"));
+        fprintf($fp,"%s\n",myinsert(substr($row[0],0,4).substr($row[0],5,2).substr($row[0],8,2),"QSO_DATE"));
+        fprintf($fp,"%s\n",myinsert(substr($row[0],11,2).substr($row[0],14,2).substr($row[0],17,2),"TIME_ON"));
+        fprintf($fp,"<EOR>\n\n");
       }
-      echo "</pre>";
+      fclose($fp);
+      echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download Cabrillo</a><br>";
       echo "$export_from $export_to\n";
       break;
       
