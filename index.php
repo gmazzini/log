@@ -107,7 +107,7 @@ else {
       
     case "start":
       $qsostart=gmdate('Y-m-d H:i:s');
-      $query=mysqli_query($con,"select firstname,lastname from who where callsign='$Icallsign'");
+      $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born from who where callsign='$Icallsign'");
       $row=mysqli_fetch_array($query);
       if($row==null){
         $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
@@ -117,10 +117,20 @@ else {
         echo "</pre>";
         $row[0]=$q2->Callsign->fname;
         $row[1]=$q2->Callsign->name;
+        $row[2]=$q2->Callsign->addr1;
+        $row[3]=$q2->Callsign->addr2;
+        $row[4]=$q2->Callsign->state;
+        $row[5]=$q2->Callsign->zip;
+        $row[6]=$q2->Callsign->country;
+        $row[7]=$q2->Callsign->grid;
+        $row[8]=$q2->Callsign->email;
+        $row[9]=$q2->Callsign->cqzone;
+        $row[10]=$q2->Callsign->ituzone;
+        $row[11]=$q2->Callsign->born;
       }
       mysqli_free_result($query);
       echo "<pre>";
-      printf("---\n%s %s\n",$row[0],$row[1]);
+      printf("---\n%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n",$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
       echo "</pre>";
       break; 
     
