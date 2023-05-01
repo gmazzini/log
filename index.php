@@ -10,6 +10,10 @@ function myextract($buf,$token){
   return substr($buf,$pose+1,$ll);
 }
 
+function myinsert($buf,$token){
+  return "<".$token.":".strlen($buf).">".$buf; 
+}
+
 $act=(int)$_POST['act'];
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -105,11 +109,14 @@ else {
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
       echo "<pre>";
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start desc");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
-        printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
+        printf("%s\n",myinsert($row[1],"CALL"));
+        printf("%s\n",myinsert(substr($row[0],0,4).substr($row[0],5,2).substr($row[0],8,2),"QSO_DATE"));
+        printf("%s\n",myinsert(substr($row[0],11,2).substr($row[0],14,2).substr($row[0],17,2),"TIME_ON"));
+        printf("<EOR>\n\n");
       }
       echo "</pre>";
       echo "$export_from $export_to\n";
