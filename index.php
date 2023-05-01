@@ -1,4 +1,5 @@
 <?php
+include "local.php";
 
 function myextract($buf,$token){
   $pos=stripos($buf,"<".$token.":");
@@ -10,7 +11,7 @@ function myextract($buf,$token){
 }
 
 $act=(int)$_POST['act'];
-$con=mysqli_connect("127.0.0.1","log","log345log","log");
+$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $mypage=30;
 
@@ -105,75 +106,69 @@ else {
     case "start":
       echo "ciao\n";
       $qsostart=gmdate('Y-m-d H:i:s');
+      $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
+      $q2=simplexml_load_string($q1);
+      print_r($q2->Callsign);
       break; 
     
-    
-    
     case "find":
-    echo "<pre>";
-    $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
-    for(;;){
-      $row=mysqli_fetch_array($query);
-      if($row==null)break;
-      printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
-    }
-    echo "</pre>";
-    mysqli_free_result($query);
-    break;
+      echo "<pre>";
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
+      for(;;){
+        $row=mysqli_fetch_array($query);
+        if($row==null)break;
+        printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
+      }
+      echo "</pre>";
+      mysqli_free_result($query);
+      break;
 
     case "list";
-    echo "<pre>";
-    $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where mycall='$mycall' order by start desc limit $mypage offset $page");
-    for(;;){
-      $row=mysqli_fetch_array($query);
-      if($row==null)break;
-      printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
-    }
-    echo "</pre>";
-    mysqli_free_result($query);
-    break;
+      echo "<pre>";
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where mycall='$mycall' order by start desc limit $mypage offset $page");
+      for(;;){
+        $row=mysqli_fetch_array($query);
+        if($row==null)break;
+        printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
+      }
+      echo "</pre>";
+      mysqli_free_result($query);
+      break;
 
     case "import";
-    if(isset($_FILES['myfile']['tmp_name']))$hh=fopen($_FILES['myfile']['tmp_name'],"r");
-    $aux="";
-    while(!feof($hh)){
-      $line=trim(fgets($hh));
-      $pp=stripos($line,"<eor>");
-      if($pp===false)$aux.=$line;
-      else {
-        $aux.=substr($line,0,$pp);
-        $callsign=myextract($aux,"call");
-        $freqtx=myextract($aux,"freq")*1000000;
-        $freqrx=myextract($aux,"freq_rx")*1000000;
-        $signaltx=myextract($aux,"rst_sent");
-        $signalrx=myextract($aux,"rst_rcvd");
-        $mode=myextract($aux,"mode");
-        $timeon=myextract($aux,"time_on");
-        if(strlen($timeon)==4)$timeon.="00";
-        $timeoff=myextract($aux,"time_off");
-        if(strlen($timeoff)==4)$timeoff.="00"; 
-        $dateon=myextract($aux,"qso_date");
-        $dateoff=myextract($aux,"qso_date_off");
-        $start=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":".substr($timeon,4,2);
-        $end=substr($dateoff,0,4)."-".substr($dateoff,4,2)."-".substr($dateoff,6,2)." ".substr($timeoff,0,2).":".substr($timeoff,2,2).":".substr($timeoff,4,2);
-        mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx')");
-        $aux=substr($line,$pp+5);
+      if(isset($_FILES['myfile']['tmp_name']))$hh=fopen($_FILES['myfile']['tmp_name'],"r");
+      $aux="";
+      while(!feof($hh)){
+        $line=trim(fgets($hh));
+        $pp=stripos($line,"<eor>");
+        if($pp===false)$aux.=$line;
+        else {
+          $aux.=substr($line,0,$pp);
+          $callsign=myextract($aux,"call");
+          $freqtx=myextract($aux,"freq")*1000000;
+          $freqrx=myextract($aux,"freq_rx")*1000000;
+          $signaltx=myextract($aux,"rst_sent");
+          $signalrx=myextract($aux,"rst_rcvd");
+          $mode=myextract($aux,"mode");
+          $timeon=myextract($aux,"time_on");
+          if(strlen($timeon)==4)$timeon.="00";
+          $timeoff=myextract($aux,"time_off");
+          if(strlen($timeoff)==4)$timeoff.="00"; 
+          $dateon=myextract($aux,"qso_date");
+          $dateoff=myextract($aux,"qso_date_off");
+          $start=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":".substr($timeon,4,2);
+          $end=substr($dateoff,0,4)."-".substr($dateoff,4,2)."-".substr($dateoff,6,2)." ".substr($timeoff,0,2).":".substr($timeoff,2,2).":".substr($timeoff,4,2);
+          mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx')");
+          $aux=substr($line,$pp+5);
+        }
       }
-    }
-    fclose($hh);
-    break;
-
+      fclose($hh);
+      break;
   }
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "</form>";
 }
-
-
-// mysqli_query($con,"update redirect set hit=hit+1 where origin='$org'");
-
-
-
 
 mysqli_close($con);
 
