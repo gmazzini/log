@@ -106,12 +106,21 @@ else {
       break;
       
     case "start":
-      echo "ciao\n";
       $qsostart=gmdate('Y-m-d H:i:s');
-      $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
-      $q2=simplexml_load_string($q1);
+      $query=mysqli_query($con,"select firstname,lastname from who where callsign='$Icallsign'");
+      $row=mysqli_fetch_array($query);
+      if($row==null){
+        $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
+        $q2=simplexml_load_string($q1);
+        echo "<pre>";
+        print_r($q2->Callsign);
+        echo "</pre>";
+        $row[0]=$q2->Callsign->fname;
+        $row[1]=$q2->Callsign->name;
+      }
+      mysqli_free_result($query);
       echo "<pre>";
-      print_r($q2->Callsign);
+      sprintf("%s %s\n",$row[0],$row[1]);
       echo "</pre>";
       break; 
     
