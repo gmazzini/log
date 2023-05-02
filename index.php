@@ -63,6 +63,10 @@ else {
   $Imode=strtoupper($_POST['Imode']);
   $Isignaltx=$_POST['Isignaltx'];
   $Isignalrx=$_POST['Isignalrx'];
+  $Icontest=$_POST['Icontest'];
+  $Icontesttx=$_POST['Icontesttx'];
+  $Icontestrx=$_POST['Icontestrx'];
+  echo "<label>Call</label>";
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\">";
   echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\">";
   echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\">";
