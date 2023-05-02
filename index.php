@@ -83,6 +83,8 @@ else {
   $qsostart=$_POST['qsostart'];
   $runcontest=(int)$_POST['runcontest'];
   
+  echo "<h2>$runcontest</h2>";
+  
   if($runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
   else echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
   echo "<input type=\"submit\" name=\"run\" value=\"start\">";
