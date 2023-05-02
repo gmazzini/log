@@ -155,6 +155,15 @@ else {
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
+        $freq=$row[2]/1000;
+        for($i=0;;$i++){
+          if(!isset($bpfreq[$i]))break;
+          if($freq>=$bpfreq[$i][1]&&$freq<$bpfreq[$i][2]){
+            echo $bpfreq[$i][0]." ".$bpfreq[$i][3]."\n";
+            break;
+          }
+        }
+        
         printf("%s %10s %7.1f %10s\n",$row[3],$row[0],$row[2]/1000,$row[1]);
       }
       echo "</pre>";
