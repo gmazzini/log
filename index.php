@@ -208,8 +208,17 @@ else {
       $qsoend=gmdate('Y-m-d H:i:s');
       $ftx=$Ifreqtx*1000;
       $frx=$ftx;
-      if($runcontest)mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx','$Icontesttx','$Icontestrx','$Icontest')");
-      else mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx')");
+      if($runcontest){
+        $Acontesttx=$Icontesttx;
+        $Acontestrx=$Icontestrx;
+        $Acontest=$Icontest;
+      }
+      else {
+        $Acontesttx="";
+        $Acontestrx="";
+        $Acontest="";
+      }
+      mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx','$Acontesttx','$Acontestrx','$Acontest')");
       break;
       
     case "start":
