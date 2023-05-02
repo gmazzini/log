@@ -139,7 +139,7 @@ else {
   
   $dxcsel=$_POST['dxcsel'];
   echo "<label>160</label><input type=\"checkbox\" name=\"dxcsel[]\" value=\"160\"";
-  foreach($dxcsrl as &$vv)if($vv=="160")echo " checked";
+  foreach($dxcsel as &$vv)if($vv=="160")echo " checked";
   echo ">";
   
   echo "<label>80</label>";
