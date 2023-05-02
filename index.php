@@ -137,8 +137,11 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"end\">";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
   
-  echo "<label>160</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"160\">";
+  $dxcsel=$_POST['dxcsel'];
+  echo "<label>160</label><input type=\"checkbox\" name=\"dxcsel[]\" value=\"160\"";
+  foreach($dxcsrl as &$vv)if($vv=="160")echo " checked";
+  echo ">";
+  
   echo "<label>80</label>";
   echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"80\">";
   echo "<label>60</label>";
