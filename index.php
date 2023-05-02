@@ -140,7 +140,7 @@ else {
   
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
-      case "cluster";
+    case "cluster":
       echo "<pre>";
       $query=mysqli_query($con,"select dxc,spotter,freq,timespot from dxc order by timespot desc limit $mypage");
       for(;;){
