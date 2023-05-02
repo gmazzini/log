@@ -118,11 +118,17 @@ else {
   
   if($runcontest){
     echo "<label>contestTX</label>";
-     echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\">";
-     echo "<label>ContestRX</label>";
-     echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\">";
-     echo "<label>contest</label>";
-     echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\">";
+    echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\">";
+    echo "<label>ContestRX</label>";
+    echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\">";
+    echo "<label>contest</label>";
+    echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\">";
+    echo "<br>"; 
+  }
+  else {
+    echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
+    echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
+    echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
   
   if($runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
