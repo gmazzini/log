@@ -78,13 +78,17 @@ else {
   echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\">";
   echo "<br>";
   
+  $run=$_POST['run'];
+  $page=(int)$_POST['page'];
+  $qsostart=$_POST['qsostart'];
+  $runcontest=(int)$_POST['runcontest'];
+  
+  if($runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
+  else echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
   echo "<input type=\"submit\" name=\"run\" value=\"start\">";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">";
   echo "<br>";
 
-  $run=$_POST['run'];
-  $page=(int)$_POST['page'];
-  $qsostart=$_POST['qsostart'];
   switch($run){
     case "list": 
       $page=0; 
@@ -113,6 +117,14 @@ else {
   }
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
+    case "contest":
+      $runcontest=1;
+      break;
+      
+    case "contest off":
+      $runcontest=0;
+      break;
+      
     case "exportcbr":
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $name=rand().rand().rand().rand().".cbr";
@@ -182,7 +194,7 @@ else {
       $qsoend=gmdate('Y-m-d H:i:s');
       $ftx=$Ifreqtx*1000;
       $frx=$ftx;
-      mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx')");
+      mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx','$Icontesttx','$Icontestrx','$Icontest')");
       break;
       
     case "start":
@@ -300,6 +312,7 @@ else {
   }
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
+  echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
   echo "</form>";
 }
 
