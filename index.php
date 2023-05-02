@@ -135,10 +135,23 @@ else {
   else echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
   echo "<input type=\"submit\" name=\"run\" value=\"start\">";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
   echo "<br>";
   
   echo "<h1>$mycall $mygrid $page</h1>";
-  switch($run){    
+  switch($run){
+      case "cluster";
+      echo "<pre>";
+      $query=mysqli_query($con,"select dxc,spotter,freq,timespot from dxc order by timespot desc limit $mypage");
+      for(;;){
+        $row=mysqli_fetch_array($query);
+        if($row==null)break;
+        printf("%s %10s %7.1f %10s\n",$row[3],$row[0],$row[2]/1000,$row[1]);
+      }
+      echo "</pre>";
+      mysqli_free_result($query);
+      break;
+      
     case "exportcbr":
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $name=rand().rand().rand().rand().".cbr";
