@@ -210,7 +210,7 @@ else {
       $frx=$ftx;
       if($runcontest)mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx','$Icontesttx','$Icontestrx','$Icontest')");
       else mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx')");
-      break;t
+      break;
       
     case "start":
       $qsostart=gmdate('Y-m-d H:i:s');
