@@ -24,11 +24,16 @@ if($act>=1){
   $mycall=strtoupper($_POST['mycall']);
   if($act==1)$md5passwd=md5($_POST['mypasswd']);
   else $md5passwd=$_POST['md5passwd'];
-  $query=mysqli_query($con,"select mygrid from user where mycall='$mycall' and md5passwd='$md5passwd'");
+  $query=mysqli_query($con,"select mygrid,cluster from user where mycall='$mycall' and md5passwd='$md5passwd'");
   $row=mysqli_fetch_array($query);
+  if($row!=null){
+    $mygrid=strtoupper($row[0]);
+    $aux=explode(",",$cluster);
+    foreach($aux as &$vv)$dxcsel[$vv]=1;
+  }
+  else $act=0;
   $mygrid=strtoupper($row[0]);
   mysqli_free_result($query);
-  if(strlen($mygrid)!=6)$act=0;
 }
 
 if($act==0){
