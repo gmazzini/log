@@ -142,7 +142,7 @@ else {
   switch($run){
     case "cluster":
       echo "<pre>";
-      $query=mysqli_query($con,"select dxc,spotter,freq,timespot from dxc order by timespot desc limit $mypage");
+      $query=mysqli_query($con,"select dx,spotter,freq,timespot from dxc order by timespot desc limit $mypage");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
