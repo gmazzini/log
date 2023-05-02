@@ -158,10 +158,7 @@ else {
         $freq=$row[2]/1000;
         for($i=0;;$i++){
           if(!isset($bpfreq[$i]))break;
-          if($freq>=$bpfreq[$i][1]&&$freq<$bpfreq[$i][2]){
-            echo $bpfreq[$i][0]." ".$bpfreq[$i][3]."\n";
-            break;
-          }
+          if($freq>=$bpfreq[$i][1]&&$freq<$bpfreq[$i][2])break;
         }
         if(isset($bpfreq[$i])&&$dxcsel[$bpfreq[$i][0]]&&$dxcsel[$bpfreq[$i][3]]){
         printf("%s %10s %7.1f %10s\n",$row[3],$row[0],$row[2]/1000,$row[1]);
