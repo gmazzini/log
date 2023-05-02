@@ -82,15 +82,6 @@ else {
   $page=(int)$_POST['page'];
   $qsostart=$_POST['qsostart'];
   $runcontest=(int)$_POST['runcontest'];
-  
-  $aaa=gmdate('Y-m-d H:i:s');
-  echo "<h2>$runcontest $aaa</h2>";
-  
-  if($runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
-  else echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"start\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"end\">";
-  echo "<br>";
 
   switch($run){
     case "list": 
@@ -117,17 +108,25 @@ else {
       $page-=$mypage;
       if($page<0)$page=0;
       break;
-  }
-  echo "<h1>$mycall $mygrid $page</h1>";
-  switch($run){
     case "contest":
       $runcontest=1;
       break;
-      
     case "contest off":
       $runcontest=0;
       break;
-      
+  }
+  
+  $aaa=gmdate('Y-m-d H:i:s');
+  echo "<h2>$runcontest $aaa</h2>";
+  
+  if($runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
+  else echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"start\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"end\">";
+  echo "<br>";
+  
+  echo "<h1>$mycall $mygrid $page</h1>";
+  switch($run){    
     case "exportcbr":
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $name=rand().rand().rand().rand().".cbr";
