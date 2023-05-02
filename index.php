@@ -138,8 +138,8 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
   
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
-  foreach(array(160,80) as &$vv){
-    echo "<label>$vv/label>";
+  foreach(array("160","80","60","40","30","20","17","15","12","10","PH","CW","DG") as &$vv){
+    echo "<label>$vv</label>";
     echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"$vv\"";
     if($dxcsel[$vv])echo " checked";
     echo ">";
