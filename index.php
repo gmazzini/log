@@ -68,9 +68,13 @@ else {
   $Icontestrx=$_POST['Icontestrx'];
   echo "<label>Call</label>";
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\">";
+  echo "<label>Freq</label>";
   echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\">";
+  echo "<label>Mode</label>";
   echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\">";
+  echo "<label>SigTX</label>";
   echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\">";
+  echo "<label>SigRX</label>";
   echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\">";
   echo "<br>";
   
