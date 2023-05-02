@@ -28,7 +28,7 @@ if($act>=1){
   $row=mysqli_fetch_array($query);
   if($row!=null){
     $mygrid=strtoupper($row[0]);
-    $aux=explode(",",$cluster);
+    $aux=explode(",",$row[1]);
     foreach($aux as &$vv)$dxcsel[$vv]=1;
   }
   else $act=0;
