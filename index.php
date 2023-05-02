@@ -137,32 +137,13 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"end\">";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
   
-  $dxcsel=$_POST['dxcsel'];
-  echo "<label>160</label><input type=\"checkbox\" name=\"dxcsel[]\" value=\"160\"";
-  foreach($dxcsel as &$vv)if($vv=="160")echo " checked";
-  echo ">";
-  
-  echo "<label>80</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"80\">";
-  echo "<label>60</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"60\">";
-  echo "<label>40</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"40\">";
-  echo "<label>30</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"30\">";
-  echo "<label>20</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"20\">";
-  echo "<label>17</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"17\">";
-  echo "<label>15</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"15\">";
-  echo "<label>12</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"12\">";
-  echo "<label>10</label>";
-  echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"10\">";
-  print_r($_POST['dxcsel']);
-  
-  
+  foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
+  foreach(array(160,80) as &$vv){
+    echo "<label>$vv/label>";
+    echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"$vv\"";
+    if($dxcsel[$vv])echo " checked";
+    echo ">";
+  }  
   echo "<br>";
   
   echo "<h1>$mycall $mygrid $page</h1>";
