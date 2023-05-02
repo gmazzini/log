@@ -157,7 +157,7 @@ else {
   echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"12\">";
   echo "<label>10</label>";
   echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"10\">";
-  print_r($_POST['dxcsel'];);
+  print_r($_POST['dxcsel']);
   
   
   echo "<br>";
