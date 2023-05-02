@@ -1,5 +1,6 @@
 <?php
 include "local.php";
+include "bandplane.php";
 
 function myextract($buf,$token){
   $pos=stripos($buf,"<".$token.":");
