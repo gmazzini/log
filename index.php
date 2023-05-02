@@ -151,7 +151,7 @@ else {
   switch($run){
     case "cluster":
       echo "<pre>";
-      $i=0;
+      $myrow=0;
       $query=mysqli_query($con,"select dx,spotter,freq,timespot from dxc order by timespot desc limit 1000");
       for(;;){
         $row=mysqli_fetch_array($query);
@@ -163,8 +163,8 @@ else {
         }
         if(isset($bpfreq[$i])&&$dxcsel[$bpfreq[$i][0]]&&$dxcsel[$bpfreq[$i][3]]){
           printf("%s %10s %7.1f %10s\n",$row[3],$row[0],$row[2]/1000,$row[1]);
-          $i++;
-          if($i>$mypage)break;
+          $myrow++;
+          if($myrow>$mypage)break;
         }
       }
       echo "</pre>";
