@@ -136,6 +136,30 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"start\">";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
+  
+  echo "<label>160</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"160\">";
+  echo "<label>80</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"80\">";
+  echo "<label>60</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"60\">";
+  echo "<label>40</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"40\">";
+  echo "<label>30</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"30\">";
+  echo "<label>20</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"20\">";
+  echo "<label>17</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"17\">";
+  echo "<label>15</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"15\">";
+  echo "<label>12</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"12\">";
+  echo "<label>10</label>";
+  echo "<input type=\"checkbox\" name=\"dxcsel\" value=\"10\">";
+  print_r($_POST['dxcsel'];);
+  
+  
   echo "<br>";
   
   echo "<h1>$mycall $mygrid $page</h1>";
