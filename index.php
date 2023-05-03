@@ -262,20 +262,22 @@ else {
       $qsostart=gmdate('Y-m-d H:i:s');
       $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born from who where callsign='$Icallsign'");
       $row=mysqli_fetch_array($query);
-      if($row==null){
+      $ff=0;
+      if($row!=null&&strlen($row[0])==0){$ff=1; mysqli_query($con,"delete from who where callsign='$Icallsign'");}
+      if($row==null||$ff){
         $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
         $q2=simplexml_load_string($q1);
-        $row[0]=$q2->Callsign->fname;
+        $row[0]=mysqli_real_escape_string($con,$q2->Callsign->fname);
         if(strlen($row[0])>0){
-          if(isset($q2->Callsign->nickname))$row[0].=' "'.$q2->Callsign->nickname.'"';
-          $row[1]=$q2->Callsign->name;
-          $row[2]=$q2->Callsign->addr1;
-          $row[3]=$q2->Callsign->addr2;
-          $row[4]=$q2->Callsign->state;
-          $row[5]=$q2->Callsign->zip;
-          $row[6]=$q2->Callsign->country;
-          $row[7]=$q2->Callsign->grid;
-          $row[8]=$q2->Callsign->email;
+          if(isset($q2->Callsign->nickname))$row[0].=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
+          $row[1]=mysqli_real_escape_string($con,$q2->Callsign->name);
+          $row[2]=mysqli_real_escape_string($con,$q2->Callsign->addr1);
+          $row[3]=mysqli_real_escape_string($con,$q2->Callsign->addr2);
+          $row[4]=mysqli_real_escape_string($con,$q2->Callsign->state);
+          $row[5]=mysqli_real_escape_string($con,$q2->Callsign->zip);
+          $row[6]=mysqli_real_escape_string($con,$q2->Callsign->country);
+          $row[7]=mysqli_real_escape_string($con,$q2->Callsign->grid);
+          $row[8]=mysqli_real_escape_string($con,$q2->Callsign->email);
           $row[9]=(int)$q2->Callsign->cqzone;
           $row[10]=(int)$q2->Callsign->ituzone;
           $row[11]=(int)$q2->Callsign->born;
