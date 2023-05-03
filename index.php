@@ -48,7 +48,7 @@ if($act==0){
 }
 else {
   echo "<form method=\"post\" enctype=\"multipart/form-data\">";
-  echo "<input class=\"mybut\" type=\"hidden\" name=\"mycall\" value=\"$mycall\">";
+  echo "<input type=\"hidden\" name=\"mycall\" value=\"$mycall\">";
   echo "<input type=\"hidden\" name=\"md5passwd\" value=\"$md5passwd\">";
   echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
   echo "<input type=\"submit\" name=\"run\" value=\"list\">";
