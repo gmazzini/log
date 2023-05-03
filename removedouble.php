@@ -6,7 +6,7 @@ $mycall="IK4LZH";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-$query=mysqli_query($con,"select callsign,start,end from log where mycall='$mycall'");
+$query=mysqli_query($con,"select callsign,start,end from log where mycall='$mycall' order by callsign");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
