@@ -1,3 +1,5 @@
+<style><?php include "style.css"; ?></style>
+
 <?php
 include "local.php";
 include "bandplane.php";
