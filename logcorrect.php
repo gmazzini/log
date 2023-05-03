@@ -11,8 +11,11 @@ for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
   $diff=strtotime($row[2])-strtotime($row[1]);
-  if($diff>3600||$diff<0)echo "... $diff $row[0]  $row[1]  $row[2]\n";
-  
+  if($diff>3600||$diff<0){
+    echo "... $diff $row[0]  $row[1]  $row[2]\n";
+    mysqli_query($con,"update log set end=DATE_ADD(start, INTERVAL 1 HOUR) where mycall='$mycall' and callsign='$row[0]' and start='$row[1]' and end='$row[2]'");
+    exit(0);
+  }
   
   $query2=mysqli_query($con,"select start,end from log where mycall='$mycall' and callsign='$row[0]' and start>'$row[1]' and start<'$row[2]'");
   for(;;){
