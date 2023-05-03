@@ -40,9 +40,9 @@ for(;;){
       $row[6]="";
       $row[7]="";
       $row[8]="";
-      $row[9]="";
-      $row[10]="";
-      $row[11]="";
+      $row[9]=0;
+      $row[10]=0;
+      $row[11]=0;
     }
     echo "...$row[0]\n";
     $mynow=gmdate('Y-m-d H:i:s');
