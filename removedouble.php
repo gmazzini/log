@@ -14,7 +14,7 @@ for(;;){
   for(;;){
     $row2=mysqli_fetch_array($query2);
     if($row2==null)break;
-    echo "$row[0] $row[1] $row[2] $row2[0] $row2[1]\n";
+    echo "$row[0]  $row[1]  $row[2]    $row2[0]  $row2[1]\n";
   }
   mysqli_free_result($query2);
 }
