@@ -10,6 +10,10 @@ $query=mysqli_query($con,"select callsign,start,end from log where mycall='$myca
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
+  $diff=strtotime($row[2]-$row[1]);
+  if($diff>3600||$diff<0)echo "... $diff $row[0]  $row[1]  $row[2]\n";
+  
+  
   $query2=mysqli_query($con,"select start,end from log where mycall='$mycall' and callsign='$row[0]' and start>'$row[1]' and start<'$row[2]'");
   for(;;){
     $row2=mysqli_fetch_array($query2);
