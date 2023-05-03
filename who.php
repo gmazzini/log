@@ -15,17 +15,17 @@ for(;;){
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     sleep(1);
-    $row[0]=$q2->Callsign->fname;
+    $row[0]=mysql_real_escape_string($q2->Callsign->fname);
     if(strlen($row[0])>0){
-      if(isset($q2->Callsign->nickname))$row[0].=' "'.$q2->Callsign->nickname.'"';
-      $row[1]=$q2->Callsign->name;
-      $row[2]=$q2->Callsign->addr1;
-      $row[3]=$q2->Callsign->addr2;
-      $row[4]=$q2->Callsign->state;
-      $row[5]=$q2->Callsign->zip;
-      $row[6]=$q2->Callsign->country;
-      $row[7]=$q2->Callsign->grid;
-      $row[8]=$q2->Callsign->email;
+      if(isset($q2->Callsign->nickname))$row[0].=' "'.mysql_real_escape_string($q2->Callsign->nickname).'"';
+      $row[1]=mysql_real_escape_string($q2->Callsign->name);
+      $row[2]=mysql_real_escape_string($q2->Callsign->addr1);
+      $row[3]=mysql_real_escape_string($q2->Callsign->addr2);
+      $row[4]=mysql_real_escape_string($q2->Callsign->state);
+      $row[5]=mysql_real_escape_string($q2->Callsign->zip);
+      $row[6]=mysql_real_escape_string($q2->Callsign->country);
+      $row[7]=mysql_real_escape_string($q2->Callsign->grid);
+      $row[8]=mysql_real_escape_string($q2->Callsign->email);
       $row[9]=(int)$q2->Callsign->cqzone;
       $row[10]=(int)$q2->Callsign->ituzone;
       $row[11]=(int)$q2->Callsign->born;
