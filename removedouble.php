@@ -6,13 +6,17 @@ $mycall="IK4LZH";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-$query=mysqli_query($con,"select call,start from log where mycall='$mycall'");
+$query=mysqli_query($con,"select call,start,end from log where mycall='$mycall'");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
+  $query2=mysqli_query($con,"select start,end from log where mycall='$mycall' and start>'$row[1]' and start<'$row[2]');
+  for(;;){
+    $row2=mysqli_fetch_array($query2);
+    if($row2==null)break;
+    echo "$row[0] $row[1] $row[2] $row2[0] $row2[1]\n";
 }
-
-
-
+mysqli_free_result($query);
+mysqli_close($con);
 
 ?>
