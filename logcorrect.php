@@ -12,7 +12,7 @@ for(;;){
   if($row==null)break;
   $diff=strtotime($row[2])-strtotime($row[1]);
   if($diff>3600||$diff<0){
-    echo "... $diff $row[0]  $row[1]  $row[2]\n";
+    echo "modifyEND $diff $row[0]  $row[1]  $row[2]\n";
     mysqli_query($con,"update log set end=DATE_ADD(start, INTERVAL 1 HOUR) where mycall='$mycall' and callsign='$row[0]' and start='$row[1]' and end='$row[2]'");
   }
   else {
@@ -20,7 +20,8 @@ for(;;){
     for(;;){
       $row2=mysqli_fetch_array($query2);
       if($row2==null)break;
-      echo "$row[0]  $row[1]  $row[2]    $row2[0]  $row2[1]\n";
+      echo "deleteDOUBLE $row[0]  $row[1]  $row[2]    $row2[0]  $row2[1]\n";
+      mysqli_query($con,"delete from log where mycall='$mycall' and callsign='$row[0]' and start='$row2[0]' and end='$row2[1]'");      
     }
     mysqli_free_result($query2);
   }
