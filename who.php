@@ -31,7 +31,7 @@ for(;;){
       $row[11]=(int)$q2->Callsign->born;
     }
     else {
-      $row[0]="@";
+      $row[0]="";
       $row[1]="";
       $row[2]="";
       $row[3]="";
