@@ -1,0 +1,61 @@
+body {
+  background-color: #F9F4B7;
+}
+
+input[type=text] {
+  padding: 2px;
+  border: 2px solid #eee;
+  margin-left: 3px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input[type=text]:hover {
+  background-color: #Ffe477;
+}
+
+input[type=file] {
+  background-color: #666699;
+  border: none;
+  color: #F9F4B7;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 15px;
+  outline:none;
+  margin-left: 3px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+input[type=submit] {
+  background-color: #666699;
+  border: none;
+  color: #F9F4B7;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 15px;
+  outline:none;
+  margin-left: 3px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+input[type=submit]:hover {
+  background-color: #402B88
+}
+
+input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+  border: solid white;  
+  border-width: 0 4px 4px 0;  
+  transform: rotate(45deg);  
+}
