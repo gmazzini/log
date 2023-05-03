@@ -15,13 +15,15 @@ for(;;){
     echo "... $diff $row[0]  $row[1]  $row[2]\n";
     mysqli_query($con,"update log set end=DATE_ADD(start, INTERVAL 1 HOUR) where mycall='$mycall' and callsign='$row[0]' and start='$row[1]' and end='$row[2]'");
   }
-  $query2=mysqli_query($con,"select start,end from log where mycall='$mycall' and callsign='$row[0]' and start>'$row[1]' and start<'$row[2]'");
-  for(;;){
-    $row2=mysqli_fetch_array($query2);
-    if($row2==null)break;
-    echo "$row[0]  $row[1]  $row[2]    $row2[0]  $row2[1]\n";
+  else {
+    $query2=mysqli_query($con,"select start,end from log where mycall='$mycall' and callsign='$row[0]' and start>'$row[1]' and start<'$row[2]'");
+    for(;;){
+      $row2=mysqli_fetch_array($query2);
+      if($row2==null)break;
+      echo "$row[0]  $row[1]  $row[2]    $row2[0]  $row2[1]\n";
+    }
+    mysqli_free_result($query2);
   }
-  mysqli_free_result($query2);
 }
 mysqli_free_result($query);
 mysqli_close($con);
