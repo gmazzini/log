@@ -18,6 +18,7 @@ for(;;){
     $row[0]=$q2->Callsign->fname;
     if(strlen($row[0])>0){
       if(isset($q2->Callsign->nickname))$row[0].=' "'.$q2->Callsign->nickname.'"';
+      echo "...$row[0]\n";
       $row[1]=$q2->Callsign->name;
       $row[2]=$q2->Callsign->addr1;
       $row[3]=$q2->Callsign->addr2;
