@@ -29,7 +29,7 @@ if($act>=1){
   if($row!=null){
     $mygrid=strtoupper($row[0]);
     $aux=explode(",",$row[1]);
-    foreach($aux as &$vv)$dxcsel[$vv]=1;
+    if($act==1)foreach($aux as &$vv)$dxcsel[$vv]=1;
   }
   else $act=0;
   $mygrid=strtoupper($row[0]);
