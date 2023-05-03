@@ -18,7 +18,6 @@ for(;;){
     $row[0]=$q2->Callsign->fname;
     if(strlen($row[0])>0){
       if(isset($q2->Callsign->nickname))$row[0].=' "'.$q2->Callsign->nickname.'"';
-      echo "...$row[0]\n";
       $row[1]=$q2->Callsign->name;
       $row[2]=$q2->Callsign->addr1;
       $row[3]=$q2->Callsign->addr2;
@@ -30,9 +29,24 @@ for(;;){
       $row[9]=(int)$q2->Callsign->cqzone;
       $row[10]=(int)$q2->Callsign->ituzone;
       $row[11]=(int)$q2->Callsign->born;
-      $mynow=gmdate('Y-m-d H:i:s');
-      mysqli_query($con,"insert into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,myupdate) value ('$Icallsign','$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],'$mynow')");
     }
+    else {
+      $row[0[="@";
+      $row[1]="";
+      $row[2]="";
+      $row[3]="";
+      $row[4]="";
+      $row[5]="";
+      $row[6]="";
+      $row[7]="";
+      $row[8]="";
+      $row[9]="";
+      $row[10]="";
+      $row[11]="";
+    }
+    echo "...$row[0]\n";
+    $mynow=gmdate('Y-m-d H:i:s');
+    mysqli_query($con,"insert into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,myupdate) value ('$Icallsign','$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],'$mynow')");
   }
   mysqli_free_result($query2);
 }
