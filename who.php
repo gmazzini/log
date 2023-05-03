@@ -17,7 +17,7 @@ for(;;){
     sleep(1);
     $row[0]=mysqli_real_escape_string($con,$q2->Callsign->fname);
     if(strlen($row[0])>0){
-      if(isset($q2->Callsign->nickname))$row[0].=' "'.mysql_real_escape_string($q2->Callsign->nickname).'"';
+      if(isset($q2->Callsign->nickname))$row[0].=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
       $row[1]=mysqli_real_escape_string($con,$q2->Callsign->name);
       $row[2]=mysqli_real_escape_string($con,$q2->Callsign->addr1);
       $row[3]=mysqli_real_escape_string($con,$q2->Callsign->addr2);
