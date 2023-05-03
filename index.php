@@ -286,6 +286,9 @@ else {
         }
       }
       mysqli_free_result($query);
+      $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born from who where callsign='$Icallsign'");
+      $row=mysqli_fetch_array($query);
+      mysqli_free_result($query);
       echo "<pre>";
       printf("%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n",$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
       echo "</pre>";
