@@ -1,3 +1,4 @@
+<title><LZH Logger Ver 0.1 by IK4LZH></title>
 <style><?php include "style.css"; ?></style>
 
 <?php
