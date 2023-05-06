@@ -22,7 +22,7 @@ function myqso($con,$mycall,$callsign){
   for(;;){
     $row=mysqli_fetch_array($query);
     if($row==null)break;
-    $band=$myband[floor($row[0]/1000)];
+    $band=$myband[floor($row[0]/1000000)];
     $mode=$mymode[$row[1]];
     $cc[$band.$mode]++;
     echo "$band $mode ".floor($row[0]/1000)."\n";
