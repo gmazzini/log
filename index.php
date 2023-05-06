@@ -158,10 +158,7 @@ else {
           if($freq>=$bpfreq[$i][1]&&$freq<$bpfreq[$i][2])break;
         }
         if(isset($bpfreq[$i])&&$dxcsel[$bpfreq[$i][0]]&&$dxcsel[$bpfreq[$i][3]]){
-          $query2=mysqli_query($con,"select count(start) from log where mycall='$mycall' and callsign='$row[0]'");
-          $row2=mysqli_fetch_array($query2);
-          mysqli_free_result($query2);
-          printf("%s %10s %7.1f %10s %03d %s\n",$row[3],$row[0],$row[2]/1000,$row[1],$row2[0],myqso($con,$mycall,$row[0]));
+          printf("%s %10s %7.1f %10s %s\n",$row[3],$row[0],$row[2]/1000,$row[1],myqso($con,$mycall,$row[0]));
           $myrow++;
           if($myrow>$mypage)break;
         }
