@@ -281,7 +281,11 @@ else {
       mysqli_free_result($query);
       echo "<pre>";
       printf("%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n",$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
+      echo "\n";
       echo myqso($con,$mycall,$Icallsign);
+      echo "\n";
+      $mys=findcall($Icallsign);
+      print_r($mys);
       echo "</pre>";
       break; 
     
