@@ -25,7 +25,7 @@ function myqso($con,$mycall,$callsign){
     $band=$myband[floor($row[0]/1000)];
     $mode=$mymode[$row[1]];
     $cc[$band.$mode]++;
-    echo "$band $mode\n";
+    echo "$band $mode ".floor($row[0]/1000)."\n";
   }
   $aux="--- $mycall $callsign ";
   foreach($cc as $key=>$value)$aux.=$key."(".$value.") ";
