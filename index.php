@@ -193,7 +193,6 @@ else {
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
       $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
-      $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
@@ -285,6 +284,7 @@ else {
       mysqli_free_result($query);
       echo "<pre>";
       printf("%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n",$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
+      echo myqso($con,$mycall,$Icallsign);
       echo "</pre>";
       break; 
     
