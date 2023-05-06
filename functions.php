@@ -13,7 +13,10 @@ function myinsert($buf,$token){
   return "<".$token.":".strlen($buf).">".$buf; 
 }
 
-function myqso($con,$call){
+function myqso($con,$mycall,$callsign){
+  $query=mysqli_query($con,"select freq,mode from log where mycall='$mycall' and callsign='$row[0]'");
+  $row=mysqli_fetch_array($query);
+  mysqli_free_result($query);
 }
 
 ?>
