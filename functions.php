@@ -13,4 +13,7 @@ function myinsert($buf,$token){
   return "<".$token.":".strlen($buf).">".$buf; 
 }
 
+function myqso($con,$call){
+}
+
 ?>
