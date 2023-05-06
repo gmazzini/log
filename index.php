@@ -3,7 +3,7 @@
 
 <?php
 include "local.php";
-include "functions.php";
+include "utility.php";
 include "bandplane.php";
 
 $act=(int)$_POST['act'];
