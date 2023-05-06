@@ -1,6 +1,6 @@
 <?php
 
-$myband=array(1=>"160",3=>"80",5=>"60",7=>"40",10=>"30",14=>"20",18=>"17",21=>"15",24=>"12",28=>"10",29=>"10",50=>"6",144=>"2",145=>"2");
+$myband=array(1=>160,3=>80,5=>60,7=>40,10=>30,14=>20,18=>17,21=>15,24=>12,28=>10,29=>10,50=>6,144=>2,145=>2);
 $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG","FM"=>"PH","AM"=>"PH");
 
 function myextract($buf,$token){
@@ -25,9 +25,8 @@ function myqso($con,$mycall,$callsign){
     $band=$myband[floor($row[0]/1000000)];
     $mode=$mymode[$row[1]];
     $cc[$band.$mode]++;
-    echo "$band $mode ".floor($row[0]/1000)."\n";
   }
-  $aux="--- $mycall $callsign ";
+  $aux="";
   foreach($cc as $key=>$value)$aux.=$key."(".$value.") ";
   mysqli_free_result($query);
   return $aux;
