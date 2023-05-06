@@ -115,11 +115,11 @@ else {
   
   if($runcontest){
     echo "<label>contestTX</label>";
-    echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\">";
+    echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">";
     echo "<label>ContestRX</label>";
-    echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\">";
+    echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\">";
     echo "<label>contest</label>";
-    echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\">";
+    echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
     echo "<br>"; 
   }
   else {
