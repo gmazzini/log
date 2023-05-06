@@ -64,15 +64,15 @@ else {
   $Icontesttx=$_POST['Icontesttx'];
   $Icontestrx=$_POST['Icontestrx'];
   echo "<label>Call</label>";
-  echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\">";
+  echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">";
   echo "<label>Freq</label>";
-  echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\">";
+  echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\ maxlength=\"10\" size=\"10\"">";
   echo "<label>Mode</label>";
-  echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\">";
+  echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">";
   echo "<label>SigTX</label>";
-  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\">";
+  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">";
   echo "<label>SigRX</label>";
-  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\">";
+  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
   echo "<br>";
   
   $run=$_POST['run'];
