@@ -26,7 +26,7 @@ function myqso($con,$mycall,$callsign){
     $mode=$mymode[$row[1]];
     $cc[$band.$mode]++;
   }
-  $aux="--- ";
+  $aux="--- $mycall,$callsign ";
   foreach($cc as $key=>$value)$aux.=$key."(".$value.") ";
   mysqli_free_result($query);
   return $aux;
