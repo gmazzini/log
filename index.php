@@ -3,20 +3,8 @@
 
 <?php
 include "local.php";
+include "functions.php";
 include "bandplane.php";
-
-function myextract($buf,$token){
-  $pos=stripos($buf,"<".$token.":");
-  if($pos===false)return null;
-  $pose=stripos($buf,">",$pos);
-  $ltok=strlen($token)+2;
-  $ll=(int)substr($buf,$pos+$ltok,$pose-$pos-$ltok);
-  return substr($buf,$pose+1,$ll);
-}
-
-function myinsert($buf,$token){
-  return "<".$token.":".strlen($buf).">".$buf; 
-}
 
 $act=(int)$_POST['act'];
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
