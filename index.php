@@ -6,13 +6,11 @@
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         aaa=this.responseText.split("\n");
-        document.getElementById("myvisits").textContent=aaa[0];
-        document.getElementById("myvisitors").textContent=aaa[1];
-        document.getElementById("myips").textContent=aaa[2];
-        document.getElementById("mydata").textContent=aaa[3];
+        document.getElementById("frig").textContent=aaa[0];
+        document.getElementById("mrig").textContent=aaa[1];
       }
     }
-    xhttp.open("GET","outgeneral.php",true);
+    xhttp.open("GET","rig.php",true);
     xhttp.send();
   }
   function nextgeneral(){
@@ -165,7 +163,9 @@ else {
   }  
   echo "<br>";
   
-  
+  echo "Frig: <span id=\"frig\"></span><br>";
+  echo "Mrig: <span id=\"mrig\"></span><br>";
+   
    $fp=fsockopen("188.209.85.89",6789);
   if($fp){
     stream_set_timeout($fp,0,200000);
