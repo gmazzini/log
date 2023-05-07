@@ -385,6 +385,7 @@ else {
           $signalrx=myextract($aux,"rst_rcvd");
           $mode=myextract($aux,"mode");
           $timeon=myextract($aux,"time_on");
+          echo "---\n";
           if(strlen($timeon)==4)$timeon.="00";
           $timeoff=myextract($aux,"time_off");
           if(strlen($timeoff)==0)$timeoff=$timeon;
