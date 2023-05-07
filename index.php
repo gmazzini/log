@@ -371,7 +371,7 @@ else {
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $aux="";
-      echo "<pre>-----------";
+      echo "<pre>";
       while(!feof($hh)){
         $line=trim(fgets($hh));
         $pp=stripos($line,"<eor>");
@@ -385,7 +385,7 @@ else {
           $signalrx=myextract($aux,"rst_rcvd");
           $mode=myextract($aux,"mode");
           $timeon=myextract($aux,"time_on");
-          echo "---\n";
+          echo "-1-\n";
           if(strlen($timeon)==4)$timeon.="00";
           $timeoff=myextract($aux,"time_off");
           if(strlen($timeoff)==0)$timeoff=$timeon;
@@ -396,8 +396,10 @@ else {
           if(stlen($contestrx)==0)$contestrx=myextract($aux,"srx");
           $dateon=myextract($aux,"qso_date");
           $dateoff=myextract($aux,"qso_date_off");
+          echo "-2-\n";
           $start=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":".substr($timeon,4,2);
           $end=substr($dateoff,0,4)."-".substr($dateoff,4,2)."-".substr($dateoff,6,2)." ".substr($timeoff,0,2).":".substr($timeoff,2,2).":".substr($timeoff,4,2);
+         echo "-3-\n";
           mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','')");
           echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','')\n";
           $aux=substr($line,$pp+5);
