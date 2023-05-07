@@ -390,6 +390,7 @@ else {
           $timeoff=myextract($aux,"time_off");
           if(strlen($timeoff)==0)$timeoff=$timeon;
           if(strlen($timeoff)==4)$timeoff.="00";
+          echo "-4-\n";
           $contesttx=myextract($aux,"stx_string");
           if(stlen($contesttx)==0)$contesttx=myextract($aux,"stx");
           $contestrx=myextract($aux,"srx_string");
