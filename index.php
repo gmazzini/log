@@ -1,4 +1,4 @@
-<title>LZH Logger V0.12 by IK4LZH</title>
+<title>LZH Logger V0.13 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 
 <?php
@@ -15,15 +15,15 @@ if($act>=1){
   $mycall=strtoupper($_POST['mycall']);
   if($act==1)$md5passwd=md5($_POST['mypasswd']);
   else $md5passwd=$_POST['md5passwd'];
-  $query=mysqli_query($con,"select mygrid,cluster from user where mycall='$mycall' and md5passwd='$md5passwd'");
+  $query=mysqli_query($con,"select mygrid,cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
   $row=mysqli_fetch_array($query);
   if($row!=null){
     $mygrid=strtoupper($row[0]);
+    $rigconnect=$row[2];
     $aux=explode(",",$row[1]);
     if($act==1)foreach($aux as &$vv)$dxcsel[$vv]=1;
   }
   else $act=0;
-  $mygrid=strtoupper($row[0]);
   mysqli_free_result($query);
 }
 
@@ -142,6 +142,18 @@ else {
     echo "<label>$vv</label>&nbsp;";
   }  
   echo "<br>";
+  
+  
+  $fp=fsockopen("188.209.85.89",6789);
+  if($fp){
+    fwrite($fp,"fm\n");
+    stream_set_timeout($fp,1);
+    $line=fread($fp,100);
+    echo $line;
+    fclose($fp);
+  }
+  
+  
   
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
