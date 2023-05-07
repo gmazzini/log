@@ -10,7 +10,7 @@ if($fp){
   $line=trim(fgets($fp,30));
   $rx=(int)$line/1000;
   if($rx==0)$split=0;
-  else $split=$tx-$rx;
+  else $split=$rx-$tx;
   printf("%.1f\n",$split);
   $line=trim(fgets($fp,30));
   printf("%s\n",$line);
