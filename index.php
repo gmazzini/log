@@ -205,11 +205,13 @@ else {
       fprintf($fp,"CATEGORY-TRANSMITTER: ONE\n");
       fprintf($fp,"CREATED-BY: IK4LZH logger\n");
       fprintf($fp,"NAME: xxxxxxx xxxxxx\n");
+      fprintf($fp,"EMAIL: xxxxxx\n");
       fprintf($fp,"ADDRESS: xxxxxx\n");
       fprintf($fp,"ADDRESS-CITY: xxxxx\n");
       fprintf($fp,"ADDRESS-POSTALCODE: xxxxxx\n");
       fprintf($fp,"ADDRESS-COUNTRY: xxxxxx\n");
       fprintf($fp,"OPERATORS: $mycall\n");
+      fprintf($fp,"CLUB: xxxxxx\n");
       $aux=file_get_contents($_FILES['myfile']['tmp_name']);
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
@@ -220,6 +222,7 @@ else {
         fprintf($fp,"QSO: %5d %2s %04d-%02d-%02d ",$row[2]/1000,$mymode[$row[3]],substr($row[0],0,4),substr($row[0],5,2),substr($row[0],8,2));
         fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row[0],11,2),substr($row[0],14,2),$mycall,$row[4],$row[8],$row[1],$row[5],$row[9]);
       }
+      fprintf($fp,"END-OF-LOG:\n");
       fclose($fp);
       echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download Cabrillo</a><br>";
       echo "$export_from $export_to\n";
