@@ -213,12 +213,12 @@ else {
       $aux=file_get_contents($_FILES['myfile']['tmp_name']);
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
         fprintf($fp,"QSO: %5d %2s %04d-%02d-%02d ",$row[2]/1000,$mymode[$row[3]],substr($row[0],0,4),substr($row[0],5,2),substr($row[0],8,2));
-        fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row[0],11,2),substr($row[0],14,2),$mycall,$row[4],"",$row[1],$row[5],"");
+        fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row[0],11,2),substr($row[0],14,2),$mycall,$row[4],$row[8],$row[1],$row[5],$row[9]);
       }
       fclose($fp);
       echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download Cabrillo</a><br>";
