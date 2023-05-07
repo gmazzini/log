@@ -144,13 +144,14 @@ else {
   echo "<br>";
   
   
-  $fp=fsockopen("188.209.85.89",6789);
+   $fp=fsockopen("188.209.85.89",6789);
   if($fp){
+    stream_set_timeout($fp,0,200000);
     fwrite($fp,"fm\n");
-    stream_set_timeout($fp,1);
-    $line=fread($fp,100);
+    $line=fread($fp,30);
     echo $line;
-    fclose($fp);
+    $line=fread($fp,30);
+    echo $line;
   }
   
   
