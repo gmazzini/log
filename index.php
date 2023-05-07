@@ -1,5 +1,23 @@
 <title>LZH Logger V0.13 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
+<script>
+  function updategeneral() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        aaa=this.responseText.split("\n");
+        document.getElementById("myvisits").textContent=aaa[0];
+        document.getElementById("myvisitors").textContent=aaa[1];
+        document.getElementById("myips").textContent=aaa[2];
+        document.getElementById("mydata").textContent=aaa[3];
+      }
+    }
+    xhttp.open("GET","outgeneral.php",true);
+    xhttp.send();
+  }
+  updategeneral();
+  setTimeout(nextgeneral,timegeneral);
+</script>
 
 <?php
 include "local.php";
