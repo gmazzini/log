@@ -387,13 +387,18 @@ else {
           $timeon=myextract($aux,"time_on");
           if(strlen($timeon)==4)$timeon.="00";
           $timeoff=myextract($aux,"time_off");
-          if(strlen($timeoff)==4)$timeoff.="00"; 
+          if(strlen($timeoff)==0)$timeoff=$timeon;
+          if(strlen($timeoff)==4)$timeoff.="00";
+          $contesttx=myextract($aux,"stx_string");
+          if(stlen($contesttx)==0)$contesttx=myextract($aux,"stx");
+          $contestrx=myextract($aux,"srx_string");
+          if(stlen($contestrx)==0)$contestrx=myextract($aux,"srx");
           $dateon=myextract($aux,"qso_date");
           $dateoff=myextract($aux,"qso_date_off");
           $start=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":".substr($timeon,4,2);
           $end=substr($dateoff,0,4)."-".substr($dateoff,4,2)."-".substr($dateoff,6,2)." ".substr($timeoff,0,2).":".substr($timeoff,2,2).":".substr($timeoff,4,2);
-          mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','','','')");
-          echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','','','')\n";
+          mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','')");
+          echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','')\n";
           $aux=substr($line,$pp+5);
         }
       }
