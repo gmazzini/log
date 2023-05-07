@@ -15,8 +15,12 @@
     xhttp.open("GET","outgeneral.php",true);
     xhttp.send();
   }
+  function nextgeneral(){
+    updategeneral();
+    setTimeout(nextgeneral,1000);
+  }  
   updategeneral();
-  setTimeout(nextgeneral,timegeneral);
+  setTimeout(nextgeneral,1000);
 </script>
 
 <?php
