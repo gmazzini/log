@@ -164,7 +164,7 @@ else {
   echo "<br>";
   
   echo "<h2>Frig: <span id=\"frig\"></span>";
-  echo "Mrig: <span id=\"mrig\"></span><br></h2>";  
+  echo " Mrig: <span id=\"mrig\"></span><br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
     case "cluster":
