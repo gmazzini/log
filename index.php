@@ -371,7 +371,7 @@ else {
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $aux="";
-      echo "<pre>";
+      echo "<pre>-----------";
       while(!feof($hh)){
         $line=trim(fgets($hh));
         $pp=stripos($line,"<eor>");
