@@ -7,7 +7,8 @@
       if (this.readyState == 4 && this.status == 200) {
         aaa=this.responseText.split("\n");
         document.getElementById("frig").textContent=aaa[0];
-        document.getElementById("mrig").textContent=aaa[1];
+        document.getElementById("srig").textContent=aaa[1]-aaa[0];
+        document.getElementById("mrig").textContent=aaa[2];
       }
     }
     xhttp.open("GET","rig.php",true);
