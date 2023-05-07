@@ -6,7 +6,7 @@ if($fp){
   fwrite($fp,"fm\n");
   $line=trim(fgets($fp,30));
   printf("%7.1f\n",(int)$line/1000);
-  $line=fread($fp,30);
+  $line=trim(fgets($fp,30));
   echo $line;
 }
 
