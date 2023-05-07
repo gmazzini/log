@@ -237,7 +237,7 @@ else {
       $aux=file_get_contents($_FILES['myfile']['tmp_name']);
       $export_from=myextract($aux,"export_from");
       $export_to=myextract($aux,"export_to");
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx,contest from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
@@ -250,7 +250,10 @@ else {
         fprintf($fp,"%s\n",myinsert(sprintf("%7.5f",$row[7]/1000000),"FREQ_RX"));
         fprintf($fp,"%s\n",myinsert($row[4],"RST_SENT"));
         fprintf($fp,"%s\n",myinsert($row[5],"RST_RCVD"));
-        fprintf($fp,"%s\n",myinsert($row[3],"MODE"));                
+        fprintf($fp,"%s\n",myinsert($row[3],"MODE")); 
+        fprintf($fp,"%s\n",myinsert($row[8],"STX_STRING"));
+        fprintf($fp,"%s\n",myinsert($row[9],"SRX_STRING"));
+        fprintf($fp,"%s\n",myinsert($row[10],"CONTEST_ID"));
         fprintf($fp,"<EOR>\n\n");
       }
       fclose($fp);
