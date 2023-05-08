@@ -17,7 +17,9 @@ if($act>=1){
   $row=mysqli_fetch_array($query);
   if($row!=null){
     $mygrid=strtoupper($row[0]);
-    $rigconnect=$row[2];
+    $aux=explode(":",$row[2]);
+    $rigIP=$aux[0];
+    $rigPORT=$aux[1];
     $aux=explode(",",$row[1]);
     if($act==1)foreach($aux as &$vv)$dxcsel[$vv]=1;
   }
@@ -40,7 +42,7 @@ if($act>=1){
         document.getElementById("Pmrig").value=aaa[2];
       }
     }
-    xhttp.open("GET","rig.php",true);
+    xhttp.open("GET","rig.php?rigIP=$rigIP&rifPORT=$rigPORT",true);
     xhttp.send();
   }
   function nextgeneral(){
