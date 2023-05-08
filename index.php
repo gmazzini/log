@@ -9,7 +9,7 @@
         document.getElementById("frig").textContent=aaa[0];
         document.getElementById("Pfrig").value=aaa[0];
         document.getElementById("srig").textContent=aaa[1];
-        document.getElementById("psrig").value=aaa[1];
+        document.getElementById("Psrig").value=aaa[1];
         document.getElementById("mrig").textContent=aaa[2];
         document.getElementById("Pmrig").value=aaa[2];
       }
