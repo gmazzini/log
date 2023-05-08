@@ -61,19 +61,19 @@ else {
   echo "<input type=\"hidden\" name=\"mycall\" value=\"$mycall\">";
   echo "<input type=\"hidden\" name=\"md5passwd\" value=\"$md5passwd\">";
   echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"list\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"list up\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"list dw\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"find\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"find up\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"find dw\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"list\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"list up\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"list dw\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"find\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"find up\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"find dw\">&nbsp;";
   echo "<br>";
 
-  echo "<input type=\"submit\" name=\"run\" value=\"importadi\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"importlzh\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">";
-  echo "<input type=\"file\" name=\"myfile\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"importadi\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"importlzh\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">"&nbsp;;
+  echo "<input type=\"file\" name=\"myfile\">&nbsp;";
   echo "<br>";
 
   $Icallsign=strtoupper($_POST['Icallsign']);
@@ -85,15 +85,15 @@ else {
   $Icontesttx=$_POST['Icontesttx'];
   $Icontestrx=$_POST['Icontestrx'];
   echo "<label>Call</label>";
-  echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">";
+  echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
   echo "<label>Freq</label>";
-  echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\" maxlength=\"10\" size=\"10\">";
+  echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\" maxlength=\"10\" size=\"10\">&nbsp;";
   echo "<label>Mode</label>";
-  echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">";
+  echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<label>SigTX</label>";
-  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">";
+  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<label>SigRX</label>";
-  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
+  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<br>";
   
   $run=$_POST['run'];
@@ -137,11 +137,11 @@ else {
   if($runcontest){
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
     echo "<label>contestTX</label>";
-    echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">";
+    echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">&nbsp;";
     echo "<label>ContestRX</label>";
-    echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\">";
+    echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\">&nbsp;";
     echo "<label>contest</label>";
-    echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
+    echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">&nbsp;";
     echo "<br>"; 
   }
   else {
@@ -151,9 +151,9 @@ else {
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
   
-  echo "<input type=\"submit\" name=\"run\" value=\"start\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"end\">";
-  echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
+  echo "<input type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
   
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   foreach(array("160","80","60","40","30","20","17","15","12","10","PH","CW","DG") as &$vv){
@@ -164,9 +164,9 @@ else {
   }  
   echo "<br>";
   
-  echo "<h2>Frig: <span id=\"frig\"></span>";
-  echo " Srig: <span id=\"srig\"></span>";
-  echo " Mrig: <span id=\"mrig\"></span><br></h2>";  
+  echo "<h2>Frig: <span id=\"frig\"></span>&nbsp;";
+  echo "Srig: <span id=\"srig\"></span>&nbsp;";
+  echo "Mrig: <span id=\"mrig\"></span><br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
     case "cluster":
