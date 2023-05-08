@@ -449,9 +449,9 @@ else {
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
   echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
-  echo "<input type=\"text\" name=\"Prigrx\" id=\"Prigrx\">";
-  echo "<input type=\"text\" name=\"Prigtx\" id=\"Prigtx\">";
-  echo "<input type=\"text\" name=\"Prigm\" id=\"Prigm\">";
+  echo "<input type=\"hidden\" name=\"Prigrx\" id=\"Prigrx\">";
+  echo "<input type=\"hidden\" name=\"Prigtx\" id=\"Prigtx\">";
+  echo "<input type=\"hidden\" name=\"Prigm\" id=\"Prigm\">";
   echo "</form>";
 }
 
