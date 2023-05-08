@@ -135,6 +135,7 @@ else {
   }
   
   if($runcontest){
+    echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
     echo "<label>contestTX</label>";
     echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">";
     echo "<label>ContestRX</label>";
@@ -144,13 +145,12 @@ else {
     echo "<br>"; 
   }
   else {
+    echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
     echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
   
-  if($runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
-  else echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
   echo "<input type=\"submit\" name=\"run\" value=\"start\">";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">";
