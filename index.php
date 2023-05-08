@@ -1,4 +1,4 @@
-<title>LZH Logger V0.15 by IK4LZH</title>
+<title>LZH Logger V0.16 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <script>
   function updategeneral() {
@@ -100,6 +100,7 @@ else {
   $page=(int)$_POST['page'];
   $qsostart=$_POST['qsostart'];
   $runcontest=(int)$_POST['runcontest'];
+  $riglink=(int)$_POST['riglink'];
 
   switch($run){
     case "list": 
@@ -131,6 +132,12 @@ else {
       break;
     case "contest off":
       $runcontest=0;
+      break;
+    case "riglink":
+      $riglink=1;
+      break;
+    case "riglink off":
+      $riglink=0;
       break;
   }
   
@@ -166,7 +173,9 @@ else {
   
   echo "<h2>Frig: <span id=\"frig\"></span>&nbsp;";
   echo "Srig: <span id=\"srig\"></span>&nbsp;";
-  echo "Mrig: <span id=\"mrig\"></span><br></h2>";  
+  echo "Mrig: <span id=\"mrig\"></span>&nbsp;";
+  echo "echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
+  echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
     case "cluster":
@@ -417,6 +426,7 @@ else {
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
+  echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
   echo "</form>";
 }
 
