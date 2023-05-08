@@ -32,6 +32,10 @@ input[type=file] {
   margin-top: 2px;
 }
 
+input[type=file]:hover {
+  background-color: #Ffe477;
+}
+
 input[type=submit] {
   background-color: #666699;
   border: none;
