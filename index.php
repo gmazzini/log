@@ -278,10 +278,12 @@ else {
       
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
-  
+      if($riglink)$ftx=$_POST['Pfrig']*1000;
+      else $ftx=$Ifreqtx*1000;
       
       
-      $ftx=$Ifreqtx*1000;
+      
+      
       $frx=$ftx;
       if($runcontest){
         $Acontesttx=$Icontesttx;
