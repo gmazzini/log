@@ -1,6 +1,6 @@
 <?php
 
-$fp=fsockopen("188.209.85.89",$_GET['rigPORT']);
+$fp=fsockopen($_GET['rigIP'],$_GET['rigPORT']);
 if($fp){
   stream_set_timeout($fp,0,200000);
   fwrite($fp,"fim\n");
