@@ -275,6 +275,9 @@ else {
       
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
+  
+      
+      
       $ftx=$Ifreqtx*1000;
       $frx=$ftx;
       if($runcontest){
