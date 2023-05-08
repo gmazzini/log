@@ -131,10 +131,12 @@ else {
   
   echo "<label>Call</label>";
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
-  echo "<label>Freq</label>";
-  echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\" maxlength=\"10\" size=\"10\">&nbsp;";
-  echo "<label>Mode</label>";
-  echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">&nbsp;";
+  if($riglink){
+    echo "<label>Freq</label>";
+    echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\" maxlength=\"10\" size=\"10\">&nbsp;";
+    echo "<label>Mode</label>";
+    echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">&nbsp;";
+  }
   echo "<label>SigTX</label>";
   echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<label>SigRX</label>";
