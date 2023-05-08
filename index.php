@@ -286,20 +286,16 @@ else {
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
       if($riglink){
-        $ftx=$_POST['Pfrig']*1000;
-        $fmode=$_POST['Pmrig'];
+        $frx=$_POST['Prigrx']*1000;
+        $ftx=$_POST['Prigtx']*1000;
+        if($ftx==0)$ftx=$frx;
+        $fmode=$_POST['Prigm'];
       }
       else {
-        $ftx=$Ifreq*1000;
+        $frx=$Ifreq*1000;
+        $ftx=$frx;
         $fmode=$Imode;
       }
-      
-      
-      
-      $frx=$ftx;
-      
-      
-      
       if($runcontest){
         $Acontesttx=$Icontesttx;
         $Acontestrx=$Icontestrx;
