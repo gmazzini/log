@@ -434,7 +434,7 @@ else {
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
   echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
-  echo "<input type=\"text\" name=\"Pfrig\">";
+  echo "<input type=\"text\" name=\"Pfrig\" id=\"Pfrig\">";
   echo "</form>";
 }
 
