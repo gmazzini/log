@@ -1,4 +1,4 @@
-<title>LZH Logger V0.14 by IK4LZH</title>
+<title>LZH Logger V0.15 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <script>
   function updategeneral() {
@@ -135,7 +135,7 @@ else {
   }
   
   if($runcontest){
-    echo "<input type=\"submit\" name=\"run\" value=\"contest off\">";
+    echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
     echo "<label>contestTX</label>";
     echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">";
     echo "<label>ContestRX</label>";
@@ -145,7 +145,7 @@ else {
     echo "<br>"; 
   }
   else {
-    echo "<input type=\"submit\" name=\"run\" value=\"contest\">";
+    echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
     echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
