@@ -140,6 +140,10 @@ else {
     echo "<label>Mode</label>";
     echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">&nbsp;";
   }
+  else {
+    echo "<input type=\"hidden\" name=\"Ifreqtx\" value=\"$Ifreqtx\">";
+    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
+  }
   echo "<label>SigTX</label>";
   echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<label>SigRX</label>";
