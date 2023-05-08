@@ -4,15 +4,17 @@ $fp=fsockopen($_GET['rigIP'],$_GET['rigPORT']);
 if($fp){
   stream_set_timeout($fp,0,200000);
   fwrite($fp,"sfim\n");
-  fgets($fp,30);
-  $line=trim(fgets($fp,30));
-  $rx=(int)$line/1000;
+  $split=(int)fgets($fp,30);
+  $ricsplit=fgets($fp,30);
+  $arx=trim(fgets($fp,30));
+  $rx=(int)$arx/1000;
   printf("%.1f\n",$rx);
-  $line=trim(fgets($fp,30));
-  $tx=(int)$line/1000;
+  $atx=trim(fgets($fp,30));
+  $tx=(int)$atx/1000;
   printf("%.1f\n",$tx);
-  $line=trim(fgets($fp,30));
-  printf("%s\n",$line);
+  $mode=trim(fgets($fp,30));
+  $bandwidth=trim(fgets($fp,30));
+  printf("%s\n",$mode);
 }
 
 ?>
