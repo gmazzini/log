@@ -34,12 +34,12 @@ if($act>=1){
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         aaa=this.responseText.split("\n");
-        document.getElementById("frig").textContent=aaa[0];
-        document.getElementById("Pfrig").value=aaa[0];
-        document.getElementById("srig").textContent=aaa[1];
-        document.getElementById("Psrig").value=aaa[1];
-        document.getElementById("mrig").textContent=aaa[2];
-        document.getElementById("Pmrig").value=aaa[2];
+        document.getElementById("rigrx").textContent=aaa[0];
+        document.getElementById("Prigrx").value=aaa[0];
+        document.getElementById("rigtx").textContent=aaa[1];
+        document.getElementById("Prigtx").value=aaa[1];
+        document.getElementById("rigm").textContent=aaa[2];
+        document.getElementById("Prigm").value=aaa[2];
       }
     }
     xhttp.open("GET","rig.php?rigIP=<?php echo $rigIP;?>&rigPORT=<?php echo $rigPORT;?>",true);
@@ -83,7 +83,7 @@ else {
   echo "<br>";
 
   $Icallsign=strtoupper($_POST['Icallsign']);
-  $Ifreqtx=$_POST['Ifreqtx'];
+  $Ifreq=$_POST['Ifreq'];
   $Imode=strtoupper($_POST['Imode']);
   $Isignaltx=$_POST['Isignaltx'];
   $Isignalrx=$_POST['Isignalrx'];
@@ -139,12 +139,12 @@ else {
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
   if(!$riglink){
     echo "<label>Freq</label>";
-    echo "<input type=\"text\" name=\"Ifreqtx\" value=\"$Ifreqtx\" maxlength=\"10\" size=\"10\">&nbsp;";
+    echo "<input type=\"text\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\">&nbsp;";
     echo "<label>Mode</label>";
     echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">&nbsp;";
   }
   else {
-    echo "<input type=\"hidden\" name=\"Ifreqtx\" value=\"$Ifreqtx\">";
+    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
     echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
   }
   echo "<label>SigTX</label>";
@@ -184,9 +184,9 @@ else {
   }  
   echo "<br>";
   
-  echo "<h2>Frig: <span id=\"frig\"></span>&nbsp;";
-  echo "Srig: <span id=\"srig\"></span>&nbsp;";
-  echo "Mrig: <span id=\"mrig\"></span>&nbsp;";
+  echo "<h2>RX: <span id=\"rigrx\"></span>&nbsp;";
+  echo "TX: <span id=\"rigtx\"></span>&nbsp;";
+  echo "M: <span id=\"rigm\"></span>&nbsp;";
   if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
@@ -290,7 +290,7 @@ else {
         $fmode=$_POST['Pmrig'];
       }
       else {
-        $ftx=$Ifreqtx*1000;
+        $ftx=$Ifreq*1000;
         $fmode=$Imode;
       }
       
@@ -453,9 +453,9 @@ else {
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
   echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
-  echo "<input type=\"text\" name=\"Pfrig\" id=\"Pfrig\">";
-  echo "<input type=\"text\" name=\"Psrig\" id=\"Psrig\">";
-  echo "<input type=\"text\" name=\"Pmrig\" id=\"Pmrig\">";
+  echo "<input type=\"text\" name=\"Prigrx\" id=\"Prigrx\">";
+  echo "<input type=\"text\" name=\"Prigtx\" id=\"Prigtx\">";
+  echo "<input type=\"text\" name=\"Prigm\" id=\"Prigm\">";
   echo "</form>";
 }
 
