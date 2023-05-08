@@ -94,6 +94,7 @@ else {
   echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<label>SigRX</label>";
   echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">&nbsp;";
+  if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink ogg\">&nbsp;";
   echo "<br>";
   
   $run=$_POST['run'];
@@ -174,7 +175,7 @@ else {
   echo "<h2>Frig: <span id=\"frig\"></span>&nbsp;";
   echo "Srig: <span id=\"srig\"></span>&nbsp;";
   echo "Mrig: <span id=\"mrig\"></span>&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
+  if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
