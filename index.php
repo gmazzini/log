@@ -1,4 +1,4 @@
-<title>LZH Logger V0.16 by IK4LZH</title>
+<title>LZH Logger V0.17 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <script>
   function updategeneral() {
@@ -282,13 +282,21 @@ else {
       
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
-      if($riglink)$ftx=$_POST['Pfrig']*1000;
-      else $ftx=$Ifreqtx*1000;
-      
+      if($riglink){
+        $ftx=$_POST['Pfrig']*1000;
+        $fmode=$_POST['Pmrig'];
+      }
+      else {
+        $ftx=$Ifreqtx*1000;
+        $fmode=$Imode;
+      }
       
       
       
       $frx=$ftx;
+      
+      
+      
       if($runcontest){
         $Acontesttx=$Icontesttx;
         $Acontestrx=$Icontestrx;
@@ -299,7 +307,7 @@ else {
         $Acontestrx="";
         $Acontest="";
       }
-      mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$Icallsign','$qsostart','$qsoend','$Imode',$ftx,$frx,'$Isignaltx','$Isignalrx','$Acontesttx','$Acontestrx','$Acontest')");
+      mysqli_query($con,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$Icallsign','$qsostart','$qsoend','$fmode',$ftx,$frx,'$Isignaltx','$Isignalrx','$Acontesttx','$Acontestrx','$Acontest')");
       break;
       
     case "start":
