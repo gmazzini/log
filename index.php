@@ -7,7 +7,6 @@
       if (this.readyState == 4 && this.status == 200) {
         aaa=this.responseText.split("\n");
         document.getElementById("frig").textContent=aaa[0];
-        document.getElementById("Pfrig").textContent=aaa[0];
         document.getElementById("srig").textContent=aaa[1];
         document.getElementById("mrig").textContent=aaa[2];
       }
@@ -434,7 +433,6 @@ else {
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
   echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
-  echo "<input type=\"text\" name=\"Pfrig\">";
   echo "</form>";
 }
 
