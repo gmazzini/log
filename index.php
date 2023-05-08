@@ -1,5 +1,31 @@
 <title>LZH Logger V0.17 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
+<?php
+include "local.php";
+include "utility.php";
+include "bandplane.php";
+
+$act=(int)$_POST['act'];
+$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+mysqli_query($con,"SET time_zone='+00:00'");
+$mypage=30;
+if($act>=1){
+  $mycall=strtoupper($_POST['mycall']);
+  if($act==1)$md5passwd=md5($_POST['mypasswd']);
+  else $md5passwd=$_POST['md5passwd'];
+  $query=mysqli_query($con,"select mygrid,cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
+  $row=mysqli_fetch_array($query);
+  if($row!=null){
+    $mygrid=strtoupper($row[0]);
+    $rigconnect=$row[2];
+    $aux=explode(",",$row[1]);
+    if($act==1)foreach($aux as &$vv)$dxcsel[$vv]=1;
+  }
+  else $act=0;
+  mysqli_free_result($query);
+}
+?>
+
 <script>
   function updategeneral() {
     var xhttp = new XMLHttpRequest();
@@ -26,31 +52,6 @@
 </script>
 
 <?php
-include "local.php";
-include "utility.php";
-include "bandplane.php";
-
-$act=(int)$_POST['act'];
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
-mysqli_query($con,"SET time_zone='+00:00'");
-$mypage=30;
-
-if($act>=1){
-  $mycall=strtoupper($_POST['mycall']);
-  if($act==1)$md5passwd=md5($_POST['mypasswd']);
-  else $md5passwd=$_POST['md5passwd'];
-  $query=mysqli_query($con,"select mygrid,cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
-  $row=mysqli_fetch_array($query);
-  if($row!=null){
-    $mygrid=strtoupper($row[0]);
-    $rigconnect=$row[2];
-    $aux=explode(",",$row[1]);
-    if($act==1)foreach($aux as &$vv)$dxcsel[$vv]=1;
-  }
-  else $act=0;
-  mysqli_free_result($query);
-}
-
 if($act==0){
   echo "<form method=\"post\">";
   echo "<input type=\"text\" name=\"mycall\">";
