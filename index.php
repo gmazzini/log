@@ -9,7 +9,9 @@
         document.getElementById("frig").textContent=aaa[0];
         document.getElementById("Pfrig").value=aaa[0];
         document.getElementById("srig").textContent=aaa[1];
+        document.getElementById("psrig").value=aaa[1];
         document.getElementById("mrig").textContent=aaa[2];
+        document.getElementById("Pmrig").value=aaa[2];
       }
     }
     xhttp.open("GET","rig.php",true);
@@ -435,6 +437,8 @@ else {
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
   echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
   echo "<input type=\"text\" name=\"Pfrig\" id=\"Pfrig\">";
+  echo "<input type=\"text\" name=\"Psrig\" id=\"Psrig\">";
+  echo "<input type=\"text\" name=\"Pmrig\" id=\"Pmrig\">";
   echo "</form>";
 }
 
