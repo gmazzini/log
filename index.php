@@ -72,7 +72,7 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"importadi\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"importlzh\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">"&nbsp;;
+  echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">&nbsp;";
   echo "<input type=\"file\" name=\"myfile\">&nbsp;";
   echo "<br>";
 
