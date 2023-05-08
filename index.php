@@ -84,6 +84,13 @@ else {
   $Icontest=$_POST['Icontest'];
   $Icontesttx=$_POST['Icontesttx'];
   $Icontestrx=$_POST['Icontestrx'];
+  
+  $run=$_POST['run'];
+  $page=(int)$_POST['page'];
+  $qsostart=$_POST['qsostart'];
+  $runcontest=(int)$_POST['runcontest'];
+  $riglink=(int)$_POST['riglink'];
+  
   echo "<label>Call</label>";
   echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
   echo "<label>Freq</label>";
@@ -94,15 +101,9 @@ else {
   echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">&nbsp;";
   echo "<label>SigRX</label>";
   echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">&nbsp;";
-  if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink ogg\">&nbsp;";
+  if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink off\">&nbsp;";
   echo "<br>";
   
-  $run=$_POST['run'];
-  $page=(int)$_POST['page'];
-  $qsostart=$_POST['qsostart'];
-  $runcontest=(int)$_POST['runcontest'];
-  $riglink=(int)$_POST['riglink'];
-
   switch($run){
     case "list": 
       $page=0; 
