@@ -7,7 +7,7 @@
       if (this.readyState == 4 && this.status == 200) {
         aaa=this.responseText.split("\n");
         document.getElementById("frig").textContent=aaa[0];
-        document.getElementById("Pfrig").textContent=aaa[0];
+        document.getElementById("Pfrig").value=aaa[0];
         document.getElementById("srig").textContent=aaa[1];
         document.getElementById("mrig").textContent=aaa[2];
       }
