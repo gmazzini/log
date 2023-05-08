@@ -174,7 +174,7 @@ else {
   echo "<h2>Frig: <span id=\"frig\"></span>&nbsp;";
   echo "Srig: <span id=\"srig\"></span>&nbsp;";
   echo "Mrig: <span id=\"mrig\"></span>&nbsp;";
-  echo "echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
