@@ -352,7 +352,7 @@ else {
     
     case "find":
       echo "<pre>";
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
