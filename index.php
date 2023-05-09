@@ -356,7 +356,9 @@ else {
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
-        printf("%s %10s %7.1f %4s %4s %4s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5]);
+        $aux="";
+        if((int)$row[6]==1)$aux.="L";
+        printf("%s %10s %7.1f %4s %4s %4s %2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
       }
       echo "</pre>";
       mysqli_free_result($query);
