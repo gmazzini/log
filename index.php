@@ -359,7 +359,7 @@ else {
         $aux="";
         if((int)$row[6]==1)$aux.="L";
         if((int)$row[7]==1)$aux.="E";
-        printf("%s %12s %7.1f %4s %5s %5s %2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
+        printf("%s %12s %7.1f %4s %5s %5s %-2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
       }
       echo "</pre>";
       mysqli_free_result($query);
@@ -374,7 +374,7 @@ else {
         $aux="";
         if((int)$row[6]==1)$aux.="L";
         if((int)$row[7]==1)$aux.="E";
-        printf("%s %12s %7.1f %4s %5s %5s %2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
+        printf("%s %12s %7.1f %4s %5s %5s %-2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
       }
       echo "</pre>";
       mysqli_free_result($query);
