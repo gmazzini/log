@@ -57,7 +57,7 @@ if($act>=1){
 if($act==0){
   echo "<form method=\"post\">";
   echo "<input type=\"text\" name=\"mycall\">";
-  echo "<input type=\"text\" name=\"mypasswd\">";
+  echo "<input type=\"text\" name=\"mypasswd\" autocomplete=\"off\">";
   echo "<input type=\"hidden\" name=\"act\" value=\"1\">";
   echo "<input type=\"submit\">";
   echo "</form>";
