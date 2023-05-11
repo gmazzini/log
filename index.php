@@ -1,4 +1,4 @@
-<title>LZH Logger V0.18 by IK4LZH</title>
+<title>LZH Logger V0.20 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -79,8 +79,9 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"importlzh\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"importlotw\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"importeqsl\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"qsl_lotw\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"qsl_eqsl\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"qsl_qrz\">&nbsp;";
   echo "<input type=\"file\" name=\"myfile\">&nbsp;";
   echo "<br>";
 
@@ -354,13 +355,14 @@ else {
     
     case "find":
       echo "<pre>";
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
         $aux="";
         if((int)$row[6]==1)$aux.="L";
         if((int)$row[7]==1)$aux.="E";
+	if((int)$row[8]==1)$aux.="Q";
         printf("%s %12s %7.1f %4s %5s %5s %-2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
       }
       echo "</pre>";
@@ -369,13 +371,14 @@ else {
 
     case "list";
       echo "<pre>";
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl from log where mycall='$mycall' order by start desc limit $mypage offset $page");
+      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz from log where mycall='$mycall' order by start desc limit $mypage offset $page");
       for(;;){
         $row=mysqli_fetch_array($query);
         if($row==null)break;
         $aux="";
         if((int)$row[6]==1)$aux.="L";
         if((int)$row[7]==1)$aux.="E";
+	if((int)$row[8]==1)$aux.="Q";
         printf("%s %12s %7.1f %4s %5s %5s %-2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
       }
       echo "</pre>";
@@ -453,7 +456,7 @@ else {
       fclose($hh);
       break;
       
-    case "importlotw";
+    case "qsl_lotw";
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $aux="";
@@ -471,7 +474,7 @@ else {
           $ee=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":59";
           $qsl=myextract($aux,"qsl_rcvd");
           if($qsl=="Y"){
-            echo "lotw on $callsign $timeon $dateon\n";
+            echo "qsl via lotw on $callsign $dateon $timeon\n";
             mysqli_query($con,"update log set lotw=1 where mycall='$mycall' and callsign='$callsign' and start>='$bb' and start<='$ee'");
           }
           $aux=substr($line,$pp+5);
@@ -481,7 +484,7 @@ else {
       fclose($hh);
       break;
       
-    case "importeqsl";
+    case "qsl_eqsl";
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $aux="";
@@ -499,8 +502,36 @@ else {
 	  $ee=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":59";
 	  $qsl=myextract($aux,"app_eqsl_ag");
           if($qsl=="Y"){
-            echo "eqsl on $callsign $timeon $dateon\n";
+            echo "qsl via eqsl on $callsign $dateon $timeon\n";
             mysqli_query($con,"update log set eqsl=1 where mycall='$mycall' and callsign='$callsign' and start>='$bb' and start<='$ee'");
+          }
+          $aux=substr($line,$pp+5);
+        }
+      }
+      echo "</pre>";
+      fclose($hh);
+      break;
+	  
+    case "qsl_eqsl";
+      if(!isset($_FILES['myfile']['tmp_name']))break;
+      $hh=fopen($_FILES['myfile']['tmp_name'],"r");
+      $aux="";
+      echo "<pre>";
+      while(!feof($hh)){
+        $line=trim(fgets($hh));
+        $pp=stripos($line,"<eor>");
+        if($pp===false)$aux.=$line;
+        else {
+          $aux.=substr($line,0,$pp);
+          $callsign=myextract($aux,"call");
+          $timeon=myextract($aux,"time_on");
+          $dateon=myextract($aux,"qso_date");
+          $bb=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":00";
+	  $ee=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":59";
+	  $qsl=myextract($aux,"app_qrzlog_status");
+          if($qsl=="C"){
+            echo "qsl via qrz on $callsign $dateon $timeon\n";
+            mysqli_query($con,"update log set qrz=1 where mycall='$mycall' and callsign='$callsign' and start>='$bb' and start<='$ee'");
           }
           $aux=substr($line,$pp+5);
         }
