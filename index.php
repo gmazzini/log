@@ -1,4 +1,4 @@
-<title>LZH Logger V0.20 by IK4LZH</title>
+<title>LZH Logger V0.21 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -512,7 +512,7 @@ else {
       fclose($hh);
       break;
 	  
-    case "qsl_eqsl";
+    case "qsl_qrz";
       if(!isset($_FILES['myfile']['tmp_name']))break;
       $hh=fopen($_FILES['myfile']['tmp_name'],"r");
       $aux="";
