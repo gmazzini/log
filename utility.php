@@ -19,18 +19,21 @@ function myinsert($buf,$token){
 function myqso($con,$mycall,$callsign){
   global $myband,$mymode;
   $tot=0;
-  $query=mysqli_query($con,"select freqtx,mode from log where mycall='$mycall' and callsign='$callsign'");
+  $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall' and callsign='$callsign'");
   for(;;){
     $row=mysqli_fetch_array($query);
     if($row==null)break;
     $band=$myband[floor($row[0]/1000000)];
     $mode=$mymode[$row[1]];
     $cc[$band.$mode]++;
+    if($row[2]==1)$lotw[$band.$mode]++;
+    if($row[3]==1)$eqsl[$band.$mode]++;
+    if($row[4]==1)$qrz[$band.$mode]++;
     $tot++;
   }
   ksort($cc);
-  $aux="$tot ";
-  foreach($cc as $key=>$value)$aux.=$key."(".$value.") ";
+  $aux=sprintf("%3d ",$tot);
+  foreach($cc as $key=>$value)$aux.=$key."(".$value.",".$lotw[$key].",".$eqsl[$key].",".$qrz[$key].") ";
   mysqli_free_result($query);
   return $aux;
 }
