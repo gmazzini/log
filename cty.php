@@ -1,5 +1,13 @@
 <?php
 
+$sock=socket_create(AF_INET,SOCK_DGRAM,0);
+socket_bind($sock,"0.0.0.0",44444);
+for(;;){
+  socket_recvfrom($sock,$buf,1000,0,$remote_ip,$remote_port);
+  if($remote_ip<>"127.0.0.1")continue;
+  socket_sendto($sock,$buf,strlen(buf),0,"127.0.0.1");
+}
+
 function findcall($a){
   global $z1,$z2,$z3,$loadcty;
   if(!isset($loadcty)){
