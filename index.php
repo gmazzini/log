@@ -72,7 +72,7 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"list dw\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"find\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"find up\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"find dw\">&nbsp;"
+  echo "<input type=\"submit\" name=\"run\" value=\"find dw\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"report\">&nbsp;";
   echo "<br>";
 
