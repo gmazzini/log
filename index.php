@@ -98,6 +98,7 @@ else {
   $page=(int)mypost("page");
   $qsostart=mypost("qsostart");
   $runcontest=(int)mypost("runcontest");
+	$modecontest=(int)mypost("modecontest");
   $riglink=(int)mypost("riglink");
   
   switch($run){
@@ -109,6 +110,8 @@ else {
     case "find dw": $run="find"; $page-=$mypage; if($page<0)$page=0; break;
     case "contest": $runcontest=1; break;
     case "contest off": $runcontest=0; break;
+    case "auto": $modecontest=1; break;
+    case "auto off": $modecontest=0; break;
     case "riglink": $riglink=1; break;
     case "riglink off": $riglink=0; break;
   }
@@ -140,6 +143,8 @@ else {
     echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\">&nbsp;";
     echo "<label>Contest</label>";
     echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">&nbsp;";
+    if($modecontest)echo "<input type=\"submit\" name=\"run\" value=\"auto off\">&nbsp;";
+    else echo "<input type=\"submit\" name=\"run\" value=\"auto\">&nbsp;";
     echo "<br>"; 
   }
   else {
@@ -188,6 +193,7 @@ else {
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
   echo "<input type=\"hidden\" name=\"runcontest\" value=\"$runcontest\">";
+  echo "<input type=\"hidden\" name=\"modecontest\" value=\"$modecontest\">";
   echo "<input type=\"hidden\" name=\"riglink\" value=\"$riglink\">";
   echo "<input type=\"hidden\" name=\"Prigrx\" id=\"Prigrx\">";
   echo "<input type=\"hidden\" name=\"Prigtx\" id=\"Prigtx\">";
