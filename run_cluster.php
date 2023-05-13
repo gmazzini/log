@@ -19,6 +19,5 @@ for(;;){
 }
 echo "</pre>";
 mysqli_free_result($query);
-break;
 
 ?>
