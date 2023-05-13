@@ -134,11 +134,11 @@ else {
   
   if($runcontest){
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
-    echo "<label>contestTX</label>";
+    echo "<label>ContestTX</label>";
     echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">&nbsp;";
     echo "<label>ContestRX</label>";
     echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\">&nbsp;";
-    echo "<label>contest</label>";
+    echo "<label>Contest</label>";
     echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">&nbsp;";
     echo "<br>"; 
   }
