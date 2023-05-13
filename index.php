@@ -6,7 +6,7 @@ include "utility.php";
 include "bandplane.php";
 
 if(isset($_POST['act']))$act=(int)$_POST['act'];
-elsle $act="";
+else $act="";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $mypage=30;
