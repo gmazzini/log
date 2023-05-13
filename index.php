@@ -5,7 +5,8 @@ include "local.php";
 include "utility.php";
 include "bandplane.php";
 
-$act=(int)$_POST['act'];
+if(isset($_POST['act']))$act=(int)$_POST['act'];
+elsle $act="";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $mypage=30;
@@ -86,6 +87,7 @@ else {
   echo "<input type=\"file\" name=\"myfile\">&nbsp;";
   echo "<br>";
 
+	
   $Icallsign=strtoupper($_POST['Icallsign']);
   $Ifreq=$_POST['Ifreq'];
   $Imode=strtoupper($_POST['Imode']);
@@ -100,43 +102,18 @@ else {
   $qsostart=$_POST['qsostart'];
   $runcontest=(int)$_POST['runcontest'];
   $riglink=(int)$_POST['riglink'];
+  
   switch($run){
-    case "list": 
-      $page=0; 
-      break;
-    case "list up": 
-      $run="list"; 
-      $page+=$mypage; 
-      break;
-    case "list dw": 
-      $run="list"; 
-      $page-=$mypage;
-      if($page<0)$page=0;
-      break;
-    case "find": 
-      $page=0; 
-      break;
-    case "find up": 
-      $run="find";
-      $page+=$mypage;
-      break;
-    case "find dw":
-      $run="find";
-      $page-=$mypage;
-      if($page<0)$page=0;
-      break;
-    case "contest":
-      $runcontest=1;
-      break;
-    case "contest off":
-      $runcontest=0;
-      break;
-    case "riglink":
-      $riglink=1;
-      break;
-    case "riglink off":
-      $riglink=0;
-      break;
+    case "list": $page=0; break;
+    case "list up": $run="list"; $page+=$mypage; break;
+    case "list dw": $run="list"; $page-=$mypage; if($page<0)$page=0; break;
+    case "find": $page=0; break;
+    case "find up": $run="find"; $page+=$mypage; break;
+    case "find dw": $run="find"; $page-=$mypage; if($page<0)$page=0; break;
+    case "contest": $runcontest=1; break;
+    case "contest off": $runcontest=0; break;
+    case "riglink": $riglink=1; break;
+    case "riglink off": $riglink=0; break;
   }
   
   echo "<label>Call</label>";
