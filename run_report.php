@@ -14,10 +14,11 @@ for(;;){
   if($row[4]==1)$qrz[$band.$mode]++;
   $tot++;
 }
+mysqli_free_result($query);
 ksort($cc);
 printf("%6d\n",$tot);
+print_r($cc);
 foreach($cc as $key=>$value)printf("%s %6d %6d %6d %6d\n",$value,$lotw[$key],$eqsl[$key],$qrz[$key]);
-mysqli_free_result($query);
 
 echo "</pre>";
 
