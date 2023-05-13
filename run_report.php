@@ -1,6 +1,6 @@
 <?php
 
-echo "<pre>";
+echo "<pre>fff";
 
 query=mysqli_query($con,"select count(lotw),count(eqsl),count(qrz) from log where mycall='$mycall'");
 $row=mysqli_fetch_array($query);
