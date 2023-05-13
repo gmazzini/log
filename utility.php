@@ -5,7 +5,7 @@ $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=
 
 function mypost($token){
   global $_POST;
-  if(isset($_POST['$token]))return $_POST[$token];
+  if(isset($_POST[$token]))return $_POST[$token];
   return "";
 }
 
