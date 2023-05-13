@@ -72,7 +72,8 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"list dw\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"find\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"find up\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"find dw\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"find dw\">&nbsp;"
+  echo "<input type=\"submit\" name=\"run\" value=\"report\">&nbsp;";
   echo "<br>";
 
   echo "<input type=\"submit\" name=\"run\" value=\"importadi\">&nbsp;";
@@ -194,27 +195,9 @@ else {
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
-    case "cluster":
-      echo "<pre>";
-      $myrow=0;
-      $query=mysqli_query($con,"select dx,spotter,freq,timespot from dxc order by timespot desc limit 1000");
-      for(;;){
-        $row=mysqli_fetch_array($query);
-        if($row==null)break;
-        $freq=$row[2]/1000;
-        for($i=0;;$i++){
-          if(!isset($bpfreq[$i]))break;
-          if($freq>=$bpfreq[$i][1]&&$freq<$bpfreq[$i][2])break;
-        }
-        if(isset($bpfreq[$i])&&$dxcsel[$bpfreq[$i][0]]&&$dxcsel[$bpfreq[$i][3]]){
-          printf("%s %12s %7.1f %10s %s\n",$row[3],$row[0],$row[2]/1000,$row[1],myqso($con,$mycall,$row[0]));
-          $myrow++;
-          if($myrow>$mypage)break;
-        }
-      }
-      echo "</pre>";
-      mysqli_free_result($query);
-      break;
+    case "report": include("run_report.php"); break;
+    case "cluster": include("run_cluster.php"); break;
+		  
       
     case "exportcbr":
       if(!isset($_FILES['myfile']['tmp_name']))break;
