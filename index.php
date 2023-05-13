@@ -137,6 +137,7 @@ else {
   
   if($runcontest){
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
+    if($modecontest)$Icontesttx=10;
     echo "<label>ContestTX</label>";
     echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">&nbsp;";
     echo "<label>ContestRX</label>";
