@@ -1,4 +1,4 @@
-<title>LZH Logger V0.22 by IK4LZH</title>
+<title>LZH Logger V0.23 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -143,7 +143,6 @@ else {
     echo "<br>"; 
   }
   else {
-    echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
     echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
@@ -151,6 +150,7 @@ else {
   
   echo "<input type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
+  if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
   
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
