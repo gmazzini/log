@@ -137,7 +137,12 @@ else {
   
   if($runcontest){
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
-    if($modecontest)$Icontesttx=10;
+    if($modecontest){
+      $query=mysqli_query($con,"select max(contesttx) from log where mycall='$mycall' and contest='$Icontest'");
+      $row=mysqli_fetch_array($query);
+      $Icontesttx=$row[0]+1;
+      mysqli_free_result($query);
+    }
     echo "<label>ContestTX</label>";
     echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">&nbsp;";
     echo "<label>ContestRX</label>";
