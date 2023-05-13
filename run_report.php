@@ -3,6 +3,7 @@
 echo "<pre>";
 
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall'");
+$tot=0;
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
