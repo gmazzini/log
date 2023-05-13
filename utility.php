@@ -3,6 +3,11 @@
 $myband=array(0=>0,1=>160,3=>80,5=>60,7=>40,10=>30,14=>20,18=>17,21=>15,24=>12,28=>10,29=>10,50=>6,144=>2,145=>2,430=>0.7,431=>0.7,432=>0.7,433=>0.7);
 $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG","FM"=>"PH","AM"=>"PH","PKT"=>"DG","TOR"=>"DG","AMTOR"=>"DG","PSK"=>"DG");
 
+function mypost($token){
+  if(isset($_POST['$token]))return $_POST[$token];
+  return "";
+}
+
 function myextract($buf,$token){
   $pos=stripos($buf,"<".$token.":");
   if($pos===false)return null;
