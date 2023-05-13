@@ -8,10 +8,20 @@ for(;;){
   if($row==null)break;
   $band=$myband[floor($row[0]/1000000)];
   $mode=$mymode[$row[1]];
-  $cc[$band.$mode]++;
-  if($row[2]==1)$lotw[$band.$mode]++;
-  if($row[3]==1)$eqsl[$band.$mode]++;
-  if($row[4]==1)$qrz[$band.$mode]++;
+  if(isset($cc[$band.$mode]))$cc[$band.$mode]++;
+  else $cc[$band.$mode]=1;
+  if($row[2]==1){
+    if(isset($lotw[$band.$mode]))$lotw[$band.$mode]++;
+    else $lotw[$band.$mode]=1;
+  }
+  if($row[3]==1){
+    if(isset($eqsl[$band.$mode]))$eqsl[$band.$mode]++;
+    else $eqsl[$band.$mode]=1;
+  }
+  if($row[4]==1){
+    if(isset($qrz[$band.$mode]))$qrz[$band.$mode]++;
+    else $qrz[$band.$mode]=1;
+  }
   $tot++;
 }
 mysqli_free_result($query);
