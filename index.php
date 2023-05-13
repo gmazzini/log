@@ -87,20 +87,19 @@ else {
   echo "<br>";
 
 	
-  $Icallsign=strtoupper($_POST['Icallsign']);
-  $Ifreq=$_POST['Ifreq'];
-  $Imode=strtoupper($_POST['Imode']);
-  $Isignaltx=$_POST['Isignaltx'];
-  $Isignalrx=$_POST['Isignalrx'];
-  $Icontest=$_POST['Icontest'];
-  $Icontesttx=$_POST['Icontesttx'];
-  $Icontestrx=$_POST['Icontestrx'];
-  
-  $run=$_POST['run'];
-  $page=(int)$_POST['page'];
-  $qsostart=$_POST['qsostart'];
-  $runcontest=(int)$_POST['runcontest'];
-  $riglink=(int)$_POST['riglink'];
+  $Icallsign=strtoupper(mypost("Icallsign"));
+  $Ifreq=mypost("Ifreq");
+  $Imode=strtoupper(mypost("Imode"));
+  $Isignaltx=mypost("Isignaltx");
+  $Isignalrx=mypost("Isignalrx");
+  $Icontest=mypost("Icontest");
+  $Icontesttx=mypost("Icontesttx");
+  $Icontestrx=mypost("Icontestrx");
+  $run=mypost("run");
+  $page=(int)mypost("page");
+  $qsostart=mypost("qsostart");
+  $runcontest=(int)mypost("runcontest");
+  $riglink=(int)mypost("riglink");
   
   switch($run){
     case "list": $page=0; break;
