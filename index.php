@@ -194,80 +194,13 @@ else {
   if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
-  switch($run){
-    case "report": include "run_report.php"; break;
-    case "cluster": include "run_cluster.php"; break;
-		  
-      
-    case "exportcbr":
-      if(!isset($_FILES['myfile']['tmp_name']))break;
-      $name=rand().rand().rand().rand().".cbr";
-      $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
-      fprintf($fp,"START-OF-LOG: 3.0\n");
-      fprintf($fp,"CONTEST: xxxxxx\n");
-      fprintf($fp,"CALLSIGN: $mycall\n");
-      fprintf($fp,"CATEGORY-OPERATOR: SINGLE-OP\n");
-      fprintf($fp,"CATEGORY-ASSISTED: ASSISTED\n");
-      fprintf($fp,"CATEGORY-BAND: ALL\n");
-      fprintf($fp,"CATEGORY-POWER: LOW\n");
-      fprintf($fp,"CATEGORY-TRANSMITTER: ONE\n");
-      fprintf($fp,"CREATED-BY: IK4LZH logger\n");
-      fprintf($fp,"NAME: xxxxxxx xxxxxx\n");
-      fprintf($fp,"EMAIL: xxxxxx\n");
-      fprintf($fp,"ADDRESS: xxxxxx\n");
-      fprintf($fp,"ADDRESS-CITY: xxxxx\n");
-      fprintf($fp,"ADDRESS-POSTALCODE: xxxxxx\n");
-      fprintf($fp,"ADDRESS-COUNTRY: xxxxxx\n");
-      fprintf($fp,"OPERATORS: $mycall\n");
-      fprintf($fp,"CLUB: xxxxxx\n");
-      $aux=file_get_contents($_FILES['myfile']['tmp_name']);
-      $export_from=myextract($aux,"export_from");
-      $export_to=myextract($aux,"export_to");
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
-      for(;;){
-        $row=mysqli_fetch_array($query);
-        if($row==null)break;
-        fprintf($fp,"QSO: %5d %2s %04d-%02d-%02d ",$row[2]/1000,$mymode[$row[3]],substr($row[0],0,4),substr($row[0],5,2),substr($row[0],8,2));
-        fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row[0],11,2),substr($row[0],14,2),$mycall,$row[4],$row[8],$row[1],$row[5],$row[9]);
-      }
-      fprintf($fp,"END-OF-LOG:\n");
-      fclose($fp);
-      echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download Cabrillo</a><br>";
-      echo "$export_from $export_to\n";
-      break;
-      
-    case "exportadi":
-      if(!isset($_FILES['myfile']['tmp_name']))break;
-      $name=rand().rand().rand().rand().".adi";
-      $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
-      fprintf($fp,"%s\n",myinsert("LZHlogger","PROGRAMID"));
-      fprintf($fp,"<EOH>\n\n");
-      $aux=file_get_contents($_FILES['myfile']['tmp_name']);
-      $export_from=myextract($aux,"export_from");
-      $export_to=myextract($aux,"export_to");
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx,contest from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
-      for(;;){
-        $row=mysqli_fetch_array($query);
-        if($row==null)break;
-        fprintf($fp,"%s\n",myinsert($row[1],"CALL"));
-        fprintf($fp,"%s\n",myinsert(substr($row[0],0,4).substr($row[0],5,2).substr($row[0],8,2),"QSO_DATE"));
-        fprintf($fp,"%s\n",myinsert(substr($row[0],11,2).substr($row[0],14,2).substr($row[0],17,2),"TIME_ON"));
-        fprintf($fp,"%s\n",myinsert(substr($row[6],0,4).substr($row[6],5,2).substr($row[6],8,2),"QSO_DATE_OFF"));
-        fprintf($fp,"%s\n",myinsert(substr($row[6],11,2).substr($row[6],14,2).substr($row[6],17,2),"TIME_OFF"));
-        fprintf($fp,"%s\n",myinsert(sprintf("%7.5f",$row[2]/1000000),"FREQ"));
-        fprintf($fp,"%s\n",myinsert(sprintf("%7.5f",$row[7]/1000000),"FREQ_RX"));
-        fprintf($fp,"%s\n",myinsert($row[4],"RST_SENT"));
-        fprintf($fp,"%s\n",myinsert($row[5],"RST_RCVD"));
-        fprintf($fp,"%s\n",myinsert($row[3],"MODE")); 
-        fprintf($fp,"%s\n",myinsert($row[8],"STX_STRING"));
-        fprintf($fp,"%s\n",myinsert($row[9],"SRX_STRING"));
-        fprintf($fp,"%s\n",myinsert($row[10],"CONTEST_ID"));
-        fprintf($fp,"<EOR>\n\n");
-      }
-      fclose($fp);
-      echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download ADIF</a><br>";
-      echo "$export_from $export_to\n";
-      break;
+	
+	switch($run){
+    case "find": include "run_find.php"; break;
+		case "report": include "run_report.php"; break;
+    case "cluster": include "run_cluster.php"; break;      
+    case "exportcbr": include "run_exportcbr.php"; break;
+    case "exportadi": include "run_exportadi.php"; break;
       
     case "end":
       $qsoend=gmdate('Y-m-d H:i:s');
@@ -335,22 +268,6 @@ else {
       print_r($mys);
       echo "</pre>";
       break; 
-    
-    case "find":
-      echo "<pre>";
-      $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
-      for(;;){
-        $row=mysqli_fetch_array($query);
-        if($row==null)break;
-        $aux="";
-        if((int)$row[6]==1)$aux.="L";
-        if((int)$row[7]==1)$aux.="E";
-	if((int)$row[8]==1)$aux.="Q";
-        printf("%s %12s %7.1f %4s %5s %5s %-2s\n",$row[0],$row[1],$row[2]/1000,$row[3],$row[4],$row[5],$aux);
-      }
-      echo "</pre>";
-      mysqli_free_result($query);
-      break;
 
     case "list";
       echo "<pre>";
