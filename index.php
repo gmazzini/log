@@ -10,7 +10,7 @@ $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $mypage=30;
 if($act>=1){
-  $mycall=strtoupper(mypos("mycall"));
+  $mycall=strtoupper(mypost("mycall"));
   if($act==1)$md5passwd=md5(mypost("mypasswd"));
   else $md5passwd=mypost("md5passwd");
   $query=mysqli_query($con,"select mygrid,cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
