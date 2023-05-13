@@ -85,7 +85,6 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"qsl_qrz\">&nbsp;";
   echo "<input type=\"file\" name=\"myfile\">&nbsp;";
   echo "<br>";
-
 	
   $Icallsign=strtoupper(mypost("Icallsign"));
   $Ifreq=mypost("Ifreq");
