@@ -204,7 +204,7 @@ else {
     case "exportadi": include "run_exportadi.php"; break;
     case "end": include "run_end.php"; break;
     case "start": include "run_start.php"; break;
-    case "importlzh": include "run_importlzh.php"; break,
+    case "importlzh": include "run_importlzh.php"; break;
     case "importadi": include "run_importadi.php"; break; 
     case "qsl_lotw": include "run_qsl_lotw.php"; break;
     case "qsl_eqsl": include "run_qsl_eqsl.php"; break;
