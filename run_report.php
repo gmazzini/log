@@ -2,7 +2,7 @@
 
 echo "<pre>";
 
-$query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall' and lotw=1");
+$query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall'");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
@@ -15,7 +15,7 @@ for(;;){
   $tot++;
 }
 ksort($cc);
-printf("%3d ",$tot);
+printf("%6d\n",$tot);
 foreach($cc as $key=>$value)printf("%s %6d %6d %6d %6d\n",$value,$lotw[$key],$eqsl[$key],$qrz[$key]);
 mysqli_free_result($query);
 
