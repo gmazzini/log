@@ -138,7 +138,7 @@ else {
   if($runcontest){
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
     if($modecontest){
-      $query=mysqli_query($con,"select max(cast(contesttx) as unsigned) from log where mycall='$mycall' and contest='$Icontest'");
+      $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
       $row=mysqli_fetch_array($query);
       $Icontesttx=$row[0]+1;
       mysqli_free_result($query);
