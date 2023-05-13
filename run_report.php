@@ -7,7 +7,7 @@ for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
   $Intfreq=floor($row[0]/1000000);
-  if(!isset($Intfreq))$band=10;
+  if(!isset($myband[$Intfreq]))$band=10;
   else $band=$myband[$Intfreq];
   $mode=$mymode[$row[1]];
   if(isset($cc[$band.$mode]))$cc[$band.$mode]++;
