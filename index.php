@@ -195,8 +195,8 @@ else {
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
   switch($run){
-    case "report": include("run_report.php"); break;
-    case "cluster": include("run_cluster.php"); break;
+    case "report": include "run_report.php"; break;
+    case "cluster": include "run_cluster.php"; break;
 		  
       
     case "exportcbr":
