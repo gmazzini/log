@@ -6,9 +6,7 @@ $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
-  $Intfreq=floor($row[0]/1000000);
-  if(!isset($myband[$Intfreq])){$band=10; echo "$Intfreq\n";}
-  else $band=$myband[$Intfreq];
+  $band=$myband[floor($row[0]/1000000)];
   $mode=$mymode[$row[1]];
   if(isset($cc[$band.$mode]))$cc[$band.$mode]++;
   else $cc[$band.$mode]=1;
