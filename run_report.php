@@ -6,6 +6,12 @@ function myinc(&$w,$in,$el){
   if(isset($w[$in][$el]))$w[$in][$el]++;
   else $w[$in][$el]=1;
 }
+function mycmpkey($a,$b){
+  if($a==$b)return 0;
+  $aa=(float)$a*1000+ord(substr($a,strspn($a,"CPD"),1));
+  $bb=(float)$b*1000+ord(substr($b,strspn($b,"CPD"),1));
+  return ($aa<$bb)?-1:1;
+}
 
 unset($w);
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
@@ -26,10 +32,6 @@ mysqli_free_result($query);
 
 printf("<b>%10s %6d %6d %6d %6d</b>\n","band/mode",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
-function mycmpkey($a,$b){
-  if($a==$b)return 0;
-  return ((float)$a<(float)$b)?-1:1;
-}
 usort($key,mycmpkey);
 foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
 echo "\n";
