@@ -1,11 +1,9 @@
 <?php
 
-$sock=socket_create(AF_INET,SOCK_DGRAM,0);
-socket_bind($sock,"0.0.0.0",44444);
-for(;;){
-  socket_recvfrom($sock,$buf,1000,0,$remote_ip,$remote_port);
-  if($remote_ip<>"127.0.0.1")continue;
-  socket_sendto($sock,$buf,strlen(buf),0,"127.0.0.1");
+$socket=stream_socket_server("tcp://0.0.0.0:8000");
+while($conn=stream_socket_accept($socket)){
+  fwrite($conn, 'The local time is ' . date('n/j/Y g:i a') . "\n");
+  fclose($conn);
 }
 
 function findcall($a){
