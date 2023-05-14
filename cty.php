@@ -1,7 +1,7 @@
 <?php
 
-$socket=stream_socket_server("tcp://0.0.0.0:22222",-1);
-while($conn=stream_socket_accept($socket)){
+$socket=stream_socket_server("tcp://0.0.0.0:22222");
+while($conn=stream_socket_accept($socket,-1)){
   $call=fread($conn,20);
   $lookup=json_encode(findcall($call));
   fwrite($conn,$lookup);
