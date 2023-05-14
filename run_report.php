@@ -21,7 +21,7 @@ for(;;){
   if($row[3]==1)myinc($w,2,$tt);
   if($row[4]==1)myinc($w,3,$tt);
   $lookup=json_decode(findcall($row[5]));
-  echo $lookup["dxcc"];
+  print_r($lookup);
   exit(0);
   $tot++;
 }
