@@ -35,9 +35,9 @@ function mycmpkey($a,$b){
 usort($key,mycmpkey);
 foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
 
-$key=array_keys($w[5]);
+$key=array_keys($w[4]);
 sort($key);
-foreach($key as &$kk)printf("%10s %6d\n",$kk,$w[5][$kk]);
+foreach($key as &$kk)printf("%10s %6d\n",$kk,$w[4][$kk]);
 
 echo "</pre>";
 
