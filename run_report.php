@@ -37,7 +37,7 @@ foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[0][$kk],$w[1][$kk],$
 
 $key=array_keys($w[5]);
 sort($key);
-foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[5][$kk]);
+foreach($key as &$kk)printf("%10s %6d\n",$kk,$w[5][$kk]);
 
 echo "</pre>";
 
