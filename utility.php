@@ -45,9 +45,9 @@ function myqso($con,$mycall,$callsign){
 }
 
 function findcall($a){
-  $fp=@fsockopen("127.0.0.0.1",22222);
+  $fp=@fsockopen("127.0.0.1",22222);
   if($fp){
-    fwrite($fp,"IK4LZH");
+    fwrite($fp,$a);
     $lookup=gets($fp,1000);
     fclose($fp);
     return $lookup;
