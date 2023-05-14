@@ -1,6 +1,6 @@
 <?php
 
-$socket=stream_socket_server("tcp://0.0.0.0:8000");
+$socket=stream_socket_server("tcp://0.0.0.0:22222");
 while($conn=stream_socket_accept($socket)){
   fwrite($conn, 'The local time is ' . date('n/j/Y g:i a') . "\n");
   fclose($conn);
