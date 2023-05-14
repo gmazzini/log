@@ -1,7 +1,7 @@
 <?php
 
 echo "<pre>";
-$query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
+$query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '$Icallsign' and mycall='$mycall' order by start desc limit $mypage offset $page");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
