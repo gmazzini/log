@@ -2,8 +2,9 @@
 
 $socket=stream_socket_server("tcp://0.0.0.0:22222");
 while($conn=stream_socket_accept($socket)){
-  $cmd=fread($conn,20);
-  fwrite($conn, 'The local time is ' . date('n/j/Y g:i a') . "$cmd\n");
+  $call=fread($conn,20);
+  $lookup=findcall($call);
+  fwrite($conn,$lookup);
   fclose($conn);
 }
 
