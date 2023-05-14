@@ -47,9 +47,11 @@ for(;;){
   printf("\n");
 }
 mysqli_free_result($query);
+echo "\n";
 
 echo myqso($con,$mycall,$Icallsign);
 echo "\n";
+
 $mys=findcall($Icallsign);
 print_r($mys);
 echo "</pre>";
