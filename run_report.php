@@ -2,7 +2,7 @@
 
 echo "<pre>";
 
-$query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall'");
+$query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,callsign from log where mycall='$mycall'");
 $tot=0;
 for(;;){
   $row=mysqli_fetch_array($query);
@@ -23,6 +23,8 @@ for(;;){
     if(isset($qrz[$band.$mode]))$qrz[$band.$mode]++;
     else $qrz[$band.$mode]=1;
   }
+  $lookup=json_decode(mycall($row[5]));
+  echo $lookup["dxcc"];
   $tot++;
 }
 mysqli_free_result($query);
