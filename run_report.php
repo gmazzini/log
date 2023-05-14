@@ -20,7 +20,8 @@ for(;;){
   if($row[2]==1)myinc($w,1,$tt);
   if($row[3]==1)myinc($w,2,$tt);
   if($row[4]==1)myinc($w,3,$tt);
-  echo findcall("IK4LZH");
+  $lookup=json_decode(findcall("IK4LZH"));
+  echo $lookup["dxcc"];
   exit(0);
   $tot++;
 }
