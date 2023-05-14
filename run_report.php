@@ -37,6 +37,7 @@ usort($key,mycmpkey);
 foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
 echo "\n";
 
+printf("<b>%10s %6d %6d %6d %6d</b>\n","",count($w[4]),count($w[5]),count($w[6]),count($w[7]));
 $key=array_keys($w[4]);
 foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk]);
 
