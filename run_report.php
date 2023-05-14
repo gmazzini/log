@@ -9,7 +9,6 @@ function myinc(&$w,$in,$el){
 
 unset($w);
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
-$tot=0;
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
@@ -22,12 +21,10 @@ for(;;){
   if($row[2]==1){myinc($w,1,$tt); myinc($w,5,$dxcc);}
   if($row[3]==1){myinc($w,2,$tt); myinc($w,6,$dxcc);}
   if($row[4]==1){myinc($w,3,$tt); myinc($w,7,$dxcc);}
-  $tot++;
 }
 mysqli_free_result($query);
 
-printf("%6d\n",$tot);
-
+printf("%10s %6d %6d %6d %6d\n","",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
 function mycmpkey($a,$b){
   if($a==$b)return 0;
