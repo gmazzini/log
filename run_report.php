@@ -8,8 +8,8 @@ function myinc(&$w,$in,$el){
 }
 function mycmpkey($a,$b){
   if($a==$b)return 0;
-  $aa=(float)$a*1000+ord(substr($a,strspn($a,"CPD"),1));
-  $bb=(float)$b*1000+ord(substr($b,strspn($b,"CPD"),1));
+  $aa=((float)$a)*1000+ord(substr($a,strcspn($a,"CPD"),1));
+  $bb=((float)$b)*1000+ord(substr($b,strcspn($b,"CPD"),1));
   return ($aa<$bb)?-1:1;
 }
 
