@@ -20,7 +20,7 @@ for(;;){
   if($row[2]==1)myinc($w,1,$tt);
   if($row[3]==1)myinc($w,2,$tt);
   if($row[4]==1)myinc($w,3,$tt);
-  echo findcall($row[5]);
+  echo findcall("IK4LZH");
   exit(0);
   $tot++;
 }
