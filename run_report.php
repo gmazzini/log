@@ -24,7 +24,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-printf("%10s %6d %6d %6d %6d\n","",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
+printf("<b>%10s %6d %6d %6d %6d</b>\n","",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
 function mycmpkey($a,$b){
   if($a==$b)return 0;
