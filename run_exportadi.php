@@ -1,7 +1,7 @@
 <?php
 
- if(!isset($_FILES['myfile']['tmp_name']))break;
- $name=rand().rand().rand().rand().".adi";
+if(isset($_FILES['myfile']['tmp_name'])){
+  $name=rand().rand().rand().rand().".adi";
  $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
  fprintf($fp,"%s\n",myinsert("LZHlogger","PROGRAMID"));
  fprintf($fp,"<EOH>\n\n");
@@ -30,5 +30,6 @@
  fclose($fp);
  echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download ADIF</a><br>";
  echo "$export_from $export_to\n";
+}
 
 ?>
