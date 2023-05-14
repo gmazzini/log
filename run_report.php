@@ -20,8 +20,9 @@ for(;;){
   if($row[2]==1)myinc($w,1,$tt);
   if($row[3]==1)myinc($w,2,$tt);
   if($row[4]==1)myinc($w,3,$tt);
-//  $lookup=json_decode(mycall($row[5]));
-//  echo $lookup["dxcc"];
+  $lookup=json_decode(findcall($row[5]));
+  echo $lookup["dxcc"];
+  exit(0);
   $tot++;
 }
 mysqli_free_result($query);
