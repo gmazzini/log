@@ -3,7 +3,7 @@
 $socket=stream_socket_server("tcp://0.0.0.0:22222");
 while($conn=stream_socket_accept($socket)){
   $call=fread($conn,20);
-  $lookup=findcall($call);
+  $lookup=json_encode(findcall($call));
   fwrite($conn,$lookup);
   fclose($conn);
 }
