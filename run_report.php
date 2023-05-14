@@ -32,7 +32,7 @@ printf("%6d\n",$tot);
 $key=array_keys($cc);
 function mycmpkey($a,$b){
   if($a==$b)return 0;
-  return ((int)$a<(int)$b)?-1:1;
+  return ((float)$a<(float)$b)?-1:1;
 }
 usort($key,mycmpkey);
 
