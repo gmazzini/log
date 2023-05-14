@@ -35,9 +35,7 @@ function mycmpkey($a,$b){
   return ((float)$a<(float)$b)?-1:1;
 }
 usort($key,mycmpkey);
-
-print_r($key);
-// foreach($cc as $key=>$value)printf("%s %6d %6d %6d %6d\n",$value,$lotw[$key],$eqsl[$key],$qrz[$key]);
+foreach($key as &$kk)printf("%s %6d %6d %6d %6d\n",$kk,$cc[$kk],$lotw[$kk],$eqsl[$kk],$qrz[$kk]);
 
 echo "</pre>";
 
