@@ -22,7 +22,7 @@ for(;;){
   if($row[4]==1)myinc($w,3,$tt);
   $lookup=json_decode(findcall("IK4LZH"));
   print_r($lookup);
-  echo $lookup["dxcc"];
+  echo $lookup->dxcc;
   exit(0);
   $tot++;
 }
