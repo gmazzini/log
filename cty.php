@@ -1,6 +1,6 @@
 <?php
 
-$socket=stream_socket_server("tcp://0.0.0.0:22222");
+$socket=stream_socket_server("tcp://0.0.0.0:22222",-1);
 while($conn=stream_socket_accept($socket)){
   $call=fread($conn,20);
   $lookup=json_encode(findcall($call));
