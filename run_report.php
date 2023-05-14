@@ -26,16 +26,16 @@ for(;;){
   $tot++;
 }
 mysqli_free_result($query);
-$key=array_key($cc);
 
+printf("%6d\n",$tot);
+
+$key=array_keys($cc);
 function mycmpkey($a,$b){
   if($a==$b)return 0;
   return ((int)$a<(int)$b)?-1:1;
 }
-
 usort($key,mycmpkey);
 
-printf("%6d\n",$tot);
 print_r($key);
 // foreach($cc as $key=>$value)printf("%s %6d %6d %6d %6d\n",$value,$lotw[$key],$eqsl[$key],$qrz[$key]);
 
