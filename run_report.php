@@ -20,8 +20,7 @@ for(;;){
   if($row[2]==1)myinc($w,1,$tt);
   if($row[3]==1)myinc($w,2,$tt);
   if($row[4]==1)myinc($w,3,$tt);
-  $lookup=json_decode(findcall($row[5]));
-  print_r($lookup);
+  echo findcall($row[5]);
   exit(0);
   $tot++;
 }
