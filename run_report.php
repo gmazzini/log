@@ -15,15 +15,14 @@ for(;;){
   if($row==null)break;
   $band=$myband[floor($row[0]/1000000)];
   $mode=$mymode[$row[1]];
+  $lookup=json_decode(findcall($row[5]));
+  $dxcc=$lookup->dxcc;
   $tt=$band.$mode;
   myinc($w,0,$tt);
+  myinc($w,10,$dxcc);
   if($row[2]==1)myinc($w,1,$tt);
   if($row[3]==1)myinc($w,2,$tt);
   if($row[4]==1)myinc($w,3,$tt);
-  $lookup=json_decode(findcall("IK4LZH"));
-  print_r($lookup);
-  echo $lookup->dxcc;
-  exit(0);
   $tot++;
 }
 mysqli_free_result($query);
