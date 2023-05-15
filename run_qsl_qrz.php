@@ -1,6 +1,8 @@
 <?php
 
 if(isset($_FILES['myfile']['tmp_name'])){
+  echo $_FILES['myfile']['tmp_name'];
+  exit(0);
   $hh=fopen($_FILES['myfile']['tmp_name'],"r");
   $aux="";
   echo "<pre>";
