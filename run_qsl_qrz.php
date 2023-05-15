@@ -1,7 +1,6 @@
 <?php
 
 if(isset($_FILES['myfile']['tmp_name'])){
-  $hh=fopen($_FILES['myfile']['tmp_name'],"r");
   echo $_FILES['myfile']['tmp_name']."---\n";
   exit(0);
   $hh=fopen($_FILES['myfile']['tmp_name'],"r");
