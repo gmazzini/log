@@ -19,7 +19,6 @@ for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
   $band=$myband[floor($row[0]/1000000)];
-  if($band==0)echo "$row[0]\n";
   $mode=$mymode[$row[1]];
   $tt=$band.$mode;
   $dxcc=$row[5];
