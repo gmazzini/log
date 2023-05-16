@@ -23,3 +23,9 @@ echo "</pre>";
 mysqli_free_result($query);
 
 ?>
+<p id="demo"></p>
+<script>
+function myfreq(freq) {
+  document.getElementById("demo").innerHTML=freq;
+}
+</script>
