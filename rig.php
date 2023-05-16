@@ -15,6 +15,7 @@ if($fp){
   $mode=trim(fgets($fp,30));
   $bandwidth=trim(fgets($fp,30));
   printf("%s\n",$mode);
+  fclose($fp);
 }
 
 ?>
