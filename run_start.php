@@ -2,8 +2,8 @@
 // also triggered by ENTER in Call input
 echo "<pre>";
 
-if($Icallsign=="IK4LZH"){
-  echo "wowwwww\n";
+if(is_numeric($Icallsign)){
+  echo "Freq set to $Icallsign\n";
 }
 else {
   $qsostart=gmdate('Y-m-d H:i:s');
