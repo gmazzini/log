@@ -3,7 +3,14 @@
 echo "<pre>";
 
 if(is_numeric($Icallsign)){
-  echo "Freq set to $Icallsign\n";
+  $setfreq=(float)$Icallsign*1000;
+  echo "Freq set to $setfreq\n";
+  $fp=@fsockopen($rigIP,$rigPORT);
+  if($fp){
+    stream_set_timeout($fp,0,200000);
+    fwrite($fp,"F $setfreq\n");
+    fclose($fp);
+  }
 }
 else {
   $qsostart=gmdate('Y-m-d H:i:s');
