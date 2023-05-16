@@ -2,13 +2,6 @@
 
 echo "<pre>";
 
-function mycmpkey($a,$b){
-  if($a==$b)return 0;
-  $aa=((float)$a)*1000+ord(substr($a,strcspn($a,"CPD"),1));
-  $bb=((float)$b)*1000+ord(substr($b,strcspn($b,"CPD"),1));
-  return ($aa<$bb)?-1:1;
-}
-
 unset($w);
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
