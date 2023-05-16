@@ -27,7 +27,7 @@ mysqli_free_result($query);
 <script>
 function myfreq(freq){
   var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","http://log.chaos.cc/setfreq.php?freq="+freq,true);
+  xmlhttp.open("GET","setfreq.php?freq="+freq,true);
   xmlhttp.send();
   document.getElementById("demo").innerHTML=freq;
 }
