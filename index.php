@@ -29,6 +29,14 @@ if($act>=1){
 ?>
 
 <script>
+  var xcall=document.getElementById("xcall");
+  xcall.addEventListener("keypress",function(event){
+    if(event.key==="Enter"){
+      event.preventDefault();
+      document.getElementById("xstart").click();
+    }
+  });
+  
   function updategeneral() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -117,7 +125,7 @@ else {
   }
   
   echo "<label>Call</label>";
-  echo "<input type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
+  echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
   if(!$riglink){
     echo "<label>Freq</label>";
     echo "<input type=\"text\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\">&nbsp;";
@@ -159,7 +167,7 @@ else {
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
   
-  echo "<input type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
+  echo "<input id=\"xstart\" type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
   if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
