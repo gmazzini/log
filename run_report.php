@@ -2,10 +2,6 @@
 
 echo "<pre>";
 
-function myinc(&$w,$in,$el){
-  if(isset($w[$in][$el]))$w[$in][$el]++;
-  else $w[$in][$el]=1;
-}
 function mycmpkey($a,$b){
   if($a==$b)return 0;
   $aa=((float)$a)*1000+ord(substr($a,strcspn($a,"CPD"),1));
