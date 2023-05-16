@@ -23,12 +23,10 @@ echo "</pre>";
 mysqli_free_result($query);
 
 ?>
-<p id="demo"></p>
 <script>
 function myfreq(freq){
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.open("GET","setfreq.php?freq="+freq+"&rigIP=<?php echo $rigIP; ?>&rigPORT=<?php echo $rigPORT; ?>",true);
   xmlhttp.send();
-  document.getElementById("demo").innerHTML=freq;
 }
 </script>
