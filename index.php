@@ -163,12 +163,6 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
   if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"sto1\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"rcl1\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"sto2\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"rcl2\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"sto3\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"rcl3\">&nbsp;";
   
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   foreach(array("160","80","60","40","30","20","17","15","12","10","PH","CW","DG") as &$vv){
@@ -179,11 +173,18 @@ else {
   }  
   echo "<br>";
   
-  echo "<h2>RX:<span id=\"rigrx\"></span>&nbsp;";
+  echo "RX:<span id=\"rigrx\"></span>&nbsp;";
   echo "TX:<span id=\"rigtx\"></span>&nbsp;";
   echo "M:<span id=\"rigm\"></span>&nbsp;";
   if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
-  echo "<br></h2>";  
+  echo "<input type=\"submit\" name=\"run\" value=\"sto1\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"rcl1\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"sto2\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"rcl2\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"sto3\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"rcl3\">&nbsp;";
+  echo "<br>";  
+  
   echo "<h1>$mycall $mygrid $page</h1>";
   
   switch($run){
