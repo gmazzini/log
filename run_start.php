@@ -12,6 +12,14 @@ if(is_numeric($Icallsign)){
     fclose($fp);
   }
 }
+elseif($Icallsign=="USB"||$Icallsign=="LSB"||$Icallsign=="CW"){
+  $fp=@fsockopen($rigIP,$rigPORT);
+  if($fp){
+    stream_set_timeout($fp,0,200000);
+    fwrite($fp,"M $Icallsign 0\n");
+    fclose($fp);
+  }
+}
 else {
   $qsostart=gmdate('Y-m-d H:i:s');
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born from who where callsign='$Icallsign'");
