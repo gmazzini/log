@@ -163,6 +163,12 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
   if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"sto1\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"rcl1\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"sto2\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"rcl2\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"sto3\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"rcl3\">&nbsp;";
   
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   foreach(array("160","80","60","40","30","20","17","15","12","10","PH","CW","DG") as &$vv){
