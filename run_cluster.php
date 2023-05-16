@@ -13,7 +13,7 @@ for(;;){
   }
   if(isset($bpfreq[$i])&&$dxcsel[$bpfreq[$i][0]]&&$dxcsel[$bpfreq[$i][3]]){
     printf("%s %12s ",$row[3],$row[0]);
- //   printf("<button onclick=\"%s\">%7.1f</button> ","setfreq.php?freq=$row[2]",$freq);
+    printf("<button onclick=\"%s\">%7.1f</button> ","setfreq.php?freq=$row[2]",$freq);
     printf("%10s %s\n",$row[1],myqso($con,$mycall,$row[0]));
     $myrow++;
     if($myrow>$mypage)break;
