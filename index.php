@@ -29,14 +29,6 @@ if($act>=1){
 ?>
 
 <script>
-  var xcall=document.getElementById("xcall");
-  xcall.addEventListener("keypress",function(event){
-    if(event.key==="Enter"){
-      event.preventDefault();
-      document.getElementById("xstart").click();
-    }
-  });
-  
   function updategeneral() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -218,3 +210,13 @@ else {
 mysqli_close($con);
 
 ?>
+
+<script>
+  var xcall=document.getElementById("xcall");
+  xcall.addEventListener("keypress",function(event){
+    if(event.key==="Enter"){
+      event.preventDefault();
+      document.getElementById("xstart").click();
+    }
+  });
+</script>
