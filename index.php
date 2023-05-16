@@ -1,4 +1,4 @@
-<title>LZH Logger V0.23 by IK4LZH</title>
+<title>LZH Logger V0.24 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -85,7 +85,7 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"qsl_qrz\">&nbsp;";
   echo "<input type=\"file\" name=\"myfile\">&nbsp;";
   echo "<br>";
-	
+  
   $Icallsign=strtoupper(mypost("Icallsign"));
   $Ifreq=mypost("Ifreq");
   $Imode=strtoupper(mypost("Imode"));
@@ -179,7 +179,7 @@ else {
   if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
   echo "<br></h2>";  
   echo "<h1>$mycall $mygrid $page</h1>";
-	
+  
   switch($run){
     case "list": include "run_list.php"; break;
     case "find": include "run_find.php"; break;
