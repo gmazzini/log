@@ -98,7 +98,7 @@ else {
   $page=(int)mypost("page");
   $qsostart=mypost("qsostart");
   $runcontest=(int)mypost("runcontest");
-	$modecontest=(int)mypost("modecontest");
+  $modecontest=(int)mypost("modecontest");
   $riglink=(int)mypost("riglink");
   
   switch($run){
