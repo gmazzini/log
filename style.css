@@ -53,7 +53,8 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #402B88
+  background-color: #402B88;
+  color: #F9F4B7;
 }
 
 input[type=checkbox] {
