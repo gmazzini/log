@@ -64,6 +64,6 @@ input[type=checkbox] {
   transform: rotate(45deg);  
 }
 
-input[type=button]:hover {
+button[type=button]:hover {
   background-color: #402B88
 }
