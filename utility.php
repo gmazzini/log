@@ -54,10 +54,10 @@ function myqso($con,$mycall,$callsign){
   usort($key,"mycmpkey");
   $aux=sprintf("%3d ",array_sum($w[0]));
   foreach($key as &$kk){
-    if(isset($w[0][$kk]))$w1=$w[1][$kk]; else $w0="";
+    if(isset($w[0][$kk]))$w0=$w[0][$kk]; else $w0="";
     if(isset($w[1][$kk]))$w1=$w[1][$kk]; else $w1="";
-    if(isset($w[2][$kk]))$w1=$w[1][$kk]; else $w2="";
-    if(isset($w[3][$kk]))$w1=$w[1][$kk]; else $w3="";
+    if(isset($w[2][$kk]))$w2=$w[2][$kk]; else $w2="";
+    if(isset($w[3][$kk]))$w3=$w[3][$kk]; else $w3="";
     $aux.=$kk."(".$w0.",".$w1.",".$w2.",".$w3.") ";
   }
   return $aux;
