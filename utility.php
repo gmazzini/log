@@ -56,7 +56,7 @@ function myqso($con,$mycall,$callsign){
   }
   mysqli_free_result($query);
   $key=array_keys($w[0]);
-  usort($key,mycmpkey);
+  usort($key,"mycmpkey");
   $aux=sprintf("%3d ",array_sum($w[0]));
   foreach($key as &$kk)$aux.=$kk."(".myo($w[0][$kk]).",".myo($w[1][$kk]).",".myo($w[2][$kk]).",".myo($w[3][$kk]).") ";
   return $aux;
