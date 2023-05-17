@@ -16,10 +16,19 @@ if(substr($run,0,3)=="sto"){
   }
   file_put_contents("sto$ch.dat","$frx\n$ftx\n$fmode\n");
 }
+else {
+  $aux=file_get_contents("sto$ch.dat");
+  $lines=explode("\n",$aux);
+  $fp=@fsockopen($rigIP,$rigPORT);
+  if($fp){
+    stream_set_timeout($fp,0,200000);
+    fwrite($fp,"F $lines[0]\n");
+    // to be inserted other elements
+    fclose($fp);
+  }
+}
 
-echo $run;
-echo "\n";
-
+echo "$run\n";
 echo "</pre>";
 
 ?>
