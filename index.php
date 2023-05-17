@@ -200,7 +200,8 @@ else {
     case "importadi": include "run_importadi.php"; break; 
     case "qsl_lotw": include "run_qsl_lotw.php"; break;
     case "qsl_eqsl": include "run_qsl_eqsl.php"; break;
-    case "qsl_qrz": include "run_qsl_qrz.php"; break;    
+    case "qsl_qrz": include "run_qsl_qrz.php"; break;
+    case "sto1": case "sto2": case "sto3": case "rcl1": case "rcl2": case "rcl3": include "run_storcl.php"; break;
   }
   
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
