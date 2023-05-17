@@ -54,7 +54,6 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: #402B88;
-  color: #F9F4B7;
 }
 
 input[type=checkbox] {
@@ -66,5 +65,6 @@ input[type=checkbox] {
 }
 
 button[type=button]:hover {
-  background-color: #992C15 
+  background-color: #992C15;
+  color: #F9F4B7;
 }
