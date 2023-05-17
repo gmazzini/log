@@ -13,7 +13,7 @@ for(;;){
   }
   if(isset($bpfreq[$i])&&isset($dxcsel[$bpfreq[$i][0]])&&isset($dxcsel[$bpfreq[$i][3]])){
     printf("%s %12s ",$row[3],$row[0]);
-    printf("<button type=\"button\" onclick=\"myfreq(%s)\">%7.1f</button> ",$row[2],$freq);
+    printf("<button type=\"button\" onclick=\"myfreqcall(%s,%s)\">%7.1f</button> ",$row[2],$row[0],$freq);
     printf("%10s %s\n",$row[1],myqso($con,$mycall,$row[0]));
     $myrow++;
     if($myrow>$mypage)break;
@@ -24,10 +24,10 @@ mysqli_free_result($query);
 
 ?>
 <script>
-function myfreq(freq){
+function myfreqcall(freq,call){
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.open("GET","setfreq.php?freq="+freq+"&rigIP=<?php echo $rigIP; ?>&rigPORT=<?php echo $rigPORT; ?>",true);
   xmlhttp.send();
-  document.getElementById("xcall").value='iuy';
+  document.getElementById("xcall").value=call;
 }
 </script>
