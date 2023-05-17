@@ -14,7 +14,7 @@ if(substr($run,0,3)=="sto"){
     $ftx=$frx;
     $fmode=$Imode;
   }
-  file_put_contents("sto1.dat","$frx\n$ftx\n$mode\n");
+  file_put_contents("sto$ch.dat","$frx\n$ftx\n$fmode\n");
 }
 
 echo $run;
