@@ -50,6 +50,7 @@ function myqso($con,$mycall,$callsign){
     if($row[4]==1)myinc($w,3,$tt);
   }
   mysqli_free_result($query);
+  if(!isset($w[0]))return "";
   $key=array_keys($w[0]);
   usort($key,"mycmpkey");
   $aux=sprintf("%3d ",array_sum($w[0]));
