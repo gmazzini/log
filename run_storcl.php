@@ -23,8 +23,8 @@ else {
   if($fp){
     stream_set_timeout($fp,0,200000);
     fwrite($fp,"F $lines[0]\n");
+    fwrite($fp,"I $lines[1]\n");
     fwrite($fp,"M $lines[2] 0\n");
-    // to be inserted other elements
     fclose($fp);
   }
 }
