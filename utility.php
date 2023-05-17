@@ -21,11 +21,6 @@ function mypost($token){
   return "";
 }
 
-function myo($w){
-  if(isset($w))return $w;
-  else return "";
-}
-
 function myextract($buf,$token){
   $pos=stripos($buf,"<".$token.":");
   if($pos===false)return null;
@@ -58,7 +53,10 @@ function myqso($con,$mycall,$callsign){
   $key=array_keys($w[0]);
   usort($key,"mycmpkey");
   $aux=sprintf("%3d ",array_sum($w[0]));
-  @foreach($key as &$kk)$aux.=$kk."(".myo($w[0][$kk]).",".myo($w[1][$kk]).",".myo($w[2][$kk]).",".myo($w[3][$kk]).") ";
+  if(isset($w[1][$kk])$w1=$w[1][$kk]; else W1="";
+  
+  
+  foreach($key as &$kk)$aux.=$kk."(".$w[0][$kk].",".$w1.",".$w[2][$kk].",".$w[3][$kk].") ";
   return $aux;
 }
 
