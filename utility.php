@@ -53,7 +53,7 @@ function myqso($con,$mycall,$callsign){
   $key=array_keys($w[0]);
   usort($key,"mycmpkey");
   $aux=sprintf("%3d ",array_sum($w[0]));
-  if(isset($w[1][$kk]))$w1=$w[1][$kk]; else W1="";
+  if(isset($w[1][$kk]))$w1=$w[1][$kk]; else $w1="";
   
   
   foreach($key as &$kk)$aux.=$kk."(".$w[0][$kk].",".$w1.",".$w[2][$kk].",".$w[3][$kk].") ";
