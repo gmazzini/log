@@ -25,6 +25,7 @@ else {
     fwrite($fp,"F $lines[0]\n");
     fwrite($fp,"I $lines[1]\n");
     fwrite($fp,"M $lines[2] 0\n");
+    // check if split is set
     fclose($fp);
   }
 }
