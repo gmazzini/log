@@ -28,6 +28,6 @@ function myfreqcall(freq,call){
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.open("GET","setfreq.php?freq="+freq+"&rigIP=<?php echo $rigIP; ?>&rigPORT=<?php echo $rigPORT; ?>",true);
   xmlhttp.send();
-  document.getElementById("xcall").value=call;
+  document.getElementById("xcall").value=''+call;
 }
 </script>
