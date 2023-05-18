@@ -35,7 +35,7 @@ function myinsert($buf,$token){
 }
 
 function mysto($con,$channel,$content){
-  mysqli_query($con,"replace into store (channel,content) values ('$channel','$content')");  
+  mysqli_query($con,"replace into store (channel,content) values ('$channel',mysqli_real_escape_string($con,'$content'))");  
 }
 
 function myrcl($con,$channel){
