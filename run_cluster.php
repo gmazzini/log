@@ -10,7 +10,7 @@ for(;;){
   $row2=mysqli_fetch_array($query2);
   mysqli_free_result($query2);
   echo "$row2[0] $row2[1]\n";
-  if(isset($dxcsel[$row2[0]])&&isset($dxcsel[$row2[1]]))
+  if(isset($dxcsel[$row2[0]])&&isset($dxcsel[$row2[1]])){
     printf("%s %12s ",$row[3],$row[0]);
     printf("<button type=\"button\" onclick=\"myfreqcall(%s,'%s')\">%7.1f</button> ",$row[2],$row[0],$freq);
     printf("%10s %s\n",$row[1],myqso($con,$mycall,$row[0]));
