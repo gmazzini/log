@@ -17,7 +17,7 @@ if(substr($run,0,3)=="sto"){
   mysto($con,$ch."@".$mycall,"$frx\n$ftx\n$fmode\n");
 }
 else {
-  $aux=myrcl($con,"@".$mycall);
+  $aux=myrcl($con,$ch."@".$mycall);
   $lines=explode("\n",$aux);
   $fp=@fsockopen($rigIP,$rigPORT);
   if($fp){
