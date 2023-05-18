@@ -6,12 +6,10 @@ $query=mysqli_query($con,"select dx,spotter,freq,timespot from dxc order by time
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
-  $freq=$row[2]/1000;
-  for($i=0;;$i++){
-    if(!isset($bpfreq[$i]))break;
-    if($freq>=$bpfreq[$i][1]&&$freq<$bpfreq[$i][2])break;
-  }
-  if(isset($bpfreq[$i])&&isset($dxcsel[$bpfreq[$i][0]])&&isset($dxcsel[$bpfreq[$i][3]])){
+  $query2=mysqli_query($con,"select band,mode from bpfreq where $row[2]>=fromfreq and $row[2]<tofreq");
+  $row2=mysqli_fetch_array($query2);
+  mysqli_free_result($query2);
+  if(isset($dxcsel[$row2[0]])&&isset($dxcsel[$row2[1]]))
     printf("%s %12s ",$row[3],$row[0]);
     printf("<button type=\"button\" onclick=\"myfreqcall(%s,'%s')\">%7.1f</button> ",$row[2],$row[0],$freq);
     printf("%10s %s\n",$row[1],myqso($con,$mycall,$row[0]));
@@ -19,8 +17,8 @@ for(;;){
     if($myrow>$mypage)break;
   }
 }
-echo "</pre>";
 mysqli_free_result($query);
+echo "</pre>";
 
 ?>
 <script>
