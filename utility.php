@@ -34,6 +34,19 @@ function myinsert($buf,$token){
   return "<".$token.":".strlen($buf).">".$buf; 
 }
 
+function mysto($con,$channel,$content){
+  mysqli_query($con,"replace into store (channel,contest) values ('$channel','$content')");  
+}
+
+function myrcl($con,$channel){
+  $query=mysqli_query($con,"select content from store where channel='$channel'");
+  $row=mysqli_fetch_array($query);
+  if($row==null)$content="";
+  else $content=$row[0];
+  mysqli_free_result($query);
+  return $content;
+}
+
 function myqso($con,$mycall,$callsign){
   global $myband,$mymode;
   unset($w);
