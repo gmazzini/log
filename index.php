@@ -3,7 +3,6 @@
 <?php
 include "local.php";
 include "utility.php";
-include "bandplane.php";
 
 $act=(int)mypost("act");
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
