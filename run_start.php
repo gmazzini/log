@@ -36,7 +36,7 @@ else {
       $qrzkey=$q2->Session->Key;
       
  
-      echo "--- $key ---\n";
+      echo "--- $qrzkey ---\n";
     }
     
     
