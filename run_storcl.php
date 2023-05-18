@@ -15,10 +15,9 @@ if(substr($run,0,3)=="sto"){
     $fmode=$Imode;
   }
   mysto($con,$ch."@".$mycall,"$frx\n$ftx\n$fmode\n");
-  file_put_contents("sto$ch.dat","$frx\n$ftx\n$fmode\n");
 }
 else {
-  $aux=file_get_contents("sto$ch.dat");
+  $aux=myrcl($con,"@".$mycall);
   $lines=explode("\n",$aux);
   $fp=@fsockopen($rigIP,$rigPORT);
   if($fp){
