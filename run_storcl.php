@@ -14,7 +14,7 @@ if(substr($run,0,3)=="sto"){
     $ftx=$frx;
     $fmode=$Imode;
   }
-  mysto($con,$ch."@".$mycall);
+  mysto($con,$ch."@".$mycall,"$frx\n$ftx\n$fmode\n");
   file_put_contents("sto$ch.dat","$frx\n$ftx\n$fmode\n");
 }
 else {
