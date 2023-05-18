@@ -27,12 +27,13 @@ else {
   $ff=0;
   if($row!=null&&strlen($row[0])==0){$ff=1; mysqli_query($con,"delete from who where callsign='$Icallsign'");}
   if($row==null||$ff){
-    $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
+    $qrzkey=file_get_contents("qrzkey.dat");    
+    $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     if(isset($q2->Session->Error)){
       $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
       $q2=simplexml_load_string($q1);
-      $key=$q2->Session->Key;
+      $qrzkey=$q2->Session->Key;
       
  
       echo "--- $key ---\n";
