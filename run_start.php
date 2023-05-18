@@ -29,6 +29,13 @@ else {
   if($row==null||$ff){
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
+    if(isset($q2->Session->Error)){
+      
+      echo "MALE\n";
+    }
+    
+    
+    
     $row[0]=mysqli_real_escape_string($con,$q2->Callsign->fname);
     if(strlen($row[0])>0){
       if(isset($q2->Callsign->nickname))$row[0].=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
