@@ -30,8 +30,12 @@ else {
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzs;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     if(isset($q2->Session->Error)){
+      $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
+      $q2=simplexml_load_string($q1);
+      $key=$q2->Session->Key;
       
-      echo "MALE\n";
+ 
+      echo "--- $key ---\n";
     }
     
     
