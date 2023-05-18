@@ -34,13 +34,10 @@ else {
       $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
       $q2=simplexml_load_string($q1);
       $qrzkey=$q2->Session->Key;
-      
- 
-      echo "--- $qrzkey ---\n";
+      file_put_contents("qrzkey.dat","$qrzkey\n");
+      $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
+      $q2=simplexml_load_string($q1);
     }
-    
-    
-    
     $row[0]=mysqli_real_escape_string($con,$q2->Callsign->fname);
     if(strlen($row[0])>0){
       if(isset($q2->Callsign->nickname))$row[0].=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
