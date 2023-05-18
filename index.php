@@ -1,4 +1,4 @@
-<title>LZH Logger V0.24 by IK4LZH</title>
+<title>LZH Logger V0.25 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -90,7 +90,9 @@ else {
   $Ifreq=mypost("Ifreq");
   $Imode=strtoupper(mypost("Imode"));
   $Isignaltx=mypost("Isignaltx");
+  if($Isignaltx=="")$Isignaltx="59";
   $Isignalrx=mypost("Isignalrx");
+  if($Isignalrx=="")$Isignalrx="59";
   $Icontest=mypost("Icontest");
   $Icontesttx=mypost("Icontesttx");
   $Icontestrx=mypost("Icontestrx");
