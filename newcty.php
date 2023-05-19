@@ -3,19 +3,35 @@
 include "local.php";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 // loadcty($con);
-searchcty($con,"R3TT/UF6V");
+print_r(searchcty($con,"R3TT/UF6V"));
 
 function searchcty($con,$call){
+  $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$call'");
+  $row=mysqli_fetch_array($query);
+  mysqli_free_result($query);
+  if($row!=null)return $row;
+  
+  $to1=strrpos($call,"/");
+  if($to1!==false){
+    if(in_array(substr($call,$to1+1),array("P","M","LH","MM","AM","A","QRP","0","1","2","3","4","5","6","7","8","9"))){
+      $call=substr($call,0,$to1);
+      $to1=strrpos($call,"/");
+    }
+    if($to1!==false){
+      $lc=strlen($call);
+      if($to1<$lc-$to1-1)$call=substr($call,0,$to1);
+      else $call=substr($call,$to1+1);
+    }
+  }
+  
   $lc=strlen($call);
   for($q=$lc;$q>0;$q--){
     $prefix=substr($call,0,$q);
     $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$prefix'");
     $row=mysqli_fetch_array($query);
-    if($row!=null)break;
-  }
-  mysqli_free_result($query);
-  print_r($row);
-  
+    mysqli_free_result($query);
+    if($row!=null)return $row;
+  }  
 }
 
 function loadcty($con){
