@@ -23,7 +23,7 @@ elseif($Icallsign=="USB"||$Icallsign=="LSB"||$Icallsign=="CW"){
 else {
   $qsostart=gmdate('Y-m-d H:i:s');
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born from who where callsign='$Icallsign'");
-  $row=mysqli_fetch_array($query);
+  $row=mysqli_fetch_row($query);
   $ff=0;
   if($row!=null&&strlen($row[0])==0){$ff=1; mysqli_query($con,"delete from who where callsign='$Icallsign'");}
   if($row==null||$ff){
