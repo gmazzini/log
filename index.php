@@ -174,9 +174,6 @@ else {
   }  
   echo "<br>";
   
-  echo "RX:<span id=\"rigrx\"></span>&nbsp;";
-  echo "TX:<span id=\"rigtx\"></span>&nbsp;";
-  echo "M:<span id=\"rigm\"></span>&nbsp;";
   if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"sto1\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"rcl1\">&nbsp;";
@@ -184,6 +181,9 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"rcl2\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"sto3\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"rcl3\">&nbsp;";
+  echo "<h2>RX:<span id=\"rigrx\"></span>&nbsp;";
+  echo "TX:<span id=\"rigtx\"></span>&nbsp;";
+  echo "M:<span id=\"rigm\"></span>&nbsp;</h2>";
   echo "<br>";  
   
   echo "<h1>$mycall $mygrid $page</h1>";
