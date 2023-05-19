@@ -62,7 +62,7 @@ function loadcty($con){
       }
       else $gmtshift=(float)$dd[8];
       
-      if($ff[0]=="=")$pref=substr($f,1);
+      if($ff[0]=="=")$pref=substr($ff,1);
       else $pref=$ff;
       mysqli_query($con,"insert info cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,pref) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$pref')");
       
