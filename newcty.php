@@ -3,9 +3,10 @@
 include "local.php";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 
-loadcty();
+loadcty($con);
 
-function loadcty(){
+function loadcty($con){
+  mysqli_query($con,"truncate table cty");
   $hh=fopen("cty.csv","r");
   while(!feof($hh)){
     $dd=fgetcsv($hh,100000);
@@ -56,15 +57,16 @@ function loadcty(){
       $to1=strpos($ff,"~");
       if($to1!==false){
         $to2=strpos($ff,"~",$to1+1);
-        $localtime=(float)substr($ff,$to1+1,$to2-$to1-1);
+        $gmtshift=(float)substr($ff,$to1+1,$to2-$to1-1);
         $ff=substr($ff,0,$to1).substr($ff,$to2+1);
       }
-      else $localtime=(float)$dd[8];
+      else $gmtshift=(float)$dd[8];
       
       if($ff[0]=="=")$pref=substr($f,1);
       else $pref=$ff;
+      mysqli_query($con,"insert info cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,pref) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$pref')");
       
-      echo "$pref - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $localtime\n";
+      echo "$pref - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $gmtshift\n";
     }
   }
   fclose($hh);
