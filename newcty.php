@@ -58,7 +58,7 @@ function loadcty(){
       }
       else $localtime=(float)$dd[8];
       
-      echo "$base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $localtime\n";
+      echo "$ff - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $localtime\n";
     }
   }
   fclose($hh);
