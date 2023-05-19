@@ -64,7 +64,7 @@ function loadcty($con){
       
       if($ff[0]=="=")$pref=substr($ff,1);
       else $pref=$ff;
-      mysqli_query($con,"insert info cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,pref) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$pref')");
+      mysqli_query($con,"insert into cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,pref) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$pref')");
       
       echo "$pref - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $gmtshift\n";
     }
