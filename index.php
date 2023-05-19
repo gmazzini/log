@@ -13,13 +13,13 @@ if($act>=1){
   if($act==1)$md5passwd=md5(mypost("mypasswd"));
   else $md5passwd=mypost("md5passwd");
   $query=mysqli_query($con,"select mygrid,cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
-  $row=mysqli_fetch_array($query);
+  $row=mysqli_fetch_assoc($query);
   if($row!=null){
-    $mygrid=strtoupper($row[0]);
-    $aux=explode(":",$row[2]);
+    $mygrid=strtoupper($row["mygrid"]);
+    $aux=explode(":",$row["rigconnect"]);
     $rigIP=$aux[0];
     $rigPORT=$aux[1];
-    $aux=explode(",",$row[1]);
+    $aux=explode(",",$row["cluster"]);
     if($act==1)foreach($aux as &$vv)$dxcsel[$vv]=1;
   }
   else $act=0;
@@ -140,7 +140,7 @@ else {
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
     if($modecontest){
       $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
-      $row=mysqli_fetch_array($query);
+      $row=mysqli_fetch_row($query);
       $Icontesttx=$row[0]+1;
       mysqli_free_result($query);
     }
