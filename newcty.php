@@ -3,7 +3,7 @@
 include "local.php";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 // loadcty($con);
-searchcty($con,"IK4LZH");
+searchcty($con,"R3TT/UF6V");
 
 function searchcty($con,$call){
   $lc=strlen($call);
