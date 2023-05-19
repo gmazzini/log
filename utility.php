@@ -41,9 +41,9 @@ function mysto($con,$channel,$content){
 
 function myrcl($con,$channel){
   $query=mysqli_query($con,"select content from store where channel='$channel'");
-  $row=mysqli_fetch_array($query);
+  $row=mysqli_fetch_assoc($query);
   if($row==null)$content="";
-  else $content=$row[0];
+  else $content=$row["content"];
   mysqli_free_result($query);
   return $content;
 }
@@ -53,15 +53,15 @@ function myqso($con,$mycall,$callsign){
   unset($w);
   $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall' and callsign='$callsign'");
   for(;;){
-    $row=mysqli_fetch_array($query);
+    $row=mysqli_fetch_assoc($query);
     if($row==null)break;
-    $band=$myband[floor($row[0]/1000000)];
-    $mode=$mymode[$row[1]];
+    $band=$myband[floor($row[freqtx]/1000000)];
+    $mode=$mymode[$row[mode]];
     $tt=$band.$mode;
     myinc($w,0,$tt);
-    if($row[2]==1)myinc($w,1,$tt);
-    if($row[3]==1)myinc($w,2,$tt);
-    if($row[4]==1)myinc($w,3,$tt);
+    if($row["lotw"]==1)myinc($w,1,$tt);
+    if($row["eqsl"]==1)myinc($w,2,$tt);
+    if($row["qrz"]==1)myinc($w,3,$tt);
   }
   mysqli_free_result($query);
   if(!isset($w[0]))return "";
