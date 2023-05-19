@@ -107,14 +107,4 @@ function searchcty($con,$call){
   }
 }
 
-function findcall($a){
-  $fp=@fsockopen("127.0.0.1",22222);
-  if($fp){
-    fwrite($fp,$a);
-    $lookup=fgets($fp,1000);
-    fclose($fp);
-    return $lookup;
-  }
-}
-
 ?>
