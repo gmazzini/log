@@ -78,6 +78,26 @@ function myqso($con,$mycall,$callsign){
   return $aux;
 }
 
+function searchcty($con,$call){
+  $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$call'");
+  $row=mysqli_fetch_assoc($query);
+  mysqli_free_result($query);
+  if($row!=null)return $row;
+  
+  $to1=strrpos($call,"/");
+  if($to1!==false){
+    if(in_array(substr($call,$to1+1),array("P","M","LH","MM","AM","A","QRP","0","1","2","3","4","5","6","7","8","9"))){
+      $call=substr($call,0,$to1);
+      $to1=strrpos($call,"/");
+    }
+    if($to1!==false){
+      $lc=strlen($call);
+      if($to1<$lc-$to1-1)$call=substr($call,0,$to1);
+      else $call=substr($call,$to1+1);
+    }
+  }
+}
+
 function findcall($a){
   $fp=@fsockopen("127.0.0.1",22222);
   if($fp){
