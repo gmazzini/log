@@ -62,9 +62,9 @@ function loadcty($con){
       }
       else $gmtshift=(float)$dd[8];
       
-      if($ff[0]=="=")$pref=substr($ff,1);
-      else $pref=$ff;
-      mysqli_query($con,"insert into cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,pref) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$pref')");
+      if($ff[0]=="=")$prefix=substr($ff,1);
+      else $prefix=$ff;
+      mysqli_query($con,"insert into cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,prefix) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$prefix')");
             
       echo "insert into cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,pref) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$pref')";
 
