@@ -58,7 +58,13 @@ function loadcty(){
       }
       else $localtime=(float)$dd[8];
       
-      echo "$ff - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $localtime\n";
+      if($ff[0]=="=")$pref=substr($f,1);
+      elseif (substr($ff,-2,1)=="/"&&ctype_lower(substr($ff,-1,1))){
+        $pref="mha";
+      }
+      else $pref=$ff;
+      
+      echo "$pref - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $localtime\n";
     }
   }
   fclose($hh);
