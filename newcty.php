@@ -2,8 +2,21 @@
 
 include "local.php";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+// loadcty($con);
+searchcty($con,"IK4LZH");
 
-loadcty($con);
+function searchcty($con,$call){
+  $lc=strlen($call);
+  for($q=$lc;$q>0;$q--){
+    $prefix=substr($call,0,$q);
+    $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$prefix'");
+    $row=mysqli_fetch_array($query);
+    if($row!=null)break;
+  }
+  mysqli_free_result($query);
+  print_r($row);
+  
+}
 
 function loadcty($con){
   mysqli_query($con,"truncate table cty");
