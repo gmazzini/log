@@ -1,5 +1,8 @@
 <?php
 
+include "local.php";
+$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+
 loadcty();
 
 function loadcty(){
@@ -59,9 +62,6 @@ function loadcty(){
       else $localtime=(float)$dd[8];
       
       if($ff[0]=="=")$pref=substr($f,1);
-      elseif (substr($ff,-2,1)=="/"&&ctype_lower(substr($ff,-1,1))){
-        $pref="mha";
-      }
       else $pref=$ff;
       
       echo "$pref - $base $name $dxcc $cont $cqzone $ituzone $latitude $longitude $localtime\n";
