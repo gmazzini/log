@@ -81,7 +81,7 @@ else {
   echo myqso($con,$mycall,$Icallsign);
   echo "\n";
 
-  $mys=findcall($Icallsign);
+  $mys=searchcty($con,$Icallsign);
   print_r($mys);
 }
 
