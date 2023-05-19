@@ -5,12 +5,14 @@ echo "<pre>";
 $qq=0;
 $query=mysqli_query($con,"select start,callsign from log where mycall='$mycall' and dxcc=0");
 for(;;){
-  $row=mysqli_fetch_array($query);
+  $row=mysqli_fetch_assoc($query);
   if($row==null)break;
-  $aux=searchcty($con,$row[1]);
+  $aux=searchcty($con,$row["callsign"]);
   if($aux!=null){
     $dxcc=(int)$aux["dxcc"];
-    mysqli_query($con,"update log set dxcc=$dxcc where mycall='$mycall' and start='$row[0]' and callsign='$row[1]' and dxcc=0");
+    $mstart=$row["start"];
+    $mcallsign=$row["callsign"];
+    mysqli_query($con,"update log set dxcc=$dxcc where mycall='$mycall' and start='$mstart' and callsign='$mcallsign' and dxcc=0");
     $qq++;
   }
 }
@@ -20,17 +22,17 @@ echo "Set dxcc: $qq\n\n";
 unset($w);
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
-  $row=mysqli_fetch_array($query);
+  $row=mysqli_fetch_assoc($query);
   if($row==null)break;
-  $band=$myband[floor($row[0]/1000000)];
-  $mode=$mymode[$row[1]];
+  $band=$myband[floor($row["freqtx"]/1000000)];
+  $mode=$mymode[$row["mode"]];
   $tt=$band.$mode;
-  $dxcc=$row[5];
+  $dxcc=$row["dxcc"];
   myinc($w,0,$tt);
   myinc($w,4,$dxcc);
-  if($row[2]==1){myinc($w,1,$tt); myinc($w,5,$dxcc);}
-  if($row[3]==1){myinc($w,2,$tt); myinc($w,6,$dxcc);}
-  if($row[4]==1){myinc($w,3,$tt); myinc($w,7,$dxcc);}
+  if($row["lotw"]==1){myinc($w,1,$tt); myinc($w,5,$dxcc);}
+  if($row["eqsl"]==1){myinc($w,2,$tt); myinc($w,6,$dxcc);}
+  if($row["qrz"]==1){myinc($w,3,$tt); myinc($w,7,$dxcc);}
 }
 mysqli_free_result($query);
 
