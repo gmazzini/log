@@ -15,7 +15,7 @@ for(;;){
   }
 }
 mysqli_free_result($query);
-echo "Set dxcc: $qq\n";
+echo "Set dxcc: $qq\n\n";
 
 unset($w);
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
