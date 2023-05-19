@@ -96,6 +96,15 @@ function searchcty($con,$call){
       else $call=substr($call,$to1+1);
     }
   }
+  
+  $lc=strlen($call);
+  for($q=$lc;$q>0;$q--){
+    $prefix=substr($call,0,$q);
+    $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$prefix'");
+    $row=mysqli_fetch_assoc($query);
+    mysqli_free_result($query);
+    if($row!=null)return $row;
+  }
 }
 
 function findcall($a){
