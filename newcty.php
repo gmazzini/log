@@ -7,7 +7,7 @@ print_r(searchcty($con,"R3TT/UF6V"));
 
 function searchcty($con,$call){
   $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$call'");
-  $row=mysqli_fetch_array($query);
+  $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   if($row!=null)return $row;
   
@@ -28,7 +28,7 @@ function searchcty($con,$call){
   for($q=$lc;$q>0;$q--){
     $prefix=substr($call,0,$q);
     $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$prefix'");
-    $row=mysqli_fetch_array($query);
+    $row=mysqli_fetch_assoc($query);
     mysqli_free_result($query);
     if($row!=null)return $row;
   }  
