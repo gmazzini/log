@@ -2,6 +2,21 @@
 
 echo "<pre>";
 
+$qq=0;
+$query=mysqli_query($con,"select start,callsign from log where mycall='$mycall' and dxcc=0");
+for(;;){
+  $row=mysqli_fetch_array($query);
+  if($row==null)break;
+  $aux=searchcty($con,$row[1]);
+  if($aux!=null){
+    $dxcc=(int)$aux["dxcc"];
+    mysqli_query($con,"update log set dxcc=$dxcc where mycall='$mycall' and start='$row[0]' and callsign='$row[1]' and dxcc=0");
+    $qq++;
+  }
+}
+mysqli_free_result($query);
+echo "Set dxcc: $qq\n";
+
 unset($w);
 $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
