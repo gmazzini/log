@@ -6,8 +6,9 @@ $query=mysqli_query($con,"select dx,spotter,freq,timespot from dxc order by time
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
-  $freq=(float)$row["freq"]/1000;
-  $query2=mysqli_query($con,"select band,mode from bpfreq where $row["freq"]>=fromfreq and $row["freq"]<tofreq");
+  $orgfreq=$row["freq"];
+  $freq=(float)$orgfreq/1000;
+  $query2=mysqli_query($con,"select band,mode from bpfreq where $orgfreq>=fromfreq and $orgfreq<tofreq");
   $row2=mysqli_fetch_assoc($query2);
   mysqli_free_result($query2);
   if(isset($dxcsel[$row2["band"]])&&isset($dxcsel[$row2["mode"]])){
