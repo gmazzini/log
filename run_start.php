@@ -80,10 +80,14 @@ else {
   echo "\n";
 
   echo myqso($con,$mycall,$Icallsign);
-  echo "\n";
+  echo "\n\n";
 
   $mys=searchcty($con,$Icallsign);
   print_r($mys);
+  echo "\n\n";
+  
+  $mydbt=dbt($con,$mycall,$Icallsign);
+  print_r($mudbt);
 }
 
 echo "</pre>";
