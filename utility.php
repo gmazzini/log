@@ -16,16 +16,21 @@ function griddb($con,$call1,$call2){
   $x1["longitude"]=(ord(substr($g1,0,1))-65)*20+(int)substr($g1,2,1)*2+(ord(substr($g1,4,1))-97)/12+1/24-180;
   $x2["latitude"]=(ord(substr($g2,1,1))-65)*10+(int)substr($g2,3,1)+(ord(substr($g2,5,1))-97)/24+1/48-90;
   $x2["longitude"]=(ord(substr($g2,0,1))-65)*20+(int)substr($g2,2,1)*2+(ord(substr($g2,4,1))-97)/12+1/24-180;
+  
+  print_r($x1);
+  print_r($x2);
+  
+  
   $lat1=(float)$x1["latitude"]*M_PI/180;
   $lat2=(float)$x2["latitude"]*M_PI/180;
   $lon1=(float)$x1["longitude"]*M_PI/180;
   $lon2=(float)$x2["longitude"]*M_PI/180;
   $a=pow(sin(($lat1-$lat2)/2),2)+cos($lat1)*cos($lat2)*pow(sin(($lon1-$lon2)/2),2);
   $c=2*atan2(sqrt($a),sqrt(1-$a));
-  $o["distance"]=6371*$c;
+  $o["griddistance"]=6371*$c;
   $b=atan2(sin($lon1-$lon2)*cos($lat2),cos($lat1)*sin($lat2)-sin($lat1)*cos($lat2)*cos($lon1-$lon2))/M_PI*180;
   if($b<0)$b+=360;
-  $o["beaming"]=$b;
+  $o["gridbeaming"]=$b;
   return $o;
 }
 
