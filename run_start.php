@@ -87,7 +87,7 @@ else {
   echo "\n\n";
   
   $mydbt=dbt($con,$mycall,$Icallsign);
-  print_r($mudbt);
+  print_r($mydbt);
 }
 
 echo "</pre>";
