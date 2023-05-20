@@ -3,6 +3,32 @@
 $myband=array(0=>0,1=>160,3=>80,5=>60,7=>40,10=>30,14=>20,18=>17,21=>15,24=>12,28=>10,29=>10,50=>6,144=>2,145=>2,430=>0.7,431=>0.7,432=>0.7,433=>0.7);
 $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG","FM"=>"PH","AM"=>"PH","PKT"=>"DG","TOR"=>"DG","AMTOR"=>"DG","PSK"=>"DG");
 
+function griddb($con,$call1,$call2){
+  $query=mysqli_query($con,"select grid from who where callsign='$call1'");
+  $row=mysqli_fetch_assoc($query);
+  $g1=$row["grid"];
+  mysqli_free_result($query);
+  $query=mysqli_query($con,"select grid from who where callsign='$call2'");
+  $row=mysqli_fetch_assoc($query);
+  $g2=$row["grid"];
+  mysqli_free_result($query);
+  $x1["latitude"]=(ord(substr($g1,1,1))-65)*10+(int)substr($g1,3,1)+(ord(substr($g1,5,1))-97)/24+1/48-90;
+  $x1["longitude"]=(ord(substr($g1,0,1))-65)*20+(int)substr($g1,2,1)*2+(ord(substr($g1,4,1))-97)/12+1/24-180;
+  $x2["latitude"]=(ord(substr($g2,1,1))-65)*10+(int)substr($g2,3,1)+(ord(substr($g2,5,1))-97)/24+1/48-90;
+  $x2["longitude"]=(ord(substr($g2,0,1))-65)*20+(int)substr($g2,2,1)*2+(ord(substr($g2,4,1))-97)/12+1/24-180;
+  $lat1=(float)$x1["latitude"]*M_PI/180;
+  $lat2=(float)$x2["latitude"]*M_PI/180;
+  $lon1=(float)$x1["longitude"]*M_PI/180;
+  $lon2=(float)$x2["longitude"]*M_PI/180;
+  $a=pow(sin(($lat1-$lat2)/2),2)+cos($lat1)*cos($lat2)*pow(sin(($lon1-$lon2)/2),2);
+  $c=2*atan2(sqrt($a),sqrt(1-$a));
+  $o["distance"]=6371*$c;
+  $b=atan2(sin($lon1-$lon2)*cos($lat2),cos($lat1)*sin($lat2)-sin($lat1)*cos($lat2)*cos($lon1-$lon2))/M_PI*180;
+  if($b<0)$b+=360;
+  $o["beaming"]=$b;
+  return $o;
+}
+
 function dbt($con,$call1,$call2){
   $x1=searchcty($con,$call1);
   $x2=searchcty($con,$call2);
