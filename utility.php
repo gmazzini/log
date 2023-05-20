@@ -37,6 +37,10 @@ function griddb($con,$call1,$call2){
 function dbt($con,$call1,$call2){
   $x1=searchcty($con,$call1);
   $x2=searchcty($con,$call2);
+  
+   print_r($x1);
+  print_r($x2);
+  
   $lat1=(float)$x1["latitude"]*M_PI/180;
   $lat2=(float)$x2["latitude"]*M_PI/180;
   $lon1=(float)$x1["longitude"]*M_PI/180;
