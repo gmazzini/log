@@ -14,7 +14,7 @@ for(;;){
   if(isset($dxcsel[$row2["band"]])&&isset($dxcsel[$row2["mode"]])){
     printf("%s %12s ",$row["timespot"],$row["dx"]);
     printf("<button type=\"button\" onclick=\"myfreqcall(%s,'%s')\">%7.1f</button> ",$row["freq"],$row["dx"],$freq);
-    printf("%10s %s\n",$row[1],myqso($con,$mycall,$row["dx"]));
+    printf("%10s %s\n",$row["spotter"],myqso($con,$mycall,$row["dx"]));
     $myrow++;
     if($myrow>$mypage)break;
   }
