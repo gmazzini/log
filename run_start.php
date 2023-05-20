@@ -88,6 +88,11 @@ else {
   
   $mydbt=dbt($con,$mycall,$Icallsign);
   print_r($mydbt);
+  echo "\n\n";
+  
+  $mydbt=griddb($con,$mycall,$Icallsign);
+  print_r($mydbt);
+  
 }
 
 echo "</pre>";
