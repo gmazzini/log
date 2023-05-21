@@ -19,16 +19,10 @@ function griddb($con,$call1,$call2){
   $g2=strtoupper(substr($aux,0,2)).substr($aux,2,2).strtolower(substr($aux,4,2));
   $o["grid1"]=$g1;
   $o["grid2"]=$g2;
- 
   $x1["latitude"]=(ord(substr($g1,1,1))-65)*10+(int)substr($g1,3,1)+(ord(substr($g1,5,1))-97)/24+1/48-90;
   $x1["longitude"]=-((ord(substr($g1,0,1))-65)*20+(int)substr($g1,2,1)*2+(ord(substr($g1,4,1))-97)/12+1/24-180);
   $x2["latitude"]=(ord(substr($g2,1,1))-65)*10+(int)substr($g2,3,1)+(ord(substr($g2,5,1))-97)/24+1/48-90;
   $x2["longitude"]=-((ord(substr($g2,0,1))-65)*20+(int)substr($g2,2,1)*2+(ord(substr($g2,4,1))-97)/12+1/24-180);
-  
-  print_r($x1);
-  print_r($x2);
-  
-  
   $lat1=(float)$x1["latitude"]*M_PI/180;
   $lat2=(float)$x2["latitude"]*M_PI/180;
   $lon1=(float)$x1["longitude"]*M_PI/180;
@@ -45,10 +39,6 @@ function griddb($con,$call1,$call2){
 function dbt($con,$call1,$call2){
   $x1=searchcty($con,$call1);
   $x2=searchcty($con,$call2);
-  
-   print_r($x1);
-  print_r($x2);
-  
   $lat1=(float)$x1["latitude"]*M_PI/180;
   $lat2=(float)$x2["latitude"]*M_PI/180;
   $lon1=(float)$x1["longitude"]*M_PI/180;
