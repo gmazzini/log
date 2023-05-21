@@ -101,10 +101,14 @@ function myrcl($con,$channel){
 function myqso($con,$mycall,$callsign){
   global $myband,$mymode;
   unset($w);
-  $query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall' and callsign='$callsign'");
+  $timenow=time();
+  $timemin=4000000000;
+  $query=mysqli_query($con,"select start,freqtx,mode,lotw,eqsl,qrz from log where mycall='$mycall' and callsign='$callsign'");
   for(;;){
     $row=mysqli_fetch_assoc($query);
     if($row==null)break;
+    $timediff=$timenow-strtotime($row["start"]);
+    if($timemin>$timediff)$timemin=$timediff;
     $band=$myband[floor($row[freqtx]/1000000)];
     $mode=$mymode[$row[mode]];
     $tt=$band.$mode;
@@ -117,7 +121,7 @@ function myqso($con,$mycall,$callsign){
   if(!isset($w[0]))return "";
   $key=array_keys($w[0]);
   usort($key,"mycmpkey");
-  $aux=sprintf("%3d ",array_sum($w[0]));
+  $aux=sprintf("%9ld %3d ",$timemin,array_sum($w[0]));
   foreach($key as &$kk){
     if(isset($w[0][$kk]))$w0=$w[0][$kk]; else $w0="";
     if(isset($w[1][$kk]))$w1=$w[1][$kk]; else $w1="";
