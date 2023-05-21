@@ -1,4 +1,4 @@
-<title>LZH Logger V0.30 by IK4LZH</title>
+<title>LZH Logger V0.35 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -12,10 +12,9 @@ if($act>=1){
   $mycall=strtoupper(mypost("mycall"));
   if($act==1)$md5passwd=md5(mypost("mypasswd"));
   else $md5passwd=mypost("md5passwd");
-  $query=mysqli_query($con,"select mygrid,cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
+  $query=mysqli_query($con,"select cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
   $row=mysqli_fetch_assoc($query);
   if($row!=null){
-    $mygrid=strtoupper($row["mygrid"]);
     $aux=explode(":",$row["rigconnect"]);
     $rigIP=$aux[0];
     $rigPORT=$aux[1];
@@ -186,7 +185,7 @@ else {
   echo "M:<span id=\"rigm\"></span>&nbsp;</font>";
   echo "<br>";  
   
-  echo "<h1>$mycall $mygrid $page</h1>";
+  echo "<h1>$mycall $page</h1>";
   
   switch($run){
     case "list": include "run_list.php"; break;
