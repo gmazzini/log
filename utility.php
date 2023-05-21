@@ -9,12 +9,14 @@ function griddb($con,$call1,$call2){
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   if($row==null)return $o;
-  $g1=$row["grid"];
+  $aux=$row["grid"];
+  $g1=strtoupper(substr($aux,0,2)).substr($aux,2,2).strtolower(substr($aux,4,2));
   $query=mysqli_query($con,"select grid from who where callsign='$call2'");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   if($row==null)return $o;
-  $g2=$row["grid"];
+  $aux=$row["grid"];
+  $g2=strtoupper(substr($aux,0,2)).substr($aux,2,2).strtolower(substr($aux,4,2));
   $o["grid1"]=$g1;
   $o["grid2"]=$g2;
  
