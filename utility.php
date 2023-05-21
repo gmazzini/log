@@ -5,7 +5,7 @@ $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=
 
 function myprint($a){
   foreach($a as $key => $value){
-    if(is_number($value))printf("[%s]=>%d ",$key,$value);
+    if(is_numberic($value))printf("[%s]=>%d ",$key,$value);
     else printf("[%s]=>%s ",$key,$value);
   }
 }
