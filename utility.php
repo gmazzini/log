@@ -107,7 +107,7 @@ function myqso($con,$mycall,$callsign){
   for(;;){
     $row=mysqli_fetch_assoc($query);
     if($row==null)break;
-    $timediff=$timenow-strtotime($row["start"]);
+    $timediff=$timenow-strtotime($row["start"]." UTC");
     if($timemin>$timediff)$timemin=$timediff;
     $band=$myband[floor($row[freqtx]/1000000)];
     $mode=$mymode[$row[mode]];
