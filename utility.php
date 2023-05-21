@@ -4,18 +4,24 @@ $myband=array(0=>0,1=>160,3=>80,5=>60,7=>40,10=>30,14=>20,18=>17,21=>15,24=>12,2
 $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG","FM"=>"PH","AM"=>"PH","PKT"=>"DG","TOR"=>"DG","AMTOR"=>"DG","PSK"=>"DG");
 
 function griddb($con,$call1,$call2){
+  $o["griddistance"]=-1;
   $query=mysqli_query($con,"select grid from who where callsign='$call1'");
   $row=mysqli_fetch_assoc($query);
-  $g1=$row["grid"];
   mysqli_free_result($query);
+  if($row==null)return $o;
+  $g1=$row["grid"];
   $query=mysqli_query($con,"select grid from who where callsign='$call2'");
   $row=mysqli_fetch_assoc($query);
-  $g2=$row["grid"];
   mysqli_free_result($query);
+  if($row==null)return $o;
+  $g2=$row["grid"];
+  $o["grid1"]=$g1;
+  $o["grid2"]=$g2;
+ 
   $x1["latitude"]=(ord(substr($g1,1,1))-65)*10+(int)substr($g1,3,1)+(ord(substr($g1,5,1))-97)/24+1/48-90;
-  $x1["longitude"]=(ord(substr($g1,0,1))-65)*20+(int)substr($g1,2,1)*2+(ord(substr($g1,4,1))-97)/12+1/24-180;
+  $x1["longitude"]=-((ord(substr($g1,0,1))-65)*20+(int)substr($g1,2,1)*2+(ord(substr($g1,4,1))-97)/12+1/24-180);
   $x2["latitude"]=(ord(substr($g2,1,1))-65)*10+(int)substr($g2,3,1)+(ord(substr($g2,5,1))-97)/24+1/48-90;
-  $x2["longitude"]=(ord(substr($g2,0,1))-65)*20+(int)substr($g2,2,1)*2+(ord(substr($g2,4,1))-97)/12+1/24-180;
+  $x2["longitude"]=-((ord(substr($g2,0,1))-65)*20+(int)substr($g2,2,1)*2+(ord(substr($g2,4,1))-97)/12+1/24-180);
   
   print_r($x1);
   print_r($x2);
