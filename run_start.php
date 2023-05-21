@@ -83,15 +83,15 @@ else {
   echo "\n\n";
 
   $mys=searchcty($con,$Icallsign);
-  print_r($mys);
+  myprint($mys);
   echo "\n\n";
   
   $mydbt=dbt($con,$mycall,$Icallsign);
-  print_r($mydbt);
+  myprint($mydbt);
   echo "\n\n";
   
   $mydbt=griddb($con,$mycall,$Icallsign);
-  print_r($mydbt);
+  myprint($mydbt);
   
 }
 
