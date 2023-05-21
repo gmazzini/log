@@ -45,7 +45,12 @@ echo "\n";
 arsort($w[4]);
 printf("<b>%10s %6d %6d %6d %6d</b>\n","dxcc",count($w[4]),count($w[5]),count($w[6]),count($w[7]));
 $key=array_keys($w[4]);
-foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk]);
+foreach($key as &$kk){
+  $query=mysqli_query($con,"select name from cty where dxcc=$kk");
+  $row=mysqli_fetch_assoc($query);
+  mysqli_free_result($query);
+  printf("%10s %6d %6d %6d %6d %s\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
+}
 
 echo "</pre>";
 
