@@ -121,7 +121,14 @@ function myqso($con,$mycall,$callsign){
   if(!isset($w[0]))return "";
   $key=array_keys($w[0]);
   usort($key,"mycmpkey");
-  $aux=sprintf("%9ld %3d ",$timemin,array_sum($w[0]));
+  
+  if($timemin<3600)$aux=sprintf("%2dm",$timemin/60);
+  elseif ($timemin<86400)$aux=sprintf("%2dh",$timemin/3600);
+  elseif ($timemin<2592000)$aux=sprintf("%2dd",$timemin/86400);
+  elseif ($timemin<31536000)$aux=sprintf("%2dm",$timemin/2592000);
+  else $aux=sprintf("%2dy",$timemin/31536000);
+  
+  $aux=sprintf("%3s %3d ",$aux,array_sum($w[0]));
   foreach($key as &$kk){
     if(isset($w[0][$kk]))$w0=$w[0][$kk]; else $w0="";
     if(isset($w[1][$kk]))$w1=$w[1][$kk]; else $w1="";
