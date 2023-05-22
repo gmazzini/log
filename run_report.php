@@ -40,7 +40,7 @@ printf("<p id=\"myh1\">%10s %6s %8s %8s %8s</p>","Band/Mode","QSO","QSL.LOTW","Q
 printf("<p id=\"myh2\">%10s %6d %8d %8d %8d</p>","Tot",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
 usort($key,mycmpkey);
-foreach($key as &$kk)printf("%10s %6d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
+foreach($key as &$kk)@printf("%10s %6d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
 echo "\n";
 
 arsort($w[4]);
@@ -51,7 +51,7 @@ foreach($key as &$kk){
   $query=mysqli_query($con,"select name from cty where dxcc=$kk limit 1");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
-  printf("%10s %6d %8d %8d %8d %s\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
+  @printf("%10s %6d %8d %8d %8d %s\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
 }
 
 echo "</pre>";
