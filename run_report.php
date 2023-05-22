@@ -36,11 +36,11 @@ for(;;){
 }
 mysqli_free_result($query);
 
-printf("<p id=\"myh1\">%10s %6d %6d %6d %6d</p>","Band/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
-printf("<p id=\"myh2\">%10s %6d %6d %6d %6d</p>","Tot",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
+printf("<p id=\"myh1\">%10s %6s %8s %8s %8s</p>","Band/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+printf("<p id=\"myh2\">%10s %6d %8d %8d %8d</p>","Tot",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
 usort($key,mycmpkey);
-foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
+foreach($key as &$kk)printf("%10s %6d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
 echo "\n";
 
 arsort($w[4]);
