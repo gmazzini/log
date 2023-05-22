@@ -5,14 +5,14 @@ body {
 #myh1 {
   color: red;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 2px;
   line-height: 0;
 }
 
 #myh2 {
   color: blue;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 2px;
   line-height: 0;
 }
 
