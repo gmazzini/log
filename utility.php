@@ -118,7 +118,7 @@ function myqso($con,$mycall,$callsign){
     $timediff=$timenow-strtotime($row["start"]." UTC");
     if($timemin>$timediff)$timemin=$timediff;
     $band=$myband[floor($row[freqtx]/1000000)];
-    $mode=$mymode[$row[mode]];
+    $mode=$mymode[$row["mode"]];
     $tt=$band.$mode;
     myinc($w,0,$tt);
     if($row["lotw"]==1)myinc($w,1,$tt);
