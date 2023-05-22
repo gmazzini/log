@@ -27,6 +27,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
     fprintf($fp,"%s\n",myinsert($row["contest"],"CONTEST_ID"));
     fprintf($fp,"<EOR>\n\n");
   }
+  mysqli_free_result($query);
   fclose($fp);
   echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download ADIF</a><br>";
   echo "$export_from $export_to\n";
