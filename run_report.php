@@ -44,13 +44,14 @@ foreach($key as &$kk)printf("%10s %6d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk],$
 echo "\n";
 
 arsort($w[4]);
-printf("<b>%10s %6d %6d %6d %6d</b>\n","dxcc",count($w[4]),count($w[5]),count($w[6]),count($w[7]));
+printf("<p id=\"myh1\">%10s %6d %8s %8s %8s</p>","dxcc","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+printf("<p id=\"myh2\">%10s %6d %8d %8d %8d</p>","Tot",count($w[4]),count($w[5]),count($w[6]),count($w[7]));
 $key=array_keys($w[4]);
 foreach($key as &$kk){
   $query=mysqli_query($con,"select name from cty where dxcc=$kk limit 1");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
-  printf("%10s %6d %6d %6d %6d %s\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
+  printf("%10s %6d %8d %8d %8d %s\n",$kk,$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
 }
 
 echo "</pre>";
