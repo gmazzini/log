@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /home/www/log.chaos.cc
 aa=`curl -sS http://www.country-files.com/category/big-cty/ | grep zip | head -n 1 | awk -F '"' '{print $2}'`
 mkdir tmpcty
 cd tmpcty
@@ -8,3 +9,5 @@ unzip cty.zip
 cd ..
 cp tmpcty/cty.csv .
 rm -rf tmpcty
+php renew_cty.php
+rm -f cty.csv
