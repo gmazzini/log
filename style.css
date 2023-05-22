@@ -10,6 +10,14 @@ body {
   line-height: 0;
 }
 
+#myh1 {
+  color: blue;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 0;
+  line-height: 0;
+}
+
 input[type=text] {
   padding: 2px;
   border: 2px solid #eee;
