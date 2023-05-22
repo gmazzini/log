@@ -5,8 +5,9 @@ body {
 #myh1 {
   color: red;
   font-weight: bold;
-  margin-bottom: 0px;
-  line-height: 0px;
+  margin-bottom: 0;
+  margin-top: 0;
+  line-height: 0;
 }
 
 input[type=text] {
