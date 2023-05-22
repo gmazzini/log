@@ -44,7 +44,7 @@ foreach($key as &$kk)printf("%10s %6d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk],$
 echo "\n";
 
 arsort($w[4]);
-printf("<p id=\"myh1\">%10s %6d %8s %8s %8s</p>","dxcc","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+printf("<p id=\"myh1\">%10s %6d %8s %8s %8s %s</p>","dxcc","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
 printf("<p id=\"myh2\">%10s %6d %8d %8d %8d</p>","Tot",count($w[4]),count($w[5]),count($w[6]),count($w[7]));
 $key=array_keys($w[4]);
 foreach($key as &$kk){
