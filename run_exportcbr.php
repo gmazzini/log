@@ -2,7 +2,7 @@
 
 if(isset($_FILES['myfile']['tmp_name'])){
   $name=rand().rand().rand().rand().".cbr";
-  mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='$mycall'");
+  $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='$mycall'");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
