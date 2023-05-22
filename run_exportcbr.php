@@ -24,7 +24,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
   $export_from=myextract($aux,"export_from");
   $export_to=myextract($aux,"export_to");
   $export_comtest=myextract($aux,"export_contest");
-  if(strlen($export_contest)>1)query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and contest='$export_contest' order by start");
+  if(strlen($export_contest)>1)$query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and contest='$export_contest' order by start");
   else $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
   for(;;){
     $row=mysqli_fetch_assoc($query);
