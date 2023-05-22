@@ -36,7 +36,8 @@ for(;;){
 }
 mysqli_free_result($query);
 
-printf("<b>%10s %6d %6d %6d %6d</b>\n","band/mode",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
+printf("<p id=\"myh1\">%10s %6d %6d %6d %6d</p>\n","band/mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+printf("<b>%10s %6d %6d %6d %6d</b>\n","",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
 usort($key,mycmpkey);
 foreach($key as &$kk)printf("%10s %6d %6d %6d %6d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
