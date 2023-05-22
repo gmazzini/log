@@ -2,6 +2,11 @@ body {
   background-color: #F9F4B7;
 }
 
+#myh1 {
+  color: red;
+  font-weight: bold;
+}
+
 input[type=text] {
   padding: 2px;
   border: 2px solid #eee;
