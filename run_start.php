@@ -61,6 +61,7 @@ else {
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image from who where callsign='$Icallsign'");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
+  printf("<img src=\"%s\" width=\"300\"",$row["image"]);
   printf("%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
   echo "\n";
 
