@@ -61,9 +61,10 @@ else {
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image from who where callsign='$Icallsign'");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
-  printf("<img src=\"%s\" width=\"200\"",$row["image"]);
-  printf("%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
-  echo "\n";
+  printf("<table>");
+  printf("<tr><img src=\"%s\" width=\"200\"</tr>",$row["image"]);
+  printf("<tr>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s</tr>",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
+  printf("</table>\n");
 
   $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='$Icallsign' and mycall='$mycall' order by start desc limit 5");
   for(;;){
