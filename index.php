@@ -1,4 +1,4 @@
-<title>LZH Logger V0.42 by IK4LZH</title>
+<title>LZH Logger V0.43 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -55,7 +55,7 @@ if($act>=1){
 if($act==0){
   echo "<form method=\"post\">";
   echo "<input type=\"text\" name=\"mycall\">";
-  echo "<input type=\"text\" name=\"mypasswd\" autocomplete=\"off\">";
+  echo "<input type=\"password\" name=\"mypasswd\" autocomplete=\"off\">";
   echo "<input type=\"hidden\" name=\"act\" value=\"1\">";
   echo "<input type=\"submit\">";
   echo "</form>";
