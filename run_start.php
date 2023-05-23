@@ -62,8 +62,8 @@ else {
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   printf("<table>");
-  printf("<tr><td>%s %s</td><td>%s</td><td>%s</td><td>%s %s %s</td><td>%s</td><td>%s</td><td>%s %s %s</td></tr>",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
-  printf("<tr><td><img align=\top\" src=\"%s\" width=\"200\"</td></tr>",$row["image"]);
+  printf("<td>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n</td>",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
+  printf("<td><img align=\top\" src=\"%s\" width=\"200\"</td>",$row["image"]);
   printf("</table>\n");
 
   $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='$Icallsign' and mycall='$mycall' order by start desc limit 5");
