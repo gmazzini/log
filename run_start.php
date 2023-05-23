@@ -54,7 +54,7 @@ else {
       $row[11]=(int)$q2->Callsign->born;
       $row[12]=mysqli_real_escape_string($con,$q2->Callsign->image);
       $mynow=gmdate('Y-m-d H:i:s');
-      mysqli_query($con,"insert into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],$row[12],'$mynow')");
+      mysqli_query($con,"insert into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],'$row[12]','$mynow')");
     }
   }
   mysqli_free_result($query);
