@@ -62,7 +62,7 @@ else {
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   printf("<table>");
-  printf("<td>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n</td>",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
+  printf("<td><pre>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n</pre></td>",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
   printf("<td><img align=\top\" src=\"%s\" width=\"200\"</td>",$row["image"]);
   printf("</table>\n");
 
