@@ -14,6 +14,7 @@ for(;;){
   $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   if(isset($q2->Session->Error)){
+    echo "Renew\n";
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
     $qrzkey=$q2->Session->Key;
