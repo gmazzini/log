@@ -28,7 +28,7 @@ else {
   $ff=0;
   if($row!=null&&strlen($row["firstname"])==0){$ff=1; mysqli_query($con,"delete from who where callsign='$Icallsign'");}
   if($row==null||$ff){
-    $qrzkey=myrcl($con,"qrzkey");    
+    $qrzkey=trim(myrcl($con,"qrzkey"));    
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     if(isset($q2->Session->Error)){
