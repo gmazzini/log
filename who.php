@@ -9,6 +9,7 @@ for(;;){
   $row2=mysqli_fetch_array($query2);
   if($row2==null)break;
   $Icallsign=$row2[0];
+  echo "$Icallsign\n";
   mysqli_query($con,"delete from who where callsign='$Icallsign'");
   $qrzkey=trim(myrcl($con,"qrzkey"));    
   $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
