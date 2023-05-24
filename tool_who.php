@@ -10,12 +10,10 @@ for(;;){
   if($row2==null)break;
   $Icallsign=$row2[0];
   echo "$Icallsign\n";
-  mysqli_query($con,"delete from who where callsign='$Icallsign'");
   $qrzkey=trim(myrcl($con,"qrzkey"));    
   $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   if(isset($q2->Session->Error)){
-    echo "Renew\n";
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
     $qrzkey=$q2->Session->Key;
@@ -23,24 +21,23 @@ for(;;){
     $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
   }
-  $row[0]=mysqli_real_escape_string($con,$q2->Callsign->fname);
-  if(strlen($row[0])>0){
-    if(isset($q2->Callsign->nickname))$row[0].=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
-    $row[1]=mysqli_real_escape_string($con,$q2->Callsign->name);
-    $row[2]=mysqli_real_escape_string($con,$q2->Callsign->addr1);
-    $row[3]=mysqli_real_escape_string($con,$q2->Callsign->addr2);
-    $row[4]=mysqli_real_escape_string($con,$q2->Callsign->state);
-    $row[5]=mysqli_real_escape_string($con,$q2->Callsign->zip);
-    $row[6]=mysqli_real_escape_string($con,$q2->Callsign->country);
-    $row[7]=mysqli_real_escape_string($con,$q2->Callsign->grid);
-    $row[8]=mysqli_real_escape_string($con,$q2->Callsign->email);
-    $row[9]=(int)$q2->Callsign->cqzone;
-    $row[10]=(int)$q2->Callsign->ituzone;
-    $row[11]=(int)$q2->Callsign->born;
-    $row[12]=mysqli_real_escape_string($con,$q2->Callsign->image);
+  $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
+  if(strlen($gfname)>0){
+    if(isset($q2->Callsign->nickname))$gfname.=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
+    $gname=mysqli_real_escape_string($con,$q2->Callsign->name);
+    $gaddr1=mysqli_real_escape_string($con,$q2->Callsign->addr1);
+    $gaddr2=mysqli_real_escape_string($con,$q2->Callsign->addr2);
+    $gstate=mysqli_real_escape_string($con,$q2->Callsign->state);
+    $gzip=mysqli_real_escape_string($con,$q2->Callsign->zip);
+    $gcountry=mysqli_real_escape_string($con,$q2->Callsign->country);
+    $ggrid=mysqli_real_escape_string($con,$q2->Callsign->grid);
+    $gemail=mysqli_real_escape_string($con,$q2->Callsign->email);
+    $gcqzone=(int)$q2->Callsign->cqzone;
+    $gituzone=(int)$q2->Callsign->ituzone;
+    $gborn=(int)$q2->Callsign->born;
+    $gimage=mysqli_real_escape_string($con,$q2->Callsign->image);
     $mynow=gmdate('Y-m-d H:i:s');
-    echo "insert into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],'$row[12]','$mynow')\n";
-    mysqli_query($con,"insert into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$row[0]','$row[1]','$row[2]','$row[3]','$row[4]','$row[5]','$row[6]','$row[7]','$row[8]',$row[9],$row[10],$row[11],'$row[12]','$mynow')");
+    mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow')");
   }
 }
 mysqli_free_result($query2);
