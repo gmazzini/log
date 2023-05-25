@@ -61,9 +61,15 @@ function dbt($con,$call1,$call2){
   return $o;
 }
   
-function myinc(&$w,$in,$el){
-  if(isset($w[$in][$el]))$w[$in][$el]++;
-  else $w[$in][$el]=1;
+function myinc(&$w,$in,$el,$opt=null){
+  if(!isset($opt)){
+    if(isset($w[$in][$el]))$w[$in][$el]++;
+    else $w[$in][$el]=1;
+  }
+  else {
+    if(isset($w[$in][$el][$opt]))$w[$in][$el][$opt]++;
+    else $w[$in][$el][$opt]=1;
+  }
 }
 
 function mycmpkey($a,$b){
