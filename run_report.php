@@ -53,7 +53,7 @@ foreach($key as &$kk){
   $query=mysqli_query($con,"select name from cty where dxcc=$kk limit 1");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
-  @printf("%10s %8d %6d %8d %8d %8d %s\n",$kk,count($[8][$kk]);$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
+  @printf("%10s %8d %6d %8d %8d %8d %s\n",$kk,count($[8][$kk]),$w[4][$kk],$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
 }
 
 echo "</pre>";
