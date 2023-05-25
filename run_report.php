@@ -33,7 +33,7 @@ for(;;){
   myinc($w,4,$dxcc);
   myinc($w,8,$dxcc,$callsign);
   myinc($w,9,$tt,$callsign);
-  yinc($w,10,$callsign);
+  myinc($w,10,$callsign);
   if($row["lotw"]==1){myinc($w,1,$tt); myinc($w,5,$dxcc);}
   if($row["eqsl"]==1){myinc($w,2,$tt); myinc($w,6,$dxcc);}
   if($row["qrz"]==1){myinc($w,3,$tt); myinc($w,7,$dxcc);}
