@@ -32,17 +32,18 @@ for(;;){
   myinc($w,0,$tt);
   myinc($w,4,$dxcc);
   myinc($w,8,$dxcc,$callsign);
+  myinc($w,9,$tt,$callsign);
   if($row["lotw"]==1){myinc($w,1,$tt); myinc($w,5,$dxcc);}
   if($row["eqsl"]==1){myinc($w,2,$tt); myinc($w,6,$dxcc);}
   if($row["qrz"]==1){myinc($w,3,$tt); myinc($w,7,$dxcc);}
 }
 mysqli_free_result($query);
 
-printf("<p id=\"myh1\">%10s %6s %8s %8s %8s</p>","Band/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s</p>","Band/Mode","QSO","QSO.uniq","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 printf("<p id=\"myh2\">%10s %6d %8d %8d %8d</p>","Tot",array_sum($w[0]),array_sum($w[1]),array_sum($w[2]),array_sum($w[3]));
 $key=array_keys($w[0]);
 usort($key,"mycmpkey");
-foreach($key as &$kk)@printf("%10s %6d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk],$w[2][$kk],$w[3][$kk]);
+foreach($key as &$kk)@printf("%10s %6d %8d %8d %8d %8d\n",$kk,$w[0][$kk],count($w[9][$kk]),$w[1][$kk],$w[2][$kk],$w[3][$kk]);
 echo "\n";
 
 arsort($w[4]);
