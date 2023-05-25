@@ -20,7 +20,7 @@ mysqli_free_result($query);
 echo "Set dxcc: $qq\n\n";
 
 unset($w);
-$query=mysqli_query($con,"select freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
+$query=mysqli_query($con,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
@@ -28,8 +28,10 @@ for(;;){
   $mode=$mymode[$row["mode"]];
   $tt=$band.$mode;
   $dxcc=$row["dxcc"];
+  $callsign=$row["callsign"];
   myinc($w,0,$tt);
   myinc($w,4,$dxcc);
+  myinc($w,8,$dxcc,$callsign);
   if($row["lotw"]==1){myinc($w,1,$tt); myinc($w,5,$dxcc);}
   if($row["eqsl"]==1){myinc($w,2,$tt); myinc($w,6,$dxcc);}
   if($row["qrz"]==1){myinc($w,3,$tt); myinc($w,7,$dxcc);}
