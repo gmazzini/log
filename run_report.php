@@ -47,7 +47,7 @@ echo "\n";
 
 arsort($w[4]);
 printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
-printf("<p id=\"myh2\">%10s %6d %8d %8d %8d %8d</p>","Tot",count($w[4]),count($w[8]),count($w[5]),count($w[6]),count($w[7]));
+printf("<p id=\"myh2\">%10s %6d %8d %8d %8d %8d</p>","Tot",count($w[4]),array_sum($w[8]),count($w[5]),count($w[6]),count($w[7]));
 $key=array_keys($w[4]);
 foreach($key as &$kk){
   $query=mysqli_query($con,"select name from cty where dxcc=$kk limit 1");
