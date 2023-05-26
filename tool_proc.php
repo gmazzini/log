@@ -13,7 +13,7 @@ for(;;){
     case "D":
       $start=$cc[1];
       $callsign=$cc[2];
-      echo "delete from log where mycall='$mycall' and start='$start' and callsign='$callsign'";
+      echo "delete from log where mycall='$mycall' and start='$start' and callsign='$callsign'\n";
       break;
   }
 }
