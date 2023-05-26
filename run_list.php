@@ -22,7 +22,7 @@ mysqli_free_result($query);
 <script>
 function mydel(mycall,start,callsign){
   var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("GET","booking.php?mycall="+mycall+"&act=1111",true);
+  xmlhttp.open("GET","act_booking.php?mycall="+mycall+"&act=1111",true);
   xmlhttp.send();
 }
 </script>
