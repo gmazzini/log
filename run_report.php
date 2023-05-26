@@ -56,10 +56,10 @@ printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.un
 printf("<p id=\"myh2\">%10s %6d %8d %8d %8d %8d %8d</p>","Tot",count($w[4]),count($w[8]),count($w[13]),count($w[5]),count($w[6]),count($w[7]));
 $key=array_keys($w[4]);
 foreach($key as &$kk){
-  $query=mysqli_query($con,"select name from cty where dxcc=$kk limit 1");
+  $query=mysqli_query($con,"select name,base from cty where dxcc=$kk limit 1");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
-  @printf("%10s %6d %8d %8d %8d %8d %8d %s\n",$kk,$w[4][$kk],count($w[8][$kk]),count($w[13][$kk]),$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
+  @printf("%3s-%-6s %6d %8d %8d %8d %8d %8d %s\n",$kk,$row["base"],$w[4][$kk],count($w[8][$kk]),count($w[13][$kk]),$w[5][$kk],$w[6][$kk],$w[7][$kk],$row["name"]);
 }
 
 echo "</pre>";
