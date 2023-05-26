@@ -61,7 +61,7 @@ else {
   mysqli_free_result($query);
   printf("<table>");
   printf("<td><pre>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s\n</pre></td>",$row["firstname"],$row["lastname"],$row["addr1"],$row["addr2"],$row["state"],$row["zip"],$row["country"],$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"]);
-  if(strlen($row["image"])>0)printf("<td><img align=\top\" src=\"%s\" width=\"200\"</td>",$row["image"]);
+  if(strlen($row["image"])>0)printf("<td><img align=\top\" src=\"%s\" width=\"200\"></td>",$row["image"]);
   printf("</table>\n");
 
   $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='$Icallsign' and mycall='$mycall' order by start desc limit 5");
