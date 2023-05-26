@@ -17,7 +17,7 @@ for(;;){
       break;
   }
 }
-mysqli_free_result($query2);
+mysqli_free_result($query);
 mysqli_close($con);
 
 ?>
