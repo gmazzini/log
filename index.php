@@ -67,7 +67,7 @@ else {
   echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
   
   echo "<table>";
-  echo "<td><";
+  echo "<td>";
   echo "<button type=\"submit\" name=\"run\" value=\"list\">List</button>&nbsp;";
   echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>&nbsp;";
   echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>&nbsp;";
