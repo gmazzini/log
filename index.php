@@ -68,7 +68,7 @@ else {
   
   echo "<table>";
   echo "<td>";
-  echo "<button type=\"submit\" name=\"run\" value=\"list\">List</button>&nbsp;";
+  echo "<button type=\"submit\" class=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
   echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>&nbsp;";
   echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>&nbsp;";
   echo "<br>";
