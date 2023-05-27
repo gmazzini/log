@@ -71,6 +71,10 @@ else {
   echo "<button type=\"submit\" name=\"run\" value=\"list\">List</button>";
   echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>";
   echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>";
+  echo "<br>";
+  echo "<button type=\"submit\" name=\"run\" value=\"find\">Find</button>";
+  echo "<button type=\"submit\" name=\"run\" value=\"find up\">up</button>";
+  echo "<button type=\"submit\" name=\"run\" value=\"find dw\">dw</button>";
   echo "</td>";
   echo "</table>";
   
