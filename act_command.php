@@ -14,7 +14,7 @@ $query=mysqli_query($con,"select mycall from user where mycall='$mycall' and md5
 $row=mysqli_fetch_assoc($query);
 if($row!=null){
   $mynow=gmdate('Y-m-d H:i:s');
-  mysqli_query($con,"insert into booking (mycall,command,myupdate) value ('$mycall','$command','$mynow')");
+  mysqli_query($con,"insert into booking (mycall,start,callsign,command,myupdate) value ('$mycall','$start','$callsign','$command','$mynow')");
 }
 mysqli_free_result($query);
 mysqli_close($con);
