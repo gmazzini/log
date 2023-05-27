@@ -10,7 +10,7 @@ $command=strtoupper($_GET["command"]);
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-$query=mysqli_query($con,"select firstname from user where mycall='$mycall' and md5passwd='$md5passwd'");
+$query=mysqli_query($con,"select mycall from user where mycall='$mycall' and md5passwd='$md5passwd'");
 $row=mysqli_fetch_assoc($query);
 if($row!=null){
   $mynow=gmdate('Y-m-d H:i:s');
