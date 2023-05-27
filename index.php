@@ -71,6 +71,7 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"find\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"find up\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"find dw\">&nbsp;";
+  echo "<input type=\"submit\" name=\"run\" value=\"normalize\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"report\">&nbsp;";
   echo "<br>";
 
@@ -191,6 +192,7 @@ else {
     case "list": include "run_list.php"; break;
     case "find": include "run_find.php"; break;
     case "report": include "run_report.php"; break;
+    case "normalize": include "run_normalize.php"; break;
     case "cluster": include "run_cluster.php"; break;      
     case "exportcbr": include "run_exportcbr.php"; break;
     case "exportadi": include "run_exportadi.php"; break;
