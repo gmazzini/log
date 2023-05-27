@@ -62,7 +62,19 @@ for(;;){
     case "DT":
     case "DATETIME":
       $do="update log set start='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
-      break;   
+      break;
+    case "CO":
+    case "CONTEST":
+      $do="update log set contest='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "COT":
+    case "CONTESTTX":
+      $do="update log set contesttx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "COR":
+    case "CONTESTRX":
+      $do="update log set contestrx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
   }
   printf("%s\n",$do);
   mysqli_query($con,$do);
