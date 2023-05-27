@@ -5,7 +5,7 @@ $mycall=$_GET["mycall"];
 $md5passwd=$_GET["md5passwd"];
 $start=$_GET["start"];
 $callsign=$_GET["callsign"];
-$command=$_GET["command"];
+$command=strtoupper($_GET["command"]);
 
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
