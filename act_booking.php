@@ -1,6 +1,8 @@
 <?php
 include "local.php";
 
+
+// improve security with password check
 $mycall=$_GET["mycall"];
 $act=$_GET["act"];
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
