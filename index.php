@@ -67,15 +67,15 @@ else {
   echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
   
   echo "<table>";
-  echo "<td><pre>";
-  echo "<button type=\"submit\" name=\"run\" value=\"list\">List</button>";
-  echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>";
-  echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>\n";
+  echo "<td><";
+  echo "<button type=\"submit\" name=\"run\" value=\"list\">List</button>&nbsp;";
+  echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>&nbsp;";
+  echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>&nbsp;";
   echo "<br>";
-  echo "<button type=\"submit\" name=\"run\" value=\"find\">Find</button>";
-  echo "<button type=\"submit\" name=\"run\" value=\"find up\">up</button>";
-  echo "<button type=\"submit\" name=\"run\" value=\"find dw\">dw</button>";
-  echo "</pre></td>";
+  echo "<button type=\"submit\" name=\"run\" value=\"find\">Find</button>&nbsp;";
+  echo "<button type=\"submit\" name=\"run\" value=\"find up\">up</button>&nbsp;";
+  echo "<button type=\"submit\" name=\"run\" value=\"find dw\">dw</button>&nbsp;";
+  echo "</td>";
   echo "</table>";
   
   echo "<input type=\"submit\" name=\"run\" value=\"list\">&nbsp;";
