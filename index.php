@@ -66,9 +66,13 @@ else {
   echo "<input type=\"hidden\" name=\"md5passwd\" value=\"$md5passwd\">";
   echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
   
+  echo "<table>";
+  echo "<td>";
   echo "<button type=\"submit\" name=\"run\" value=\"list\">List</button>";
   echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>";
   echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>";
+  echo "</td>";
+  echo "</table>";
   
   echo "<input type=\"submit\" name=\"run\" value=\"list\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"list up\">&nbsp;";
