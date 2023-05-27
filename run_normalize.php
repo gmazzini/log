@@ -58,6 +58,10 @@ for(;;){
     case "C":
     case "CALL":
       $do="update log set signalrx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "DT":
+    case "DATETIME":
+      $do="update log set start='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;   
   }
   printf("%s\n",$do);
