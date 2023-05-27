@@ -45,19 +45,19 @@ for(;;){
       break;
     case "M":
     case "MODE":
-      $do="update log set mode=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      $do="update log set mode='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;
     case "ST":
     case "SIGNALTX":
-      $do="update log set signaltx=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      $do="update log set signaltx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;
     case "SR":
     case "SIGNALRX":
-      $do="update log set signalrx=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      $do="update log set signalrx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;
     case "C":
     case "CALL":
-      $do="update log set signalrx=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      $do="update log set signalrx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;   
   }
   printf("%s\n",$do);
