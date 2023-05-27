@@ -61,6 +61,7 @@ for(;;){
       break;   
   }
   printf("%s\n",$do);
+  mysqli_query($con,"delete from booking where mycall='$mycall' and myupdate='$myupdate'");
 }
 mysqli_free_result($query);
 
