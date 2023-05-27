@@ -18,3 +18,11 @@ echo "</pre>";
 mysqli_free_result($query);
 
 ?>
+<script>
+function mycommand(mycall,md5passwd,start,callsign){
+  var xmlhttp=new XMLHttpRequest();
+  let command=prompt("DEL DELETE FT,xxx FREQTX,xxx FR,xxx FREQRX,xxx M,xxx MODE,xxx ST,xxx SIGNALTX,xxx SR,xxx SIGNALRX,xxx C,xxx CALL,xxx DT,xxx DATETIME,xxx CO,xxx CONTEST,xxx COT,xxx CONTESTTX,xxx COR,xxx CONTESTRX,xxx","");
+  xmlhttp.open("GET","act_command.php?mycall="+mycall+"&md5passwd="+md5passwd+"&start="+start+"&callsign="+callsign+"&command="+command,true);
+  xmlhttp.send();
+}
+</script>
