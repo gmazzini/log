@@ -19,10 +19,12 @@ for(;;){
 mysqli_free_result($query);
 echo "Set dxcc: $qq\n\n";
 
-$query=mysqli_query($con,"select command,myupdate from booking where mycall='$mycall' order by myupdate");
+$query=mysqli_query($con,"select callsign,start,command,myupdate from booking where mycall='$mycall' order by myupdate");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
+  $callsign=$row["callsign"];
+  $start=$row["start"];
   $command=$row["command"];
   $myupdate=$row["myupdate"];
   $cc=explode(",",$command);
