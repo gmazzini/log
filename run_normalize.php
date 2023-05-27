@@ -26,13 +26,39 @@ for(;;){
   $command=$row["command"];
   $myupdate=$row["myupdate"];
   $cc=explode(",",$command);
-  $para=$cc[1];
   switch($cc[0]){
     case "DEL":
     case "DELETE":
-      $do="delete from log where mycall='$mycall' and ";
+      $do="delete from log where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;
+    case "FT":
+    case "FREQTX":
+      $freqtx=(int)($cc[1]*1000);
+      $do="update log set freqtx=$freqtx where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "FR":
+    case "FREQRX":
+      $freqrx=(int)($cc[1]*1000);
+      $do="update log set freqrx=$freqrx where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "M":
+    case "MODE":
+      $do="update log set mode=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "ST":
+    case "SIGNALTX":
+      $do="update log set signaltx=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "SR":
+    case "SIGNALRX":
+      $do="update log set signalrx=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;
+    case "C":
+    case "CALL":
+      $do="update log set signalrx=$cc[1] where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      break;   
   }
+  printf("%s\n",$do);
 }
 mysqli_free_result($query);
 
