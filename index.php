@@ -1,4 +1,4 @@
-<title>LZH Logger V0.60 by IK4LZH</title>
+<title>LZH Logger V0.63 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -69,12 +69,12 @@ else {
   echo "<table>";
   echo "<td>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">up</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">dw</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&uarr;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&darr;</button>";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">up</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">dw</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&uarr;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&darr;</button>";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Normalize</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
