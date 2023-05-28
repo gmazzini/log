@@ -85,19 +85,17 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">ADI&#8680;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">LZH&#8680;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&#8680;ADI</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;CBR</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;CBR</button>";
+  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>&nbsp;";
   
-
   
   echo "</td>";
   echo "</table>";
 
-  echo "<input type=\"submit\" name=\"run\" value=\"qsl_lotw\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"qsl_eqsl\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"qsl_qrz\">&nbsp;";
-  echo "<input type=\"file\" name=\"myfile\">&nbsp;";
-  echo "<br>";
-  
+    
   $Icallsign=strtoupper(mypost("Icallsign"));
   $Ifreq=mypost("Ifreq");
   $Imode=strtoupper(mypost("Imode"));
