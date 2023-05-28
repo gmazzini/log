@@ -8,7 +8,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
     $line=trim(fgets($hh));
     if(substr($line,0,4)!="QSO:")continue;
     $parts=preg_split('/\s+/',$line);
-    $start=$parts[3]." ".substr($parts[4],0,2).":".substr($parts[4],2,2)":00";
+    $start=$parts[3]." ".substr($parts[4],0,2).":".substr($parts[4],2,2).":00";
     $callsign=$parts[8];
     $contesttx=$part[7];
     $contestrx=$parts[10];
