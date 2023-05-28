@@ -80,7 +80,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
   echo "</td>";
   echo "<td>";
-  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 40px\">";
+  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 200px\">";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>&nbsp;";
