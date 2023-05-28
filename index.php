@@ -158,11 +158,10 @@ else {
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">AutoOn</button>";
   echo "</td>";
   
-  // non va font id
   echo "<td id=\"myq1\">";
-  echo "RX:<span id=\"rigrx\"></span><br>";
-  echo "TX:<span id=\"rigtx\"></span><br>";
-  echo "M:<span id=\"rigm\"></span><br>";
+  echo "<label id=\"myf1\">RX:</label><span id=\"rigrx\"></span><br>";
+  echo "<label id=\"myf1\">TX:</label><span id=\"rigtx\"></span><br>";
+  echo "<label id=\"myf1\">M :</label><span id=\"rigm\"></span><br>";
   if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button><br>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto1\">S1</button>&nbsp;";
