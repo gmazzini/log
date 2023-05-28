@@ -188,7 +188,7 @@ else {
   echo "<td id=\"myq1\">";
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   $x=0;
-  foreach(array("160","80","60","40","30","20","17","15","12","10","6","2","PH","CW","DG") as &$vv){
+  foreach(array("PH","CW","DG","10","15","20","40","80","160","12","17","30","60") as &$vv){
     echo "<input type=\"checkbox\" id=\"myc1\" name=\"dxcsel[]\" value=\"$vv\"";
     if(isset($dxcsel[$vv]))echo " checked";
     echo ">";
@@ -196,7 +196,7 @@ else {
     $x++;
     if($x==3){$x=0; echo "<br>";}
   }
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cluster\">Cluster</button>";
+  echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cluster\">Cluster</button>";
   echo "</td>";
   
   echo "</table>";
