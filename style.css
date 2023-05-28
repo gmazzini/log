@@ -58,6 +58,27 @@ td {
   background-color: #992C15;
 }
 
+#myb2 {
+  font-family: "Lucida Console", "Courier New", monospace;
+  background-color: #666699;
+  border: none;
+  color: #F9F4B7;
+  padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 15px;
+  outline:none;
+  margin-left: 3px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+#myb2:hover {
+  background-color: #992C15;
+}
+
 #myh1 {
   color: red;
   font-weight: bold;
