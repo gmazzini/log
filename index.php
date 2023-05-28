@@ -203,8 +203,6 @@ else {
   
   echo "</table>";
   
-  echo "<h1>$mycall $page</h1>";
-  
   switch($run){
     case "list": include "run_list.php"; break;
     case "find": include "run_find.php"; break;
@@ -222,6 +220,8 @@ else {
     case "qsl_qrz": include "run_qsl_qrz.php"; break;
     case "sto1": case "sto2": case "sto3": case "rcl1": case "rcl2": case "rcl3": include "run_storcl.php"; break;
   }
+  
+  echo "<h1>$mycall $page</h1>";
   
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
