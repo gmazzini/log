@@ -1,5 +1,12 @@
 <?php
 
+$query=mysqli_query($con,"select max(serial) from log where mycall='$mycall'");
+$row=mysqli_fetch_row($query);
+$lastserial=(int)$row[0];
+mysqli_free_result($query);
+
+echo $lastserial."\n";
+
 echo "<pre>";
 $query=mysqli_query($con,"select start,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='$mycall' order by start desc limit $mypage offset $page");
 for(;;){
