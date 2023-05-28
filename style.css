@@ -19,6 +19,11 @@ body {
   margin-top: 2px;
 }
 
+#myb1:hover {
+  background-color: #992C15;
+  color: #F9F4B7;
+}
+
 #myh1 {
   color: red;
   font-weight: bold;
