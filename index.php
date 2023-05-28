@@ -70,14 +70,17 @@ else {
   echo "<td>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">up</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">dw</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">dw</button>";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">up</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">dw</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">dw</button>";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Normalize</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
+  echo "</td>";
+  echo "<td>";
+  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\">&nbsp;";
   echo "</td>";
   echo "</table>";
 
