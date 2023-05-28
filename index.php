@@ -40,7 +40,7 @@ if($act>=1){
         document.getElementById("Prigm").value=aaa[2];
       }
     }
-    xhttp.open("GET","rig.php?rigIP=<?php echo $rigIP;?>&rigPORT=<?php echo $rigPORT;?>",true);
+    xhttp.open("GET","act_rig.php?rigIP=<?php echo $rigIP;?>&rigPORT=<?php echo $rigPORT;?>",true);
     xhttp.send();
   }
   function nextgeneral(){
