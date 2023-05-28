@@ -133,7 +133,7 @@ else {
     echo "<input type=\"checkbox\" id=\"myc1\" name=\"dxcsel[]\" value=\"$vv\"";
     if(isset($dxcsel[$vv]))echo " checked";
     echo ">";
-    printf("<label>%-3s</label>",$vv);
+    printf("<label id=\"myf1\">%-3s</label>",$vv);
     $x++;
     if($x==3){$x=0; echo "<br>";}
   }  
