@@ -163,6 +163,12 @@ else {
   echo "M:<span id=\"rigm\"></span><br>";
   if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button><br>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button><br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto1\">S1</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl1\">R1</button><br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto2\">S2</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl2\">R2</button><br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto3\">S3</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl3\">R3</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
@@ -204,16 +210,7 @@ else {
   echo "<input id=\"xstart\" type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
   
-
-  echo "<br>";
-  
-
-  echo "<input type=\"submit\" name=\"run\" value=\"sto1\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"rcl1\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"sto2\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"rcl2\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"sto3\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"rcl3\">&nbsp;";
+ 
   
   echo "<br>";  
   
