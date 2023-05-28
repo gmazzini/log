@@ -14,10 +14,15 @@ for(;;){
   mysqli_query($con,"update log set serial=$lastserial where mycall='$mycall' and callsign='$callsign' and start='$start'");
 }
 mysqli_free_result($query);
-
-
-$baseserial=$lastserial-$page;
-echo $lastserial."\n";
+if($page<0){
+  $auxstart=strval(-$page);
+  $auxstart=sprintf("%s-%s-%s 00:00:00",substr($auxstart,0,4),substr($auxstart,4,2),substr($auxstart,6,2));
+  $query=mysqli_query($con,"select serial from log where mycall='$mycall' and start<='$auxstart' limit 1");
+  $row=mysqli_fetch_assoc($query);
+  $baseserial=(int)$row["serial"];
+  mysqli_free_result($query);
+}
+else $baseserial=$lastserial-$page;
 
 echo "<pre>";
 $query=mysqli_query($con,"select start,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='$mycall' and serial<=$baseserial order by start desc limit $mypage");
