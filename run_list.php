@@ -17,7 +17,6 @@ mysqli_free_result($query);
 if($page<0){
   $auxstart=strval(-$page);
   $auxstart=sprintf("%s-%s-%s 00:00:00",substr($auxstart,0,4),substr($auxstart,4,2),substr($auxstart,6,2));
-  echo "select serial from log where mycall='$mycall' and start<='$auxstart' limit 1\n";
   $query=mysqli_query($con,"select serial from log where mycall='$mycall' and start>='$auxstart' limit 1");
   $row=mysqli_fetch_assoc($query);
   $baseserial=(int)$row["serial"];
