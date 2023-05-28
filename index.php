@@ -123,7 +123,7 @@ else {
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>";
   echo "</td>";
   
   echo "<td>";
@@ -136,7 +136,9 @@ else {
     printf("<label id=\"myf1\">%-3s</label>",$vv);
     $x++;
     if($x==3){$x=0; echo "<br>";}
-  }  
+  }
+  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cluster\">Cluster</button>";
   echo "</td>";
   
   echo "</table>";
@@ -190,7 +192,6 @@ else {
   echo "<input id=\"xstart\" type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
   if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
   
 
   echo "<br>";
