@@ -69,12 +69,12 @@ else {
   echo "<table>";
   echo "<td>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
-  echo "<button type=\"submit\" name=\"run\" value=\"list up\">up</button>&nbsp;";
-  echo "<button type=\"submit\" name=\"run\" value=\"list dw\">dw</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">up</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">dw</button>&nbsp;";
   echo "<br>";
-  echo "<button type=\"submit\" name=\"run\" value=\"find\">Find</button>&nbsp;";
-  echo "<button type=\"submit\" name=\"run\" value=\"find up\">up</button>&nbsp;";
-  echo "<button type=\"submit\" name=\"run\" value=\"find dw\">dw</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">up</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">dw</button>&nbsp;";
   echo "</td>";
   echo "</table>";
   
