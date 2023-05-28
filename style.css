@@ -6,6 +6,14 @@ td {
   text-align: center;
 }
 
+#myc1 {
+  width: 15px;
+  height: 15px;
+  border: solid white;  
+  border-width: 0 4px 4px 0;  
+  transform: rotate(45deg);  
+}
+
 #myb1 {
   font-family: "Lucida Console", "Courier New", monospace;
   background-color: #666699;
@@ -53,14 +61,6 @@ input[type=text] {
 
 input[type=text]:hover {
   background-color: #Ffe477;
-}
-
-input[type=checkbox] {
-  width: 15px;
-  height: 15px;
-  border: solid white;  
-  border-width: 0 4px 4px 0;  
-  transform: rotate(45deg);  
 }
 
 button[type=button] {
