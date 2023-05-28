@@ -105,18 +105,18 @@ else {
   echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\"><br>";
   if(!$riglink){
     echo "<label id=\"myf1\">Freq </label>";
-    echo "<input type=\"text\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\"><br>";
     echo "<label id=\"myf1\">Mode </label>";
-    echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\"><br>";
   }
   else {
     echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
     echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
   }
   echo "<label id=\"myf1\">SigTX</label>";
-  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\"><br>";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\"><br>";
   echo "<label id=\"myf1\">SigRX</label>";
-  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
   if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink off\">";
   echo "</td>";
  
