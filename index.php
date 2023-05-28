@@ -76,7 +76,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button>";
   echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Normalize</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
   echo "</td>";
   echo "<td>";
