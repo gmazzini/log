@@ -14,6 +14,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
     $contestrx=$parts[10];
     $contest=$Icontest;
     echo "update log set contesttx='$contesttx',contestrx='$contestrx',contest='$contest' where mycall='$mycall' and callsign='$callsign' and start='$start'\n";
+    mysqli_query($con,"update log set contesttx='$contesttx',contestrx='$contestrx',contest='$contest' where mycall='$mycall' and callsign='$callsign' and start='$start'");
   }
   echo "</pre>";
   fclose($hh);
