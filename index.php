@@ -129,14 +129,14 @@ else {
     echo "<label id=\"myf1\">ConRX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
     echo "<label id=\"myf1\">Con -</label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
   }
   else {
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
     echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
-  echo "<button type=\"submit\" id=\"xstart\" name=\"run\" value=\"start\">Start</button>&nbsp;";
+  echo "<br><button type=\"submit\" id=\"xstart\" name=\"run\" value=\"start\">Start</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"end\">End</button>";
   echo "</td>";
  
