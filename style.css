@@ -2,6 +2,12 @@ body {
   background-color: #F9F4B7;
 }
 
+td {
+  border: 1px solid red;
+  border-collapse: collapse;
+  border-style: dotted;
+}
+
 #myt1,#xcall {
   padding: 2px;
   border: 2px solid #eee;
