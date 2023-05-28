@@ -4,6 +4,18 @@ $query=mysqli_query($con,"select max(serial) from log where mycall='$mycall'");
 $row=mysqli_fetch_row($query);
 $lastserial=(int)$row[0];
 mysqli_free_result($query);
+$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' and serial=0 order by start");
+for(;;){
+  $row=mysqli_fetch_assoc($query);
+  if($row==null)break;
+  $callsign=$row["callsign"];
+  $start=$row["start"];
+  $lastserial++;
+  mysqli_query($con,"update log set serial=$lastserial where mycall='$mycall' and callsign='$callsign' and start='$start'");
+}
+mysqli_free_result($query);
+
+
 $baseserial=$lastserial-$page;
 echo $lastserial."\n";
 
