@@ -161,7 +161,7 @@ else {
   echo "<td id=\"myq1\">";
   echo "<label id=\"myf1\">RX:</label><span id=\"rigrx\"></span><br>";
   echo "<label id=\"myf1\">TX:</label><span id=\"rigtx\"></span><br>";
-  echo "<label id=\"myf1\">M :</label><span id=\"rigm\"></span><br>";
+  echo "<label id=\"myf1\">M:</label><span id=\"rigm\"></span><br>";
   if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button><br>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto1\">S1</button>&nbsp;";
@@ -192,7 +192,7 @@ else {
     echo "<input type=\"checkbox\" id=\"myc1\" name=\"dxcsel[]\" value=\"$vv\"";
     if(isset($dxcsel[$vv]))echo " checked";
     echo ">";
-    printf("<label id=\"myf1\">%-3s</label>",$vv);
+    printf("<label id=\"myf1\">%3s</label>",$vv);
     $x++;
     if($x==3){$x=0; echo "<br>";}
   }
