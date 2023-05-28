@@ -61,41 +61,6 @@ if($act==0){
   echo "</form>";
 }
 else {
-  echo "<form method=\"post\" enctype=\"multipart/form-data\">";
-  echo "<input type=\"hidden\" name=\"mycall\" value=\"$mycall\">";
-  echo "<input type=\"hidden\" name=\"md5passwd\" value=\"$md5passwd\">";
-  echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
-  
-  echo "<table>";
-  echo "<td>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
-  echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button>";
-  echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
-  echo "</td>";
-  echo "<td>";
-  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\">";
-  echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&#8680;adi</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;cbr</button>";
-  echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>&nbsp;";
-  
-  
-  echo "</td>";
-  echo "</table>";
-
-    
   $Icallsign=strtoupper(mypost("Icallsign"));
   $Ifreq=mypost("Ifreq");
   $Imode=strtoupper(mypost("Imode"));
@@ -127,6 +92,44 @@ else {
     case "riglink": $riglink=1; break;
     case "riglink off": $riglink=0; break;
   }
+  
+  echo "<form method=\"post\" enctype=\"multipart/form-data\">";
+  echo "<input type=\"hidden\" name=\"mycall\" value=\"$mycall\">";
+  echo "<input type=\"hidden\" name=\"md5passwd\" value=\"$md5passwd\">";
+  echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
+  
+  echo "<table>";
+ 
+  echo "<td>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
+  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button>";
+  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
+  echo "</td>";
+  
+  echo "<td>";
+  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\">";
+  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&#8680;adi</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;cbr</button>";
+  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>&nbsp;";
+  echo "</td>";
+  
+  echo "</table>";
+
+    
+
   
   echo "<label>Call</label>";
   echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
