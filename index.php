@@ -159,6 +159,12 @@ else {
   echo "</td>";
   
   echo "<td id=\"myq1\">";
+  echo "RX:<span id=\"rigrx\"></span><br>";
+  echo "TX:<span id=\"rigtx\"></span><br>";
+  echo "M:<span id=\"rigm\"></span><br>";
+  echo "</td>";
+  
+  echo "<td id=\"myq1\">";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\">";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
@@ -207,9 +213,7 @@ else {
   echo "<input type=\"submit\" name=\"run\" value=\"rcl2\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"sto3\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"rcl3\">&nbsp;";
-  echo "<font size=5>RX:<span id=\"rigrx\"></span>&nbsp;";
-  echo "TX:<span id=\"rigtx\"></span>&nbsp;";
-  echo "M:<span id=\"rigm\"></span>&nbsp;</font>";
+  
   echo "<br>";  
   
   echo "<h1>$mycall $page</h1>";
