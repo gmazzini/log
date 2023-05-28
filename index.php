@@ -82,6 +82,7 @@ else {
     case "list": $page=0; break;
     case "list up": $run="list"; $page+=$mypage; break;
     case "list dw": $run="list"; $page-=$mypage; if($page<0)$page=0; break;
+    case "list go": $run="list"; $page=-(int)$Icallsign; break;
     case "find": $page=0; break;
     case "find up": $run="find"; $page+=$mypage; break;
     case "find dw": $run="find"; $page-=$mypage; if($page<0)$page=0; break;
@@ -143,7 +144,8 @@ else {
   echo "<td id=\"myq1\">";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list go\">Go</button>";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>&nbsp;";
