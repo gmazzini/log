@@ -8,8 +8,7 @@ body {
   margin-left: 3px;
   margin-bottom: 2px;
   margin-top: 2px;
-  font-family: inherit;
-  font-size: inherit;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #myt1:hover {
