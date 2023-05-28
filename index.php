@@ -137,7 +137,6 @@ else {
     $x++;
     if($x==3){$x=0; echo "<br>";}
   }
-  echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cluster\">Cluster</button>";
   echo "</td>";
   
