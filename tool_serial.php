@@ -5,14 +5,14 @@ mysqli_query($con,"SET time_zone='+00:00'");
 
 $mycall="IK4LZH";
 $serial=1;
-$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' order by start desc");
+$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' order by start");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
   $start=$row["start"];
-  mysqli_query($con,"update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start')");
-  echo "update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start')"; exit(0);
+  mysqli_query($con,"update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start'");
+  echo "update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start'"; exit(0);
   $serial++;
 }
 mysqli_free_result($query);
