@@ -11,7 +11,7 @@ body {
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
-#myt1:hover {
+#myt1:hover,#call:hover {
   background-color: #Ffe477;
 }
 
