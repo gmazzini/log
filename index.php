@@ -107,16 +107,16 @@ else {
     echo "<label id=\"myf1\">Freq </label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\"><br>";
     echo "<label id=\"myf1\">Mode </label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"6\"><br>";
   }
   else {
     echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
     echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
   }
   echo "<label id=\"myf1\">SigTX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"5\"><br>";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"6\"><br>";
   echo "<label id=\"myf1\">SigRX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"5\">";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"6\">";
   if($runcontest){
     if($modecontest){
       $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
@@ -128,7 +128,7 @@ else {
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\"><br>";
     echo "<label id=\"myf1\">ConRX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
-    echo "<label id=\"myf1\">Con  </label>";
+    echo "<label id=\"myf1\">Con -</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\"><br>";
     if($modecontest)echo "<input type=\"submit\" name=\"run\" value=\"auto off\">&nbsp;";
     else echo "<input type=\"submit\" name=\"run\" value=\"auto\">&nbsp;";
