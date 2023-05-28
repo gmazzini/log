@@ -118,14 +118,13 @@ else {
   echo "<label id=\"myf1\">SigRX</label>";
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
   if($runcontest){
-    echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
     if($modecontest){
       $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
       $row=mysqli_fetch_row($query);
       $Icontesttx=$row[0]+1;
       mysqli_free_result($query);
     }
-    echo "<label id=\"myf1\">ContestTX</label>";
+    echo "<br><label id=\"myf1\">ContestTX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\"><br>";
     echo "<label id=\"myf1\">ContestRX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
@@ -153,8 +152,10 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
   echo "<br>";
-  if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button>";
-  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button>";    
+  if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button>&nbsp;";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button>&nbsp;";
+  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"Contest off\">ConOff</button>";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"Contest\">ConOn</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
@@ -195,7 +196,6 @@ else {
   
   echo "<input id=\"xstart\" type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
-  if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
   
 
   echo "<br>";
