@@ -124,11 +124,11 @@ else {
       $Icontesttx=$row[0]+1;
       mysqli_free_result($query);
     }
-    echo "<br><label id=\"myf1\">ContestTX</label>";
+    echo "<br><label id=\"myf1\">ConTX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\"><br>";
-    echo "<label id=\"myf1\">ContestRX</label>";
+    echo "<label id=\"myf1\">ConRX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
-    echo "<label id=\"myf1\">Contest</label>";
+    echo "<label id=\"myf1\">Con  </label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\"><br>";
     if($modecontest)echo "<input type=\"submit\" name=\"run\" value=\"auto off\">&nbsp;";
     else echo "<input type=\"submit\" name=\"run\" value=\"auto\">&nbsp;";
