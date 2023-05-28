@@ -101,12 +101,12 @@ else {
   echo "<table>";
   
   echo "<td>";
-  echo "<label id=\"myf1\">Call</label>";
+  echo "<label id=\"myf1\">Call </label>";
   echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\"><br>";
   if(!$riglink){
-    echo "<label id=\"myf1\">Freq</label>";
+    echo "<label id=\"myf1\">Freq </label>";
     echo "<input type=\"text\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\"><br>";
-    echo "<label id=\"myf1\">Mode</label>";
+    echo "<label id=\"myf1\">Mode </label>";
     echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\"><br>";
   }
   else {
@@ -133,7 +133,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
   echo "</td>";
   
-  echo "<td>";
+  echo "<td id=\"myq1\">";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\">";
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
@@ -146,7 +146,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>";
   echo "</td>";
   
-  echo "<td>";
+  echo "<td id=\"myq1\">";
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   $x=0;
   foreach(array("160","80","60","40","30","20","17","15","12","10","6","2","PH","CW","DG") as &$vv){
