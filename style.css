@@ -6,6 +6,10 @@ td {
   text-align: center;
 }
 
+#myf1 {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
 #myc1 {
   width: 15px;
   height: 15px;
