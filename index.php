@@ -117,6 +117,28 @@ else {
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\"><br>";
   echo "<label id=\"myf1\">SigRX</label>";
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
+  if($runcontest){
+    echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
+    if($modecontest){
+      $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
+      $row=mysqli_fetch_row($query);
+      $Icontesttx=$row[0]+1;
+      mysqli_free_result($query);
+    }
+    echo "<label id=\"myf1\">ContestTX</label>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\"><br>";
+    echo "<label id=\"myf1\">ContestRX</label>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
+    echo "<label id=\"myf1\">Contest</label>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\"><br>";
+    if($modecontest)echo "<input type=\"submit\" name=\"run\" value=\"auto off\">&nbsp;";
+    else echo "<input type=\"submit\" name=\"run\" value=\"auto\">&nbsp;";
+  }
+  else {
+    echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
+    echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
+    echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
+  }
   echo "</td>";
  
   echo "<td id=\"myq1\">";
@@ -169,29 +191,7 @@ else {
   
  
   
-  if($runcontest){
-    echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
-    if($modecontest){
-      $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
-      $row=mysqli_fetch_row($query);
-      $Icontesttx=$row[0]+1;
-      mysqli_free_result($query);
-    }
-    echo "<label>ContestTX</label>";
-    echo "<input type=\"text\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\">&nbsp;";
-    echo "<label>ContestRX</label>";
-    echo "<input type=\"text\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\">&nbsp;";
-    echo "<label>Contest</label>";
-    echo "<input type=\"text\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">&nbsp;";
-    if($modecontest)echo "<input type=\"submit\" name=\"run\" value=\"auto off\">&nbsp;";
-    else echo "<input type=\"submit\" name=\"run\" value=\"auto\">&nbsp;";
-    echo "<br>"; 
-  }
-  else {
-    echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
-    echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
-    echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
-  }
+ 
   
   echo "<input id=\"xstart\" type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
