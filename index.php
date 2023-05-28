@@ -130,8 +130,6 @@ else {
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
     echo "<label id=\"myf1\">Con -</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\"><br>";
-    if($modecontest)echo "<input type=\"submit\" name=\"run\" value=\"auto off\">&nbsp;";
-    else echo "<input type=\"submit\" name=\"run\" value=\"auto\">&nbsp;";
   }
   else {
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
@@ -152,10 +150,13 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
   echo "<br>";
-  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">ConOff</button>";
-  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">ConOn</button>";
+  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">ConOff</button>&nbsp;";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">ConOn</button>&nbsp;";
+  if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">AutoOff</button>";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">AutoOn</button>";
   echo "</td>";
   
+  // non va font id
   echo "<td id=\"myq1\">";
   echo "RX:<span id=\"rigrx\"></span><br>";
   echo "TX:<span id=\"rigtx\"></span><br>";
