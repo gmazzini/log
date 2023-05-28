@@ -9,12 +9,13 @@ if(isset($_FILES['myfile']['tmp_name'])){
     if(substr($line,0,4)!="QSO:")continue;
     $parts=preg_split('/\s+/',$line);
     $start=$parts[3]." ".substr($parts[4],0,2).":".substr($parts[4],2,2).":00";
+    $end=$parts[3]." ".substr($parts[4],0,2).":".substr($parts[4],2,2).":59";
     $callsign=$parts[8];
     $contesttx=$parts[7];
     $contestrx=$parts[10];
     $contest=$Icontest;
-    echo "update log set contesttx='$contesttx',contestrx='$contestrx',contest='$contest' where mycall='$mycall' and callsign='$callsign' and start='$start'\n";
-    mysqli_query($con,"update log set contesttx='$contesttx',contestrx='$contestrx',contest='$contest' where mycall='$mycall' and callsign='$callsign' and start='$start'");
+    echo "update log set contesttx='$contesttx',contestrx='$contestrx',contest='$contest' where mycall='$mycall' and callsign='$callsign' and start>='$start' and start<='$end'\n";
+    mysqli_query($con,"update log set contesttx='$contesttx',contestrx='$contestrx',contest='$contest' where mycall='$mycall' and callsign='$callsign' and start>='$start' and start<='$end'");
   }
   echo "</pre>";
   fclose($hh);
