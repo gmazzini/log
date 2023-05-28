@@ -2,6 +2,20 @@ body {
   background-color: #F9F4B7;
 }
 
+#myt1 {
+  padding: 2px;
+  border: 2px solid #eee;
+  margin-left: 3px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+#myt1:hover {
+  background-color: #Ffe477;
+}
+
 #myq1 {
   text-align: center;
 }
