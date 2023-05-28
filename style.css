@@ -7,7 +7,7 @@ body {
   background-color: #666699;
   border: none;
   color: #F9F4B7;
-  padding: 10px 20px;
+  padding: 5px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -20,7 +20,7 @@ body {
 }
 
 #myb1:hover {
-  background-color: #402B88;
+  background-color: #992C15;
 }
 
 #myh1 {
