@@ -126,6 +126,19 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>&nbsp;";
   echo "</td>";
   
+  echo "<td>";
+  foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
+  $x=0;
+  foreach(array("160","80","60","40","30","20","17","15","12","10","6","2","PH","CW","DG") as &$vv){
+    echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"$vv\"";
+    if(isset($dxcsel[$vv]))echo " checked";
+    echo ">";
+    echo "<label>$vv</label>&nbsp;";
+    $x++;
+    if($x==3){$x=0; echo "<br>";}
+  }  
+  echo "</td>";
+  
   echo "</table>";
 
     
@@ -179,13 +192,7 @@ else {
   if(!$runcontest)echo "<input type=\"submit\" name=\"run\" value=\"contest\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"cluster\">&nbsp;";
   
-  foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
-  foreach(array("160","80","60","40","30","20","17","15","12","10","PH","CW","DG") as &$vv){
-    echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"$vv\"";
-    if(isset($dxcsel[$vv]))echo " checked";
-    echo ">";
-    echo "<label>$vv</label>&nbsp;";
-  }  
+
   echo "<br>";
   
   if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
