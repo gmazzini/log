@@ -22,6 +22,7 @@ if($page<0){
   $row=mysqli_fetch_assoc($query);
   $baseserial=(int)$row["serial"];
   mysqli_free_result($query);
+  $page=$lastserial-$baseserial;
 }
 else $baseserial=$lastserial-$page;
 echo "$baseserial\n";
