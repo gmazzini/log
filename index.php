@@ -130,7 +130,7 @@ else {
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   $x=0;
   foreach(array("160","80","60","40","30","20","17","15","12","10","6","2","PH","CW","DG") as &$vv){
-    echo "<input type=\"checkbox\" name=\"dxcsel[]\" value=\"$vv\"";
+    echo "<input type=\"checkbox\" id=\"myc1\" name=\"dxcsel[]\" value=\"$vv\"";
     if(isset($dxcsel[$vv]))echo " checked";
     echo ">";
     echo "<label>$vv</label>&nbsp;";
