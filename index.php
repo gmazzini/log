@@ -82,20 +82,16 @@ else {
   echo "<td>";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\">";
   echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">ADI&rarr</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">LZH&rarr</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\"&rarrADI>></button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\"&rarrCBR>></button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">ADI&rarr;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">LZH&rarr;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&rarr;ADI>></button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&rarr;CBR>></button>&nbsp;";
   
 
   
   echo "</td>";
   echo "</table>";
 
-  echo "<input type=\"submit\" name=\"run\" value=\"importadi\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"importlzh\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"exportadi\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"exportcbr\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"qsl_lotw\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"qsl_eqsl\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"qsl_qrz\">&nbsp;";
