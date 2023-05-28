@@ -1,4 +1,4 @@
-<title>LZH Logger V0.63 by IK4LZH</title>
+<title>LZH Logger V0.70 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -145,15 +145,12 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list go\">G</button>";
-  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list go\">G</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button>";
-  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
-  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button><br>";
   if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">ConOff</button>&nbsp;";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">ConOn</button>&nbsp;";
   if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">AutoOff</button>";
@@ -175,16 +172,15 @@ else {
   echo "</td>";
   
   echo "<td id=\"myq1\">";
-  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\">";
-  echo "<br>";
+  echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\"><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&#8680;adi</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;cbr</button>";
-  echo "<br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;cbr</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button><br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cbrtocontest\">cbrcon</button><br>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
@@ -219,6 +215,7 @@ else {
     case "qsl_eqsl": include "run_qsl_eqsl.php"; break;
     case "qsl_qrz": include "run_qsl_qrz.php"; break;
     case "sto1": case "sto2": case "sto3": case "rcl1": case "rcl2": case "rcl3": include "run_storcl.php"; break;
+    case "cbrtocontest": include "run_cbrcontest.php"; break;
   }
   
   echo "<h1>$mycall $page</h1>";
