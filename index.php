@@ -136,6 +136,8 @@ else {
     echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
+  echo "<button type=\"submit\" id=\"xstart\" name=\"run\" value=\"start\">Start</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"end\">End</button>";
   echo "</td>";
  
   echo "<td id=\"myq1\">";
@@ -199,20 +201,6 @@ else {
   echo "</td>";
   
   echo "</table>";
-
-    
-
-  
- 
-  
- 
-  
-  echo "<input id=\"xstart\" type=\"submit\" name=\"run\" value=\"start\">&nbsp;";
-  echo "<input type=\"submit\" name=\"run\" value=\"end\">&nbsp;";
-  
- 
-  
-  echo "<br>";  
   
   echo "<h1>$mycall $page</h1>";
   
