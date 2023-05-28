@@ -154,8 +154,8 @@ else {
   echo "<br>";
   if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button>&nbsp;";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button>&nbsp;";
-  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"Contest off\">ConOff</button>";
-  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"Contest\">ConOn</button>";
+  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">ConOff</button>";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">ConOn</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
