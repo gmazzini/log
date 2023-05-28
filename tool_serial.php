@@ -9,7 +9,7 @@ $query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' 
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
-  $callsigh=$row["callsign"];
+  $callsign=$row["callsign"];
   $start=$row["start"];
   mysqli_query($con,"update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start')");
   $serial++;
