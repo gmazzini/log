@@ -9,5 +9,5 @@ unzip cty.zip
 cd ..
 cp tmpcty/cty.csv .
 rm -rf tmpcty
-php renew_cty.php
+php tool_renewcty.php
 rm -f cty.csv
