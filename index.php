@@ -117,7 +117,6 @@ else {
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\"><br>";
   echo "<label id=\"myf1\">SigRX</label>";
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
-  if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink off\">";
   echo "</td>";
  
   echo "<td id=\"myq1\">";
@@ -131,6 +130,9 @@ else {
   echo "<br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button>";
+  echo "<br>";
+  if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button>";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button>";    
   echo "</td>";
   
   echo "<td id=\"myq1\">";
@@ -198,7 +200,7 @@ else {
 
   echo "<br>";
   
-  if(!$riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink\">&nbsp;";
+
   echo "<input type=\"submit\" name=\"run\" value=\"sto1\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"rcl1\">&nbsp;";
   echo "<input type=\"submit\" name=\"run\" value=\"sto2\">&nbsp;";
