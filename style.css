@@ -31,7 +31,7 @@ body {
   transform: rotate(45deg);  
 }
 
-#myb1 {
+#myb1,#xstart {
   font-family: "Lucida Console", "Courier New", monospace;
   background-color: #666699;
   border: none;
@@ -48,7 +48,7 @@ body {
   margin-top: 2px;
 }
 
-#myb1:hover {
+#myb1:hover,#xstart:hover {
   background-color: #992C15;
 }
 
