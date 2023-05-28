@@ -2,6 +2,10 @@ body {
   background-color: #F9F4B7;
 }
 
+td {
+  text-align: center;
+}
+
 #myb1 {
   font-family: "Lucida Console", "Courier New", monospace;
   background-color: #666699;
