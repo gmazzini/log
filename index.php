@@ -82,15 +82,10 @@ else {
   echo "<td>";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\">";
   echo "<br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">ADIF >></button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">LZH >></button>&nbsp;";
-  
-  
-  
-  
-  
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">>> ADIF >></button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">>> CBR>></button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">ADI&rarr</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">LZH&rarr</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\"&rarrADI>></button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\"&rarrCBR>></button>&nbsp;";
   
 
   
