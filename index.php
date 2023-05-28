@@ -120,7 +120,7 @@ else {
   if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink off\">";
   echo "</td>";
  
-  echo "<td>";
+  echo "<td id=\"myq1\">";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
