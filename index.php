@@ -99,6 +99,26 @@ else {
   echo "<input type=\"hidden\" name=\"act\" value=\"2\">";
   
   echo "<table>";
+  
+  echo "<td>";
+  echo "<label id=\"myf1\">Call</label>";
+  echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">";
+  if(!$riglink){
+    echo "<label id=\"myf1\">Freq</label>";
+    echo "<input type=\"text\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\">";
+    echo "<label id=\"myf1\">Mode</label>";
+    echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">";
+  }
+  else {
+    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
+    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
+  }
+  echo "<label id=\"myf1\">SigTX</label>";
+  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">";
+  echo "<label id=\"myf1\">SigRX</label>";
+  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">";
+  if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink off\">";
+  echo "</td>";
  
   echo "<td>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
@@ -145,24 +165,7 @@ else {
     
 
   
-  echo "<label>Call</label>";
-  echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\">&nbsp;";
-  if(!$riglink){
-    echo "<label>Freq</label>";
-    echo "<input type=\"text\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\">&nbsp;";
-    echo "<label>Mode</label>";
-    echo "<input type=\"text\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"4\">&nbsp;";
-  }
-  else {
-    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
-    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
-  }
-  echo "<label>SigTX</label>";
-  echo "<input type=\"text\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"4\">&nbsp;";
-  echo "<label>SigRX</label>";
-  echo "<input type=\"text\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"4\">&nbsp;";
-  if($riglink)echo "<input type=\"submit\" name=\"run\" value=\"riglink off\">&nbsp;";
-  echo "<br>";
+ 
   
   if($runcontest){
     echo "<input type=\"submit\" name=\"run\" value=\"contest off\">&nbsp;";
