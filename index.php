@@ -143,13 +143,13 @@ else {
  
   echo "<td id=\"myq1\">";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list go\">G</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find\">Find</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find up\">&#8679;</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button><br>";
   if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">cOFF</button>&nbsp;";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">cON</button>&nbsp;";
