@@ -8,7 +8,10 @@ $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
 echo "<pre>";
 echo "$Icontest\n";
 foreach($ll as $v){
-  echo "$v[0]\n";
+  if(str_contain($Icontest,$v[0])){
+    echo "$v[0]\n";
+    break;
+  }
 }
 echo "</pre>";
 
