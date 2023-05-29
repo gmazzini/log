@@ -6,13 +6,17 @@ $ll[]=array("CQWWSSB","https://ik4lzh.mazzini.org/cqww.php");
 $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
 
 echo "<pre>";
-echo "$Icontest\n";
-foreach($ll as $v){
-  if(strstr($Icontest,$v[0])){
-    echo "$v[1]\n";
-    break;
+$go="";
+if(strlen($Icontest)>0){
+  foreach($ll as $v){
+    if(strstr($Icontest,$v[0])){
+      $go=$v[1];
+      break;
+    }
   }
 }
+
+echo "$go\n";
 echo "</pre>";
 
 ?>
