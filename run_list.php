@@ -28,7 +28,7 @@ if($page<0){
 else $baseserial=$lastserial-$page;
 
 echo "<pre>";
-$query=mysqli_query($con,"select start,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='$mycall' and serial<=$baseserial order by start desc limit $mypage");
+$query=mysqli_query($con,"select start,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='$mycall' and serial<=$baseserial order by serial desc limit $mypage");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
