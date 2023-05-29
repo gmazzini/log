@@ -137,12 +137,12 @@ else {
     echo "<input type=\"hidden\" name=\"Icontestrx\" value=\"$Icontestrx\">";
     echo "<input type=\"hidden\" name=\"Icontest\" value=\"$Icontest\">";
   }
-  echo "<br><button type=\"submit\" id=\"xstart\" name=\"run\" value=\"start\">Start</button>&nbsp;";
+  echo "<br><button type=\"submit\" id=\"xstart\" name=\"run\" value=\"start\">Start</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"end\">End</button>";
   echo "</td>";
  
   echo "<td id=\"myq1\">";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list go\">G</button><br>";
@@ -151,8 +151,8 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button><br>";
-  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">cOFF</button>&nbsp;";
-  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">cON</button>&nbsp;";
+  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">cOFF</button>";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">cON</button>";
   if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">c#OFF</button>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">c#ON</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest list\">cList</button>";
@@ -164,22 +164,22 @@ else {
   echo "<label id=\"myf1\">M:</label><span id=\"rigm\"></span><br>";
   if($riglink)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink off\">RigOff</button><br>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"riglink\">RigOn</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto1\">S1</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto1\">S1</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl1\">R1</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto2\">S2</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto2\">S2</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl2\">R2</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto3\">S3</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto3\">S3</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl3\">R3</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\"><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&#8680;adi</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportadi\">&#8680;adi</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"exportcbr\">&#8680;cbr</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>&nbsp;";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>&nbsp;";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_lotw\">QSL.lotw</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cbrtocontest\">cbrcon</button><br>";
   echo "</td>";
