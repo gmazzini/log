@@ -155,7 +155,7 @@ else {
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">cON</button>";
   if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">c#OFF</button>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">c#ON</button>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest list\">cList</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contestlist\">cList</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
@@ -217,6 +217,7 @@ else {
     case "qsl_qrz": include "run_qsl_qrz.php"; break;
     case "sto1": case "sto2": case "sto3": case "rcl1": case "rcl2": case "rcl3": include "run_storcl.php"; break;
     case "cbrtocontest": include "run_cbrcontest.php"; break;
+    case "contestlist": include "run_contest_list.php"; break;
   }
   
   echo "<h1>$mycall $page</h1>";
