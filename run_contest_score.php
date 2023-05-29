@@ -8,7 +8,7 @@ $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
 echo "<pre>";
 echo "$Icontest\n";
 foreach($ll as $v){
-  if(str_starts_with($Icontest,$v[0])){
+  if(strstr($Icontest,$v[0])){
     echo "$v[0]\n";
     break;
   }
