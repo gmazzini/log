@@ -198,6 +198,10 @@ else {
   echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cluster\">Cluster</button>";
   echo "</td>";
   
+  echo "<td>";
+  echo "<h1>$mycall</h1>";
+  echo "</td>";
+  
   echo "</table>";
   
   switch($run){
@@ -219,8 +223,6 @@ else {
     case "cbrtocontest": include "run_cbrcontest.php"; break;
     case "contestlist": include "run_contest_list.php"; break;
   }
-  
-  echo "<h1>$mycall $page</h1>";
   
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
   echo "<input type=\"hidden\" name=\"page\" value=\"$page\">";
