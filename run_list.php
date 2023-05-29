@@ -17,11 +17,9 @@ mysqli_free_result($query);
 if($page<0){
   $auxstart=strval(-$page);
   $auxstart=sprintf("%s-%s-%s 00:00:00",substr($auxstart,0,4),substr($auxstart,4,2),substr($auxstart,6,2));
-  echo "... $auxstart \n";
   $query=mysqli_query($con,"select serial from log where mycall='$mycall' and start>='$auxstart' order by start limit 1");
   $row=mysqli_fetch_assoc($query);
   $baseserial=(int)$row["serial"];
-  echo ">>> $baseserial \n";
   mysqli_free_result($query);
   $page=$lastserial-$baseserial;
 }
