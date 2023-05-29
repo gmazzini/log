@@ -18,7 +18,8 @@ if(strlen($Icontest)>0){
 
 if($go!=""){
   $name=rand().rand().rand().rand().".cbr";
-  $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
+  $fn="/home/www/log.chaos.cc/files/$name";
+  $fp=fopen($fn,"w");
   fprintf($fp,"START-OF-LOG: 3.0\n");
   fprintf($fp,"CALLSIGN: $mycall\n");
   $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and contest='$Icontest' order by start");
@@ -31,6 +32,8 @@ if($go!=""){
   mysqli_free_result($query);
   fprintf($fp,"END-OF-LOG:\n");
   fclose($fp);
+  $aux=file_get_contents("$go?fromlog=$fn");
+  echo $aux;
 }
 
 echo "$go\n";
