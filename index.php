@@ -1,4 +1,4 @@
-<title>LZH Logger V0.70 by IK4LZH</title>
+<title>LZH Logger V0.71 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -151,10 +151,10 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"find dw\">&#8681;</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"normalize\">Apply</button>&nbsp;";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"report\">Report</button><br>";
-  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">ConOff</button>&nbsp;";
-  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">ConOn</button>&nbsp;";
-  if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">AutoOff</button>";
-  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">AutoOn</button>";
+  if($runcontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest off\">cOFF</button>&nbsp;";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">cON</button>&nbsp;";
+  if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">c#OFF</button>";
+  else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">c#ON</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
