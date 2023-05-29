@@ -155,7 +155,8 @@ else {
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contest\">cON</button>";
   if($modecontest)echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto off\">c#OFF</button>";
   else echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"auto\">c#ON</button>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contestlist\">cList</button>";
+  echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contestlist\">cList</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contestscore\">cScore</button>";
   echo "</td>";
   
   echo "<td id=\"myq1\">";
