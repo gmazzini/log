@@ -21,10 +21,7 @@ if($go!=""){
   $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
   fprintf($fp,"START-OF-LOG: 3.0\n");
   fprintf($fp,"CALLSIGN: $mycall\n");
-
-
-  if(strlen($export_contest)>1)$query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and contest='$export_contest' order by start");
-  else $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and start>='$export_from' and start<='$export_to' order by start");
+  $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx from log where mycall='$mycall' and contest='$Icontest' order by start");
   for(;;){
     $row=mysqli_fetch_assoc($query);
     if($row==null)break;
@@ -34,8 +31,10 @@ if($go!=""){
   mysqli_free_result($query);
   fprintf($fp,"END-OF-LOG:\n");
   fclose($fp);
+}
 
 echo "$go\n";
+echo "/home/www/log.chaos.cc/files/$name\n";
 echo "</pre>";
 
 ?>
