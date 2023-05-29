@@ -4,7 +4,9 @@ $ll=array();
 $ll[]=array("ARIDX","https://ik4lzh.mazzini.org/aridx.php");
 $ll[]=array("CQWWSSB","https://ik4lzh.mazzini.org/cqww.php");
 $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
-$ll[]=array("EUHF","https://ik4lzh.mazzini.org/euhf.php");
+$ll[]=array("EUHF","https://ik4lzh.mazzini.org/eudx.php");
+$ll[]=array("CQWPXSSB","https://ik4lzh.mazzini.org/cqwpx.php");
+$ll[]=array("CQWPXCW","https://ik4lzh.mazzini.org/cqwpx.php");
 
 $go="";
 if(strlen($Icontest)>0){
