@@ -4,6 +4,7 @@ $ll=array();
 $ll[]=array("ARIDX","https://ik4lzh.mazzini.org/aridx.php");
 $ll[]=array("CQWWSSB","https://ik4lzh.mazzini.org/cqww.php");
 $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
+$ll[]=array("EUHF","https://ik4lzh.mazzini.org/euhf.php");
 
 $go="";
 if(strlen($Icontest)>0){
