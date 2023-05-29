@@ -9,7 +9,7 @@ echo "<pre>";
 echo "$Icontest\n";
 foreach($ll as $v){
   if(strstr($Icontest,$v[0])){
-    echo "$v[0]\n";
+    echo "$v[1]\n";
     break;
   }
 }
