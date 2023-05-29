@@ -1,7 +1,7 @@
 <?php
 
 echo "<pre>";
-$query=mysqli_query($con,"select distinct contest from log where mycall='$mycall' order by start");
+$query=mysqli_query($con,"select distinct contest from log where mycall='$mycall' and contest<>'' order by start");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
