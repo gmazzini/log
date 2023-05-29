@@ -5,7 +5,6 @@ $ll[]=array("ARIDX","https://ik4lzh.mazzini.org/aridx.php");
 $ll[]=array("CQWWSSB","https://ik4lzh.mazzini.org/cqww.php");
 $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
 
-echo "<pre>";
 $go="";
 if(strlen($Icontest)>0){
   foreach($ll as $v){
@@ -35,9 +34,5 @@ if($go!=""){
   $aux=file_get_contents("$go?fromlog=$fn");
   echo $aux;
 }
-
-echo "$go\n";
-echo "/home/www/log.chaos.cc/files/$name\n";
-echo "</pre>";
 
 ?>
