@@ -223,6 +223,7 @@ else {
     case "sto1": case "sto2": case "sto3": case "rcl1": case "rcl2": case "rcl3": include "run_storcl.php"; break;
     case "cbrtocontest": include "run_cbrcontest.php"; break;
     case "contestlist": include "run_contest_list.php"; break;
+    case "contestscore": include "run_contest_score.php"; break;
   }
   
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
