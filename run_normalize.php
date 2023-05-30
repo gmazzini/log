@@ -57,7 +57,7 @@ for(;;){
       break;
     case "C":
     case "CALL":
-      $do="update log set signalrx='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
+      $do="update log set call='$cc[1]' where mycall='$mycall' and callsign='$callsign' and start='$start'";
       break;
     case "DT":
     case "DATETIME":
