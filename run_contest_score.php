@@ -4,9 +4,18 @@ $ll=array();
 $ll[]=array("ARIDX","https://ik4lzh.mazzini.org/aridx.php");
 $ll[]=array("CQWWSSB","https://ik4lzh.mazzini.org/cqww.php");
 $ll[]=array("CQWWCW","https://ik4lzh.mazzini.org/cqww.php");
+$ll[]=array("CQWWDIGI","https://ik4lzh.mazzini.org/cqwwdigi.php");
 $ll[]=array("EUHF","https://ik4lzh.mazzini.org/eudx.php");
 $ll[]=array("CQWPXSSB","https://ik4lzh.mazzini.org/cqwpx.php");
 $ll[]=array("CQWPXCW","https://ik4lzh.mazzini.org/cqwpx.php");
+$ll[]=array("ARRLSSB","https://ik4lzh.mazzini.org/arrldx.php");
+$ll[]=array("ARRLCW","https://ik4lzh.mazzini.org/arrldx.php");
+$ll[]=array("HADX","https://ik4lzh.mazzini.org/hadx.php");
+$ll[]=array("IARUHF","https://ik4lzh.mazzini.org/iaruhf.php");
+$ll[]=array("SPDX","https://ik4lzh.mazzini.org/spdx.php");
+$ll[]=array("UBASSB","https://ik4lzh.mazzini.org/ubadx.php");
+$ll[]=array("UBACW","https://ik4lzh.mazzini.org/ubadx.php");
+$ll[]=array("4080","https://ik4lzh.mazzini.org/4080.php");
 
 $go="";
 if(strlen($Icontest)>0){
