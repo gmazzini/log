@@ -115,9 +115,9 @@ else {
     echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
   }
   echo "<label id=\"myf1\">SigTX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"8\" size=\"6\"><br>";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"10\" size=\"6\"><br>";
   echo "<label id=\"myf1\">SigRX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"8\" size=\"6\">";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"10\" size=\"6\">";
   if($runcontest){
     if($modecontest){
       $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
