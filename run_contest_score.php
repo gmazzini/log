@@ -16,6 +16,7 @@ $ll[]=array("SPDX","https://ik4lzh.mazzini.org/spdx.php");
 $ll[]=array("UBASSB","https://ik4lzh.mazzini.org/ubadx.php");
 $ll[]=array("UBACW","https://ik4lzh.mazzini.org/ubadx.php");
 $ll[]=array("4080","https://ik4lzh.mazzini.org/4080.php");
+$ll[]=array("CQBB","https://ik4lzh.mazzini.org/bandebasse.php");
 
 $go="";
 if(strlen($Icontest)>0){
