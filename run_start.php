@@ -89,7 +89,7 @@ else {
   
   $dxcc=$mys["dxcc"];
   $query=mysqli_query($con,"select count(callsign) from log where mycall='$mycall' and dxcc=$dxcc");
-  $row=mysqli_fetch_assoc($query);
+  $row=mysqli_fetch_row($query);
   mysqli_free_result($query);
   echo "Same dxcc[$dxcc]: $row[0]\n\n";
   
