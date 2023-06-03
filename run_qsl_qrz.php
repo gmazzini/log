@@ -19,7 +19,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
       $ee=date("Y-m-d H:i:s",$xss+$qslwin);
       $qsl=myextract($aux,"app_qrzlog_status");
       if($qsl=="C"){
-        echo "qsl via qrz on $callsign $dateon $timeon\n";
+        echo "update log set qrz=1 where mycall='$mycall' and callsign='$callsign' and start>='$bb' and start<='$ee'\n";
         mysqli_query($con,"update log set qrz=1 where mycall='$mycall' and callsign='$callsign' and start>='$bb' and start<='$ee'");
       }
       $aux=substr($line,$pp+5);
