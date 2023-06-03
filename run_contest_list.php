@@ -16,3 +16,8 @@ mysqli_free_result($query);
 echo "</pre>";
 
 ?>
+<script>
+function myfreqcall(contest){
+  document.getElementById("xcall").value=contest;
+}
+</script>
