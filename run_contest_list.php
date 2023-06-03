@@ -8,7 +8,8 @@ for(;;){
   $contest=$row["contest"];
   $query2=mysqli_query($con,"select min(start),max(start),count(callsign) from log where mycall='$mycall' and contest='$contest'");
   $row2=mysqli_fetch_row($query2);
-  printf("%20s: [%4d] %s -> %s\n",$contest,$row2[2],$row2[0],$row2[1]);
+  printf("<button type=\"button\" id=\"myb2\" onclick=\"mycontest('%s')\">%20s</button> ",$contest,$contest);
+  printf(": [%4d] %s -> %s\n",$row2[2],$row2[0],$row2[1]);
   mysqli_free_result($query2);
 }
 mysqli_free_result($query);
