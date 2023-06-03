@@ -4,11 +4,18 @@ include "utility.php";
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-$query2=mysqli_query($con,"select callsign from who where image=''");
+$mycall="IK4LZH";
+
+$query2=mysqli_query($con,"select distint callsign from log where mycall='$mycall'");
 for(;;){
-  $row2=mysqli_fetch_array($query2);
+  $row2=mysqli_fetch_row($query2);
   if($row2==null)break;
-  $Icallsign=$row2[0];
+  $callsign=$row[0];
+  $query=mysqli_query($con,"select count(callsign) from who where callsign='callsign'");
+  $row=mysqli_fetch_row($query);
+  $cc=(int)$row[0];
+  mysqli_free_result($query);
+  if($cc>0)continue;
   echo "$Icallsign\n";
   $qrzkey=trim(myrcl($con,"qrzkey"));    
   $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
