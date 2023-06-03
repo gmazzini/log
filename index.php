@@ -1,4 +1,4 @@
-<title>LZH Logger V0.77 by IK4LZH</title>
+<title>LZH Logger V0.78 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -130,7 +130,7 @@ else {
     echo "<label id=\"myf1\">ConRX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
     echo "<label id=\"myf1\">Con -</label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
+    echo "<input type=\"text\" id=\"xcontest\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
   }
   else {
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
