@@ -17,7 +17,7 @@ echo "</pre>";
 
 ?>
 <script>
-function myfreqcall(contest){
+function mycontest(contest){
   document.getElementById("xcontest").value=contest;
 }
 </script>
