@@ -8,7 +8,7 @@ td {
   border-style: dotted;
 }
 
-#myt1,#xcall {
+#myt1,#xcall,#scontest {
   padding: 2px;
   border: 2px solid #eee;
   margin-left: 3px;
@@ -17,7 +17,7 @@ td {
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
-#myt1:hover,#xcall:hover {
+#myt1:hover,#xcall:hover,#xcontest:hover {
   background-color: #Ffe477;
 }
 
