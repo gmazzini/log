@@ -6,6 +6,7 @@ mysqli_query($con,"SET time_zone='+00:00'");
 
 $mycall="IK4LZH";
 
+$qq=0;
 $query2=mysqli_query($con,"select distinct callsign from log where mycall='$mycall'");
 for(;;){
   $row2=mysqli_fetch_row($query2);
@@ -44,6 +45,8 @@ for(;;){
     $gborn=(int)$q2->Callsign->born;
     $gimage=mysqli_real_escape_string($con,$q2->Callsign->image);
     $mynow=gmdate('Y-m-d H:i:s');
+    $qq++;
+    echo "$qq\n";
     echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow')\n";
     mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow')");
   }
