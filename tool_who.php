@@ -17,7 +17,7 @@ for(;;){
   $cc=(int)$row[0];
   mysqli_free_result($query);
   if($cc>0)continue;
-  echo "$Icallsign\n";
+  echo "$Icallsign $cc\n";
   $qrzkey=trim(myrcl($con,"qrzkey"));    
   $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
