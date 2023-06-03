@@ -13,7 +13,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
       $callsign=myextract($aux,"call");
       $timeon=myextract($aux,"time_on");
       $dateon=myextract($aux,"qso_date");
-      $xx=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":00";
+      $ss=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":00";
       $xss=strtotime($ss);
       $bb=date("Y-m-d H:i:s",$xss-$qslwin);
       $ee=date("Y-m-d H:i:s",$xss+$qslwin);
