@@ -6,7 +6,7 @@ mysqli_query($con,"SET time_zone='+00:00'");
 
 $mycall="IK4LZH";
 
-$query2=mysqli_query($con,"select distint callsign from log where mycall='$mycall'");
+$query2=mysqli_query($con,"select distinct callsign from log where mycall='$mycall'");
 for(;;){
   $row2=mysqli_fetch_row($query2);
   if($row2==null)break;
