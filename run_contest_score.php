@@ -47,5 +47,6 @@ if($go!=""){
   $aux=file_get_contents("$go?fromlog=$fn");
   echo $aux;
 }
+else echo "<pre>Contest not into https://ik4lzh.mazzini.org list\n";
 
 ?>
