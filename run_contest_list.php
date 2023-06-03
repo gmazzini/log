@@ -18,6 +18,6 @@ echo "</pre>";
 ?>
 <script>
 function myfreqcall(contest){
-  document.getElementById("xcall").value=contest;
+  document.getElementById("xcontest").value=contest;
 }
 </script>
