@@ -10,7 +10,7 @@ $query2=mysqli_query($con,"select distinct callsign from log where mycall='$myca
 for(;;){
   $row2=mysqli_fetch_row($query2);
   if($row2==null)break;
-  $callsign=$row[0];
+  $callsign=$row2[0];
   $query=mysqli_query($con,"select count(callsign) from who where callsign='callsign'");
   $row=mysqli_fetch_row($query);
   $cc=(int)$row[0];
