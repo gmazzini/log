@@ -1,7 +1,5 @@
 <?php
 
-echo "<pre>";
-
 unset($w);
 $query=mysqli_query($con,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
@@ -15,15 +13,18 @@ for(;;){
 }
 mysqli_free_result($query);
 
+echo "<pre><table>";
+
+echo "<td>";
 arsort($w[0]);
 $cc=0;
 foreach($w[0] as $k => $v){
   printf("%10s %6d\n",$k,$v);
   $cc++;
-  if($cc>10)break;
+  if($cc>30)break;
 }
+echo "</td>";
 
-
-echo "</pre>";
+echo "</table></pre>";
 
 ?>
