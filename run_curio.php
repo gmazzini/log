@@ -12,7 +12,7 @@ for(;;){
   myinc($w,0,$callsign);
   myinc($w,1,$band);
   myinc($w,2,$mode);
-  if(row["lotw"]==1){myinc($w,3,$callsign);myinc($w,4,$dxcc);}
+  if($row["lotw"]==1){myinc($w,3,$callsign);myinc($w,4,$dxcc);}
 }
 mysqli_free_result($query);
 
