@@ -22,7 +22,7 @@ for(;;){
   echo "QRZKEY: $qrzkey\n";
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
-  print_r($q2);
+  // questa sotto è nuova
   if(!isset($q2->Session->Key)){
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
@@ -31,9 +31,6 @@ for(;;){
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     if($myshow)echo "Renewed qrz.com key $qrzkey\n";
-    
-    
-    exit(0);
   }
   $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
   if(strlen($gfname)>0){
@@ -60,6 +57,8 @@ for(;;){
     $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
     sleep(3);
     $q2=simplexml_load_string($q1);
+    print_r($q2);
+    exit(0);
     if(isset($q2->session->error)){
       $q1=mycurlget("https://api.qrz.ru/login?u=$ruuser&p=$rupassword&agent=LZH23");
       sleep(3);
