@@ -18,7 +18,8 @@ for(;;){
   mysqli_free_result($query);
   if($cc>0)continue;
   echo "$Icallsign $cc\n";
-  $qrzkey=trim(myrcl($con,"qrzkey"));    
+  $qrzkey=trim(myrcl($con,"qrzkey"));
+  echo "QRZKEY: $qrzkey\n";
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   if(isset($q2->Session->Error)){
@@ -28,7 +29,7 @@ for(;;){
     mysto($con,"qrzkey","$qrzkey\n");
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
-    if($myshow)echo "Renewed qrz.com key\n";
+    if($myshow)echo "Renewed qrz.com key $qrzkey\n";
   }
   $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
   if(strlen($gfname)>0){
@@ -51,6 +52,7 @@ for(;;){
   }
   else {
     $rukey=trim(myrcl($con,"rukey"));
+    echo "EUKEY: $rukey\n";
     $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
     sleep(3);
     $q2=simplexml_load_string($q1);
@@ -63,7 +65,7 @@ for(;;){
       $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
       sleep(3);
       $q2=simplexml_load_string($q1);
-      if($myshow)echo "Renewed qrz.ru key\n";
+      if($myshow)echo "Renewed qrz.ru key $rukey\n";
     }
     $gfname=mysqli_real_escape_string($con,$q2->Callsign->name);
     if(strlen($gfname)>0){
