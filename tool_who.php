@@ -52,13 +52,16 @@ for(;;){
   else {
     $rukey=trim(myrcl($con,"rukey"));
     $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
+    sleep(3);
     $q2=simplexml_load_string($q1);
     if(isset($q2->session->error)){
       $q1=mycurlget("https://api.qrz.ru/login?u=$ruuser&p=$rupassword&agent=LZH23");
+      sleep(3);
       $q2=simplexml_load_string($q1);
       $rukey=$q2->Session->session_id;
       mysto($con,"rukey","$rukey\n");
       $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
+      sleep(3);
       $q2=simplexml_load_string($q1);
       if($myshow)echo "Renewed qrz.ru key\n";
     }
@@ -81,7 +84,6 @@ for(;;){
       $mynow=gmdate('Y-m-d H:i:s');
       if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,qrz) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')\n";
       mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')");
-      sleep(3);
     }
   }
 }
