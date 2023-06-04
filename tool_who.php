@@ -58,8 +58,8 @@ for(;;){
     sleep(3);
     $q2=simplexml_load_string($q1);
     print_r($q2);
-    exit(0);
-    if(isset($q2->session->error)){
+    // cambiato
+    if(isset($q2->session->errorcode)&&$q2->session->errorcode==403){
       $q1=mycurlget("https://api.qrz.ru/login?u=$ruuser&p=$rupassword&agent=LZH23");
       sleep(3);
       $q2=simplexml_load_string($q1);
