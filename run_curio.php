@@ -27,7 +27,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-echo "<pre><table>";
+echo "<table>";
 
 for($i=0;$i<=8;$i++){
   echo "<td>";
@@ -42,13 +42,13 @@ for($i=0;$i<=8;$i++){
       mysqli_free_result($query);
       printf("%s@%s %6d<br>",$k,$base,$v);
     }
-    else printf("%10s %6d<br>",$k,$v);
+    else printf("<pre>%10s %6d\n</pre>",$k,$v);
     $cc++;
     if($cc>30)break;
   }
   echo "</td>";
 }
 
-echo "</table></pre>";
+echo "</table>";
 
 ?>
