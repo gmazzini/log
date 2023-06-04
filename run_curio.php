@@ -15,7 +15,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-sort($w[0]);
+// sort($w[0]);
 print_r($w[0]);
 $cc=0;
 foreach($w[0] as $k => $v){
