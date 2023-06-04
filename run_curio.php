@@ -33,7 +33,7 @@ for($i=0;$i<=8;$i++){
   echo "<td><pre>";
   arsort($w[$i]);
   $cc=0;
-  printf("<div style=\"text-align:center;\"><b>%s</b></div>\n",$h[$i]);
+  printf("<div style=\"text-align:center;\"><b>%s</b></div>",$h[$i]);
   foreach($w[$i] as $k => $v){
     if($p[$i]==1){
       $query=mysqli_query($con,"select base from cty where dxcc=$k limit 1");
