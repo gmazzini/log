@@ -13,12 +13,14 @@ for(;;){
   myinc($w,1,$band);
   myinc($w,2,$mode);
   if($row["lotw"]==1){myinc($w,3,$callsign);myinc($w,4,$dxcc);}
+  if($row["eqsl"]==1){myinc($w,5,$callsign);myinc($w,6,$dxcc);}
+  if($row["qrz"]==1){myinc($w,7,$callsign);myinc($w,8,$dxcc);}
 }
 mysqli_free_result($query);
 
 echo "<pre><table>";
 
-for($i=0;$i<=4;$i++){
+for($i=0;$i<=8;$i++){
   echo "<td>";
   arsort($w[$i]);
   $cc=0;
