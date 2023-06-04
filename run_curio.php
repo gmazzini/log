@@ -9,9 +9,9 @@ for(;;){
   $mode=$mymode[$row["mode"]];
   $dxcc=$row["dxcc"];
   $callsign=$row["callsign"];
-  myinc($w,0,$callsign); $h[0]="call";
-  myinc($w,1,$band); $h[1]="band";
-  myinc($w,2,$mode); $h[2]="mode";
+  myinc($w,0,$callsign); $h[0]="call"; $v[0]=0;
+  myinc($w,1,$band); $h[1]="band"; $v[1]=0;
+  myinc($w,2,$mode); $h[2]="mode"; $v[2]=0;
   if($row["lotw"]==1){
     myinc($w,3,$callsign); $h[3]="call.lotw";
     myinc($w,4,$dxcc); $h[4]="dxcc.lotw"; $v[4]=1;
