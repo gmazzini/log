@@ -42,7 +42,7 @@ for($i=0;$i<=8;$i++){
       mysqli_free_result($query);
       printf("%s@%s %6d<br>",$k,$base,$v);
     }
-    else printf("%10s %6d --$v[$i]--<br>",$k,$v);
+    else printf("%10s %6d<br>",$k,$v);
     $cc++;
     if($cc>30)break;
   }
