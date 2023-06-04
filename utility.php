@@ -4,6 +4,16 @@ $myband=array(0=>0,1=>160,3=>80,5=>60,7=>40,10=>30,14=>20,18=>17,21=>15,24=>12,2
 $mymode=array("SSB"=>"PH","CW"=>"CW","USB"=>"PH","LSB"=>"PH","FT8"=>"DG","RTTY"=>"DG","MFSK"=>"DG","FT4"=>"DG","FM"=>"PH","AM"=>"PH","PKT"=>"DG","TOR"=>"DG","AMTOR"=>"DG","PSK"=>"DG");
 $qslwin=240;
 
+function mycurlget($ff){
+  $ch=curl_init();
+  curl_setopt($ch,CURLOPT_URL,$ff);
+  curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+  curl_setopt($ch,CURLOPT_USERAGENT,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+  $out=curl_exec($ch);
+  curl_close($ch);
+  return $out;
+}
+
 function wpx($s){
   preg_match("#\d\D*$#",$s,$m,PREG_OFFSET_CAPTURE);
   if(isset($m[0][1]))return substr($s,0,$m[0][1]+1);
