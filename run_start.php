@@ -36,7 +36,7 @@ else {
       mysto($con,"qrzkey","$qrzkey\n");
       $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
       $q2=simplexml_load_string($q1);
-      echo "Renewed qrz.com key\n";
+      if($myshow)echo "Renewed qrz.com key\n";
     }
     $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
     if(strlen($gfname)>0){
@@ -54,7 +54,7 @@ else {
       $gborn=(int)$q2->Callsign->born;
       $gimage=mysqli_real_escape_string($con,$q2->Callsign->image);
       $mynow=gmdate('Y-m-d H:i:s');
-      echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')\n";
+      if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')\n";
       mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')");
     }
     else {
@@ -68,7 +68,7 @@ else {
         mysto($con,"rukey","$rukey\n");
         $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
         $q2=simplexml_load_string($q1);
-        echo "Renewed qrz.ru key\n";
+        if($myshow)echo "Renewed qrz.ru key\n";
       }
       $gfname=mysqli_real_escape_string($con,$q2->Callsign->name);
       if(strlen($gfname)>0){
@@ -86,7 +86,8 @@ else {
         $gborn=(int)substr($q2->Callsign->birthday,6,4);
         $gimage=mysqli_real_escape_string($con,$q2->Files->file);
         $mynow=gmdate('Y-m-d H:i:s');
-        echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,qrz) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')\n";
+        if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,qrz) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')\n";
+        mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')");
       }
     }
   }
