@@ -40,7 +40,7 @@ for($i=0;$i<=8;$i++){
       $row=mysqli_fetch_assoc($query);
       $base=$row["base"];
       mysqli_free_result($query);
-      printf("%s%s %6d<br>",$k,$base,$v);
+      printf("%s@%s %6d<br>",$k,$base,$v);
     }
     else printf("%10s %6d<br>",$k,$v);
     $cc++;
