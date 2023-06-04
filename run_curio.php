@@ -30,7 +30,7 @@ mysqli_free_result($query);
 echo "<table>";
 
 for($i=0;$i<=8;$i++){
-  echo "<td>";
+  echo "<td><pre>";
   arsort($w[$i]);
   $cc=0;
   printf("<b>%s</b><br>",$h[$i]);
@@ -42,11 +42,11 @@ for($i=0;$i<=8;$i++){
       mysqli_free_result($query);
       printf("%s@%s %6d<br>",$k,$base,$v);
     }
-    else printf("<pre>%10s %6d</pre>",$k,$v);
+    else printf("%10s %6d\n",$k,$v);
     $cc++;
     if($cc>30)break;
   }
-  echo "</td>";
+  echo "</pre></td>";
 }
 
 echo "</table>";
