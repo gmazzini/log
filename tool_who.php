@@ -23,7 +23,7 @@ for(;;){
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   print_r($q2);
-  if(isset($q2->Session->Error)){
+  if(!isset($q2->Session->Key)){
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
     $qrzkey=$q2->Session->Key;
