@@ -27,15 +27,16 @@ else {
   mysqli_free_result($query);
   if($row==null||strlen($row["firstname"])==0){
     $qrzkey=trim(myrcl($con,"qrzkey"));    
-    $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
+    $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     if(isset($q2->Session->Error)){
-      $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
+      $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
       $q2=simplexml_load_string($q1);
       $qrzkey=$q2->Session->Key;
       mysto($con,"qrzkey","$qrzkey\n");
-      $q1=file_get_contents("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
+      $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
       $q2=simplexml_load_string($q1);
+      echo "Renewed qrz.com key\n";
     }
     $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
     if(strlen($gfname)>0){
@@ -53,10 +54,11 @@ else {
       $gborn=(int)$q2->Callsign->born;
       $gimage=mysqli_real_escape_string($con,$q2->Callsign->image);
       $mynow=gmdate('Y-m-d H:i:s');
-      echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow')\n";
-      mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow')");
+      echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')\n";
+      mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')");
     }
   }
+  
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image from who where callsign='$Icallsign'");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
