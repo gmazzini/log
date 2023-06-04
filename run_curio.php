@@ -10,6 +10,7 @@ for(;;){
   $dxcc=$row["dxcc"];
   $callsign=$row["callsign"];
   myinc($w,0,$callsign);
+  myinc($w,1,$band);
 }
 mysqli_free_result($query);
 
@@ -19,6 +20,16 @@ echo "<td>";
 arsort($w[0]);
 $cc=0;
 foreach($w[0] as $k => $v){
+  printf("%10s %6d<br>",$k,$v);
+  $cc++;
+  if($cc>30)break;
+}
+echo "</td>";
+
+echo "<td>";
+arsort($w[1]);
+$cc=0;
+foreach($w[1] as $k => $v){
   printf("%10s %6d<br>",$k,$v);
   $cc++;
   if($cc>30)break;
