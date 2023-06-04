@@ -33,14 +33,15 @@ for($i=0;$i<=8;$i++){
   echo "<td><pre>";
   arsort($w[$i]);
   $cc=0;
-  printf("<b>%s</b><br>",$h[$i]);
+  printf("<b>%s</b>\n",$h[$i]);
   foreach($w[$i] as $k => $v){
     if($p[$i]==1){
       $query=mysqli_query($con,"select base from cty where dxcc=$k limit 1");
       $row=mysqli_fetch_assoc($query);
       $base=$row["base"];
       mysqli_free_result($query);
-      printf("%s@%s %6d<br>",$k,$base,$v);
+      $aux=$k."@".$base;
+      printf("%10s %6d\n",$aux,$v);
     }
     else printf("%10s %6d\n",$k,$v);
     $cc++;
