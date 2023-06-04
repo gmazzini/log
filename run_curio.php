@@ -12,40 +12,23 @@ for(;;){
   myinc($w,0,$callsign);
   myinc($w,1,$band);
   myinc($w,2,$mode);
+  if(row["lotw"]==1){myinc($w,3,$callsign);myinc($w,4,$dxcc);}
 }
 mysqli_free_result($query);
 
 echo "<pre><table>";
 
-echo "<td>";
-arsort($w[0]);
-$cc=0;
-foreach($w[0] as $k => $v){
-  printf("%10s %6d<br>",$k,$v);
-  $cc++;
-  if($cc>30)break;
+for($i=0;$i<=4;$i++){
+  echo "<td>";
+  arsort($w[$i]);
+  $cc=0;
+  foreach($w[$i] as $k => $v){
+    printf("%10s %6d<br>",$k,$v);
+    $cc++;
+    if($cc>30)break;
+  }
+  echo "</td>";
 }
-echo "</td>";
-
-echo "<td>";
-arsort($w[1]);
-$cc=0;
-foreach($w[1] as $k => $v){
-  printf("%10s %6d<br>",$k,$v);
-  $cc++;
-  if($cc>30)break;
-}
-echo "</td>";
-
-echo "<td>";
-arsort($w[2]);
-$cc=0;
-foreach($w[2] as $k => $v){
-  printf("%10s %6d<br>",$k,$v);
-  $cc++;
-  if($cc>30)break;
-}
-echo "</td>";
 
 echo "</table></pre>";
 
