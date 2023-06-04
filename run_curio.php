@@ -19,7 +19,7 @@ echo "<td>";
 arsort($w[0]);
 $cc=0;
 foreach($w[0] as $k => $v){
-  printf("%10s %6d\n",$k,$v);
+  printf("%10s %6d<br>",$k,$v);
   $cc++;
   if($cc>30)break;
 }
