@@ -7,7 +7,7 @@ mysqli_query($con,"SET time_zone='+00:00'");
 $mycall="IK4LZH";
 
 $qq=0;
-$query2=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign like 'R1%'");
+$query2=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign like 'R%'");
 for(;;){
   $row2=mysqli_fetch_row($query2);
   if($row2==null)break;
@@ -57,7 +57,6 @@ for(;;){
     $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
     sleep(3);
     $q2=simplexml_load_string($q1);
-    print_r($q2);
     // cambiato
     if(isset($q2->session->errorcode)&&$q2->session->errorcode==403){
       $q1=mycurlget("https://api.qrz.ru/login?u=$ruuser&p=$rupassword&agent=LZH23");
