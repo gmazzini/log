@@ -33,7 +33,7 @@ for($i=0;$i<=8;$i++){
   echo "<td>";
   arsort($w[$i]);
   $cc=0;
-  printf("<b>%s</b>",$h[$i]);
+  printf("<b>%s</b><br>",$h[$i]);
   foreach($w[$i] as $k => $v){
     printf("%10s %6d<br>",$k,$v);
     $cc++;
