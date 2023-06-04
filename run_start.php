@@ -76,7 +76,8 @@ else {
         $gname=mysqli_real_escape_string($con,$q2->Callsign->surname);
         $gaddr1=mysqli_real_escape_string($con,$q2->Callsign->street);
         $gaddr2=mysqli_real_escape_string($con,$q2->Callsign->city);
-        $gstate=mysqli_real_escape_string($con,$q2->Callsign->state)." ".mysqli_real_escape_string($con,$q2->Callsign->region_id);
+        $gstate=mysqli_real_escape_string($con,$q2->Callsign->state);
+        if(isset($q2->Callsign->region_id))$gstate.=' :'.mysqli_real_escape_string($con,$q2->Callsign->region_id);
         $gzip=mysqli_real_escape_string($con,$q2->Callsign->zip);
         $gcountry=mysqli_real_escape_string($con,$q2->Callsign->country);
         $ggrid=mysqli_real_escape_string($con,$q2->Callsign->qthloc);
