@@ -12,9 +12,10 @@ if($act>=1){
   $mycall=strtoupper(mypost("mycall"));
   if($act==1)$md5passwd=md5(mypost("mypasswd"));
   else $md5passwd=mypost("md5passwd");
-  $query=mysqli_query($con,"select cluster,rigconnect from user where mycall='$mycall' and md5passwd='$md5passwd'");
+  $query=mysqli_query($con,"select cluster,rigconnect,translate from user where mycall='$mycall' and md5passwd='$md5passwd'");
   $row=mysqli_fetch_assoc($query);
   if($row!=null){
+    $tra=$row["translate"];
     $aux=explode(":",$row["rigconnect"]);
     $rigIP=$aux[0];
     $rigPORT=$aux[1];
