@@ -37,6 +37,10 @@ else {
   printf("<table>");
   printf("<td><pre>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s %s\n</pre></td>",cyrlat($row["firstname"],$tra),cyrlat($row["lastname"],$tra),cyrlat($row["addr1"],$tra),cyrlat($row["addr2"],$tra),cyrlat($row["state"],$tra),$row["zip"],cyrlat($row["country"],$tra),$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"],$row["src"]);
   if(strlen($row["image"])>0)printf("<td><a href=\"%s\" target=\"_blank\"><img align=\top\" src=\"%s\" width=\"200\"></a></td>",$row["image"],$row["image"]);
+  echo "<td id=\"myq1\">";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew qrz\">QRZ.com</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew ru\">QRZ.ru</button>";
+  echo "</td>";
   printf("</table>\n");
 
   $query=mysqli_query($con,"select start,callsign,freqtx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='$Icallsign' and mycall='$mycall' order by start desc limit 5");
