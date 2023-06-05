@@ -22,7 +22,6 @@ for(;;){
   echo "QRZKEY: $qrzkey\n";
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign"); 
   $q2=simplexml_load_string($q1);
-  // questa sotto è nuova
   if(isset($q2->Session->Error)&&$q2->Session->Error=="Session Timeout"){
   print_r($q2);
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
@@ -58,7 +57,6 @@ for(;;){
     $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
     sleep(3);
     $q2=simplexml_load_string($q1);
-    // cambiato
     if(isset($q2->session->errorcode)&&$q2->session->errorcode==403){
       $q1=mycurlget("https://api.qrz.ru/login?u=$ruuser&p=$rupassword&agent=LZH23");
       sleep(3);
