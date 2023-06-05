@@ -9,7 +9,7 @@ function mycurlget($ff){
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,$ff);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-  curl_setopt($ch,CURLOPT_USERAGENT,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+  curl_setopt($ch,CURLOPT_USERAGENT,"curl/7.74.0");
   $out=curl_exec($ch);
   curl_close($ch);
   return $out;
