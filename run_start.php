@@ -29,7 +29,7 @@ else {
     $qrzkey=trim(myrcl($con,"qrzkey"));    
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
-    if(isset($q2->Session->Error)){
+    if(isset($q2->Session->Error)&&$q2->Session->Error=="Session Timeout"){
       $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
       $q2=simplexml_load_string($q1);
       $qrzkey=$q2->Session->Key;
@@ -61,7 +61,7 @@ else {
       $rukey=trim(myrcl($con,"rukey"));
       $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
       $q2=simplexml_load_string($q1);
-      if(isset($q2->session->error)){
+      if(isset($q2->session->errorcode)&&$q2->session->errorcode==403){
         $q1=mycurlget("https://api.qrz.ru/login?u=$ruuser&p=$rupassword&agent=LZH23");
         $q2=simplexml_load_string($q1);
         $rukey=$q2->Session->session_id;
