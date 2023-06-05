@@ -23,13 +23,18 @@ elseif($Icallsign=="USB"||$Icallsign=="LSB"||$Icallsign=="CW"){
 }
 else {
   $qsostart=gmdate('Y-m-d H:i:s');
-  $query=mysqli_query($con,"select firstname from who where callsign='$Icallsign'");
-  $row=mysqli_fetch_assoc($query);
-  mysqli_free_result($query);
-  if($row==null||strlen($row["firstname"])==0){
-    $aux=qrz($con,$Icallsign);
-    if($aux==0)$aux=ru($con,$Icallsign);
+  
+  if($act_start==""){
+    $query=mysqli_query($con,"select firstname from who where callsign='$Icallsign'");
+    $row=mysqli_fetch_assoc($query);
+    mysqli_free_result($query);
+    if($row==null||strlen($row["firstname"])==0){
+      $aux=qrz($con,$Icallsign);
+      if($aux==0)$aux=ru($con,$Icallsign);
+    }
   }
+  elseif($act_start=="qrz")qrz($con,$Icallsign);
+  elseif($act_start=="ru")ru($con,$Icallsign);
   
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,src from who where callsign='$Icallsign'");
   $row=mysqli_fetch_assoc($query);
