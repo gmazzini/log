@@ -24,6 +24,7 @@ for(;;){
   $q2=simplexml_load_string($q1);
   // questa sotto è nuova
   if(!isset($q2->Session->Key)){
+    print_r($q2);
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
     $qrzkey=$q2->Session->Key;
