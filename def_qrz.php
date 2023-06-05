@@ -1,7 +1,7 @@
 <?php
 
 function qrz($con,$Icallsign){
-  global $myshow;
+  global $myshow,$qrzuser,$qrzpassword;
   $qrzkey=trim(myrcl($con,"qrzkey"));    
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
@@ -38,7 +38,7 @@ function qrz($con,$Icallsign){
 }
 
 function ru($con,$Icallsign){
-  global $myshow;
+  global $myshow,$ruuser,$rupassword;
   $rukey=trim(myrcl($con,"rukey"));
   $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
