@@ -33,6 +33,7 @@ for(;;){
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
     if($myshow)echo "Renewed qrz.com key $qrzkey\n";
+  exit(0);
   }
   $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
   if(strlen($gfname)>0){
