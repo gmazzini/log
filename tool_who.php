@@ -26,6 +26,7 @@ echo "http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign\n";
   // questa sotto è nuova
   if(isset($q2->Session->Error)&&$q2->Session->Error="Session Timeout"){
   print_r($q2);
+  exit(0);
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
   print_r($q2);
