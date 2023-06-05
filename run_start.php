@@ -1,5 +1,6 @@
 <?php
 // also triggered by ENTER in Call input
+include "def_qrz.php";
 echo "<pre>";
 
 if(is_numeric($Icallsign)){
