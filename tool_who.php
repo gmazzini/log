@@ -48,7 +48,7 @@ for(;;){
     $gituzone=(int)$q2->Callsign->ituzone;
     $gborn=(int)$q2->Callsign->born;
     $gimage=mysqli_real_escape_string($con,$q2->Callsign->image);
-    $mynow=gmdate('Y-m-d H:i:s1359
+    $mynow=gmdate('Y-m-d H:i:s');
     if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')\n";
     mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')");
   }
