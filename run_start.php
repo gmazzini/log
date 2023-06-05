@@ -27,7 +27,8 @@ else {
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
   if($row==null||strlen($row["firstname"])==0){
-    if(!qrz($Icallsign))ru($Icallsign);
+    $aux=qrz($con,$Icallsign);
+    if($aux==0)$aux=ru($con,$Icallsign);
   }
   
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,src from who where callsign='$Icallsign'");
