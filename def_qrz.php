@@ -1,6 +1,6 @@
 <?php
 
-function qrz($Icallsign){
+function qrz($con,$Icallsign){
   $qrzkey=trim(myrcl($con,"qrzkey"));    
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
@@ -36,7 +36,7 @@ function qrz($Icallsign){
   else return 0;
 }
 
-function ru($Icallsign){
+function ru($con,$Icallsign){
   $rukey=trim(myrcl($con,"rukey"));
   $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
