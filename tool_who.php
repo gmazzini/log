@@ -20,6 +20,7 @@ for(;;){
   echo "$Icallsign $cc\n";
   $qrzkey=trim(myrcl($con,"qrzkey"));
   echo "QRZKEY: $qrzkey\n";
+echo "http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign\n";
   $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   // questa sotto è nuova
