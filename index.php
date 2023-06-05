@@ -1,4 +1,4 @@
-<title>LZH Logger V0.80 by IK4LZH</title>
+<title>LZH Logger V0.81 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -80,6 +80,9 @@ else {
   $riglink=(int)mypost("riglink");
   
   switch($run){
+    case "renew qrz": $run="start"; $act_start="qrz"; break;
+    case "renew ru": $run="start"; $act_start="ru"; break;
+    case "start": $act_start=""; break;
     case "list": $page=0; break;
     case "list up": $run="list"; $page+=$mypage; break;
     case "list dw": $run="list"; $page-=$mypage; if($page<0)$page=0; break;
