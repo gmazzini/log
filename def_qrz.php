@@ -44,10 +44,10 @@ function ru($con,$Icallsign){
   for(;;){
     $aux=myrcl($con,"rulock");
     $lines=explode("\n",$aux);
-    $q=time()-$lines[1];
+    $q=time()-(int)$lines[1];
     echo "...$q\n";
     if($q<3)sleep($q-3);
-    if($lines[0]==0)break;
+    if((int)$lines[0]==0)break;
   }
   $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
