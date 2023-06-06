@@ -20,10 +20,7 @@ for(;;){
   if($cc>0)continue;
   echo "$Icallsign $cc\n";
   $aux=qrz($con,$Icallsign);
-  if($aux==0){
-    $aux=ru($con,$Icallsign);
-    exit(0);
-  }
+  if($aux==0)$aux=ru($con,$Icallsign);
 }
 mysqli_free_result($query2);
 mysqli_close($con);
