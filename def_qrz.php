@@ -89,9 +89,9 @@ function ru($con,$Icallsign){
     $ret=1;
   }
   else $ret=0;
+  mysto($con,"rulock","0\n");
+  mysto($con,"rutime",time()."\n");
+  return $ret;
 }
-mysto($con,"rulock","0\n");
-mysto($con,"rutime",time()."\n");
-return $ret;
 
 ?>
