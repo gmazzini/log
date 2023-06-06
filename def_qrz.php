@@ -40,18 +40,18 @@ function qrz($con,$Icallsign){
 
 function ru($con,$Icallsign){
   global $myshow,$ruuser,$rupassword;
+  
   $rukey=trim(myrcl($con,"rukey"));
   for(;;){
-    $aux=myrcl($con,"rulock");
-    echo $aux;
-    sleep(10);
-    $lines=explode("\n",$aux);
-    $q=time()-(int)$lines[1];
-    echo "...$q $lines[1]\n";
-    echo time()."\n";
-    if($q<3)sleep($q-3);
-    if((int)$lines[0]==0)break;
+    $mylock=(int)trim(myrcl($con,"rulock"));
+    if($mylock==0)break;
+    sleep(3);
   }
+  mysto($con,"rulock","1\n");
+  $mytime=(int)trim(myrcl($con,"rutime"));
+  $q=time()-$mytime;
+  if($q<3)sleep($q-3);
+   
   $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   if(isset($q2->session->errorcode)&&$q2->session->errorcode==403){
@@ -86,7 +86,8 @@ function ru($con,$Icallsign){
   }
   else $ret=0;
 }
-mysto($con,"rulock","0\n".time()."\n");
+mysto($con,"rulock","0\n");
+mysto($con,"rutime",time()."\n");
 return $ret;
 
 ?>
