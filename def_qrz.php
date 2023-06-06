@@ -44,11 +44,13 @@ function ru($con,$Icallsign){
   $rukey=trim(myrcl($con,"rukey"));
   for(;;){
     $mylock=(int)trim(myrcl($con,"rulock"));
+    echo ">>> $mylock\n";
     if($mylock==0)break;
     sleep(3);
   }
   mysto($con,"rulock","1\n");
   $mytime=(int)trim(myrcl($con,"rutime"));
+  echo ">>> $mytime\n";
   $q=time()-$mytime;
   echo "...$q\n";
   if($q<3)sleep($q-3);
