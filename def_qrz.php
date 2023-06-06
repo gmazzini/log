@@ -46,6 +46,7 @@ function ru($con,$Icallsign){
     $lines=explode("\n",$aux);
     $q=time()-(int)$lines[1];
     echo "...$q $lines[1]\n";
+    echo time()."\n";
     if($q<3)sleep($q-3);
     if((int)$lines[0]==0)break;
   }
