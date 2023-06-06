@@ -54,6 +54,7 @@ function ru($con,$Icallsign){
   $q=time()-$mytime;
   echo "...$q\n";
   if($q<3)sleep($q-3);
+  return 1;
    
   $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
