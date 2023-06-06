@@ -30,16 +30,24 @@ function qrz($con,$Icallsign){
     $gborn=(int)$q2->Callsign->born;
     $gimage=mysqli_real_escape_string($con,$q2->Callsign->image);
     $mynow=gmdate('Y-m-d H:i:s');
-    if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')\n";
-    mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','QRZ')");
-    return 1;
+    if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','qrz.com')\n";
+    mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','qrz.com')");
+    $ret=1;
   }
-  else return 0;
+  else $ret=0;
+  return $ret;
 }
 
 function ru($con,$Icallsign){
   global $myshow,$ruuser,$rupassword;
   $rukey=trim(myrcl($con,"rukey"));
+  for(;;){
+    $aux=myrcl($con,"rulock");
+    $lines=explode("\n",$aux);
+    $q=time()-$lines[1];
+    if($q<3)sleep($q-3);
+    if($lines[0]==0)break;
+  }
   $q1=mycurlget("https://api.qrz.ru/callsign?id=$rukey&callsign=$Icallsign");
   $q2=simplexml_load_string($q1);
   if(isset($q2->session->errorcode)&&$q2->session->errorcode==403){
@@ -68,11 +76,13 @@ function ru($con,$Icallsign){
     $gborn=(int)substr($q2->Callsign->birthday,6,4);
     $gimage=mysqli_real_escape_string($con,$q2->Files->file);
     $mynow=gmdate('Y-m-d H:i:s');
-    if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,qrz) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')\n";
-    mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','RU')");
-    return 1;
+    if($myshow)echo "replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,qrz) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','qrz.ru')\n";
+    mysqli_query($con,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('$Icallsign','$gfname','$gname','$gaddr1','$gaddr2','$gstate','$gzip','$gcountry','$ggrid','$gemail',$gcqzone,$gituzone,$gborn,'$gimage','$mynow','qrz.ru')");
+    $ret=1;
   }
-  else return 0;
+  else $ret=0;
 }
+mysto($con,"rulock","0\n".time()."\n");
+return $ret;
 
 ?>
