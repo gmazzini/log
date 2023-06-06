@@ -44,6 +44,7 @@ function ru($con,$Icallsign){
   for(;;){
     $aux=myrcl($con,"rulock");
     echo $aux;
+    sleep(10);
     $lines=explode("\n",$aux);
     $q=time()-(int)$lines[1];
     echo "...$q $lines[1]\n";
