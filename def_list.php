@@ -1,6 +1,6 @@
 <?php
 
-function mylist($con,$condition){
+function mylist($con,$condition,$mycall,$md5passwd){
   echo "<pre>";
   $query=mysqli_query($con,"select start,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log $condition");
   for(;;){
