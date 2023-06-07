@@ -15,7 +15,7 @@ function mylist($con,$condition,$mycall,$md5passwd){
     if($timediff==0)$taux="00s";
     elseif($timediff<60)$taux=sprintf("%2ds",$timediff);
     elseif ($timediff<3600)$taux=sprintf("%2dm",$timediff/60);
-    elseif $taux=sprintf("%2dh",$timediff/3600);
+    else $taux=sprintf("%2dh",$timediff/3600);
     
     printf("<button type=\"button\" id=\"myb2\" onclick=\"mycommand('%s','%s','%s','%s')\"> </button> ",$mycall,$md5passwd,$row["start"],$row["callsign"]);
     printf("%s&%s %12s %7.1f %4s %5s %5s %-3s ",$row["start"],$taux,$row["callsign"],$row["freqtx"]/1000,$row["mode"],$row["signaltx"],$row["signalrx"],$aux);
