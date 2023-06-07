@@ -1,4 +1,5 @@
 <?php
+include "def_list.php";
 
 $query=mysqli_query($con,"select max(serial) from log where mycall='$mycall'");
 $row=mysqli_fetch_row($query);
@@ -44,11 +45,3 @@ echo "</pre>";
 mysqli_free_result($query);
 
 ?>
-<script>
-function mycommand(mycall,md5passwd,start,callsign){
-  var xmlhttp=new XMLHttpRequest();
-  let command=prompt("DEL DELETE FT,xxx FREQTX,xxx FR,xxx FREQRX,xxx M,xxx MODE,xxx ST,xxx SIGNALTX,xxx SR,xxx SIGNALRX,xxx C,xxx CALL,xxx DT,xxx DATETIME,xxx CO,xxx CONTEST,xxx COT,xxx CONTESTTX,xxx COR,xxx CONTESTRX,xxx","");
-  xmlhttp.open("GET","act_command.php?mycall="+encodeURIComponent(mycall)+"&md5passwd="+encodeURIComponent(md5passwd)+"&start="+encodeURIComponent(start)+"&callsign="+encodeURIComponent(callsign)+"&command="+encodeURIComponent(command),true);
-  xmlhttp.send();
-}
-</script>
