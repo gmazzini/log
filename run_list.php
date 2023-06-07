@@ -26,6 +26,6 @@ if($page<0){
 }
 else $baseserial=$lastserial-$page;
 
-mylist($con,"mycall='$mycall' and serial<=$baseserial order by serial desc limit $mypage");
+mylist($con,"where mycall='$mycall' and serial<=$baseserial order by serial desc limit $mypage");
 
 ?>
