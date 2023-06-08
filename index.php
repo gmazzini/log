@@ -105,7 +105,7 @@ else {
   
   echo "<table>";
   
-  echo "<td>";
+  echo "<td><pre>";
   echo "<label id=\"myf1\">Call </label>";
   echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\"><br>";
   if(!$riglink){
@@ -143,7 +143,7 @@ else {
   }
   echo "<br><button type=\"submit\" id=\"xstart\" name=\"run\" value=\"start\">Start</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"end\">End</button>";
-  echo "</td>";
+  echo "</pre></td>";
  
   echo "<td id=\"myq1\">";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>";
