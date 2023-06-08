@@ -178,7 +178,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl3\">R3</button>";
   echo "</pre></td>";
   
-  echo "<td id=\"myq1\">";
+  echo "<td id=\"myq1\"><pre>";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\"><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importadi\">adi&#8680;</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"importlzh\">lzh&#8680;</button>";
@@ -188,9 +188,9 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_eqsl\">QSL.eqsl</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"qsl_qrz\">QSL.qrz</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cbrtocontest\">cbr&#8680;c</button><br>";
-  echo "</td>";
+  echo "</pre></td>";
   
-  echo "<td id=\"myq1\">";
+  echo "<td id=\"myq1\"><pre>";
   foreach($_POST['dxcsel'] as &$vv)$dxcsel[$vv]=1;
   $x=0;
   foreach(array("PH","CW","DG","10","15","20","40","80","160","12","17","30","60") as &$vv){
@@ -202,11 +202,11 @@ else {
     if($x==3){$x=0; echo "<br>";}
   }
   echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"cluster\">Cluster</button>";
-  echo "</td>";
+  echo "</pre></td>";
   
-  echo "<td>";
+  echo "<td><pre>";
   echo "<h1>$mycall</h1>";
-  echo "</td>";
+  echo "</pre></td>";
   
   echo "</table>";
   
