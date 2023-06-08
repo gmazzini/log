@@ -164,7 +164,7 @@ else {
   echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"curio\">curio</button>";
   echo "</td>";
   
-  echo "<td id=\"myq1\">";
+  echo "<td id=\"myq1\"><pre>";
   echo "<label id=\"myf1\">RX:</label><span id=\"rigrx\"></span><br>";
   echo "<label id=\"myf1\">TX:</label><span id=\"rigtx\"></span><br>";
   echo "<label id=\"myf1\">M:</label><span id=\"rigm\"></span><br>";
@@ -176,7 +176,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl2\">R2</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"sto3\">S3</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"rcl3\">R3</button>";
-  echo "</td>";
+  echo "</pre></td>";
   
   echo "<td id=\"myq1\">";
   echo "<input type=\"file\" id=\"myb1\" name=\"myfile\" style=\"width: 300px\"><br>";
