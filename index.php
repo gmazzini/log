@@ -133,7 +133,7 @@ else {
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\"><br>";
     echo "<label id=\"myf1\">ConRX</label>";
     echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
-    echo "<label id=\"myf1\">Con -</label>";
+    echo "<label id=\"myf1\">Con  </label>";
     echo "<input type=\"text\" id=\"xcontest\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
   }
   else {
