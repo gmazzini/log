@@ -145,7 +145,7 @@ else {
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"end\">End</button>";
   echo "</pre></td>";
  
-  echo "<td id=\"myq1\">";
+  echo "<td id=\"myq1\"><pre>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list\">List</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list up\">&#8679;</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"list dw\">&#8681;</button>";
@@ -162,7 +162,7 @@ else {
   echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contestlist\">cList</button>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"contestscore\">cScore</button>";
   echo "<br><button type=\"submit\" id=\"myb1\" name=\"run\" value=\"curio\">curio</button>";
-  echo "</td>";
+  echo "</pre></td>";
   
   echo "<td id=\"myq1\"><pre>";
   echo "<label id=\"myf1\">RX:</label><span id=\"rigrx\"></span><br>";
