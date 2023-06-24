@@ -107,21 +107,21 @@ else {
   
   echo "<td><pre>";
   echo "<label id=\"myf1\">Call </label>";
-  echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\"><br>";
+  echo "<input id=\"xcall\" type=\"text\" name=\"Icallsign\" value=\"$Icallsign\" maxlength=\"20\" size=\"10\" autocomplete=\"off\"<br>";
   if(!$riglink){
     echo "<label id=\"myf1\">Freq </label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Ifreq\" value=\"$Ifreq\" maxlength=\"10\" size=\"10\" autocomplete=\"off\"<br>";
     echo "<label id=\"myf1\">Mode </label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"6\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"6\" autocomplete=\"off\"<br>";
   }
   else {
-    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
-    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
+    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\" autocomplete=\"off\"";
+    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\" autocomplete=\"off\"";
   }
   echo "<label id=\"myf1\">SigTX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"10\" size=\"6\"><br>";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"10\" size=\"6\" autocomplete=\"off\"<br>";
   echo "<label id=\"myf1\">SigRX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"10\" size=\"6\">";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"10\" size=\"6\" autocomplete=\"off\"";
   if($runcontest){
     if($modecontest){
       $query=mysqli_query($con,"select max(cast(contesttx as unsigned)) from log where mycall='$mycall' and contest='$Icontest'");
@@ -130,11 +130,11 @@ else {
       mysqli_free_result($query);
     }
     echo "<br><label id=\"myf1\">ConTX</label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Icontesttx\" value=\"$Icontesttx\" maxlength=\"6\" size=\"6\" autocomplete=\"off\"<br>";
     echo "<label id=\"myf1\">ConRX</label>";
-    echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\"><br>";
+    echo "<input type=\"text\" id=\"myt1\" name=\"Icontestrx\" value=\"$Icontestrx\" maxlength=\"6\" size=\"6\" autocomplete=\"off\"<br>";
     echo "<label id=\"myf1\">Con  </label>";
-    echo "<input type=\"text\" id=\"xcontest\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\">";
+    echo "<input type=\"text\" id=\"xcontest\" name=\"Icontest\" value=\"$Icontest\" maxlength=\"12\" size=\"12\" autocomplete=\"off\"";
   }
   else {
     echo "<input type=\"hidden\" name=\"Icontesttx\" value=\"$Icontesttx\">";
