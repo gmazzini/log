@@ -1,4 +1,4 @@
-<title>LZH Logger V0.85 by IK4LZH</title>
+<title>LZH Logger V0.86 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -206,6 +206,7 @@ else {
   
   echo "<td><pre>";
   echo "<h1>$mycall</h1>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"delock\">Delock</button>";
   echo "</pre></td>";
   
   echo "</table>";
@@ -230,6 +231,7 @@ else {
     case "contestlist": include "run_contest_list.php"; break;
     case "contestscore": include "run_contest_score.php"; break;
     case "curio": include "run_curio.php"; break;
+    case "delock": include "run_delock.php"; break;
   }
   
   echo "<input type=\"hidden\" name=\"qsostart\" value=\"$qsostart\">";
