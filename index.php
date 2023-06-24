@@ -69,9 +69,9 @@ else {
   if($Isignaltx=="")$Isignaltx="59";
   $Isignalrx=mypost("Isignalrx");
   if($Isignalrx=="")$Isignalrx="59";
-  $Icontest=mypost("Icontest");
-  $Icontesttx=mypost("Icontesttx");
-  $Icontestrx=mypost("Icontestrx");
+  $Icontest=strtoupper(mypost("Icontest"));
+  $Icontesttx=strtoupper(mypost("Icontesttx"));
+  $Icontestrx=strtoupper(mypost("Icontestrx"));
   $run=mypost("run");
   $page=(int)mypost("page");
   $qsostart=mypost("qsostart");
