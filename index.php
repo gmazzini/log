@@ -119,7 +119,7 @@ else {
     echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\" autocomplete=\"off\"";
   }
   echo "<label id=\"myf1\">SigTX</label>";
-  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"10\" size=\"6\" autocomplete=\"off\"<br>";
+  echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"10\" size=\"6\" autocomplete=\"off\"><br>";
   echo "<label id=\"myf1\">SigRX</label>";
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignalrx\" value=\"$Isignalrx\" maxlength=\"10\" size=\"6\" autocomplete=\"off\">";
   if($runcontest){
