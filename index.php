@@ -115,8 +115,8 @@ else {
     echo "<input type=\"text\" id=\"myt1\" name=\"Imode\" value=\"$Imode\" maxlength=\"8\" size=\"6\" autocomplete=\"off\"><br>";
   }
   else {
-    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\" autocomplete=\"off\"";
-    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\" autocomplete=\"off\"";
+    echo "<input type=\"hidden\" name=\"Ifreq\" value=\"$Ifreq\">";
+    echo "<input type=\"hidden\" name=\"Imode\" value=\"$Imode\">";
   }
   echo "<label id=\"myf1\">SigTX</label>";
   echo "<input type=\"text\" id=\"myt1\" name=\"Isignaltx\" value=\"$Isignaltx\" maxlength=\"10\" size=\"6\" autocomplete=\"off\"><br>";
