@@ -3,7 +3,7 @@
 echo "<pre>CIAO";
 
 unset($w);
-$query=mysqli_query($con,"select callsign,startx,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
+$query=mysqli_query($con,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
@@ -11,7 +11,7 @@ for(;;){
   $dxcc=$row["dxcc"];
   $callsign=$row["callsign"];
   $wpx=wpx($callsign);
-  $year=substr($row["startx"],0,4);
+  $year=substr($row["start"],0,4);
   myinc($w,0,$year);
   myinc($w,1,$year,$mode);
   myinc($w,2,$year,$dxcc);
