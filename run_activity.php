@@ -42,15 +42,16 @@ for(;;){
     if($row["qrz"]==1)myinc($w,15,$yymm);
   }
 
-  if($start>=$ei3&&$start<=$es3){
-    myinc($w,16,$start);
-    myinc($w,17,$start,$mode);
-    myinc($w,18,$start,$dxcc);
-    myinc($w,19,$start,$callsign);
-    myinc($w,20,$start,$wpx);
-    if($row["lotw"]==1)myinc($w,21,$start);
-    if($row["eqsl"]==1)myinc($w,22,$start);
-    if($row["qrz"]==1)myinc($w,23,$start);
+  $yymmdd=substr($start,0,10);
+  if($yymmdd>=$ei3&&$yymmdd<=$es3){
+    myinc($w,16,$yymmdd);
+    myinc($w,17,$yymmdd,$mode);
+    myinc($w,18,$yymmdd,$dxcc);
+    myinc($w,19,$yymmdd,$callsign);
+    myinc($w,20,$yymmdd,$wpx);
+    if($row["lotw"]==1)myinc($w,21,$yymmdd);
+    if($row["eqsl"]==1)myinc($w,22,$yymmdd);
+    if($row["qrz"]==1)myinc($w,23,$yymmdd);
   }
   
 }
