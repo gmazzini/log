@@ -2,6 +2,14 @@
 
 echo "<pre>";
 
+$ay=date("Y");
+$am=date("M");
+$ad=date("D");
+$es2=$ay."-".$am;
+$ei2=($ay-1)."-".$am;
+
+echo "$es2 $ei2\n";
+
 unset($w);
 $query=mysqli_query($con,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
