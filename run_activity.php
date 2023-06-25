@@ -9,8 +9,6 @@ $tt=strtotime("-1 month",time());
 $ei3=date("Y-m-d",$tt);
 $es3=date("Y-m-d",time());
 
-echo "$es2 $ei2 $ei3 $es3\n";
-
 unset($w);
 $query=mysqli_query($con,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
 for(;;){
@@ -50,7 +48,7 @@ mysqli_free_result($query);
 printf("<p id=\"myh1\">%10s %7s %7s %7s %7s %8s %7s %4s %8s %8s %8s</p>","YYYY-MM","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 $key=array_keys($w[8]);
 rsort($key);
-foreach($key as &$kk)@printf("%10s %7d %7d %7d %7d %8d %7d %4d %8d %8d %8d\n",$kk,$w[08][$kk],$w[9][$kk]["CW"],$w[9][$kk]["DG"],$w[9][$kk]["PH"],count($w[11][$kk]),count($w[12][$kk]),count($w[10][$kk]),$w[13][$kk],$w[14][$kk],$w[15][$kk]);
+foreach($key as &$kk)@printf("%10s %7d %7d %7d %7d %8d %7d %4d %8d %8d %8d\n",$kk,$w[8][$kk],$w[9][$kk]["CW"],$w[9][$kk]["DG"],$w[9][$kk]["PH"],count($w[11][$kk]),count($w[12][$kk]),count($w[10][$kk]),$w[13][$kk],$w[14][$kk],$w[15][$kk]);
 echo "\n";
 
 printf("<p id=\"myh1\">%10s %7s %7s %7s %7s %8s %7s %4s %8s %8s %8s</p>","YYYY","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
