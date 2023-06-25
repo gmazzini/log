@@ -1,6 +1,6 @@
 <?php
 
-echo "<pre>CIAO";
+echo "<pre>";
 
 unset($w);
 $query=mysqli_query($con,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
@@ -22,15 +22,11 @@ for(;;){
   if($row["qrz"]==1){myinc($w,7,year);}
 }
 mysqli_free_result($query);
-print_r($w[0]);
 
 printf("<p id=\"myh1\">%4s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","Year","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 $key=array_keys($w[0]);
 usort($key,"mycmpkey");
-
-print_r($key);
-
-foreach($key as &$kk)@printf("%4s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",$kk,$ww[0][$kk],$ww[1][$kk]["CW"],$ww[1][$kk]["DG"],$ww[1][$kk]["PH"],0,0,0,0,0);
+foreach($key as &$kk)@printf("%4s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk]["CW"],$w[1][$kk]["DG"],$w[1][$kk]["PH"],0,0,0,0,0);
 echo "\n";
 
 
