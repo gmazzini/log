@@ -5,8 +5,11 @@ echo "<pre>";
 $tt=strtotime("-1 year",time());
 $ei2=date("Y-m",$tt);
 $es2=date("Y-m",time());
+$tt=strtotime("-1 month",time());
+$ei3=date("Y-m-d",$tt);
+$es3=date("Y-m-d",time());
 
-echo "$es2 $ei2\n";
+echo "$es2 $ei2 $ei3 $es3\n";
 
 unset($w);
 $query=mysqli_query($con,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='$mycall'");
