@@ -27,6 +27,9 @@ print_r($w[0]);
 printf("<p id=\"myh1\">%4s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","Year","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 $key=array_keys($w[0]);
 usort($key,"mycmpkey");
+
+print_r($key);
+
 foreach($key as &$kk)@printf("%4s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",$kk,$ww[0][$kk],$ww[1][$kk]["CW"],$ww[1][$kk]["DG"],$ww[1][$kk]["PH"]);
 echo "\n";
 
