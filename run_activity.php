@@ -32,7 +32,7 @@ for(;;){
   
   $yymm=substr($start,0,7);
   if($yymm>=$ei2&&$yymm<=$es2){
-     myinc($w,8,$yymm);
+    myinc($w,8,$yymm);
     myinc($w,9,$yymm,$mode);
     myinc($w,10,$yymm,$dxcc);
     myinc($w,11,$yymm,$callsign);
@@ -41,9 +41,26 @@ for(;;){
     if($row["eqsl"]==1)myinc($w,14,$yymm);
     if($row["qrz"]==1)myinc($w,15,$yymm);
   }
+
+  if($start>=$ei3&&$start<=$es3){
+    myinc($w,16,$yymm);
+    myinc($w,17,$yymm,$mode);
+    myinc($w,18,$yymm,$dxcc);
+    myinc($w,19,$yymm,$callsign);
+    myinc($w,20,$yymm,$wpx);
+    if($row["lotw"]==1)myinc($w,21,$yymm);
+    if($row["eqsl"]==1)myinc($w,22,$yymm);
+    if($row["qrz"]==1)myinc($w,23,$yymm);
+  }
   
 }
 mysqli_free_result($query);
+
+printf("<p id=\"myh1\">%10s %7s %7s %7s %7s %8s %7s %4s %8s %8s %8s</p>","YYYY-MM-DD","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+$key=array_keys($w[16]);
+rsort($key);
+foreach($key as &$kk)@printf("%10s %7d %7d %7d %7d %8d %7d %4d %8d %8d %8d\n",$kk,$w[16][$kk],$w[17][$kk]["CW"],$w[17][$kk]["DG"],$w[17][$kk]["PH"],count($w[19][$kk]),count($w[20][$kk]),count($w[18][$kk]),$w[21][$kk],$w[22][$kk],$w[23][$kk]);
+echo "\n";
 
 printf("<p id=\"myh1\">%10s %7s %7s %7s %7s %8s %7s %4s %8s %8s %8s</p>","YYYY-MM","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 $key=array_keys($w[8]);
