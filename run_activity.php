@@ -23,10 +23,10 @@ for(;;){
 }
 mysqli_free_result($query);
 
-printf("<p id=\"myh1\">%4s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","Year","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+printf("<p id=\"myh1\">%4s %7s %7s %7s %7s %8s %7s %4s %8s %8s %8s</p>","Year","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 $key=array_keys($w[0]);
 usort($key,"mycmpkey");
-foreach($key as &$kk)@printf("%4s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk]["CW"],$w[1][$kk]["DG"],$w[1][$kk]["PH"],count($w[3][$kk]),count($w[4][$kk]),count($w[5][$kk]),count($w[6][$kk]),count($w[7][$kk]));
+foreach($key as &$kk)@printf("%4s %7d %7d %7d %7d %8d %7d %4d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk]["CW"],$w[1][$kk]["DG"],$w[1][$kk]["PH"],count($w[3][$kk]),count($w[4][$kk]),count($w[2]),$w[5][$kk],$w[6][$kk],$w[7][$kk]);
 echo "\n";
 
 
