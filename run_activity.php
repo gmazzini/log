@@ -75,7 +75,6 @@ rsort($key);
 foreach($key as &$kk)@printf("%10s %7d %7d %7d %7d %8d %7d %4d %8d %8d %8d\n",$kk,$w[0][$kk],$w[1][$kk]["CW"],$w[1][$kk]["DG"],$w[1][$kk]["PH"],count($w[3][$kk]),count($w[4][$kk]),count($w[2][$kk]),$w[5][$kk],$w[6][$kk],$w[7][$kk]);
 echo "\n";
 
-
 echo "</pre>";
 
 ?>
