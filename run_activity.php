@@ -16,7 +16,7 @@ for(;;){
   myinc($w,1,$year,$mode);
   myinc($w,2,$year,$dxcc);
   myinc($w,3,$year,$callsign);
-  myinc($w,4,$year,$wpx;
+  myinc($w,4,$year,$wpx);
   if($row["lotw"]==1){myinc($w,5,$year);}
   if($row["eqsl"]==1){myinc($w,6,$year);}
   if($row["qrz"]==1){myinc($w,7,year);}
