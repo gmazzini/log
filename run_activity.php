@@ -22,6 +22,7 @@ for(;;){
   if($row["qrz"]==1){myinc($w,7,year);}
 }
 mysqli_free_result($query);
+print_r($w[0]);
 
 printf("<p id=\"myh1\">%4s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","Year","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
 $key=array_keys($w[0]);
