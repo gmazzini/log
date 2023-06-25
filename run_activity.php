@@ -43,7 +43,7 @@ for(;;){
   }
 
   if($start>=$ei3&&$start<=$es3){
-    myinc($w,16,$start;
+    myinc($w,16,$start);
     myinc($w,17,$start,$mode);
     myinc($w,18,$start,$dxcc);
     myinc($w,19,$start,$callsign);
