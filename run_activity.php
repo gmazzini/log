@@ -30,7 +30,7 @@ usort($key,"mycmpkey");
 
 print_r($key);
 
-foreach($key as &$kk)@printf("%4s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",$kk,$ww[0][$kk],$ww[1][$kk]["CW"],$ww[1][$kk]["DG"],$ww[1][$kk]["PH"]);
+foreach($key as &$kk)@printf("%4s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",$kk,$ww[0][$kk],$ww[1][$kk]["CW"],$ww[1][$kk]["DG"],$ww[1][$kk]["PH"],0,0,0,0,0);
 echo "\n";
 
 
