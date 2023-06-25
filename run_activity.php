@@ -2,11 +2,9 @@
 
 echo "<pre>";
 
-$ay=date("Y");
-$am=date("M");
-$ad=date("D");
-$es2=$ay."-".$am;
-$ei2=($ay-1)."-".$am;
+$tt=strtotime("-1 year",time());
+$ei2=date("Y-m",$tt);
+$es2=date("Y-m",time());
 
 echo "$es2 $ei2\n";
 
