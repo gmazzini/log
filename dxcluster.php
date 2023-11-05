@@ -4,6 +4,8 @@ include "local.php";
 $fp=pfsockopen($dxcaddr,$dxcport);
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
+$tte=time()-1800;
+mysqli_query($con,"delete from dxc where tt<$tte'");
 while(!feof($fp)){
   $line="";
   for(;;){
