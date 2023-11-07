@@ -13,6 +13,7 @@ for(;;){
   $start=$row["start"];
   mysqli_query($con,"update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start'");
   $serial++;
+  if($serial%1000==0)echo "$serial\n";
 }
 mysqli_free_result($query);
 mysqli_close($con);
