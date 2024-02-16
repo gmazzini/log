@@ -29,9 +29,11 @@ function mycurlget($ff){
 }
 
 function wpx($s){
-  preg_match("#\d\D*$#",$s,$m,PREG_OFFSET_CAPTURE);
-  if(isset($m[0][1]))return substr($s,0,$m[0][1]+1);
-  else return null;
+  for($i=strlen($s)-1;$i>=0;$i--){
+    $ls=ord($s[$i]);
+    if($ls>47 && $ls<58)break;
+  }
+  return substr($s,0,$i+1);
 }
 
 function myprint($a){
