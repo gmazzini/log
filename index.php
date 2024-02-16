@@ -1,4 +1,4 @@
-<title>LZH Logger V0.87 by IK4LZH</title>
+<title>LZH Logger V0.88 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
