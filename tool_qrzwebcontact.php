@@ -23,8 +23,15 @@ for(;;){
   if($row==null)break;
   $callsign=$row["callsign"];
   $aux=qrz($con,$callsign);
-  echo "$callsign $aux\n";
-  
+  if($aux==1){
+    $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
+    $row1=mysqli_fetch_assoc($query1);
+    $email=$row1["email"];
+    mysqli_free_result($query1);
+    if(strlen($email)>5){
+      echo "$callsign $email \n";
+    }
+  }  
 }
 mysqli_free_result($query);
 
