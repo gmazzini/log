@@ -5,7 +5,7 @@ mysqli_query($con,"SET time_zone='+00:00'");
 
 $mycall="IK4LZH";
 $mystart="2023-01-01 00:00:00";
-$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' order by start");
+$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' and start>'$mystart' order by start");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
