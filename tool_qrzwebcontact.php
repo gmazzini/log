@@ -12,8 +12,12 @@ for(;;){
   $callsign=$row["callsign"];
   $start=$row["start"];
   $flag=$row["flag"];
+  $query1=mysqli_query($con,"select count(callsign) from who where callsign='$callsign'");
+  $row1=mysqli_fetch_row($query1);
+  $cc=(int)$row1[0];
+  mysqli_free_result($query1);
   
-  echo "$callsign $start $flag\n";
+  echo "$callsign $start $flag $cc\n";
 //  mysqli_query($con,"update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start'");
 }
 mysqli_free_result($query);
