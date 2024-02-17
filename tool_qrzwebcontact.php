@@ -10,7 +10,7 @@ for(;;){
   if($row==null)break;
   $callsign=$row["callsign"];
   echo "$callsign\n";
-//  mysqli_query($con,"update log set serial=$serial where mycall='$mycall' and callsign='$callsign' and start='$start'");
+  mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent) value ('$mycall','$callsign',0)");
 }
 mysqli_free_result($query);
 mysqli_close($con);
