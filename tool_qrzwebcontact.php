@@ -1,7 +1,8 @@
 <?php
 include "local.php";
+include "def_qrz.php";
 $mycall="IK4LZH";
-$process=1000;
+$process=100;
 
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -20,7 +21,9 @@ for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
-  echo "$callsign\n";
+  $aux=qrz($con,$callsign);
+  echo "$callsign $aux\n";
+  
 }
 mysqli_free_result($query);
 
