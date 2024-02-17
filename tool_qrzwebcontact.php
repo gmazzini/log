@@ -1,5 +1,6 @@
 <?php
 include "local.php";
+include "utility.php";
 include "def_qrz.php";
 $mycall="IK4LZH";
 $process=100;
