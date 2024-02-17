@@ -14,7 +14,7 @@ for(;;){
   $flag=$row["flag"];
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
   $row1=mysqli_fetch_row($query1);
-  $email=$row1[0];
+  @$email=$row1[0];
   mysqli_free_result($query1);
   
   echo "$callsign $start $flag $email\n";
