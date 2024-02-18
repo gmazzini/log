@@ -23,7 +23,8 @@ foreach($out as $v){
   mysqli_query($con,"insert ignore into qrzwebcontact (mycall,callsign,sent,source) value ('$mycall','$v',1,'web')");
 }
 
-$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and sent=0 and source='me' order by rand() limit $process");
+$i=0;
+$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and sent=0 and source='me' order by rand()");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
@@ -35,7 +36,9 @@ for(;;){
     $email=$row1["email"];
     mysqli_free_result($query1);
     if(strlen($email)>5){
-      echo "$callsign $email \n";
+      echo "$i $callsign $email \n";
+      $i++;
+      if($i==$process)break;
     }
   }  
 }
