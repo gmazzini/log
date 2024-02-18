@@ -13,6 +13,8 @@ mysqli_query($con,"SET time_zone='+00:00'");
 $query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and looked=0 order by rand()");
 $myprocess=0;
 for(;;){
+  $myprocess++;
+  if($myprocess>$process)break;
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
@@ -31,8 +33,6 @@ for(;;){
       mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)");
     }
   }
-  $myprocess++;
-  if($myprocess>$process)break;
 }
 mysqli_free_result($query);
 
