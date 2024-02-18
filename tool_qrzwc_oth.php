@@ -16,6 +16,7 @@ for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
+  echo "Looking: $callsign\n";
   mysqli_query($con,"update qrzwebcontact set looked=1 where mycall='$mycall' and callsign='$callsign'");
   $out=myqrzwebcontact($callsign);
   foreach($out as $v){
@@ -24,6 +25,7 @@ for(;;){
     $aux=(int)$row1[0];
     mysqli_free_result($query1);
     if($aux==0){
+      echo "insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)\n";
       mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)");
       $i++;
       if($i==$process)break 2;
