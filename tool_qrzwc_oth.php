@@ -29,10 +29,10 @@ for(;;){
     if($aux==0){
       echo "insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)\n";
       mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)");
-      $i++;
-      if($i==$process)break 2;
     }
   }
+  $i++;
+  if($i==$process)break;
 }
 mysqli_free_result($query);
 
