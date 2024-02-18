@@ -1,0 +1,35 @@
+<?php
+include "local.php";
+include "utility.php";
+include "def_qrz.php";
+include "def_qrzwc.php";
+$mycall="IK4LZH";
+$myshow=0;
+$process=10;
+
+$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+mysqli_query($con,"SET time_zone='+00:00'");
+
+$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and looked=0 order by rand()");
+$i=0;
+for(;;){
+  $row=mysqli_fetch_assoc($query);
+  if($row==null)break;
+  $callsign=$row["callsign"];
+  mysqli_query($con,"update qrzwebcontact set looked=1 where mycall='$mycall' and callsign='$callsign'");
+  $out=myqrzwebcontact($callsign);
+  foreach($out as $v){
+    $query1=mysqli_query($con,"select count(*) from qrzwebcontact where mycall='$mycall' and callsign='$v'");
+    $row1=mysqli_fetch_row($query1);
+    $aux=(int)$row1[0];
+    mysqli_free_result($query1);
+    if($aux==0){
+      mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$callsign',0,'oth',0)");
+      $i++;
+       if($i==$process)break 2;
+    }
+}
+mysqli_free_result($query);
+
+mysqli_close($con);
+?>
