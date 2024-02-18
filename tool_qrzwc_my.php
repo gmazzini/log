@@ -2,6 +2,7 @@
 include "local.php";
 include "utility.php";
 include "def_qrz.php";
+include "def_qrzwc.php";
 $mycall="IK4LZH";
 $myshow=0;
 $process=10;
