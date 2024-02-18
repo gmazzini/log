@@ -20,6 +20,7 @@ for(;;){
   mysqli_query($con,"update qrzwebcontact set looked=1 where mycall='$mycall' and callsign='$callsign'");
   $out=myqrzwebcontact($callsign);
   sleep(5);
+  if($out==null)continue;
   foreach($out as $v){
     $query1=mysqli_query($con,"select count(*) from qrzwebcontact where mycall='$mycall' and callsign='$v'");
     $row1=mysqli_fetch_row($query1);
