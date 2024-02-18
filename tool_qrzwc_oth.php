@@ -23,14 +23,16 @@ for(;;){
   $out=myqrzwebcontact($callsign);
   sleep(5);
   if($out==null)continue;
+  $xx=0;
   foreach($out as $v){
     $query1=mysqli_query($con,"select count(*) from qrzwebcontact where mycall='$mycall' and callsign='$v'");
     $row1=mysqli_fetch_row($query1);
     $aux=(int)$row1[0];
     mysqli_free_result($query1);
     if($aux==0){
-      echo "insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)\n";
+      echo "$myprocess:$xx insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)\n";
       mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',0,'oth',0)");
+      $xx++;
     }
   }
 }
