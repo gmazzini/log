@@ -3,6 +3,7 @@ include "local.php";
 include "utility.php";
 include "def_qrz.php";
 $mycall="IK4LZH";
+$myshow=0;
 $process=10;
 
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
