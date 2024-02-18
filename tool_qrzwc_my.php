@@ -35,17 +35,16 @@ for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
-  $aux=qrz($con,$callsign);
-  if($aux==1){
-    $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
-    $row1=mysqli_fetch_assoc($query1);
-    $email=$row1["email"];
-    mysqli_free_result($query1);
-    if(strlen($email)>5){
-      echo "$i $callsign $email \n";
-      $i++;
-      if($i==$process)break;
-    }
+  qrz($con,$callsign);
+  sleep(5);
+  $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
+  $row1=mysqli_fetch_assoc($query1);
+  @$email=$row1["email"];
+  mysqli_free_result($query1);
+  if(strlen($email)>5){
+    echo "$i $callsign $email \n";
+    $i++;
+    if($i==$process)break;
   }  
 }
 mysqli_free_result($query);
