@@ -28,6 +28,7 @@ for(;;){
       $i++;
       if($i==$process)break 2;
     }
+  }
 }
 mysqli_free_result($query);
 
