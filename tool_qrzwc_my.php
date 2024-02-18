@@ -26,7 +26,7 @@ foreach($out as $v){
   $aux=(int)$row1[0];
   mysqli_free_result($query1);
   if($aux==0)mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$v',1,'web',0)");
-  else 
+  else mysqli_query($con,"update qrzwebcontact set sent=1,source='web' where mycall='$mycall' and callsign='$v'");
 }
 
 $i=0;
