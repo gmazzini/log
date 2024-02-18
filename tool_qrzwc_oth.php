@@ -26,7 +26,7 @@ for(;;){
     if($aux==0){
       mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked) value ('$mycall','$callsign',0,'oth',0)");
       $i++;
-       if($i==$process)break 2;
+      if($i==$process)break 2;
     }
 }
 mysqli_free_result($query);
