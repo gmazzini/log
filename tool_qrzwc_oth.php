@@ -22,7 +22,7 @@ for(;;){
   echo "$myprocess looking: $callsign\n";
   mysqli_query($con,"update qrzwebcontact set looked=1 where mycall='$mycall' and callsign='$callsign'");
   $out=myqrzwebcontact($callsign);
-  sleep(5);
+  sleep(rand(3,7));
   if($out==null)continue;
   if(count($out)>5)mysqli_query($con,"update qrzwebcontact set me=2 where mycall='$mycall' and callsign='$callsign'");
   $xx=0;
