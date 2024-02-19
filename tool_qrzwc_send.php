@@ -22,7 +22,7 @@ for(;;){
   $callsign=$row["callsign"];
   
   qrz($con,$callsign);
-  sleep(5);
+  sleep(rand(3,7));
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
   $row1=mysqli_fetch_assoc($query1);
   @$email=$row1["email"];
