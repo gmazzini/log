@@ -19,7 +19,7 @@ for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
-  echo "Looking: $callsign\n";
+  echo "$myprocess looking: $callsign\n";
   mysqli_query($con,"update qrzwebcontact set looked=1 where mycall='$mycall' and callsign='$callsign'");
   $out=myqrzwebcontact($callsign);
   sleep(5);
