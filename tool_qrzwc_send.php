@@ -20,6 +20,18 @@ for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
+  
+  $out=myqrzwebcontact($callsign);
+  if($out!=null){
+    foreach($out as $v){
+      if($v==$mycall){
+        mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
+        break;
+      }
+    }
+    if($v==$mycall)continue;
+  }
+  
   qrz($con,$callsign);
   sleep(5);
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
