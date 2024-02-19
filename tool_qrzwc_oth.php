@@ -24,7 +24,7 @@ for(;;){
   $out=myqrzwebcontact($callsign);
   sleep(5);
   if($out==null)continue;
-  if(count($out)>0)mysqli_query($con,"update qrzwebcontact set me=2 where mycall='$mycall' and callsign='$callsign'");
+  if(count($out)>5)mysqli_query($con,"update qrzwebcontact set me=2 where mycall='$mycall' and callsign='$callsign'");
   $xx=0;
   foreach($out as $v){
     if($v==$mycall)mysqli_query($con,"update qrzwebcontact set me=1 where mycall='$mycall' and callsign='$callsign'");
