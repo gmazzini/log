@@ -44,16 +44,14 @@ for(;;){
     and click on the button that says "DE '.$callsign.'"</li></ul><br><br>
     Thank you very much, and I hope to connect with you again 
     soon.<br><br> 73 de '.$mycall;
-    myemailsend($mycall.'<'.$myemail.'>','gmazzini@gmail.com','QRZ Web Contacts request',$msg);
-    
+    myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts request',$msg);
+    mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
     $i++;
     if($i==$process)break;
   }  
 }
 mysqli_free_result($query);
-
 mysqli_close($con);
-
 
 function myemailsend($from,$to,$subject,$html){
   global $mailgun_secret;
