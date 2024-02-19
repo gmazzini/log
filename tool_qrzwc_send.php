@@ -22,14 +22,10 @@ for(;;){
   $callsign=$row["callsign"];
   
   $out=myqrzwebcontact($callsign);
-  if($out!=null){
-    foreach($out as $v){
-      if($v==$mycall){
-        mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
-        break;
-      }
-    }
-    if($v==$mycall)continue;
+  if($out!=null && in_array($callsign,$out)){
+    mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
+    sleep(5);
+    continue;
   }
   
   qrz($con,$callsign);
