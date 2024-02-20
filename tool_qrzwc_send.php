@@ -5,7 +5,7 @@ include "def_qrz.php";
 include "def_qrzwc.php";
 $mycall="IK4LZH";
 $myshow=0;
-$process=100;
+$process=500;
 
 $con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -22,7 +22,7 @@ for(;;){
   $callsign=$row["callsign"];
   
   qrz($con,$callsign);
-  sleep(rand(3,7));
+  sleep(rand(2,6));
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
   $row1=mysqli_fetch_assoc($query1);
   @$email=$row1["email"];
