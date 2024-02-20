@@ -33,8 +33,8 @@ for(;;){
     $aux=(int)$row1[0];
     mysqli_free_result($query1);
     if($aux==0){
-      echo "$myprocess:$xx:$totprocess insert into qrzwebcontact (mycall,callsign,sent,source,looked,me) value ('$mycall','$v',0,'oth',0,0)\n";
-      mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source,looked,me) value ('$mycall','$v',0,'oth',0,0)");
+      echo "$myprocess:$xx:$totprocess insert into qrzwebcontact (mycall,callsign,source) value ('$mycall','$v','oth')\n";
+      mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,source) value ('$mycall','$v','oth')");
       $xx++;
       $totprocess++;
     }
