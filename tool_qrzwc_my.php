@@ -18,6 +18,15 @@ for(;;){
 }
 mysqli_free_result($query);
 
+$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign in (select callsign from qrzwebcontact where mycall='$mycall' and source!='me') order by callsign");
+for(;;){
+  $row=mysqli_fetch_assoc($query);
+  if($row==null)break;
+  $callsign=$row["callsign"];
+  echo "update qrzwebcontact set source='me' where mycall='$mycall' and callsign='$callsign'\n";
+}
+mysqli_free_result($query);
+
 $out=myqrzwebcontact($mycall);
 foreach($out as $v){
   $query1=mysqli_query($con,"select count(*) from qrzwebcontact where mycall='$mycall' and callsign='$v'");
