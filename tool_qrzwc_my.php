@@ -23,7 +23,7 @@ for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
-  echo "update qrzwebcontact set source='me' where mycall='$mycall' and callsign='$callsign'\n";
+  mysqli_query($con,"update qrzwebcontact set source='me' where mycall='$mycall' and callsign='$callsign'");
 }
 mysqli_free_result($query);
 
