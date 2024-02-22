@@ -18,7 +18,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign in (select callsign from qrzwebcontact where mycall='$mycall' and source!='me') order by callsign");
+$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign in (select callsign from qrzwebcontact where mycall='$mycall' and source='oth') order by callsign");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
