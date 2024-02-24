@@ -1,11 +1,11 @@
-<title>LZH Logger V0.88 by IK4LZH</title>
+<title>LZH Logger V0.89 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
 include "utility.php";
 
 $act=(int)mypost("act");
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $mypage=30;
 if($act>=1){
