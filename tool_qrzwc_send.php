@@ -7,7 +7,7 @@ $mycall="IK4LZH";
 $myshow=0;
 $process=1000;
 
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $query1=mysqli_query($con,"select email from who where callsign='$mycall'");
 $row1=mysqli_fetch_assoc($query1);
