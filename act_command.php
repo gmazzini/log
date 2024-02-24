@@ -7,7 +7,7 @@ $start=$_GET["start"];
 $callsign=$_GET["callsign"];
 $command=strtoupper($_GET["command"]);
 
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
 $query=mysqli_query($con,"select mycall from user where mycall='$mycall' and md5passwd='$md5passwd'");
