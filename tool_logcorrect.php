@@ -3,7 +3,7 @@ include "local.php";
 
 $mycall="IK4LZH";
 
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
 $query=mysqli_query($con,"select callsign,start,end from log where mycall='$mycall' order by callsign");
