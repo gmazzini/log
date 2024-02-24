@@ -6,7 +6,7 @@ include "def_qrzwc.php";
 $mycall="IK4LZH";
 $myshow=0;
 
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
 $query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign not in (select callsign from qrzwebcontact where mycall='$mycall') order by callsign");
