@@ -1,7 +1,7 @@
 <?php
 
 include "local.php";
-$con=mysqli_connect("127.0.0.1",$dbuser,$dbpassword,$dbname);
+$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 loadcty($con);
 mysqli_close($con);
 
