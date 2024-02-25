@@ -29,12 +29,7 @@ mysqli_free_result($query);
 
 $out=myqrzwebcontact($mycall);
 foreach($out as $v){
-  $query1=mysqli_query($con,"select count(*) from qrzwebcontact where mycall='$mycall' and callsign='$v'");
-  $row1=mysqli_fetch_row($query1);
-  $aux=(int)$row1[0];
-  mysqli_free_result($query1);
-  if($aux==0)mysqli_query($con,"insert into qrzwebcontact (mycall,callsign,sent,source) value ('$mycall','$v',1,'web')");
-  else mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$v'");
+  mysqli_query($con,"update qrzwebcontact set sent=1,you=1 where mycall='$mycall' and callsign='$v'");
 }
 
 mysqli_close($con);
