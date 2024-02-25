@@ -9,7 +9,7 @@ $myshow=0;
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign not in (select callsign from qrzwebcontact where mycall='$mycall') order by callsign");
+$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign not in (select callsign from qrzwebcontact where mycall='$mycall')");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
@@ -18,7 +18,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign in (select callsign from qrzwebcontact where mycall='$mycall' and source!='me') order by callsign");
+$query=mysqli_query($con,"select distinct callsign from log where mycall='$mycall' and callsign in (select callsign from qrzwebcontact where mycall='$mycall' and source!='me')");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
