@@ -20,7 +20,8 @@ for(;;){
   if($row==null)break;
   $callsign=$row["callsign"];
   echo "$myprocess:$totprocess looking: $callsign\n";
-  mysqli_query($con,"update qrzwebcontact set looked=1 where mycall='$mycall' and callsign='$callsign'");
+  $tt=(int)(time()/86400);
+  mysqli_query($con,"update qrzwebcontact set looked=$tt where mycall='$mycall' and callsign='$callsign'");
   $out=myqrzwebcontact($callsign);
   sleep(rand(3,7));
   if($out==null)continue;
