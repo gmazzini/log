@@ -48,16 +48,15 @@ for(;;){
   curl_setopt($ch,CURLOPT_COOKIE,$cookie);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   $out=curl_exec($ch);
-file_put_contents("c2.txt",$out);
   curl_close($ch);
   $tok='name="wc_userid" value="';
   $l1=strpos($out,$tok,0);
   if($l1===false)return null;
   $l1+=strlen($tok);
   $l2=strpos($out,'"',$l1);
-  $userid=substr($out,$l1,$l2-$l1);
+  $userid=(int)substr($out,$l1,$l2-$l1);
+  if($userid==0)continue;
   echo "... userid $userid\n";
-  continue;
 
   $params="webcon=1&wc_userid=$userid";
   $ch=curl_init();
@@ -70,6 +69,8 @@ file_put_contents("c2.txt",$out);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   curl_exec($ch);
   curl_close($ch);
+  mysqli_query($con,"update qrzwebcontact set me=1 where mycall='$mycall' and callsign='$callsign'");
+  
 }
 mysqli_free_result($query);
 mysqli_close($con);
