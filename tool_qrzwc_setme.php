@@ -14,6 +14,7 @@ $co=json_decode(file_get_contents("/home/www/data/qrz_cookie"),true);
 $query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and looked=1 and me=0 and you=1 and Nwc>10 order by rand()");
 $myprocess=0;
 for(;;){
+  sleep(ran(3,7));
   $myprocess++;
   if($myprocess>$process)break;
   $row=mysqli_fetch_assoc($query);
