@@ -9,7 +9,7 @@ $process=1;
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
-$co=json_decode(file_get_contents("/home/www/qrz_cookie"),true);
+$co=json_decode(file_get_contents("/home/www/data/qrz_cookie"),true);
 
 $query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and looked=1 and me=0 and you=1 and Nwc>10 order by rand()");
 $myprocess=0;
