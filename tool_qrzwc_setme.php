@@ -37,7 +37,7 @@ for(;;){
   $l2=strpos($out,'"',$l1);
   $myurl=substr($out,$l1,$l2-$l1);
   if(strlen($myurl)<5)continue;
-  echo "... myurl $myusr\n";
+  echo "... myurl $myurl\n";
   
   $cookie="";
   foreach($co as $v)$cookie.=$v["name"]."=".$v["value"]."; ";
