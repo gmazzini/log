@@ -37,7 +37,7 @@ for(;;){
     friends. If you decide to proceed, you can: <ul> 
     <li>1. log in to the qrz.com website <a href="https://www.qrz.com/">
     https://www.qrz.com/</a> with your credentials,</li>
-    <li>2. search for my callsign by typing $mycall or by clicking 
+    <li>2. search for my callsign by typing '.$mycall.' or by clicking 
     the link <a href="https://www.qrz.com/lookup/'.$mycall.'">
     https://www.qrz.com/lookup/'.$mycall.'</a></li>
     <li>3. click on the tab labeled "Web",</li>
