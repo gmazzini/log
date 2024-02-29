@@ -10,7 +10,7 @@ $process=1000;
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-for(;;){
+for($sss=0;;$sss++){
   $query1=mysqli_query($con,"select min(looked) from qrzwebcontact where mycall='$mycall'");
   $row1=mysqli_fetch_row($query1);
   $minlooked=(int)$row1[0];
@@ -26,7 +26,7 @@ for(;;){
     if($row==null)break;
     $callsign=$row["callsign"];
     $tt=(int)(time()/86400);
-    echo "$myprocess:$totprocess:$tt looking: $callsign\n";
+    echo "$myprocess:$totprocess:$tt:$sss looking: $callsign\n";
     mysqli_query($con,"update qrzwebcontact set looked=$tt where mycall='$mycall' and callsign='$callsign'");
     $out=myqrzwebcontact($callsign,$Ewc);
     sleep(rand(3,7));
