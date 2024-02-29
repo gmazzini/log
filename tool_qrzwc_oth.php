@@ -25,6 +25,7 @@ for(;;){
   $out=myqrzwebcontact($callsign,$Ewc);
   sleep(rand(3,7));
   if($out==null)continue;
+  echo "... Ewc=$Ewc,Nwc=".count($out)."\n";
   mysqli_query($con,"update qrzwebcontact set Ewc=$Ewc,Nwc=".count($out)." where mycall='$mycall' and callsign='$callsign'");
   $xx=0;
   foreach($out as $v){
