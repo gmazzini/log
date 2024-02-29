@@ -10,7 +10,12 @@ $process=10000;
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
-$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and looked=0 order by rand()");
+$query1=mysqli_query($con,"select min(looked) from qrzwebcontact where mycall='$mycall'");
+$row1=mysqli_fetch_row($query1);
+$minlooked=(int)$row1[0];
+mysqli_free_result($query1);
+
+$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and looked=$minlooked order by rand()");
 $myprocess=0;
 $totprocess=0;
 for(;;){
