@@ -2,6 +2,7 @@
 
 function myqrzwebcontact($call,&$Ewc){
   $dd=array();
+  $Ewc=0;
   $agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36";
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,"https://www.qrz.com/lookup/$call");
@@ -18,7 +19,7 @@ function myqrzwebcontact($call,&$Ewc){
   $myurl=substr($out,$l1,$l2-$l1);
   $tok='<a href="#t_webcon">Web <';
   $l1=strpos($out,$tok,0);
-  $Ewc=($l1===false)?0:1;
+  if($l1!==false)$Ewc=1;
   
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,$myurl);
