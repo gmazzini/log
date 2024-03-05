@@ -11,7 +11,7 @@ $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $co=json_decode(file_get_contents("/home/www/data/qrz_cookie"),true);
 
-$query=mysqli_query($con,"select callsign,Nwc from qrzwebcontact where mycall='$mycall' and sent=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc");
+$query=mysqli_query($con,"select callsign,Nwc from qrzwebcontact where mycall='$mycall' and sent=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc desc");
 $myprocess=0;
 for(;;){
 //  sleep(rand(10,20));
