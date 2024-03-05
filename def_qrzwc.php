@@ -41,4 +41,18 @@ function myqrzwebcontact($call,&$Ewc){
   return $dd;
 }
 
+function myemailsend($from,$to,$subject,$html){
+  global $mailgun_secret;
+  $post=array('to' => $to,'from' => $from,'subject' => $subject,'html' => $html);
+  $ch=curl_init();
+  curl_setopt($ch,CURLOPT_URL,"https://api.eu.mailgun.net/v3/mg.mazzini.org/messages");
+  curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+  curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_HTTPHEADER,Array("Authorization: Basic ".base64_encode($mailgun_secret)));
+  curl_setopt($ch,CURLOPT_POST,1);
+  curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
+  echo curl_exec($ch);
+  curl_close($ch);
+}
+
 ?>
