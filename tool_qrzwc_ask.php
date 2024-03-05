@@ -9,6 +9,10 @@ $process=1;
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
+$query1=mysqli_query($con,"select email from who where callsign='$mycall'");
+$row1=mysqli_fetch_assoc($query1);
+@$myemail=$row1["email"];
+mysqli_free_result($query1);
 $co=json_decode(file_get_contents("/home/www/data/qrz_cookie"),true);
 
 $query=mysqli_query($con,"select callsign,Nwc from qrzwebcontact where mycall='$mycall' and sent=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc desc");
