@@ -22,6 +22,35 @@ for(;;){
   $callsign=$row["callsign"];
   $Nwc=$row["Nwc"];
   echo "$myprocess $callsign $Nwc\n";
+  
+  qrz($con,$callsign);
+  sleep(rand(2,6));
+  $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
+  $row1=mysqli_fetch_assoc($query1);
+  @$email=$row1["email"];
+  mysqli_free_result($query1);
+  if(strlen($email)>5){
+    echo "... ask $callsign $email \n";
+    $msg='Hi '.$callsign.',<br><br> in the past, we have connected
+    and indeed, you are in my log. I noticed that you also have
+    a profile on qrz.com, and I do too. It would really make me
+    happy if you could add your callsign to my qrz.com page called
+    "Web Contacts," where I am collecting a large number of
+    friends. If you decide to proceed, you can: <ul> 
+    <li>1. log in to the qrz.com website <a href="https://www.qrz.com/">
+    https://www.qrz.com/</a> with your credentials,</li>
+    <li>2. search for my callsign by typing '.$mycall.' or by clicking 
+    the link <a href="https://www.qrz.com/lookup/'.$mycall.'">
+    https://www.qrz.com/lookup/'.$mycall.'</a></li>
+    <li>3. click on the tab labeled "Web",</li>
+    <li>4. go to the box labeled "Add your Web Contact", 
+    and click on the button that says "DE '.$callsign.'"</li></ul><br><br>
+    Thank you very much, and I hope to connect with you again 
+    soon.<br><br> 73 de '.$mycall;
+  //  myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts request',$msg);
+  //  mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
+  }  
+}
 
   
 }
