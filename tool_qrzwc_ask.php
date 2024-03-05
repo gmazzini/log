@@ -5,7 +5,7 @@ include "def_qrz.php";
 include "def_qrzwc.php";
 $mycall="IK4LZH";
 $myshow=0;
-$process=100;
+$process=1;
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -31,12 +31,13 @@ for(;;){
   mysqli_free_result($query1);
   if(strlen($email)>5){
     echo "... ask $callsign $email \n";
-    $msg='Hi '.$callsign.',<br><br> in the past, we have connected
-    and indeed, you are in my log. I noticed that you also have
-    a profile on qrz.com, and I do too. It would really make me
-    happy if you could add your callsign to my qrz.com page called
-    "Web Contacts," where I am collecting a large number of
-    friends. If you decide to proceed, you can: <ul> 
+    $msg='Hi '.$callsign.',<br><br> I noticed that in your profile 
+    on qrz.com you have enabled "Web Contacts" and have 
+    collected '.$Nwc.', when I visited you. I have also added my 
+    callsign to your list with great pleasure. It would really make 
+    me happy if you could also add your callsign to my qrz.com page 
+    "Web Contacts," where I am collecting a large number of friends. 
+    If you decide to proceed, you can: <ul>
     <li>1. log in to the qrz.com website <a href="https://www.qrz.com/">
     https://www.qrz.com/</a> with your credentials,</li>
     <li>2. search for my callsign by typing '.$mycall.' or by clicking 
@@ -47,7 +48,8 @@ for(;;){
     and click on the button that says "DE '.$callsign.'"</li></ul><br><br>
     Thank you very much, and I hope to connect with you again 
     soon.<br><br> 73 de '.$mycall;
-  //  myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts request',$msg);
+  $email="gmazzini@gmail.com";
+  myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts request',$msg);
   //  mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
   }  
 }
