@@ -37,7 +37,7 @@ for(;;){
     echo "... ask $callsign $email \n";
     $msg='Hi '.$callsign.',<br><br> I noticed that in your profile 
     on qrz.com you have enabled "Web Contacts" and have 
-    collected '.$Nwc.', when I visited you. I have also added my 
+    collected '.$Nwc.' entries, when I visited you. I have also added my 
     callsign to your list with great pleasure. It would really make 
     me happy if you could also add your callsign to my qrz.com page 
     "Web Contacts," where I am collecting a large number of friends. 
