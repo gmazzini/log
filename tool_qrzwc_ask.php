@@ -18,7 +18,7 @@ $co=json_decode(file_get_contents("/home/www/data/qrz_cookie"),true);
 $query=mysqli_query($con,"select callsign,Nwc from qrzwebcontact where mycall='$mycall' and sent=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc desc");
 $myprocess=0;
 for(;;){
-//  sleep(rand(10,20));
+  sleep(rand(2,6));
   $myprocess++;
   if($myprocess>$process)break;
   $row=mysqli_fetch_assoc($query);
@@ -26,9 +26,11 @@ for(;;){
   $callsign=$row["callsign"];
   $Nwc=$row["Nwc"];
   echo "$myprocess $callsign $Nwc\n";
-  
-  qrz($con,$callsign);
+
+  if(!myqrzsetwebcontact($callsign))continue;
+  mysqli_query($con,"update qrzwebcontact set me=1 where mycall='$mycall' and callsign='$callsign'");
   sleep(rand(2,6));
+  qrz($con,$callsign);
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
   $row1=mysqli_fetch_assoc($query1);
   @$email=$row1["email"];
@@ -52,9 +54,8 @@ for(;;){
     and click on the button that says "DE '.$callsign.'"</li></ul><br><br>
     Thank you very much, and I hope to connect with you again 
     soon.<br><br> 73 de '.$mycall;
-  $email="gmazzini@gmail.com";
-  myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts request',$msg);
-  //  mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
+    myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts request',$msg);
+    mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
   }  
 }
 
