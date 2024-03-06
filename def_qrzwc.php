@@ -56,6 +56,7 @@ function myqrzsetwebcontact($callsign){
 function myqrzwebcontact($call,&$Ewc,&$visit){
   $dd=array();
   $Ewc=0;
+  $visit=0;
   $agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36";
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,"https://www.qrz.com/lookup/$call");
