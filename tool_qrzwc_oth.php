@@ -33,7 +33,7 @@ for($sss=0;;$sss++){
     echo "... visit=$visit\n";
     mysqli_query($con,"update qrzwebcontact set visit=$visit where mycall='$mycall' and callsign='$callsign'");
     if($out==null)continue;
-    echo "... Ewc=$Ewc,Nwc=".count($out).",visit=$visit\n";
+    echo "... Ewc=$Ewc,Nwc=".count($out)."\n";
     mysqli_query($con,"update qrzwebcontact set Ewc=$Ewc,Nwc=".count($out)." where mycall='$mycall' and callsign='$callsign'");
     $xx=0;
     foreach($out as $v){
