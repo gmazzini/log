@@ -64,21 +64,24 @@ function myqrzwebcontact($call,&$Ewc,&$visit){
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   $out=curl_exec($ch);
   curl_close($ch);
-  $tok='var wc_summary = "';
-  $l1=strpos($out,$tok,0);
-  if($l1===false)return null;
-  $l1+=strlen($tok);
-  $l2=strpos($out,'"',$l1);
-  $myurl=substr($out,$l1,$l2-$l1);
-  $tok='<a href="#t_webcon">Web <';
-  $l1=strpos($out,$tok,0);
-  if($l1!==false)$Ewc=1;
+  
   $tok='<span class="ml1">Lookups: ';
   $l1=strpos($out,$tok,0);
   if($l1===false)return null;
   $l1+=strlen($tok);
   $l2=strpos($out,'<',$l1);
   $visit=(int)substr($out,$l1,$l2-$l1);
+  
+  $tok='var wc_summary = "';
+  $l1=strpos($out,$tok,0);
+  if($l1===false)return null;
+  $l1+=strlen($tok);
+  $l2=strpos($out,'"',$l1);
+  $myurl=substr($out,$l1,$l2-$l1);
+  
+  $tok='<a href="#t_webcon">Web <';
+  $l1=strpos($out,$tok,0);
+  if($l1!==false)$Ewc=1;
   
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,$myurl);
