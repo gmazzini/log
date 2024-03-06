@@ -53,7 +53,7 @@ function myqrzsetwebcontact($callsign){
   return 1;
 }
 
-function myqrzwebcontact($call,&$Ewc){
+function myqrzwebcontact($call,&$Ewc,&$visit){
   $dd=array();
   $Ewc=0;
   $agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36";
@@ -73,6 +73,12 @@ function myqrzwebcontact($call,&$Ewc){
   $tok='<a href="#t_webcon">Web <';
   $l1=strpos($out,$tok,0);
   if($l1!==false)$Ewc=1;
+  $tok='<span class="ml1">Lookups: ';
+  $l1=strpos($out,$tok,0);
+  if($l1===false)return null;
+  $l1+=strlen($tok);
+  $l2=strpos($out,'<',$l1);
+  $visit=(int)substr($out,$l1,$l2-$l1);
   
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,$myurl);
