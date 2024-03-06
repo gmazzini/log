@@ -28,10 +28,10 @@ for($sss=0;;$sss++){
     $tt=(int)(time()/86400);
     echo "$myprocess:$totprocess:$tt:$sss looking: $callsign\n";
     mysqli_query($con,"update qrzwebcontact set looked=$tt where mycall='$mycall' and callsign='$callsign'");
-    $out=myqrzwebcontact($callsign,$Ewc);
+    $out=myqrzwebcontact($callsign,$Ewc,$visit);
     sleep(rand(3,7));
     if($out==null)continue;
-    echo "... Ewc=$Ewc,Nwc=".count($out)."\n";
+    echo "... Ewc=$Ewc,Nwc=".count($out).",visit=$visit\n";
     mysqli_query($con,"update qrzwebcontact set Ewc=$Ewc,Nwc=".count($out)." where mycall='$mycall' and callsign='$callsign'");
     $xx=0;
     foreach($out as $v){
