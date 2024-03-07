@@ -53,10 +53,10 @@ function myqrzsetwebcontact($callsign){
   return 1;
 }
 
-function myqrzwebcontact($call,&$Ewc,&$visit){
+function myqrzwebcontact($call,&$Ewc,&$visited){
   $dd=array();
   $Ewc=0;
-  $visit=0;
+  $visited=0;
   $agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36";
   $ch=curl_init();
   curl_setopt($ch,CURLOPT_URL,"https://www.qrz.com/lookup/$call");
@@ -71,7 +71,7 @@ function myqrzwebcontact($call,&$Ewc,&$visit){
   if($l1===false)return null;
   $l1+=strlen($tok);
   $l2=strpos($out,'<',$l1);
-  $visit=(int)substr($out,$l1,$l2-$l1);
+  $visited=(int)substr($out,$l1,$l2-$l1);
   
   $tok='var wc_summary = "';
   $l1=strpos($out,$tok,0);
