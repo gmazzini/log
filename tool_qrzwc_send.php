@@ -15,13 +15,14 @@ $row1=mysqli_fetch_assoc($query1);
 mysqli_free_result($query1);
 
 $i=0;
-$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and sent=0 and source='me' order by rand()");
+$query=mysqli_query($con,"select callsign from qrzwebcontact where mycall='$mycall' and sent=0 and qrzed=0 and source='me' order by rand()");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
   $callsign=$row["callsign"];
   
   qrz($con,$callsign);
+  mysqli_query($con,"update qrzwebcontact set qrzed=1 where mycall='$mycall' and callsign='$callsign'");
   sleep(rand(2,6));
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
   $row1=mysqli_fetch_assoc($query1);
