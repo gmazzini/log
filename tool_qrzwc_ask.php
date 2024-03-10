@@ -15,7 +15,7 @@ $row1=mysqli_fetch_assoc($query1);
 mysqli_free_result($query1);
 $co=json_decode(file_get_contents("/home/www/data/qrz_cookie"),true);
 
-$query=mysqli_query($con,"select callsign,Nwc from qrzwebcontact where mycall='$mycall' and sent=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc desc");
+$query=mysqli_query($con,"select callsign,Nwc from qrzwebcontact where mycall='$mycall' and sent=0 and qrzed=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc desc");
 $myprocess=0;
 for(;;){
   sleep(rand(2,6));
@@ -28,7 +28,7 @@ for(;;){
   echo "$myprocess $callsign $Nwc\n";
 
   if(!myqrzsetwebcontact($callsign))continue;
-  mysqli_query($con,"update qrzwebcontact set me=1 where mycall='$mycall' and callsign='$callsign'");
+  mysqli_query($con,"update qrzwebcontact set me=1,qrzed=1 where mycall='$mycall' and callsign='$callsign'");
   sleep(rand(2,6));
   qrz($con,$callsign);
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
