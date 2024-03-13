@@ -25,6 +25,7 @@ function qrz($con,$Icallsign){
     $gcountry=mysqli_real_escape_string($con,$q2->Callsign->country);
     $ggrid=mysqli_real_escape_string($con,$q2->Callsign->grid);
     $gemail=mysqli_real_escape_string($con,$q2->Callsign->email);
+    if(strlen($gemail)>50)$gemail="";
     $gcqzone=(int)$q2->Callsign->cqzone;
     $gituzone=(int)$q2->Callsign->ituzone;
     $gborn=(int)$q2->Callsign->born;
