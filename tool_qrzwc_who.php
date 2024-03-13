@@ -17,8 +17,8 @@ for(;;){
   if($row==null)break;
   $callsign=$row["callsign"];
 
-  qrz($con,$callsign);
   echo "$i $callsign\n";
+  qrz($con,$callsign);
   mysqli_query($con,"update qrzwebcontact set qrzed=1 where mycall='$mycall' and callsign='$callsign'");
   sleep(1);
   $i++;
