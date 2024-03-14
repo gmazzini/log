@@ -32,8 +32,9 @@ for(;;){
   $row1=mysqli_fetch_row($query1);
   @$justsent=$row1[0];
   mysqli_free_result($query1);
+  echo "$i $callsign $email $justsent\n";
   if(strlen($email)>5 && $justsent==0){
-    echo "$i $callsign $email \n";
+    echo "... sending\n";
     $msg='Hi '.$callsign.',<br><br> in the past, we have connected
     and indeed, you are in my log. I noticed that you also have
     a profile on qrz.com, and I do too. It would really make me
