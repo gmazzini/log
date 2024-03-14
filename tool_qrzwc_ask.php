@@ -35,8 +35,13 @@ for(;;){
   $row1=mysqli_fetch_assoc($query1);
   @$email=$row1["email"];
   mysqli_free_result($query1);
-  if(strlen($email)>5){
-    echo "... ask $callsign $email \n";
+  $query1=mysqli_query($con,"select count(email) from qrzwebcontact_email where email='$email'");
+  $row1=mysqli_fetch_row($query1);
+  @$justsent=$row1[0];
+  mysqli_free_result($query1);
+  echo "... ask $callsign $email $justsent\n";
+  if(strlen($email)>5 && $justsent==0){
+    echo "... sending\n";
     $msg='Hi '.$callsign.',<br><br> I noticed that in your profile 
     on qrz.com you have enabled "Web Contacts" and have 
     collected '.$Nwc.' entries, when I visited you. I have also added my 
@@ -56,6 +61,7 @@ for(;;){
     soon.<br><br> 73 de '.$mycall;
     myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts',$msg);
     mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
+    mysqli_query($con,"insert ignore into qrzwebcontact_email (email) values ('$email')");
   }  
 }
 
