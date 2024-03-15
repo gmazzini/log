@@ -27,9 +27,9 @@ for($sss=0;;$sss++){
     $callsign=$row["callsign"];
     $tt=(int)(time()/86400);
     $out=myqrzwebcontact($callsign,$Ewc,$visited);
+    $nout=count($out);
     sleep(rand(3,7));
     echo "$myprocess:$totprocess:$tt:$sss looking:$callsign visited=$visited Ewc=$Ewc,Nwc=$nout\n";
-    $nout=count($out);
     mysqli_query($con,"update qrzwebcontact set looked=$tt,visited=$visited,Ewc=$Ewc,Nwc=$nout where mycall='$mycall' and callsign='$callsign'");    
     if($out==null)continue;
     $xx=0;
