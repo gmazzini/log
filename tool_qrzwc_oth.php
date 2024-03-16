@@ -5,7 +5,7 @@ include "def_qrz.php";
 include "def_qrzwc.php";
 $mycall="IK4LZH";
 $myshow=0;
-$process=1000;
+$process=100;
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -48,7 +48,6 @@ for($sss=0;;$sss++){
     }
   }
   mysqli_free_result($query);
-  sleep(120);
 }
 
 mysqli_close($con);
