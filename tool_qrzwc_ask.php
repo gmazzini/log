@@ -28,7 +28,8 @@ for(;;){
   echo "$myprocess $callsign $Nwc\n";
 
   if(!myqrzsetwebcontact($callsign))continue;
-  mysqli_query($con,"update qrzwebcontact set me=1,qrzed=1 where mycall='$mycall' and callsign='$callsign'");
+  $tt=(int)(time()/86400);
+  mysqli_query($con,"update qrzwebcontact set me=1,qrzed=$tt where mycall='$mycall' and callsign='$callsign'");
   sleep(rand(2,6));
   qrz($con,$callsign);
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
