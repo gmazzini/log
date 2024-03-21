@@ -22,7 +22,8 @@ for(;;){
   $callsign=$row["callsign"];
   
   qrz($con,$callsign);
-  mysqli_query($con,"update qrzwebcontact set qrzed=1 where mycall='$mycall' and callsign='$callsign'");
+  $tt=(int)(time()/86400);
+  mysqli_query($con,"update qrzwebcontact set qrzed=$tt where mycall='$mycall' and callsign='$callsign'");
   sleep(rand(2,6));
   $query1=mysqli_query($con,"select email from who where callsign='$callsign'");
   $row1=mysqli_fetch_assoc($query1);
