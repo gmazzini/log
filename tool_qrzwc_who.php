@@ -19,7 +19,8 @@ for(;;){
 
   echo "$i $callsign\n";
   qrz($con,$callsign);
-  mysqli_query($con,"update qrzwebcontact set qrzed=1 where mycall='$mycall' and callsign='$callsign'");
+  $tt=(int)(time()/86400);
+  mysqli_query($con,"update qrzwebcontact set qrzed=$tt where mycall='$mycall' and callsign='$callsign'");
   sleep(1);
   $i++;
   if($i==$process)break;
