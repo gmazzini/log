@@ -9,7 +9,7 @@ for(;;){
   socket_recvfrom($sock,$aux,1000,0,$remote_ip,$remote_port);
   $secretkey=myextract($aux,"comment");
   if($secretkey!=$secret_rx)continue;
-  $call=myextract($aux,"station_callsign");
+  $mycall=myextract($aux,"station_callsign");
   $callsign=myextract($aux,"call");
   $freqtx=myextract($aux,"freq")*1000000;
   $freqrx=myextract($aux,"freq_rx")*1000000;
