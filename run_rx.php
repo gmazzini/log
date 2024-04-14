@@ -1,5 +1,6 @@
 <?php
 include "local.php";
+include "utility.php";
 $sock=socket_create(AF_INET,SOCK_DGRAM,0);
 socket_bind($sock,"0.0.0.0",2333);
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
