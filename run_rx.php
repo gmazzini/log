@@ -3,7 +3,7 @@ include "local.php";
 $sock=socket_create(AF_INET,SOCK_DGRAM,0);
 socket_bind($sock,"0.0.0.0",2333);
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
-mysqli_query($con,"SET time_zone='+00:00'")
+mysqli_query($con,"SET time_zone='+00:00'");
 for(;;){
   socket_recvfrom($sock,$aux,1000,0,$remote_ip,$remote_port);
   $secretkey=myextract($aux,"comment");
