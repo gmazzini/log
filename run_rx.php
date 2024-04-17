@@ -9,6 +9,9 @@ for(;;){
   socket_recvfrom($sock,$aux,1000,0,$remote_ip,$remote_port);
   $secretkey=myextract($aux,"comment");
   if($secretkey!=$secret_rx)continue;
+  $timeoff=myextract($aux,"time_off");
+  if(strlen($timeoff)==0)continue;
+  if(strlen($timeoff)==4)$timeoff.="00";
   $mycall=myextract($aux,"station_callsign");
   $callsign=myextract($aux,"call");
   $freqtx=myextract($aux,"freq")*1000000;
@@ -17,10 +20,7 @@ for(;;){
   $signalrx=myextract($aux,"rst_rcvd");
   $mode=myextract($aux,"mode");
   $timeon=myextract($aux,"time_on");
-  if(strlen($timeon)==4)$timeon.="00";
-  $timeoff=myextract($aux,"time_off");
-  if(strlen($timeoff)==0)$timeoff=$timeon;
-  if(strlen($timeoff)==4)$timeoff.="00";
+  if(strlen($timeon)==4)$timeon.="00";  
   $contesttx=myextract($aux,"stx_string");
   if(strlen($contesttx)==0)$contesttx=myextract($aux,"stx");
   $contestrx=myextract($aux,"srx_string");
