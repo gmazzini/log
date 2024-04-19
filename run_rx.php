@@ -7,6 +7,7 @@ $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 for(;;){
   socket_recvfrom($sock,$aux,1000,0,$remote_ip,$remote_port);
+  echo $aux."\n";
   $secretkey=myextract($aux,"comment");
   if($secretkey!=$secret_rx)continue;
   $timeoff=myextract($aux,"time_off");
@@ -32,6 +33,6 @@ for(;;){
   $start=substr($dateon,0,4)."-".substr($dateon,4,2)."-".substr($dateon,6,2)." ".substr($timeon,0,2).":".substr($timeon,2,2).":".substr($timeon,4,2);
   $end=substr($dateoff,0,4)."-".substr($dateoff,4,2)."-".substr($dateoff,6,2)." ".substr($timeoff,0,2).":".substr($timeoff,2,2).":".substr($timeoff,4,2);
   mysqli_query($con,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','$contest')");
-  echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','$contest')\n";
+  echo "insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','$contesttx','$contestrx','$contest')\n";
 }
 ?>
