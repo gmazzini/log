@@ -10,9 +10,11 @@ for(;;){
   echo $aux."\n";
   $secretkey=myextract($aux,"comment");
   if($secretkey!=$secret_rx)continue;
+  $timeon=myextract($aux,"time_on");
+  if(strlen($timeon)==4)$timeon.="00";
   $timeoff=myextract($aux,"time_off");
-  if(strlen($timeoff)==0)continue;
   if(strlen($timeoff)==4)$timeoff.="00";
+  if($timeon==$timeoff)continue;
   $mycall=myextract($aux,"station_callsign");
   $callsign=myextract($aux,"call");
   $freqtx=myextract($aux,"freq")*1000000;
@@ -20,8 +22,6 @@ for(;;){
   $signaltx=myextract($aux,"rst_sent");
   $signalrx=myextract($aux,"rst_rcvd");
   $mode=myextract($aux,"mode");
-  $timeon=myextract($aux,"time_on");
-  if(strlen($timeon)==4)$timeon.="00";  
   $contesttx=myextract($aux,"stx_string");
   if(strlen($contesttx)==0)$contesttx=myextract($aux,"stx");
   $contestrx=myextract($aux,"srx_string");
