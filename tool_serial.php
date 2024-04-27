@@ -4,8 +4,15 @@ $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
 $mycall="IK4LZH";
-$serial=1;
-$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' order by start");
+$mystart="2024-02-01 00:00:00";
+
+$query=mysqli_query($con,"select serial from log where mycall='$mycall' and start>='$mystart' order by start limit 1");
+$row=mysqli_fetch_assoc($query);
+$serial=$row["serial"];
+if(!isset($serial))$serial=1;
+mysqli_free_result($query);
+
+$query=mysqli_query($con,"select callsign,start from log where mycall='$mycall' and start>='$mystart' order by start");
 for(;;){
   $row=mysqli_fetch_assoc($query);
   if($row==null)break;
