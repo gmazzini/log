@@ -11,7 +11,7 @@ for(;;){
   if($row==null)break;
   $signaltx=$row["signaltx"];
   $signalrx=$row["signalrx"];
-  $diff=$signaltx-$signalrx;
+  $diff=((int)$signaltx)-((int)$signalrx);
   @ $cc[$diff]++;
 }
 mysqli_free_result($query);
