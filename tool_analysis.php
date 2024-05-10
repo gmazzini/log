@@ -15,13 +15,13 @@ for(;;){
   $signalrx=$row["signalrx"];
   $oo=searchcty($con,$call);
   $diff=((int)$signaltx)-((int)$signalrx);
-  @$cc[$diff]++;
   @$cv[$oo["cont"]][$diff]++;
 }
 mysqli_free_result($query);
-ksort($cc);
-for($i=-40;$i<=40;$i++)printf("%d,%7.4f\n",$i,$cc[$i]);
-print_r($cv);
+$ak=array_key($cv);
+foreach($ak as $k => $v){
+  for($i=-40;$i<=40;$i++)printf("%s,%d,%d\n",$v,$i,$cv[$v][$i]);
+}
 
 mysqli_close($con);
 ?>
