@@ -4,6 +4,7 @@ $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
 $mycall="IK4LZH";
+for($i=-50;$i<50;$i++)$cc[$i]=0;
 
 $query=mysqli_query($con,"select signalrx,signaltx from log where mycall='$mycall' and mode='FT8'");
 for(;;){
@@ -12,7 +13,7 @@ for(;;){
   $signaltx=$row["signaltx"];
   $signalrx=$row["signalrx"];
   $diff=((int)$signaltx)-((int)$signalrx);
-  @ $cc[$diff]++;
+  $cc[$diff]++;
 }
 mysqli_free_result($query);
 
