@@ -17,7 +17,7 @@ for(;;){
 mysqli_free_result($query);
 ksort($cc);
 $t=0; for($i=-40;$i<=40;$i++)$t+=$cc[$i];
-for($i=-40;$i<=40;$i++)printf("%d,%7.4f\n",$i,$cc[$i]/$t);
+for($i=-40;$i<=40;$i++)printf("%d,%7.4f\n",$i,$cc[$i]/$t*100);
 
 mysqli_close($con);
 ?>
