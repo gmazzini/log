@@ -18,7 +18,7 @@ for(;;){
   @$cv[$oo["cont"]][$diff]++;
 }
 mysqli_free_result($query);
-$ak=array_key($cv);
+$ak=array_keys($cv);
 foreach($ak as $k => $v){
   for($i=-40;$i<=40;$i++)printf("%s,%d,%d\n",$v,$i,$cv[$v][$i]);
 }
