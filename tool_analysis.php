@@ -1,5 +1,6 @@
 <?php
 include "local.php";
+include "utility.php";
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 
