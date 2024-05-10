@@ -15,7 +15,7 @@ for(;;){
   @$cc[$diff]++;
 }
 mysqli_free_result($query);
-
+ksort($cc);
 print_r($cc);
 
 mysqli_close($con);
