@@ -21,5 +21,6 @@ for(;;){
 function xx($ss,$mm){
   socket_write($ss,$mm,strlen($mm));
   $rr=socket_read($ss,1024);
+  return $rr;
 }
 ?>
