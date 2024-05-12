@@ -6,7 +6,7 @@ $sock2=socket_create(AF_INET,SOCK_STREAM,0);
 socket_connect($sock2,"10.0.0.10",60000);
 $aux=trim(xx($sock2,"##CN;"));
 if($aux!="##CN1;"){echo "CN problem\n"; exit(-1);}
-$aux=trim(xx($sock2,"##ID00".sprintf("%d%d%s%s;",strlen($ts890s_login),strlen($ts890s_passwd),$ts890s_login,$ts890_passwd)));
+$aux=trim(xx($sock2,"##ID00".sprintf("%d%d%s%s;",strlen($ts890s_login),strlen($ts890s_passwd),$ts890s_login,$ts890s_passwd)));
 if($aux!="##ID1;"){echo "ID problem\n"; exit(-1);}
 for(;;){
   socket_recvfrom($sock1,$aux,1000,0,$remote_ip,$remote_port);
