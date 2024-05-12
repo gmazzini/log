@@ -14,9 +14,11 @@ for(;;){
   $buf=socket_read($msg,1024);
   if(strpos($buf,"i")!==false){
     $aux=xx($sock2,"FA;");
-    $mm=substr($aux,2,-1);
+    $mm=substr($aux,2,-1)."\n";
     socket_write($msg,$mm,strlen($mm));
   }
+  socket_close($msg);
+  echo ".\n";
 }
 function xx($ss,$mm){
   socket_write($ss,$mm,strlen($mm));
