@@ -9,15 +9,14 @@ $aux=trim(xx($sock2,"##CN;"));
 if($aux!="##CN1;"){echo "CN problem\n"; exit(-1);}
 $aux=trim(xx($sock2,"##ID00".sprintf("%d%d%s%s;",strlen($ts890s_login),strlen($ts890s_passwd),$ts890s_login,$ts890s_passwd)));
 if($aux!="##ID1;"){echo "ID problem\n"; exit(-1);}
+msg=socket_accept($sock1);  
 for(;;){
-  $msg=socket_accept($sock1);  
   $buf=socket_read($msg,1024);
   if(strpos($buf,"i")!==false){
     $aux=xx($sock2,"FA;");
     $mm=substr($aux,2,-1)."\n";
     socket_write($msg,$mm,strlen($mm));
   }
-  socket_close($msg);
   echo ".\n";
 }
 function xx($ss,$mm){
