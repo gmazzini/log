@@ -1,7 +1,7 @@
 <?php
 include "login.php";
 $sock1=socket_create(AF_INET,SOCK_STREAM,SOL_TCP);
-socket_bind($sock1,"0.0.0.0",6780)
+socket_bind($sock1,"0.0.0.0",6780);
 socket_listen($sock1,5);
 $sock2=socket_create(AF_INET,SOCK_STREAM,0);
 socket_connect($sock2,"10.0.0.10",60000);
@@ -15,7 +15,7 @@ for(;;){
   if(strpos($buf,"i")!==false){
     $aux=xx($sock2,"FA;");
     $mm=substr($aux,2,-1);
-    socket_write($ss,$mm,strlen($mm));
+    socket_write($msg,$mm,strlen($mm));
   }
 }
 function xx($ss,$mm){
