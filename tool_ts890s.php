@@ -1,7 +1,7 @@
 <?php
 include "login.php";
-$sock1=socket_create(AF_INET,SOCK_DGRAM,0);
-socket_bind($sock1,"0.0.0.0",6780);
+$sock1=socket_create(AF_INET,SOCK_STREAM,SOL_TCP);
+socket_connect($sock1,"0.0.0.0",6780);
 $sock2=socket_create(AF_INET,SOCK_STREAM,0);
 socket_connect($sock2,"10.0.0.10",60000);
 $aux=trim(xx($sock2,"##CN;"));
@@ -9,15 +9,13 @@ if($aux!="##CN1;"){echo "CN problem\n"; exit(-1);}
 $aux=trim(xx($sock2,"##ID00".sprintf("%d%d%s%s;",strlen($ts890s_login),strlen($ts890s_passwd),$ts890s_login,$ts890s_passwd)));
 if($aux!="##ID1;"){echo "ID problem\n"; exit(-1);}
 for(;;){
-  socket_recvfrom($sock1,$aux,1000,0,$remote_ip,$remote_port);
-  if(strpos($aux,"i")!==false){
+  $buf=socket_read($sock1,1024);
+  if(strpos($buf,"i")!==false){
     $aux=xx($sock2,"FA;");
     $mm=substr($aux,2,-1);
     socket_write($ss,$mm,strlen($mm));
   }
-
 }
-
 function xx($ss,$mm){
   socket_write($ss,$mm,strlen($mm));
   $rr=socket_read($ss,1024);
