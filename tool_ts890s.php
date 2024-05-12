@@ -17,6 +17,11 @@ for(;;){
     $mm=substr($aux,2,-1)."\n";
     socket_write($msg,$mm,strlen($mm));
   }
+  if(strpos($buf,"f")!==false){
+    $aux=xx($sock2,"FB;");
+    $mm=substr($aux,2,-1)."\n";
+    socket_write($msg,$mm,strlen($mm));
+  }
   echo ".\n";
 }
 function xx($ss,$mm){
