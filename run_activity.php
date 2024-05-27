@@ -32,9 +32,9 @@ for(;;){
   myinc($w,2,$year,$dxcc);
   myinc($w,3,$year,$callsign);
   myinc($w,4,$year,$wpx);
-  if($row["lotw"]==1)myinc($w,5,$year);
-  if($row["eqsl"]==1)myinc($w,6,$year);
-  if($row["qrz"]==1)myinc($w,7,$year);
+  if($row["lotw"]==1){myinc($w,5,$year); myinc($w,5,"ALL");}
+  if($row["eqsl"]==1){myinc($w,6,$year); myinc($w,6,"ALL");}
+  if($row["qrz"]==1){myinc($w,7,$year); myinc($w,7,"ALL");}
   
   $yymm=substr($start,0,7);
   if($yymm>=$ei2&&$yymm<=$es2){
