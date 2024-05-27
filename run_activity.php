@@ -19,6 +19,12 @@ for(;;){
   $callsign=$row["callsign"];
   $wpx=wpx($callsign);
   $start=$row["start"];
+
+  myinc($w,0,"ALL");
+  myinc($w,1,"ALL",$mode);
+  myinc($w,2,"ALL",$dxcc);
+  myinc($w,3,"ALL",$callsign);
+  myinc($w,4,"ALL",$wpx);
   
   $year=substr($start,0,4);
   myinc($w,0,$year);
