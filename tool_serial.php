@@ -1,10 +1,7 @@
 <?php
-include "local.php";
-$con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
-mysqli_query($con,"SET time_zone='+00:00'");
 
-$mycall="IK4LZH";
 $mystart="2024-05-01 00:00:00";
+echo "<pre>$mystart\n";
 
 $query=mysqli_query($con,"select serial from log where mycall='$mycall' and start>='$mystart' order by start limit 1");
 $row=mysqli_fetch_assoc($query);
@@ -23,6 +20,5 @@ for(;;){
   if($serial%1000==0)echo "$serial\n";
 }
 mysqli_free_result($query);
-mysqli_close($con);
-
+echo "</pre>";
 ?>
