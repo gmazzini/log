@@ -1,6 +1,5 @@
 <?php
-
-$mystart="2024-05-01 00:00:00";
+$mystart=date("Y-m-d H:i:s",time()-$reserialtime);
 echo "<pre>$mystart\n";
 
 $query=mysqli_query($con,"select serial from log where mycall='$mycall' and start>='$mystart' order by start limit 1");
