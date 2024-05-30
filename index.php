@@ -236,7 +236,7 @@ else {
     case "curio": include "run_curio.php"; break;
     case "delock": include "run_delock.php"; break;
     case "reserial1m": $reserialtime=2592000; include "run_reserial.php"; break;
-    case "reserial1m": $reserialtime=15811200; include "run_reserial.php"; break;
+    case "reserial6m": $reserialtime=15811200; include "run_reserial.php"; break;
     case "activity": include "run_activity.php"; break;
   }
   
