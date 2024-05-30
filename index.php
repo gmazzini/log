@@ -1,4 +1,4 @@
-<title>LZH Logger V1.1 by IK4LZH</title>
+<title>LZH Logger V1.2 by IK4LZH</title>
 <style><?php include "style.css"; ?></style>
 <?php
 include "local.php";
@@ -235,8 +235,8 @@ else {
     case "contestscore": include "run_contest_score.php"; break;
     case "curio": include "run_curio.php"; break;
     case "delock": include "run_delock.php"; break;
-    case "reserial1m": $reserialtime=1; include "run_reserial.php"; break;
-    case "reserial1m": $reserialtime=6; include "run_reserial.php"; break;
+    case "reserial1m": $reserialtime=2592000; include "run_reserial.php"; break;
+    case "reserial1m": $reserialtime=15811200; include "run_reserial.php"; break;
     case "activity": include "run_activity.php"; break;
   }
   
