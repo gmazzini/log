@@ -207,8 +207,9 @@ else {
   
   echo "<td><pre>";
   echo "<h1>$mycall</h1>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"delock\">Delock</button>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"reserial1m\">ReSerial1m</button>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"delock\">Delock</button>\n";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"reserial1m\">ReSerial1m</button>\n";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"reserial6m\">ReSerial6m</button>";
   echo "</pre></td>";
   
   echo "</table>";
@@ -235,6 +236,7 @@ else {
     case "curio": include "run_curio.php"; break;
     case "delock": include "run_delock.php"; break;
     case "reserial1m": $reserialtime=1; include "run_reserial.php"; break;
+    case "reserial1m": $reserialtime=6; include "run_reserial.php"; break;
     case "activity": include "run_activity.php"; break;
   }
   
