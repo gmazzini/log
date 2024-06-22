@@ -1,5 +1,4 @@
 <?php
-if(isset($_GET['rigIP']) && isset($_GET['rigPORT'])){
   @$fp=fsockopen($_GET['rigIP'],$_GET['rigPORT']);
   if($fp){
     stream_set_timeout($fp,0,200000);
@@ -17,6 +16,6 @@ if(isset($_GET['rigIP']) && isset($_GET['rigPORT'])){
     printf("%s\n",$mode);
     fclose($fp);
   }
-}
+
 
 ?>
