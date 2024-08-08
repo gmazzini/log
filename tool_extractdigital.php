@@ -5,27 +5,24 @@ $mycall="IK4LZH";
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
+$lowrep=-26;
+$highrep=26;
 
-$query=mysqli_query($con,"select callsign,start,end from log where mycall='$mycall' order by callsign");
+$query=mysqli_query($con,"select freqtx,signaltx,signalrx from log where mode='FT8'");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
-  $diff=strtotime($row[2])-strtotime($row[1]);
-  if($diff>3600||$diff<0){
-    echo "modifyEND $diff $row[0]  $row[1]  $row[2]\n";
-    mysqli_query($con,"update log set end=DATE_ADD(start, INTERVAL 1 HOUR) where mycall='$mycall' and callsign='$row[0]' and start='$row[1]' and end='$row[2]'");
-  }
-  else {
-    $query2=mysqli_query($con,"select start,end from log where mycall='$mycall' and callsign='$row[0]' and start>'$row[1]' and start<'$row[2]'");
-    for(;;){
-      $row2=mysqli_fetch_array($query2);
-      if($row2==null)break;
-      echo "deleteDOUBLE $row[0]  $row[1]  $row[2]    $row2[0]  $row2[1]\n";
-      mysqli_query($con,"delete from log where mycall='$mycall' and callsign='$row[0]' and start='$row2[0]' and end='$row2[1]'");      
-    }
-    mysqli_free_result($query2);
-  }
+  $freqMHZ=(int)($row["freqtx"]/1000000);
+  if($freqMHZ==0 || $freqMHZ>29)continue;
+  $signaltx=(int)$row["signaltx"];
+  if($signaltx<$lowrep || $signaltx>$highrep)continue;
+  $signalrx=(int)$row["signalrx"];
+  if($signalrx<$lowrep || $signalrx>$highrep)continue;
+  @$acc[$freqMHZ][$signatx][$signalrx]++;
 }
 mysqli_free_result($query);
+
+print_r($acc);
+
 mysqli_close($con);
 ?>
