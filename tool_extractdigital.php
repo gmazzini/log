@@ -2,6 +2,7 @@
 include "local.php";
 
 $mycall="IK4LZH";
+// all here is to think
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -18,7 +19,7 @@ for(;;){
   if($signaltx<$lowrep || $signaltx>$highrep)continue;
   $signalrx=(int)$row["signalrx"];
   if($signalrx<$lowrep || $signalrx>$highrep)continue;
-  @$acc[$freqMHZ][$signaltx][$signalrx]++;
+  @$acc[$freqMHZ][$signaltx-$signalrx]++;
 }
 mysqli_free_result($query);
 
