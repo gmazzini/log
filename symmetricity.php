@@ -25,8 +25,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-foreach($myband as $ff => $ll)if($ll<=10 && $ll>=160)
-  
+foreach($myband as $ff => $ll)if($ll<=10 && $ll>=160)$bb[$ll]++;
 echo "<html>\n";
 echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>\n";
 echo "<script type='text/javascript'>\n";
@@ -34,9 +33,9 @@ echo "google.charts.load('current',{'packages':['corechart']});\n";
 echo "google.charts.setOnLoadCallback(drawChart);\n";
 echo "function drawChart(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
-echo "['Delta'"; foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)echo ",$ll"; echo "],\n";
+echo "['Delta'"; foreach($bb as $ll => $vv)echo ",$ll"; echo "],\n";
 for($i=$lowrep;$i<=$highrep;$i++){
-  echo "[$i"; foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160){echo ","; echo (int)$acc[$ff][$i];} echo "]";
+  echo "[$i"; foreach($bb as $ff => $ll){echo ","; echo (int)$acc[$ff][$i];} echo "]";
   if($i<$highrep)echo ",";
   echo "\n";
 }
