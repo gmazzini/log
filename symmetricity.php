@@ -36,7 +36,7 @@ echo "function drawChart(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['Delta'"; foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)echo ",$ll"; echo "],\n";
 for($i=$lowrep;$i<=$highrep;$i++){
-  echo "[$i"; foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160){echo ","; echo $acc[$ff][$i];} echo "]";
+  echo "[$i"; foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160){echo ","; echo (int)$acc[$ff][$i];} echo "]";
   if($i<$highrep)echo ",";
   echo "\n";
 }
