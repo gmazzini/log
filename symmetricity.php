@@ -25,7 +25,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
-foreach($myband as $ff => $ll)if($ll<=10 && $ll>=160)$bb[$ll]++;
+foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)$bb[$ll]++;
 
 print_r($bb);
 exit(9);
