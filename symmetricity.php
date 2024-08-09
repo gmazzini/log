@@ -40,7 +40,7 @@ for($i=$lowrep;$i<=$highrep;$i++){
   echo "\n";
 }
 echo "]);\n";
-echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',legend:{position:'bottom'}};\n";
+echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{max:0.7,min:0.0}},legend:{position:'bottom'}};\n";
 echo "var chart=new google.visualization.LineChart(document.getElementById('curve_chart'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
