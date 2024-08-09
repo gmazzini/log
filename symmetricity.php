@@ -41,7 +41,7 @@ echo "var chart=new google.visualization.LineChart(document.getElementById('curv
 echo "chart.draw(data,options);\n";
 echo "}\n";
 echo "</script>\n";
-echo "<div id='curve_chart' style='width: 900px; height: 500px'></div>\n";
+echo "<div id='curve_chart' style='width: 1400px; height: 800px'></div>\n";
 echo "</html>\n";
 
 mysqli_close($con);
