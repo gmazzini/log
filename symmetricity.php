@@ -33,7 +33,7 @@ echo "google.charts.load('current',{'packages':['corechart']});\n";
 echo "google.charts.setOnLoadCallback(drawChart);\n";
 echo "function drawChart(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
-echo "['Delta'"; foreach($bb as $ll => $vv)echo ",$ll"; echo "],\n";
+echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
 for($i=$lowrep;$i<=$highrep;$i++){
   echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo (int)$acc[$ll][$i];} echo "]";
   if($i<$highrep)echo ",";
