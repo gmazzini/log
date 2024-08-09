@@ -54,7 +54,7 @@ foreach (array(3,7,10,14,18,21,24,28) as $f){
   }
   $med=$med/$tot[$f];
   $sqr=sqrt($sqr/$tot[$f]-$med*$med);
-  printf("%02d %09d %7.5f %7.5f\n",$f,$tot[$f],$med,$sqr);
+  printf("%2d %9d %+7.5f %7.5f\n",$f,$tot[$f],$med,$sqr);
 }
 
 echo "</html>\n";
