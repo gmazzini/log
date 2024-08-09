@@ -43,6 +43,14 @@ echo "chart.draw(data,options);\n";
 echo "}\n";
 echo "</script>\n";
 echo "<div id='curve_chart' style='width: 1400px; height: 800px'></div>\n";
+
+foreach (array(3,7,10,14,18,21,24,28) as $f){
+  $med=0;
+  for($i=$lowrep;$i<=$highrep;$i++)$med+=$i*$acc[$f][$i];
+  printf("%d,ave=%f\n",$i,$med/$tot[$f]);
+}
+
+
 echo "</html>\n";
 
 mysqli_close($con);
