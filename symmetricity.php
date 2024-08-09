@@ -48,6 +48,7 @@ echo "}\n";
 echo "</script>\n";
 echo "<div id='curve_chart' style='width: 1400px; height: 800px'></div>\n";
 
+exit(0);
 echo "<pre>";
 foreach (array(3,7,10,14,18,21,24,28) as $f){
   $med=0;
