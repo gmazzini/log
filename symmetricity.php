@@ -20,7 +20,7 @@ for(;;){
   $signalrx=(int)$row["signalrx"];
   if($signalrx<$lowrep || $signalrx>$highrep)continue;
   @$acc[$freqMHZ][$signaltx-$signalrx]++;
-  @$tot[freqMHZ]++;
+  @$tot[$freqMHZ]++;
 }
 mysqli_free_result($query);
 
