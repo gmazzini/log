@@ -6,8 +6,8 @@ $mycall="IK4LZH";
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
-$lowrep=-26;
-$highrep=26;
+$lowrep=-35;
+$highrep=35;
 
 $query=mysqli_query($con,"select freqtx,signaltx,signalrx from log where mode='FT8'");
 for(;;){
@@ -54,7 +54,7 @@ foreach (array(3,7,10,14,18,21,24,28) as $f){
   }
   $med=$med/$tot[$f];
   $sqr=sqrt($sqr/$tot[$f]-$med*$med);
-  printf("%d,ave=%f,sqr=%f\n",$f,$med,$sqr);
+  printf("%02d %09d %7.5f %7.5f\n",$f,$tot[$f],$med,$sqr);
 }
 
 echo "</html>\n";
