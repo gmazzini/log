@@ -35,7 +35,7 @@ echo "function drawChart(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
 for($i=$lowrep;$i<=$highrep;$i++){
-  echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo (int)$acc[$ll][$i];} echo "]";
+  echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
   if($i<$highrep)echo ",";
   echo "\n";
 }
