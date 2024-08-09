@@ -20,6 +20,7 @@ for(;;){
   $signalrx=(int)$row["signalrx"];
   if($signalrx<$lowrep || $signalrx>$highrep)continue;
   @$acc[$freqMHZ][$signaltx-$signalrx]++;
+  @$tot[freqMHZ]++;
 }
 mysqli_free_result($query);
 
@@ -33,8 +34,8 @@ echo "google.charts.setOnLoadCallback(drawChart);\n";
 echo "function drawChart(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['Delta','80m','40m','30m','20m','17m','15m','12m','10m'],\n";
-for($i=$lowrep;$i<$highrep;$i++)printf("[%d,%d,%d,%d,%d,%d,%d,%d,%d],\n",$i,$acc[3][$i],$acc[7][$i],$acc[10][$i],$acc[14][$i],$acc[18][$i],$acc[21][$i],$acc[24][$i],$acc[28][$i]);
-printf("[%d,%d,%d,%d,%d,%d,%d,%d,%d]\n",$i,$acc[3][$i],$acc[7][$i],$acc[10][$i],$acc[14][$i],$acc[18][$i],$acc[21][$i],$acc[24][$i],$acc[28][$i]);
+for($i=$lowrep;$i<$highrep;$i++)printf("[%d,%f,%f,%f,%f,%f,%f,%f,%f],\n",$i,$acc[3][$i]/$tot[3],$acc[7][$i]/$tot[7],$acc[10][$i]/$tot[10],$acc[14][$i]/$tot[14],$acc[18][$i]/$tot[18],$acc[21][$i]/$tot[21],$acc[24][$i]/$tot[24],$acc[28][$i]/$tot[28]);
+printf("[%d,%f,%f,%f,%f,%f,%f,%f,%f]\n",$i,$acc[3][$i]/$tot[3],$acc[7][$i]/$tot[7],$acc[10][$i]/$tot[10],$acc[14][$i]/$tot[14],$acc[18][$i]/$tot[18],$acc[21][$i]/$tot[21],$acc[24][$i]/$tot[24],$acc[28][$i]/$tot[28]);
 echo "]);\n";
 echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',legend:{position:'bottom'}};\n";
 echo "var chart=new google.visualization.LineChart(document.getElementById('curve_chart'));\n";
