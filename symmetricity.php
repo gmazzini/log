@@ -26,6 +26,9 @@ for(;;){
 mysqli_free_result($query);
 
 foreach($myband as $ff => $ll)if($ll<=10 && $ll>=160)$bb[$ll]++;
+
+print_r($bb);
+
 echo "<html>\n";
 echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>\n";
 echo "<script type='text/javascript'>\n";
