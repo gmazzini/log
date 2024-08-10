@@ -17,9 +17,9 @@ for(;;){
   $freqMHZ=(int)($row["freqtx"]/1000000);
   if($freqMHZ==0 || $freqMHZ>29)continue;
   $signaltx=(int)$row["signaltx"];
-  if($signaltx<$lowrep || $signaltx>$highrep)continue;
+  if(!is_numeric($row["signaltx"]) || $signaltx<$lowrep || $signaltx>$highrep)continue;
   $signalrx=(int)$row["signalrx"];
-  if($signalrx<$lowrep || $signalrx>$highrep)continue;
+  if(!is_numeric($row["signalrx"]) $signalrx<$lowrep || $signalrx>$highrep)continue;
   @$acc[$myband[$freqMHZ]][$signaltx-$signalrx]++;
   @$tot[$myband[$freqMHZ]]++;
 }
