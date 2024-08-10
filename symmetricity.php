@@ -48,6 +48,7 @@ echo "</script>\n";
 echo "<div id='curve_chart' style='width: 1400px; height: 800px'></div>\n";
 
 echo "<pre>";
+printf("%4s %9s %7s %7s\n","band","sample","average","stdev");
 foreach($bb as $ll => $vv){
   $med=0;
   $sqr=0;
@@ -57,7 +58,7 @@ foreach($bb as $ll => $vv){
   }
   $med=$med/$tot[$ll];
   $sqr=sqrt($sqr/$tot[$ll]-$med*$med);
-  printf("%3d %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
+  printf("%4d %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
 }
 echo "</html>\n";
 
