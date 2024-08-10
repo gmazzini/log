@@ -19,7 +19,7 @@ for(;;){
   $signaltx=(int)$row["signaltx"];
   if(!is_numeric($row["signaltx"]) || $signaltx<$lowrep || $signaltx>$highrep)continue;
   $signalrx=(int)$row["signalrx"];
-  if(!is_numeric($row["signalrx"]) $signalrx<$lowrep || $signalrx>$highrep)continue;
+  if(!is_numeric($row["signalrx"]) || $signalrx<$lowrep || $signalrx>$highrep)continue;
   @$acc[$myband[$freqMHZ]][$signaltx-$signalrx]++;
   @$tot[$myband[$freqMHZ]]++;
 }
