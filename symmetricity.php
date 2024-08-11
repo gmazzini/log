@@ -10,7 +10,7 @@ mysqli_query($con,"SET time_zone='+00:00'");
 $lowrep=-35;
 $highrep=35;
 
-$query=mysqli_query($con,"select freqtx,signaltx,signalrx from log where mode='FT8'");
+$query=mysqli_query($con,"select freqtx,signaltx,signalrx from log where mode='FT8' or mode='MFSK'");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
