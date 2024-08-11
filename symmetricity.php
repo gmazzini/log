@@ -41,11 +41,11 @@ for($i=$lowrep;$i<=$highrep;$i++){
 }
 echo "]);\n";
 echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
-echo "var chart=new google.visualization.LineChart(document.getElementById('curve_chart'));\n";
+echo "var chart=new google.visualization.LineChart(document.getElementById('curve1'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
 echo "</script>\n";
-echo "<div id='curve_chart' style='width: 1400px; height: 800px'></div>\n";
+echo "<div id='curve1' style='width: 1400px; height: 800px'></div>\n";
 
 echo "<pre>";
 printf("%4s %9s %7s %7s\n","band","QSOs","average","stdev");
