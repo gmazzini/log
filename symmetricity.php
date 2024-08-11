@@ -30,8 +30,10 @@ echo "<html>\n";
 echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>\n";
 echo "<script type='text/javascript'>\n";
 echo "google.charts.load('current',{'packages':['corechart']});\n";
-echo "google.charts.setOnLoadCallback(drawChart);\n";
-echo "function drawChart(){\n";
+echo "google.charts.setOnLoadCallback(draw1);\n";
+echo "google.charts.setOnLoadCallback(draw2);\n";
+
+echo "function draw1(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
 for($i=$lowrep;$i<=$highrep;$i++){
@@ -44,6 +46,21 @@ echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',v
 echo "var chart=new google.visualization.LineChart(document.getElementById('curve1'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
+
+echo "function draw2(){\n";
+echo "var data=google.visualization.arrayToDataTable([\n";
+echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
+for($i=$lowrep;$i<=$highrep;$i++){
+  echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
+  if($i<$highrep)echo ",";
+  echo "\n";
+}
+echo "]);\n";
+echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
+echo "var chart=new google.visualization.LineChart(document.getElementById('curve2'));\n";
+echo "chart.draw(data,options);\n";
+echo "}\n";
+
 echo "</script>\n";
 echo "<div id='curve1' style='width: 1400px; height: 800px'></div>\n";
 
@@ -60,6 +77,8 @@ foreach($bb as $ll => $vv){
   $sqr=sqrt($sqr/$tot[$ll]-$med*$med);
   printf("%4d %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
 }
+echo "<div id='curve2' style='width: 1400px; height: 800px'></div>\n";
+
 echo "</html>\n";
 
 mysqli_close($con);
