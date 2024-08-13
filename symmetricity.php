@@ -45,7 +45,7 @@ for($i=$lowrep;$i<=$highrep;$i++){
   echo "\n";
 }
 echo "]);\n";
-echo "var options={title:'TX-RX(dB)',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
+echo "var options={title:'TX-RX(dB) pdfs',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
 echo "var chart=new google.visualization.LineChart(document.getElementById('curve1'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
@@ -67,7 +67,7 @@ echo "}\n";
 echo "</script>\n";
 echo "<div id='curve1' style='width: 1400px; height: 800px'></div>\n";
 
-echo "<pre>";
+echo "<pre><b>Characteristic parameter analysis</b>\n";
 printf("%4s %9s %7s %7s\n","band","QSOs","average","stdev");
 foreach($bb as $ll => $vv){
   $med=0;
@@ -80,6 +80,8 @@ foreach($bb as $ll => $vv){
   $sqr=sqrt($sqr/$tot[$ll]-$med*$med);
   printf("%4s %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
 }
+echo "</pre>";
+
 echo "<div id='curve2' style='width: 1400px; height: 800px'></div>\n";
 
 echo "</html>\n";
