@@ -3,7 +3,6 @@ include "local.php";
 include "utility.php";
 
 $mycall="IK4LZH";
-// all here is to think
 
 $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
@@ -21,11 +20,14 @@ for(;;){
   $signalrx=(int)$row["signalrx"];
   if(!is_numeric($row["signalrx"]) || $signalrx<$lowrep || $signalrx>$highrep)continue;
   @$acc[$myband[$freqMHZ]][$signaltx-$signalrx]++;
+  @$acc["all"][$signaltx-$signalrx]++;
   @$tot[$myband[$freqMHZ]]++;
+  @$tot["all"]++;
 }
 mysqli_free_result($query);
 
 foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)@$bb[$ll]++;
+$bb["all"]=1;
 echo "<html>\n";
 echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>\n";
 echo "<script type='text/javascript'>\n";
