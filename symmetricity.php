@@ -29,6 +29,7 @@ mysqli_free_result($query);
 foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)@$bb[$ll]++;
 $bb["all"]=1;
 echo "<html>\n";
+echo "<h2>Real time channel symmetricity data analisys on IK4LZH QSOs collection</h2>!;
 echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>\n";
 echo "<script type='text/javascript'>\n";
 echo "google.charts.load('current',{'packages':['corechart']});\n";
@@ -44,7 +45,7 @@ for($i=$lowrep;$i<=$highrep;$i++){
   echo "\n";
 }
 echo "]);\n";
-echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
+echo "var options={title:'TX-RX(dB)',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
 echo "var chart=new google.visualization.LineChart(document.getElementById('curve1'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
