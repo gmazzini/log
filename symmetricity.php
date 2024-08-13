@@ -77,7 +77,7 @@ foreach($bb as $ll => $vv){
   }
   $med=$med/$tot[$ll];
   $sqr=sqrt($sqr/$tot[$ll]-$med*$med);
-  printf("%4d %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
+  printf("%4s %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
 }
 echo "<div id='curve2' style='width: 1400px; height: 800px'></div>\n";
 
