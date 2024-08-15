@@ -9,21 +9,15 @@ mysqli_query($con,"SET time_zone='+00:00'");
 $lowrep=-35;
 $highrep=35;
 
-$query=mysqli_query($con,"select dxcc,start from log where mode='FT8' or mode='MFSK'");
+$query=mysqli_query($con,"select cqzone,dxcc from cty");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
-  $freqMHZ=(int)($row["freqtx"]/1000000);
-  if($freqMHZ==0 || $freqMHZ>29)continue;
-  $signaltx=(int)$row["signaltx"];
-  if(!is_numeric($row["signaltx"]) || $signaltx<$lowrep || $signaltx>$highrep)continue;
-  $signalrx=(int)$row["signalrx"];
-  if(!is_numeric($row["signalrx"]) || $signalrx<$lowrep || $signalrx>$highrep)continue;
+  $mycq[$row["dxcc"]]=$row["cqzone"];
 }
 mysqli_free_result($query);
 
-
-$query=mysqli_query($con,"select freqtx,signaltx,signalrx from log where mode='FT8' or mode='MFSK'");
+$query=mysqli_query($con,"select freqtx,signaltx,signalrx,dxcc,start from log where mode='FT8' or mode='MFSK'");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
@@ -37,8 +31,12 @@ for(;;){
   @$acc["all"][$signaltx-$signalrx]++;
   @$tot[$myband[$freqMHZ]]++;
   @$tot["all"]++;
+  @$cqdata[sub($row["start"],0,7)][$mycq[$row["dxcc"]]]++;
 }
 mysqli_free_result($query);
+
+print_r($cqdata);
+exit(0);
 
 foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)@$bb[$ll]++;
 $bb["all"]=1;
