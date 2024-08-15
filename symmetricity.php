@@ -70,7 +70,7 @@ foreach($cqdata as $ll => $vv){
 }
 echo "['','2020-01','0',0]\n";
 echo "]);\n";
-echo "var colorAxis:{colors:['yellow','red']};\n";
+echo "var options=colorAxis:{colors:['yellow','red']};\n";
 echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
