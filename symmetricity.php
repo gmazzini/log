@@ -31,7 +31,7 @@ for(;;){
   @$acc["all"][$signaltx-$signalrx]++;
   @$tot[$myband[$freqMHZ]]++;
   @$tot["all"]++;
-  @$cqdata[substr($row["start"],0,7)][$mycq[$row["dxcc"]]]++;
+  @$cqdata[substr($row["start"],0,4).substr($row["start"],5,2)][$mycq[$row["dxcc"]]]++;
 }
 mysqli_free_result($query);
 ksort($cqdata);
