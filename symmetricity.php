@@ -66,6 +66,7 @@ echo "['','X','Y','tot'],\n";
 foreach($cqdata as $ll => $vv){
   foreach($vv as $lll => $vvv){
     echo "['','$ll','$lll',$vvv],\n";
+  }
 }
 echo "['','2020-01','0',0]\n";
 echo "]);\n";
