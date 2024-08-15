@@ -63,7 +63,9 @@ echo "}\n";
 echo "function draw2(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['','X','Y','tot'],\n";
+$i=0;
 foreach($cqdata as $ll => $vv){
+  if(++$i>10)break;
   foreach($vv as $lll => $vvv){
     if($lll>0)echo "['','$ll',$lll,$vvv],\n";
   }
