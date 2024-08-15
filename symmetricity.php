@@ -65,7 +65,7 @@ echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['','X','Y','tot'],\n";
 foreach($cqdata as $ll => $vv){
   foreach($vv as $lll => $vvv){
-    echo "['','$ll','$lll',$vvv],\n";
+    if($vvv>0)echo "['','$ll','$lll',$vvv],\n";
   }
 }
 echo "['','2020-01','0',0]\n";
