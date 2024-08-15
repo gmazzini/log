@@ -35,6 +35,7 @@ for(;;){
 }
 mysqli_free_result($query);
 
+ksort($cqdata);
 print_r($cqdata);
 exit(0);
 
