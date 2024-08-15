@@ -34,10 +34,7 @@ for(;;){
   @$cqdata[substr($row["start"],0,7)][$mycq[$row["dxcc"]]]++;
 }
 mysqli_free_result($query);
-
 ksort($cqdata);
-print_r($cqdata);
-exit(0);
 
 foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)@$bb[$ll]++;
 $bb["all"]=1;
@@ -65,15 +62,15 @@ echo "}\n";
 
 echo "function draw2(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
-echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
-for($i=$lowrep;$i<=$highrep;$i++){
-  echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
-  if($i<$highrep)echo ",";
-  echo "\n";
+echo "['','X','Y','tot'],\n";
+foreach($cqdata as $ll => $vv){
+  foreach($vv as $lll => $vvv){
+    echo "['','$ll','$lll',$vvv],\n";
 }
+echo "['','2020-01','0',0]\n";
 echo "]);\n";
-echo "var options={title:'Channel Symmetricity by IK4LZH',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
-echo "var chart=new google.visualization.LineChart(document.getElementById('curve2'));\n";
+echo "var colorAxis:{colors:['yellow','red']};\n";
+echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
 
