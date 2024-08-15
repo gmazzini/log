@@ -68,7 +68,7 @@ foreach($cqdata as $ll => $vv){
     if($lll>0)echo "['','$ll',$lll,$vvv],\n";
   }
 }
-echo "['','2020-01','0',0]\n";
+echo "['','2020-01',1,1]\n";
 echo "]);\n";
 echo "var options=colorAxis:{colors:['yellow','red']};\n";
 echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
