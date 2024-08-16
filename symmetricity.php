@@ -67,7 +67,7 @@ $i=0;
 foreach($cqdata as $ll => $vv){
   if(++$i>100)break;
   foreach($vv as $lll => $vvv){
-    if($lll>0)echo "['',$ll,$lll,$vvv],\n";
+    if($lll>0)echo "['$vvv',$ll,$lll,$vvv],\n";
   }
 }
 echo "['',202001,1,1]\n";
