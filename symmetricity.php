@@ -65,7 +65,7 @@ echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['ID','X','Y','tot'],\n";
 $i=0;
 foreach($cqdata as $ll => $vv){
-  if(++$i>10)break;
+  if(++$i>100)break;
   foreach($vv as $lll => $vvv){
     if($lll>0)echo "['',$ll,$lll,$vvv],\n";
   }
