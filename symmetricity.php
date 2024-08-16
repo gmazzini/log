@@ -72,7 +72,7 @@ foreach($cqdata as $ll => $vv){
 }
 echo "['',202001,1,1]\n";
 echo "]);\n";
-echo "var options=colorAxis:{colors:['yellow','red']};\n";
+echo "var options={colorAxis:{colors:['yellow','red']}};\n";
 echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
 echo "chart.draw(data,options);\n";
 echo "}\n";
