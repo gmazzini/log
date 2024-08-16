@@ -62,12 +62,12 @@ echo "}\n";
 
 echo "function draw2(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
-echo "['ID','X','Y','tot'],\n";
+echo "['ID','X','Y','tot','size'],\n";
 $i=0;
 foreach($cqdata as $ll => $vv){
   if(++$i>100)break;
   foreach($vv as $lll => $vvv){
-    if($lll>0)echo "['$vvv',$ll,$lll,$vvv],\n";
+    if($lll>0)echo "['',$ll,$lll,$vvv,3],\n";
   }
 }
 echo "['',202001,1,1]\n";
