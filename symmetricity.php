@@ -62,14 +62,14 @@ echo "}\n";
 
 echo "function draw2(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
-echo "['ID','X','Y','tot'],\n";
+echo "['ID','X','Y','tot','vv'],\n";
 foreach($cqdata as $ll => $vv){
   if($ll<201901)continue;
   foreach($vv as $lll => $vvv){
-    if($lll>0)echo "['',$ll,$lll,$vvv],\n";
+    if($lll>0)echo "['',$ll,$lll,$vvv,1],\n";
   }
 }
-echo "['',202001,1,1]\n";
+echo "['',202501,1,1,4]\n";
 echo "]);\n";
 echo "var options={colorAxis:{colors:['yellow','red']},bubble:{textStyle:{fontSize:6}}};\n";
 echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
