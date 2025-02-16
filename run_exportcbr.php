@@ -5,7 +5,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
   $query=mysqli_query($con,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='$mycall'");
   $row=mysqli_fetch_assoc($query);
   mysqli_free_result($query);
-  $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
+  $fp=fopen("/home/www/log.mazzini.org/files/$name","w");
   fprintf($fp,"START-OF-LOG: 3.0\n");
   fprintf($fp,"CONTEST: xxxxxx\n");
   fprintf($fp,"CALLSIGN: $mycall\n");
@@ -39,7 +39,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
   mysqli_free_result($query);
   fprintf($fp,"END-OF-LOG:\n");
   fclose($fp);
-  echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download Cabrillo</a><br>";
+  echo "<pre><a href='https://log.mazzini.org/files/$name' download>Download Cabrillo</a><br>";
   echo "$export_from $export_to\n";
 }
 
