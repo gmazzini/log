@@ -30,7 +30,7 @@ if(strlen($Icontest)>0){
 
 if($go!=""){
   $name=rand().rand().rand().rand().".cbr";
-  $fn="/home/www/log.chaos.cc/files/$name";
+  $fn="/home/www/log/files/$name";
   $fp=fopen($fn,"w");
   fprintf($fp,"START-OF-LOG: 3.0\n");
   fprintf($fp,"CALLSIGN: $mycall\n");
