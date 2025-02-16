@@ -2,7 +2,7 @@
 
 if(isset($_FILES['myfile']['tmp_name'])){
   $name=rand().rand().rand().rand().".adi";
-  $fp=fopen("/home/www/log.chaos.cc/files/$name","w");
+  $fp=fopen("/home/www/log/files/$name","w");
   fprintf($fp,"%s\n",myinsert("LZHlogger","PROGRAMID"));
   fprintf($fp,"<EOH>\n\n");
   $aux=file_get_contents($_FILES['myfile']['tmp_name']);
@@ -31,7 +31,7 @@ if(isset($_FILES['myfile']['tmp_name'])){
   }
   mysqli_free_result($query);
   fclose($fp);
-  echo "<pre><a href='https://log.chaos.cc/files/$name' download>Download ADIF</a><br>";
+  echo "<pre><a href='https://log.mazzini.org/files/$name' download>Download ADIF</a><br>";
   echo "$export_from $export_to\n";
 }
 
