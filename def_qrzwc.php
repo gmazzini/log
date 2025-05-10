@@ -104,7 +104,7 @@ function myqrzwebcontact($call,&$Ewc,&$visited){
   return $dd;
 }
 
-function myemailsend($from,$to,$subject,$html){
+function myemailsend_old($from,$to,$subject,$html){
   global $mailgun_secret;
   $post=array('to' => $to,'from' => $from,'subject' => $subject,'html' => $html);
   $ch=curl_init();
@@ -116,6 +116,42 @@ function myemailsend($from,$to,$subject,$html){
   curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
   echo curl_exec($ch);
   curl_close($ch);
+}
+
+function sendCommand($command,$socket,$expectedCode){
+  fwrite($socket,$command."\r\n");
+  $response="";
+  while($line=fgets($socket,512)){
+    $response.=$line;
+    if(preg_match("/^$expectedCode\s/", $line))break;
+  }
+  return $response;
+}
+
+function myemailsend($from,$to,$subject,$body){
+  global $mail_user,$mail_passwd;
+  $socket=fsockopen("s016.mazzini.org",587,$errno,$errstr,10);
+  fgets($socket);
+  sendCommand("EHLO localhost",$socket,"250");
+  sendCommand("STARTTLS",$socket,"220");
+  stream_socket_enable_crypto($socket,true,STREAM_CRYPTO_METHOD_TLS_CLIENT);
+  sendCommand("EHLO localhost",$socket,"250");
+  sendCommand("AUTH LOGIN",$socket,"334");
+  sendCommand(base64_encode($mail_user),$socket,"334");
+  sendCommand(base64_encode($mail_passwd),$socket,"235");
+  sendCommand("MAIL FROM:<$from>",$socket,"250");
+  sendCommand("RCPT TO:<$to>",$socket,"250");
+  sendCommand("DATA",$socket,"354");
+  fwrite($socket,"Subject: $subject\r\n");
+  fwrite($socket,"From: $from\r\n");
+  fwrite($socket,"To: $to\r\n");
+  fwrite($socket,"MIME-Version: 1.0\r\n");
+  fwrite($socket,"Content-Type: text/html; charset=UTF-8\r\n");
+  fwrite($socket,"\r\n");
+  fwrite($socket,"$body\r\n.\r\n");
+  $response=fgets($socket,512);
+  sendCommand("QUIT",$socket, "221");
+  fclose($socket);
 }
 
 ?>
