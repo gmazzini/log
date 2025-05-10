@@ -63,6 +63,7 @@ for(;;){
     myemailsend($mycall.'<'.$myemail.'>',$email,'QRZ Web Contacts',$msg);
     mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
     mysqli_query($con,"insert ignore into qrzwebcontact_email (email) values ('$email')");
+    sleep(30);
   }  
 }
 
