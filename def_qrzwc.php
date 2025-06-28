@@ -6,6 +6,7 @@ function myqrzsetwebcontact($callsign){
   curl_setopt($ch,CURLOPT_URL,"https://www.qrz.com/lookup/$callsign");
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   $out=curl_exec($ch);
   curl_close($ch);
@@ -25,6 +26,7 @@ function myqrzsetwebcontact($callsign){
   curl_setopt($ch,CURLOPT_URL,$myurl);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
   curl_setopt($ch,CURLOPT_COOKIE,$cookie);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   $out=curl_exec($ch);
@@ -43,6 +45,7 @@ function myqrzsetwebcontact($callsign){
   curl_setopt($ch,CURLOPT_URL,"https://www.qrz.com/db/".$callsign);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
   curl_setopt($ch,CURLOPT_COOKIE,$cookie);
   curl_setopt($ch,CURLOPT_POST,1);
   curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
@@ -62,6 +65,7 @@ function myqrzwebcontact($call,&$Ewc,&$visited){
   curl_setopt($ch,CURLOPT_URL,"https://www.qrz.com/lookup/$call");
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   $out=curl_exec($ch);
   curl_close($ch);
@@ -88,6 +92,7 @@ function myqrzwebcontact($call,&$Ewc,&$visited){
   curl_setopt($ch,CURLOPT_URL,$myurl);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("User-Agent: $agent"));
   $out=curl_exec($ch);
   curl_close($ch);
@@ -111,6 +116,7 @@ function myemailsend_old($from,$to,$subject,$html){
   curl_setopt($ch,CURLOPT_URL,"https://api.eu.mailgun.net/v3/mg.mazzini.org/messages");
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
   curl_setopt($ch,CURLOPT_HTTPHEADER,Array("Authorization: Basic ".base64_encode($mailgun_secret)));
   curl_setopt($ch,CURLOPT_POST,1);
   curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
