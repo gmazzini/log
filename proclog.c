@@ -20,7 +20,7 @@ int main(void) {
   for(c=0;c<TOTTOK;c++){
     strcpy(tok[c],token);
     token=strtok(NULL,",");
-    if(toke==NULL)exit(0);
+    if(token==NULL)exit(0);
   }
 
     MYSQL *con = mysql_init(NULL);
