@@ -12,7 +12,8 @@ int main(void) {
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
-  time_t epoch;
+  struct tm ts,te;
+  time_t epoch,td;
 
   for(len=0;;){
     c=getchar();
@@ -57,11 +58,13 @@ int main(void) {
       if(atoi(row[8])==1)strcat(aux1,"L");
       if(atoi(row[9])==1)strcat(aux1,"E");
       if(atoi(row[10])==1)strcat(aux1,"Q");
-
-//    $timediff=strtotime($row["end"])-strtotime($row["start"]);
-      
-      // printf("%s",row[2]);
-      printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],"xxxx",row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
+      strptime(row[1],"%Y-%m-%d %H:%M:%S",&te); strptime(row[0],"%Y-%m-%d %H:%M:%S",&ts);
+      td=mktime(&te)-mktime(&ts);
+      if(td==0)strcpy(aux2,"(0s)");
+      else if(td<60)sprintf(aux2,"(%ds)",td);
+      else if(td<3600)sprintf(aux2,"(%dm)",td/60);
+      else sprintf(aux2,"(%dh)",td/3600);
+      printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       printf("\n");
     }
     mysql_free_result(res);
