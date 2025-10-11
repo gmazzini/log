@@ -3,10 +3,11 @@
 #include <string.h>
 #include <mysql/mysql.h>
 #include "log.def"
+#define TOTTOK 5
 
 int main(void) {
   int c,len;
-  char buf[1001];
+  char buf[1001],token,tok[TOTTOK][100];
 
   for(len=0;;){
     c=getchar();
@@ -15,6 +16,12 @@ int main(void) {
     if(len<1000)len++;
   }
   buf[len++]='\0';
+  token=strtok(input,",");
+  for(c=0;c<TOTTOK;c++){
+    strcpy(tok[c],token);
+    token=strtok(NULL,",");
+    if(toke==NULL)exit(0);
+  }
 
     MYSQL *con = mysql_init(NULL);
     mysql_real_connect(con, dbhost, dbuser, dbpassword, dbname, 0, NULL, 0);
