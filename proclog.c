@@ -45,7 +45,7 @@ int main(void) {
   mysql_free_result(res);
   
   if(strcmp(tok[1],"a01")==0){
-    sprintf(buf,"SEELCT start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest FROM log LIMI 10");
+    sprintf(buf,"SELECT start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest FROM log LIMI 10");
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
