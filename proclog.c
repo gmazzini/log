@@ -25,8 +25,11 @@ int main(void) {
     token=strtok(NULL,",");
     if(token==NULL)break;
   }
+   printf("--%d<br>\n",c);
   if(c!=TOTTOK)exit(0);
 
+
+  
     MYSQL *con = mysql_init(NULL);
     mysql_real_connect(con, dbhost, dbuser, dbpassword, dbname, 0, NULL, 0);
     mysql_query(con, "SET time_zone = '+00:00'");
