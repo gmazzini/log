@@ -20,7 +20,7 @@ int main(void) {
   printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
   token=strtok(buf,",");
   for(c=0;c<TOTTOK;c++){
-    printf("%s<br>\n",token);
+    printf("%d %s<br>\n",c,token);
     strcpy(tok[c],token);
     token=strtok(NULL,",");
     if(token==NULL)exit(0);
