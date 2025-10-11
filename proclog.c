@@ -19,6 +19,7 @@ int main(void) {
   printf("Status: 200 OK\r\n");
   printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
   token=strtok(buf,",");
+  printf("%s<br>\n",token);
   for(c=0;c<TOTTOK;c++){
     strcpy(tok[c],token);
     token=strtok(NULL,",");
