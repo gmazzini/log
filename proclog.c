@@ -45,6 +45,7 @@ int main(void) {
   mysql_free_result(res);
   
   if(strcmp(tok[1],"a01")==0){
+    printf("<pre>");
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
       from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,1000000,atoi(tok[3]));
     mysql_query(con,buf);
@@ -55,6 +56,7 @@ int main(void) {
       printf("%s\n",row[2]);
     }
     mysql_free_result(res);
+    printf("</pre>");
   }
   
   printf("<pre>\n%s\n%s</pre>\n",buf,mycall);
