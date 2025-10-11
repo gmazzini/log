@@ -36,7 +36,7 @@ int main(void) {
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
   epoch=time(NULL);
-  sprintf(buf,"SELECT mycall FROM user WHERE ota='%s and lota<%ld' LIMIT 1",tok[0],epoch);
+  sprintf(buf,"SELECT mycall FROM user WHERE ota='%s and lota>%ld' LIMIT 1",tok[0],epoch);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   row=mysql_fetch_row(res);
