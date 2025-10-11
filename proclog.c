@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <mysql/mysql.h>
+#include "log.def"
+
+int main(void) {
+  int c,len;
+  char buf[1001];
+
+  for(len=0;;){
+    c=getchar();
+    if(c==EOF)break;
+    buf[len]=(char)c;
+    if(len<1000)len++;
+  }
+  buf[len++]='\0';
+
+    MYSQL *con = mysql_init(NULL);
+    mysql_real_connect(con, dbhost, dbuser, dbpassword, dbname, 0, NULL, 0);
+    mysql_query(con, "SET time_zone = '+00:00'");
+
+printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>\n%s\n</pre>\n",buf);
+
+    mysql_close(con);
+
+    return 0;
+}
