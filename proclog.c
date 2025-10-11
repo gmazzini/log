@@ -7,7 +7,9 @@
 
 int main(void) {
   int c,len;
-  char buf[1001],*token,tok[TOTTOK][100];
+  char buf[1001],*token,tok[TOTTOK][100],mycall[16];
+  MYSQL *con;
+  MYSQL_ROW row;
 
   for(len=0;;){
     c=getchar();
@@ -25,15 +27,20 @@ int main(void) {
     token=strtok(NULL,",");
     if(token==NULL)break;
   }
-  if(c!=TOTTOK-1)exit(0);
-
+  if(c!=TOTTOK-1)exit(1);
+  con=mysql_init(NULL);
+  if(con==NULL)exit(1);
+  if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
+  mysql_query(con,"SET time_zone='+00:00'");
+  sprintf(buf,"SELECT mycall FROM user WHERE ota='%s' LIMIT 1",tok[0]);
+  mysql_query(con,buf);
+  row=mysql_fetch_row(res);
+  if(row==NULL)exit(1);
+  strcpy(mycall,row[0]);
+  mysql_free_result(res);
 
   
-    MYSQL *con = mysql_init(NULL);
-    mysql_real_connect(con, dbhost, dbuser, dbpassword, dbname, 0, NULL, 0);
-    mysql_query(con, "SET time_zone = '+00:00'");
-
-    printf("<pre>\n%s\n</pre>\n",buf);
+    printf("<pre>\n%s\n%s</pre>\n",buf,mycall);
 
     mysql_close(con);
 
