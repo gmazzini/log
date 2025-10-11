@@ -3,7 +3,7 @@
 #include <string.h>
 #include <mysql/mysql.h>
 #include "log.def"
-#define TOTTOK 4
+#define TOTTOK 5
 
 int main(void) {
   int c,len;
@@ -16,6 +16,8 @@ int main(void) {
     if(len<1000)len++;
   }
   buf[len++]='\0';
+  printf("Status: 200 OK\r\n");
+  printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
   token=strtok(buf,",");
   for(c=0;c<TOTTOK;c++){
     strcpy(tok[c],token);
@@ -27,8 +29,6 @@ int main(void) {
     mysql_real_connect(con, dbhost, dbuser, dbpassword, dbname, 0, NULL, 0);
     mysql_query(con, "SET time_zone = '+00:00'");
 
-printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>\n%s\n</pre>\n",buf);
 
     mysql_close(con);
