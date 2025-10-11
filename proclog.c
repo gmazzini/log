@@ -3,7 +3,7 @@
 #include <string.h>
 #include <mysql/mysql.h>
 #include "log.def"
-#define TOTTOK 5
+#define TOTTOK 4
 
 int main(void) {
   int c,len;
