@@ -43,11 +43,20 @@ int main(void) {
   if(row==NULL)exit(1);
   strcpy(mycall,row[0]);
   mysql_free_result(res);
-
   
-    printf("<pre>\n%s\n%s</pre>\n",buf,mycall);
-
-    mysql_close(con);
-
-    return 0;
+  if(strcmp(tok[1],"a01"){
+    sprintf(buf,"SEELCT start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest FROM log LIMI 10");
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)exit(1);
+      printf("%s\n",row[2]);
+    }
+    mysql_free_result(res);
+  }
+  
+  printf("<pre>\n%s\n%s</pre>\n",buf,mycall);
+  mysql_close(con);
+  return 0;
 }
