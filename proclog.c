@@ -25,8 +25,7 @@ int main(void) {
     token=strtok(NULL,",");
     if(token==NULL)break;
   }
-   printf("--%d<br>\n",c);
-  if(c!=TOTTOK)exit(0);
+  if(c!=TOTTOK-1)exit(0);
 
 
   
