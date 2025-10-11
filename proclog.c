@@ -19,12 +19,13 @@ int main(void) {
   printf("Status: 200 OK\r\n");
   printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
   token=strtok(buf,",");
-  for(c=0;c<TOTTOK;c++){
+  for(c=0;;c++){
     printf("%d %s<br>\n",c,token);
     strcpy(tok[c],token);
     token=strtok(NULL,",");
-    if(token==NULL)exit(0);
+    if(token==NULL)break;
   }
+  if(c!=TOTTOK)exit(0);
 
     MYSQL *con = mysql_init(NULL);
     mysql_real_connect(con, dbhost, dbuser, dbpassword, dbname, 0, NULL, 0);
