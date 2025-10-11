@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <mysql/mysql.h>
 #include "log.def"
 #define TOTTOK 5
@@ -11,6 +12,7 @@ int main(void) {
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
+  time_t epoch;
 
   for(len=0;;){
     c=getchar();
@@ -33,7 +35,8 @@ int main(void) {
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
-  sprintf(buf,"SELECT mycall FROM user WHERE ota='%s' LIMIT 1",tok[0]);
+  epoch=time();
+  sprintf(buf,"SELECT mycall FROM user WHERE ota='%s and lota<%ld' LIMIT 1",tok[0],epoch);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   row=mysql_fetch_row(res);
