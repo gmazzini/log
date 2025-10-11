@@ -47,7 +47,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
-        body: [btn.id,"ik4lzh",page,mypage,callInput.value.trim().toUpperCase()].join(",")
+        body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()].join(",")
       });
       out.innerHTML = await r.text();
     });
