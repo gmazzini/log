@@ -54,9 +54,9 @@ int main(void) {
       row=mysql_fetch_row(res);
       if(row==NULL)exit(1);
       aux1[0]='\0';
-      if(row[8]==1)strcat(aux1,"L");
-      if(row[9]==1)strcat(aux1,"E");
-      if(row[10]==1)strcat(aux1,"Q");
+      if(atoi(row[8])==1)strcat(aux1,"L");
+      if(atoi(row[9])==1)strcat(aux1,"E");
+      if(atoi(row[10])==1)strcat(aux1,"Q");
 
 //    $timediff=strtotime($row["end"])-strtotime($row["start"]);
       
