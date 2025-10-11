@@ -9,6 +9,7 @@ int main(void) {
   int c,len;
   char buf[1001],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
+  MYSQL_RES *res;
   MYSQL_ROW row;
 
   for(len=0;;){
@@ -34,6 +35,7 @@ int main(void) {
   mysql_query(con,"SET time_zone='+00:00'");
   sprintf(buf,"SELECT mycall FROM user WHERE ota='%s' LIMIT 1",tok[0]);
   mysql_query(con,buf);
+  res=mysql_store_result(con);
   row=mysql_fetch_row(res);
   if(row==NULL)exit(1);
   strcpy(mycall,row[0]);
