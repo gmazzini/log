@@ -4,7 +4,6 @@
 <title>TEST by IK4LZH</title>
 <link rel="stylesheet" href="test2.css">
 </head>
-
 <body>
 <table>
 <td><pre>
@@ -27,6 +26,14 @@ Call <input type="text" id="call">
 <script type="module">
 const out = document.getElementById("out");
 const callInput = document.getElementById("call");
+callInput.addEventListener("keydown", e => {
+  if (e.key === ",") e.preventDefault();
+});
+callInput.addEventListener("input", e => {
+  if (callInput.value.includes(",")) {
+    callInput.value = callInput.value.replace(/,/g, "");
+  }
+});
 let page = 0;
 let mypage = 30;
 document.querySelectorAll("button[id]").forEach(btn => {
@@ -37,10 +44,10 @@ document.querySelectorAll("button[id]").forEach(btn => {
       else if (btn.id === "a03" || btn.id === "a07") page += mypage;
       else if (btn.id === "a04") page = Number.parseInt(callInput.value.trim(), 10);
       if (page < 0) page = 0;
-      const r = await fetch("test.php", {
+      const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ cmd: btn.id, mycall: "ik4lzh", page: page, mypage: mypage, call: callInput.value.trim().toUpperCase()})
+        headers: {"Content-Type": "text/csv"},
+        body: [btn.id,"ik4lzh",page,mypage,callInput.value.trim().toUpperCase()].join(",")
       });
       out.innerHTML = await r.text();
     });
