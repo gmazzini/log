@@ -58,7 +58,8 @@ int main(void) {
       if(atoi(row[8])==1)strcat(aux1,"L");
       if(atoi(row[9])==1)strcat(aux1,"E");
       if(atoi(row[10])==1)strcat(aux1,"Q");
-      strptime(row[1],"%Y-%m-%d %H:%M:%S",&te); strptime(row[0],"%Y-%m-%d %H:%M:%S",&ts);
+      sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
+      sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&te.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
       td=mktime(&te)-mktime(&ts);
       if(td==0)strcpy(aux2,"(0s)");
       else if(td<60)sprintf(aux2,"(%ds)",td);
