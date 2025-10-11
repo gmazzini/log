@@ -7,7 +7,7 @@
 
 int main(void) {
   int c,len;
-  char buf[1001],token,tok[TOTTOK][100];
+  char buf[1001],*token,tok[TOTTOK][100];
 
   for(len=0;;){
     c=getchar();
@@ -16,7 +16,7 @@ int main(void) {
     if(len<1000)len++;
   }
   buf[len++]='\0';
-  token=strtok(input,",");
+  token=strtok(buf,",");
   for(c=0;c<TOTTOK;c++){
     strcpy(tok[c],token);
     token=strtok(NULL,",");
