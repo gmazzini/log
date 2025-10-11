@@ -8,7 +8,7 @@
 
 int main(void) {
   int c,len;
-  char buf[1001],*token,tok[TOTTOK][100],mycall[16];
+  char buf[1001],aux1[100],aux2[100],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
@@ -53,8 +53,15 @@ int main(void) {
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)exit(1);
+      aux1[0]='\0';
+      if(row[8]==1)strcat(aux1,"L");
+      if(row[9]==1)strcat(aux1,"E");
+      if(row[10]==1)strcat(aux1,"Q");
+
+//    $timediff=strtotime($row["end"])-strtotime($row["start"]);
+      
       // printf("%s",row[2]);
-      printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],"xxxx",row[2],atol(row[3])/1000.0,row[5],row[6],row[7],"xxx");
+      printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],"xxxx",row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       printf("\n");
     }
     mysql_free_result(res);
