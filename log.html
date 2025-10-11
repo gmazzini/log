@@ -1,0 +1,51 @@
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>TEST by IK4LZH</title>
+<link rel="stylesheet" href="test2.css">
+</head>
+
+<body>
+<table>
+<td><pre>
+Call <input type="text" id="call">
+</pre></td>
+<td id="myq1">
+<button id="a01">List</button>
+<button id="a02">&#8679;</button>
+<button id="a03">&#8681;</button>
+<button id="a04">G</button>
+<br>
+<button id="a05">Find</button>
+<button id="a06">&#8679;</button>
+<button id="a07">&#8681;</button>
+<br>
+<button id="a08">Apply</button>
+</td>
+</table>
+<div id="out"></div>
+<script type="module">
+const out = document.getElementById("out");
+const callInput = document.getElementById("call");
+let page = 0;
+let mypage = 30;
+document.querySelectorAll("button[id]").forEach(btn => {
+  if (/^a\d{2}$/.test(btn.id)) {
+    btn.addEventListener("click", async () => {
+      if (btn.id === "a01" || btn.id === "a05") page = 0;
+      else if (btn.id === "a02" || btn.id === "a06") page -= mypage;
+      else if (btn.id === "a03" || btn.id === "a07") page += mypage;
+      else if (btn.id === "a04") page = Number.parseInt(callInput.value.trim(), 10);
+      if (page < 0) page = 0;
+      const r = await fetch("test.php", {
+        method: "POST", cache: "no-store", credentials: "same-origin",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ cmd: btn.id, mycall: "ik4lzh", page: page, mypage: mypage, call: callInput.value.trim().toUpperCase()})
+      });
+      out.innerHTML = await r.text();
+    });
+  }
+});
+</script>
+
+</body>
