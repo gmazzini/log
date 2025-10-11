@@ -58,7 +58,7 @@ int main(void) {
       if(atoi(row[8])==1)strcat(aux1,"L");
       if(atoi(row[9])==1)strcat(aux1,"E");
       if(atoi(row[10])==1)strcat(aux1,"Q");
-      strftime(row[1],"%Y-%m-%d %H:%M:%S",&te); strftime(row[0],"%Y-%m-%d %H:%M:%S",&ts);
+      strptime(row[1],"%Y-%m-%d %H:%M:%S",&te); strptime(row[0],"%Y-%m-%d %H:%M:%S",&ts);
       td=mktime(&te)-mktime(&ts);
       if(td==0)strcpy(aux2,"(0s)");
       else if(td<60)sprintf(aux2,"(%ds)",td);
