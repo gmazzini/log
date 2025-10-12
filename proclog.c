@@ -42,7 +42,7 @@ int main(void) {
   mysql_free_result(res);
   act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
 
-  if(act==4){
+  if(act==5){
     printf("Content-Type: text/plain\r\n\r\n");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
@@ -59,7 +59,7 @@ int main(void) {
 
   printf("Status: 200 OK\r\n");
   printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-  if(act==1 || act==2 || act==3){
+  if(act==1 || act==2 || act==3 || act==4){
     printf("<pre>");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
