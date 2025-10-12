@@ -8,7 +8,7 @@
 
 int main(void) {
   int c,len,act;
-  char buf[1001],aux1[100],aux2[100],*token,tok[TOTTOK][100],mycall[16];
+  char buf[1001],aux1[1001],aux2[1001],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
