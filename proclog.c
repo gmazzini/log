@@ -14,6 +14,7 @@ int main(void) {
   MYSQL_ROW row;
   struct tm ts,te;
   time_t epoch,td;
+  long lastserial;
 
   for(len=0;;){
     c=getchar();
@@ -38,17 +39,19 @@ int main(void) {
   mysql_query(con,"SET time_zone='+00:00'");
   epoch=time(NULL);
   sprintf(buf,"select mycall from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
-  mysql_query(con,buf);
-  res=mysql_store_result(con);
-  row=mysql_fetch_row(res);
+  mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
   if(row==NULL)exit(1);
   strcpy(mycall,row[0]);
   mysql_free_result(res);
   
   if(strcmp(tok[1],"a01")==0){
     printf("<pre>");
+    sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    lastserial=atol(row[0]);
+    mysql_free_result(res);
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
-      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,1000000,atoi(tok[3]));
+      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
