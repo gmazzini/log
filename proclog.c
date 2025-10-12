@@ -49,7 +49,7 @@ int main(void) {
     sprintf(aux1,"%.4s-%.2s-%.2s 00:00:00",tok[4],tok[4]+5,tok[4]+8);
     sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux1);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    echo atol(row[0]);
+    printf("%ld\n",atol(row[0]));
     mysql_free_result(res);
   }
   else if(act==1 || act==2 || act==3 || act==4){
