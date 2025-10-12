@@ -158,8 +158,8 @@ int main(void) {
       for(l1=0;l1<ndata2;l1++)if(strcmp(data2[l1].lab,aux1)==0)break;
       if(l1==ndata2){strcpy(data2[ndata2].lab,aux1); data2[ndata2].num=1; ndata2++; }
       else data2[ndata2].num++;
-     printf("%ld\n",ndata2);
     }
+    for(l1=0;l1<ndata2;l1++)printf("%s %ld\n",data2[l1].lab,data2[l1].num);
     printf("</pre>");
     goto end;
   }
