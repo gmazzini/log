@@ -16,9 +16,9 @@ char *mymode(char *s){
  if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
  return"ND";
 }
-int cmp_lab(void *a,void *b){
-  struct data2 *x=a;
-  struct data2 *y=b;
+int cmp_lab(const void *a,const void *b){
+  const struct data2 *x=a;
+  const struct data2 *y=b;
   return strcmp(x->lab,y->lab);
 }
 
