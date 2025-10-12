@@ -25,7 +25,6 @@ int main(void) {
   buf[len++]='\0';
   token=strtok(buf,",");
   for(c=0;;c++){
-    printf("%d %s<br>\n",c,token);
     strcpy(tok[c],token);
     token=strtok(NULL,",");
     if(token==NULL)break;
