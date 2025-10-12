@@ -45,23 +45,22 @@ int main(void) {
   mysql_free_result(res);
   act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
 
-  if(act==1 || act==2 || act==3 || act==4){
+  if(act==4){
+    sprintf(aux1,"%.4s-%.2s-%.2s 00:00:00",tok[4],tok[4]+5,tok[4]+8);
+    sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux1);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    echo atol(row[0]);
+    mysql_free_result(res);
+  }
+  else if(act==1 || act==2 || act==3 || act==4){
     printf("<pre>");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     lastserial=atol(row[0]);
     mysql_free_result(res);
     // MANCA UPDATE SERIAL
-    // SBAGLIATO NEL SEGUITO PERCHE' NON PUO SETTARE PAGE
     page=atol(tok[2]);
-    if(act==4){
-      sprintf(aux1,"%.4s-%.2s-%.2s 00:00:00",tok[4],tok[4]+5,tok[4]+8);
-      sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux1);
-      mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-      baseserial=atol(row[0]);
-      mysql_free_result(res);
-    }
-    else baseserial=lastserial-page;
+    baseserial=lastserial-page;
     
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
       from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,baseserial,atoi(tok[3]));
