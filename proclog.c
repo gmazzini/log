@@ -7,7 +7,7 @@
 #define TOTTOK 5
 
 int main(void) {
-  int c,len;
+  int c,len,act;
   char buf[1001],aux1[100],aux2[100],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
@@ -43,13 +43,16 @@ int main(void) {
   if(row==NULL)exit(1);
   strcpy(mycall,row[0]);
   mysql_free_result(res);
-  
-  if(strcmp(tok[1],"a01")==0 || strcmp(tok[1],"a02")==0 || strcmp(tok[1],"a03")==0){
+  act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
+
+  if(act==1 || act==2 || act==3 || act==4){
     printf("<pre>");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     lastserial=atol(row[0]);
     mysql_free_result(res);
+    // MANCA UPDATE SERIAL
+    
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
       from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
     mysql_query(con,buf);
