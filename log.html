@@ -23,6 +23,7 @@ Call <input type="text" id="call">
 </td>
 </table>
 <div id="out"></div>
+<div id="debug"></div>
 <script type="module">
 const out = document.getElementById("out");
 const callInput = document.getElementById("call");
@@ -51,6 +52,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (btn.id === "a04") page = parseInt(await r.text(), 10) || 0;
       else out.innerHTML = await r.text();
     });
+    document.getElementById("debug").innerHTML="<pre>page:"+page+"</pre>";
   }
 });
 </script>
