@@ -8,6 +8,7 @@
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 struct data2 {char lab[10]; long num;};
+int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 char *myband[434]={[0]="0",[1]="160",[3]="80",[5]="60",[7]="40",[10]="30",[14]="20",[18]="17",[21]="15",[24]="12",[28]="10",[29]="10",[50]="6",[144]="2",[145]="2",[430]="0.7",[431]="0.7",[432]="0.7",[433]="0.7"};
 char *mymode(char *s){
  if(!s)return"ND";
@@ -161,7 +162,7 @@ int main(void) {
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       if(row[1][0]=='\0')continue;
-      sprintf(aux1,"%s%s",myband[(int)(atol(row[1])/1000000.0)],mymode(row[2]));
+      sprintf(aux1,"%04d%s",myband[(int)(atol(row[1])/1000000.0)],mymode(row[2]));
       for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
       if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
       else data2[0][l1].num++;
