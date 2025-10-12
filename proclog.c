@@ -7,9 +7,17 @@
 #define TOTTOK 5
 
 MYSQL_ROW searchcty(MYSQL *,char *);
+float myband[434]={ [0]=0,[1]=160,[3]=80,[5]=60,[7]=40,[10]=30,[14]=20,[18]=17,[21]=15,[24]=12,[28]=10,[29]=10,[50]=6,[144]=2,[145]=2,[430]=0.7,[431]=0.7,[432]=0.7,[433]=0.7 };
+char *mymode(char *s){
+ if(!s)return"ND";
+ if(!strcmp(s,"CW"))return"CW";
+ if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
+ if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
+ return"ND";
+}
 
 int main(void) {
-  int c,len,act;
+  int c,len,act,ndata2;
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
@@ -17,6 +25,7 @@ int main(void) {
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2;
+  struct data2 {char lab[10]; long num;} data2[100];
 
   for(len=0;;){
     c=getchar();
@@ -137,6 +146,19 @@ int main(void) {
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
+    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    ndata2=0;
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      sprintf(aux1,"%s%s",mymode(row[2]),myband((int)(atol(row[1])/1000000.0)));
+      for(l1=0;l1<ndata2;l1++)if(strcmp(data2[l1].dat,aux1)==0)break;
+      if(l1==ndata2){strcpy(data2[ndata].dat,aux1); data2[ndata].num=1; ndata++; }
+      else data2[ndata].num++;
+    }
+    printf("</pre>");
     goto end;
   }
   
