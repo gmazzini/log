@@ -150,6 +150,7 @@ int main(void) {
     mysql_query(con,buf);
     res=mysql_store_result(con);
     ndata2[0]=ndata2[1]=ndata2[2]=ndata2[3]=0;
+    ndata2[4]=ndata2[5]=ndata2[6]=ndata2[7]=0;
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
@@ -173,6 +174,25 @@ int main(void) {
         if(l1==ndata2[3]){strcpy(data2[3][ndata2[3]].lab,aux1); data2[3][ndata2[3]].num=1; ndata2[3]++; }
         else data2[3][l1].num++;
       }
+      sprintf(aux1,"%s",row[6]);
+      for(l1=0;l1<ndata2[4];l1++)if(strcmp(data2[4][l1].lab,aux1)==0)break;
+      if(l1==ndata2[4]){strcpy(data2[4][ndata2[4]].lab,aux1); data2[4][ndata2[4]].num=1; ndata2[4]++; }
+      else data2[4][l1].num++;
+      if(atoi(row[3])==1){
+        for(l1=0;l1<ndata2[5];l1++)if(strcmp(data2[5][l1].lab,aux1)==0)break;
+        if(l1==ndata2[5]){strcpy(data2[5][ndata2[5]].lab,aux1); data2[5][ndata2[5]].num=1; ndata2[5]++; }
+        else data2[5][l1].num++;
+      }
+      if(atoi(row[4])==1){
+        for(l1=0;l1<ndata2[6];l1++)if(strcmp(data2[6][l1].lab,aux1)==0)break;
+        if(l1==ndata2[6]){strcpy(data2[6][ndata2[6]].lab,aux1); data2[6][ndata2[6]].num=1; ndata2[6]++; }
+        else data2[6][l1].num++;
+      }
+      if(atoi(row[5])==1){
+        for(l1=0;l1<ndata2[7];l1++)if(strcmp(data2[7][l1].lab,aux1)==0)break;
+        if(l1==ndata2[7]){strcpy(data2[7][ndata2[7]].lab,aux1); data2[7][ndata2[7]].num=1; ndata2[7]++; }
+        else data2[7][l1].num++;
+      }
     }
     for(l1=0;l1<ndata2[0];l1++){
       printf("%s %ld",data2[0][l1].lab,data2[0][l1].num);
@@ -182,6 +202,16 @@ int main(void) {
       printf(" %ld",(l2<ndata2[2])?data2[2][l2].num:0);
       for(l2=0;l2<ndata2[3];l2++)if(strcmp(data2[0][l1].lab,data2[3][l2].lab)==0)break;
       printf(" %ld",(l2<ndata2[3])?data2[3][l2].num:0);
+      printf("\n");
+    }
+    for(l1=0;l1<ndata2[4];l1++){
+      printf("%s %ld",data2[4][l1].lab,data2[4][l1].num);
+      for(l2=0;l2<ndata2[5];l2++)if(strcmp(data2[4][l1].lab,data2[5][l2].lab)==0)break;
+      printf(" %ld",(l2<ndata2[5])?data2[5][l2].num:0);
+      for(l2=0;l2<ndata2[6];l2++)if(strcmp(data2[4][l1].lab,data2[6][l2].lab)==0)break;
+      printf(" %ld",(l2<ndata2[6])?data2[6][l2].num:0);
+      for(l2=0;l2<ndata2[7];l2++)if(strcmp(data2[4][l1].lab,data2[7][l2].lab)==0)break;
+      printf(" %ld",(l2<ndata2[7])?data2[7][l2].num:0);
       printf("\n");
     }
     printf("</pre>");
