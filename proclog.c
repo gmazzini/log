@@ -44,11 +44,14 @@ int main(void) {
 
   if(act==4){
     printf("Content-Type: text/plain\r\n\r\n");
+    sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    lastserial=atol(row[0]);
+    mysql_free_result(res);
     sprintf(aux1,"%.4s-%.2s-%.2s 00:00:00",tok[4],tok[4]+5,tok[4]+8);
     sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux1);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    // printf("%ld\n",atol(row[0]));
-    printf("12345\n");
+    printf("%ld\n",lastserial-atol(row[0]));
     mysql_free_result(res);
     goto end;
   }
