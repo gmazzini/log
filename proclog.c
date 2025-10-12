@@ -173,8 +173,6 @@ int main(void) {
         if(l1==ndata2[3]){strcpy(data2[3][ndata2[3]].lab,aux1); data2[3][ndata2[3]].num=1; ndata2[3]++; }
         else data2[3][l1].num++;
       }
-     
-     
     }
     for(l1=0;l1<ndata2[0];l1++){
       printf("%s %ld",data2[0][l1].lab,data2[0][l1].num);
@@ -184,8 +182,8 @@ int main(void) {
       printf(" %ld",(l2<ndata2[2])?data2[2][l2].num:0);
       for(l2=0;l2<ndata2[3];l2++)if(strcmp(data2[0][l1].lab,data2[3][l2].lab)==0)break;
       printf(" %ld",(l2<ndata2[3])?data2[3][l2].num:0);
+      printf("\n");
     }
-    printf("\n");
     printf("</pre>");
     goto end;
   }
