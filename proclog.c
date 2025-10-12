@@ -56,19 +56,20 @@ int main(void) {
     goto end;
   }
 
-  printf("Status: 200 OK\r\n");
-  printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-
-  if(act==1 || act==2 || act==3 || act==4){
+  if(act<=8){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     lastserial=atol(row[0]);
     mysql_free_result(res);
     // MANCA UPDATE SERIAL
-      
-    sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
+
+    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
       from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
+    else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
+      from log where callsign like '%s' and mycall='%s' order by start desc limit %d offset %ld",tok[4],mycall,atoi(tok[3]),atol(tok[2]));
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
@@ -93,9 +94,9 @@ int main(void) {
     }
     mysql_free_result(res);
     printf("</pre>");
+    goto end;
   }
   
-  printf("<pre>\n%s\n%s</pre>\n",buf,mycall);
   end:
   mysql_close(con);
   return 0;
