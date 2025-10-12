@@ -7,6 +7,7 @@
 #define TOTTOK 5
 
 MYSQL_ROW searchcty(MYSQL *,char *);
+struct data2 {char lab[10]; long num;}
 char *myband[434]={[0]="0",[1]="160",[3]="80",[5]="60",[7]="40",[10]="30",[14]="20",[18]="17",[21]="15",[24]="12",[28]="10",[29]="10",[50]="6",[144]="2",[145]="2",[430]="0.7",[431]="0.7",[432]="0.7",[433]="0.7"};
 char *mymode(char *s){
  if(!s)return"ND";
@@ -14,6 +15,11 @@ char *mymode(char *s){
  if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
  if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
  return"ND";
+}
+int cmp_lab(void *a,void *b){
+  struct data2 *x=a;
+  struct data2 *y=b;
+  return strcmp(x->lab,y->lab);
 }
 
 int main(void) {
@@ -25,7 +31,7 @@ int main(void) {
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2;
-  struct data2 {char lab[10]; long num;} data2[10][400];
+  struct data2 data2[10][400];
 
   for(len=0;;){
     c=getchar();
@@ -194,6 +200,7 @@ int main(void) {
         else data2[7][l1].num++;
       }
     }
+    qsort(data2[0],nadata2[0],sizeof(struct data2),cmp_lab);
     for(l1=0;l1<ndata2[0];l1++){
       printf("%s %ld",data2[0][l1].lab,data2[0][l1].num);
       for(l2=0;l2<ndata2[1];l2++)if(strcmp(data2[0][l1].lab,data2[1][l2].lab)==0)break;
