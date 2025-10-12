@@ -155,8 +155,8 @@ int main(void) {
       if(row==NULL)break;
       sprintf(aux1,"%s%s",mymode(row[2]),myband[(int)(atol(row[1])/1000000.0)]);
       for(l1=0;l1<ndata2;l1++)if(strcmp(data2[l1].lab,aux1)==0)break;
-      if(l1==ndata2){strcpy(data2[ndata].lab,aux1); data2[ndata].num=1; ndata++; }
-      else data2[ndata].num++;
+      if(l1==ndata2){strcpy(data2[ndata2].lab,aux1); data2[ndata2].num=1; ndata2++; }
+      else data2[ndata2].num++;
     }
     printf("</pre>");
     goto end;
