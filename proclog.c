@@ -16,7 +16,7 @@ int main(void) {
   MYSQL_ROW row,row1;
   struct tm ts,te;
   time_t epoch,td;
-  long lastserial;
+  long lastserial,l1,l2;
 
   for(len=0;;){
     c=getchar();
@@ -112,6 +112,7 @@ int main(void) {
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
+    l1=l2=0;
     sprintf(buf,"select start,callsign from log where mycall='%s' and dxcc=0",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
@@ -120,11 +121,16 @@ int main(void) {
       if(row==NULL)break;
       printf("%s %s\n",row[0],row[1]);
       row1=searchcty(con,row[1]);
-      if(row1!=NULL)printf("%s\n",row1[0]);
-      
+      if(row1!=NULL){
+        sprintf(aux1,"Update log set dxcc=%d where mycall='%s' and start='%s' and callsign='%s' and dxcc=0",atoi(row1[2]),mycall,row[0],row[1]);
+        mysql_query(con,aux1);
+        l1++;
+      }
+      else l2++;
     }
+    // MANCA PROCESSA LABEL
     mysql_free_result(res);
-    printf("</pre>");
+    printf("Set dxcc: %ld\nNot found dxcc: %ld</pre>",l1,l2);
     goto end;
   }
   
