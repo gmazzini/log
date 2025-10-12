@@ -105,6 +105,23 @@ int main(void) {
     printf("</pre>");
     goto end;
   }
+
+  if(act==9){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
+    sprintf(buf,"select start,callsign from log where mycall='%s' and dxcc=0",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      printf("%s %s\n",row[0],row[1]);
+    }
+    mysql_free_result(res);
+    printf("</pre>");
+    goto end;
+  }
   
   end:
   mysql_close(con);
