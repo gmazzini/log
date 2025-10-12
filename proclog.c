@@ -14,7 +14,7 @@ int main(void) {
   MYSQL_ROW row;
   struct tm ts,te;
   time_t epoch,td;
-  long lastserial;
+  long lastserial,baseserial,page;
 
   for(len=0;;){
     c=getchar();
@@ -52,9 +52,18 @@ int main(void) {
     lastserial=atol(row[0]);
     mysql_free_result(res);
     // MANCA UPDATE SERIAL
+    page=atol(tok[2]);
+    if(act==4){
+      sprintf(aux1,"%.4s-%.2s-%.2s 00:00:00",tok[4],tok[4]+5,tok[4]+8);
+      sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux1);
+      mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+      baseserial=atol(row[0]);
+      mysql_free_result(res);
+    }
+    else baseserial=lastserial-page;
     
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
-      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
+      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,,atoi(tok[3]));
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
