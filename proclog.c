@@ -63,7 +63,7 @@ int main(void) {
     else baseserial=lastserial-page;
     
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
-      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,,atoi(tok[3]));
+      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,baseserial,atoi(tok[3]));
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
