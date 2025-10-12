@@ -39,10 +39,9 @@ let mypage = 30;
 document.querySelectorAll("button[id]").forEach(btn => {
   if (/^a\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
-      if (btn.id === "a01" || btn.id === "a05") page = 0;
+      if (btn.id === "a01" || btn.id === "a05" || btn.id === "a04") page = 0;
       else if (btn.id === "a02" || btn.id === "a06") page -= mypage;
       else if (btn.id === "a03" || btn.id === "a07") page += mypage;
-      else if (btn.id === "a04") page = Number.parseInt(callInput.value.trim(), 10);
       if (page < 0) page = 0;
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
