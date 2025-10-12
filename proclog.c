@@ -23,8 +23,6 @@ int main(void) {
     if(len<1000)len++;
   }
   buf[len++]='\0';
-  printf("Status: 200 OK\r\n");
-  printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
   token=strtok(buf,",");
   for(c=0;;c++){
     printf("%d %s<br>\n",c,token);
@@ -53,7 +51,11 @@ int main(void) {
     mysql_free_result(res);
     goto end;
   }
-  else if(act==1 || act==2 || act==3 || act==4){
+
+
+  printf("Status: 200 OK\r\n");
+  printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+  if(act==1 || act==2 || act==3){
     printf("<pre>");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
