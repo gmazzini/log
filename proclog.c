@@ -165,8 +165,9 @@ int main(void) {
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      /*
-      sprintf(aux1,"%04d%s",myband[(int)(atol(row[1])/1000000.0)],mymode(row[2]));
+      c=(int)(atol(row[1])/1000000.0);
+      if(c>433)continue;
+      sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
       for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
       if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
       else data2[0][l1].num++;
@@ -204,7 +205,6 @@ int main(void) {
         if(l1==ndata2[7]){strcpy(data2[7][ndata2[7]].lab,aux1); data2[7][ndata2[7]].num=1; ndata2[7]++; }
         else data2[7][l1].num++;
       }
-       */
     }
     mysql_free_result(res);
     qsort(data2[0],ndata2[0],sizeof(struct data2),cmp1);
