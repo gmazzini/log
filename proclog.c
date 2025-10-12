@@ -24,7 +24,7 @@ int cmp1(const void *a,const void *b){
 int cmp2(const void *a,const void *b){
   const struct data2 *x=a;
   const struct data2 *y=b;
-  return x->num-y->num;
+  return y->num-x->num;
 }
 
 int main(void) {
