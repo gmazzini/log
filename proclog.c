@@ -183,7 +183,7 @@ int main(void) {
       for(l2=0;l2<ndata2[2];l2++)if(strcmp(data2[0][l1].lab,data2[2][l2].lab)==0)break;
       printf(" %ld",(l2<ndata2[2])?data2[2][l2].num:0);
       for(l2=0;l2<ndata2[3];l2++)if(strcmp(data2[0][l1].lab,data2[3][l2].lab)==0)break;
-      printf(" %ld",(l2<ndata2[3])?data231][l2].num:0);
+      printf(" %ld",(l2<ndata2[3])?data2[3][l2].num:0);
     }
     printf("\n");
     printf("</pre>");
