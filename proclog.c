@@ -154,6 +154,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
     mysql_query(con,buf);
     res=mysql_store_result(con);
     row=mysql_fetch_row(res);
-    return row;
+    if(row!=NULL)break;
   }
+  return row;
 }
