@@ -146,7 +146,7 @@ int main(void) {
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
+    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s' limit 10",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     ndata2=0;
@@ -154,6 +154,7 @@ int main(void) {
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       sprintf(aux1,"%s%s",mymode(row[2]),myband[(int)(atol(row[1])/1000000.0)]);
+     printf("%s\n",aux1);
       for(l1=0;l1<ndata2;l1++)if(strcmp(data2[l1].lab,aux1)==0)break;
       if(l1==ndata2){strcpy(data2[ndata2].lab,aux1); data2[ndata2].num=1; ndata2++; }
       else data2[ndata2].num++;
