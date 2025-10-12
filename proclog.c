@@ -17,7 +17,7 @@ char *mymode(char *s){
 }
 
 int main(void) {
-  int c,len,act,ndata2;
+  int c,len,act,ndata2[10];
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
@@ -25,7 +25,7 @@ int main(void) {
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2;
-  struct data2 {char lab[10]; long num;} data2[100];
+  struct data2 {char lab[10]; long num;} data2[10][100];
 
   for(len=0;;){
     c=getchar();
@@ -149,17 +149,17 @@ int main(void) {
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s' limit 50000",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
-    ndata2=0;
+    ndata2[0]=0;
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       if(row[1][0]=='\0')continue;
       sprintf(aux1,"%s%s",mymode(row[2]),myband[(int)(atol(row[1])/1000000.0)]);
-      for(l1=0;l1<ndata2;l1++)if(strcmp(data2[l1].lab,aux1)==0)break;
-      if(l1==ndata2){strcpy(data2[ndata2].lab,aux1); data2[ndata2].num=1; ndata2++; }
-      else data2[l1].num++;
+      for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
+      if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
+      else data2[0][l1].num++;
     }
-    for(l1=0;l1<ndata2;l1++)printf("%s %ld\n",data2[l1].lab,data2[l1].num);
+    for(l1=0;l1<ndata2[0];l1++)printf("%s %ld\n",data2[0][l1].lab,data2[0][l1].num);
     printf("</pre>");
     goto end;
   }
