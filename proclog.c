@@ -144,7 +144,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
   p=strrchr(call,'/');
   if(p){
     n=strlen(call);
-    if(p-call>n-p+call-1)*p='\0';
+    if((p-call)<(n-(p-call)-1))*p='\0';
     else strcpy(call,p+1);
   }
   n=strlen(call);
