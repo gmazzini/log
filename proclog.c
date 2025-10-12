@@ -176,7 +176,11 @@ int main(void) {
      
      
     }
-    for(l1=0;l1<ndata2[0];l1++)printf("%s %ld\n",data2[0][l1].lab,data2[0][l1].num);
+    for(l1=0;l1<ndata2[0];l1++){
+      printf("%s %ld",data2[0][l1].lab,data2[0][l1].num);
+      for(l2=0;l2<ndata[1];l2++)if(strcmp(data2[0][l1].lab,data2[1][l2].lab)==0)break;
+      printf( %ld",(l2<ndata[1])?data2[0][l1].num:0);
+    }
     printf("</pre>");
     goto end;
   }
