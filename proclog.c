@@ -186,7 +186,7 @@ int main(void) {
         if(l1==ndata2[3]){strcpy(data2[3][ndata2[3]].lab,aux1); data2[3][ndata2[3]].num=1; ndata2[3]++; }
         else data2[3][l1].num++;
       }
-      sprintf(aux1,"%s",row[6]);
+      sprintf(aux1,"%03d",atoi(row[6]));
       for(l1=0;l1<ndata2[4];l1++)if(strcmp(data2[4][l1].lab,aux1)==0)break;
       if(l1==ndata2[4]){strcpy(data2[4][ndata2[4]].lab,aux1); data2[4][ndata2[4]].num=1; ndata2[4]++; }
       else data2[4][l1].num++;
