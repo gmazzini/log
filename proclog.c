@@ -52,6 +52,7 @@ int main(void) {
     lastserial=atol(row[0]);
     mysql_free_result(res);
     // MANCA UPDATE SERIAL
+    // SBAGLIATO NEL SEGUITO PERCHE' NON PUO SETTARE PAGE
     page=atol(tok[2]);
     if(act==4){
       sprintf(aux1,"%.4s-%.2s-%.2s 00:00:00",tok[4],tok[4]+5,tok[4]+8);
