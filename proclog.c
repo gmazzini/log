@@ -181,6 +181,7 @@ int main(void) {
       for(l2=0;l2<ndata2[1];l2++)if(strcmp(data2[0][l1].lab,data2[1][l2].lab)==0)break;
       printf(" %ld",(l2<ndata2[1])?data2[0][l1].num:0);
     }
+    printf("\n");
     printf("</pre>");
     goto end;
   }
