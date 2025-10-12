@@ -68,7 +68,7 @@ int main(void) {
       // MANCA BUTTON
       printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
-      if(row[4]!=NULL&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
+      if(row[4][0]!='\0'&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
       printf("\n");
     }
     mysql_free_result(res);
