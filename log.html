@@ -52,7 +52,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (btn.id === "a04") page = parseInt(await r.text(), 10) || 0;
       else out.innerHTML = await r.text();
     });
-    document.getElementById("debug").innerHTML="page:{$page}";
+    document.getElementById("debug").innerHTML=`page:${page}`;
   }
 });
 </script>
