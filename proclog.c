@@ -120,7 +120,7 @@ int main(void) {
       if(row==NULL)break;
       printf("%s %s\n",row[0],row[1]);
       row1=searchcty(con,row[1]);
-      printf("%s\n",row1[0]);
+      if(row1!=NULL)printf("%s\n",row1[0]);
       
     }
     mysql_free_result(res);
