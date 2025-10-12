@@ -43,16 +43,12 @@ document.querySelectorAll("button[id]").forEach(btn => {
       else if (btn.id === "a02" || btn.id === "a06") page -= mypage;
       else if (btn.id === "a03" || btn.id === "a07") page += mypage;
       if (page < 0) page = 0;
-      if (btn.id === "a04") {
-      }
-      else {
-        const r = await fetch("proclog.cgi", {
-          method: "POST", cache: "no-store", credentials: "same-origin",
-          headers: {"Content-Type": "text/csv"},
-          body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-"].join(",")
-        });
-        out.innerHTML = await r.text();
-      }
+      const r = await fetch("proclog.cgi", {
+        method: "POST", cache: "no-store", credentials: "same-origin",
+        headers: {"Content-Type": "text/csv"},
+        body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-"].join(",")
+      });
+      out.innerHTML = await r.text();
     });
   }
 });
