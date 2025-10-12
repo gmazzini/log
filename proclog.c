@@ -127,3 +127,60 @@ int main(void) {
   mysql_close(con);
   return 0;
 }
+
+
+xxx function searchcty(MYSQL *con,char *incall){
+  char buf[1000],*p,call[20];
+  MYSQL_RES *res;
+  MYSQL_ROW row;
+  int i,n;
+  const char *suffixes[]={"P","M","LH","MM","AM","A","QRP","0","1","2","3","4","5","6","7","8","9"};
+  n=sizeof(suffixes)/sizeof(suffixes[0]);
+  strcpy(call,incall);
+  p=strrchr(call,'/');
+  if(p){
+    for(i=0;i<n;i++)if(strcmp(p+1,suffixes[i])==0)break;
+    if(i<n)*p='\0';
+  }
+
+
+  sprintf(buf,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='%s'",call);
+  mysql_query(con,buf);
+  res=mysql_store_result(con);
+  for(;;){
+    row=mysql_fetch_row(res);
+    if(row==NULL)break;
+   
+      
+
+
+    
+      printf("%s %s\n",row[0],row[1]);
+    }
+    mysql_free_result(res);
+  
+ 
+  
+  $to1=strrpos($call,"/");
+  if($to1!==false){
+    if(in_array(substr($call,$to1+1),array("P","M","LH","MM","AM","A","QRP","0","1","2","3","4","5","6","7","8","9"))){
+      $call=substr($call,0,$to1);
+      $to1=strrpos($call,"/");
+    }
+    if($to1!==false){
+      $lc=strlen($call);
+      if($to1<$lc-$to1-1)$call=substr($call,0,$to1);
+      else $call=substr($call,$to1+1);
+    }
+  }
+  
+  $lc=strlen($call);
+  for($q=$lc;$q>0;$q--){
+    $prefix=substr($call,0,$q);
+    $query=mysqli_query($con,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='$pr
+efix'");
+    $row=mysqli_fetch_assoc($query);
+    mysqli_free_result($query);
+    if($row!=null)return $row;
+  }
+}
