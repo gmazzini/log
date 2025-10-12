@@ -119,7 +119,6 @@ int main(void) {
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      printf("%s %s\n",row[0],row[1]);
       row1=searchcty(con,row[1]);
       if(row1!=NULL){
         sprintf(aux1,"Update log set dxcc=%d where mycall='%s' and start='%s' and callsign='%s' and dxcc=0",atoi(row1[2]),mycall,row[0],row[1]);
