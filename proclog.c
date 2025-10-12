@@ -6,6 +6,8 @@
 #include "log.def"
 #define TOTTOK 5
 
+MYSQL_ROW searchcty(MYSQL *,char *);
+
 int main(void) {
   int c,len,act;
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
