@@ -48,7 +48,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
         headers: {"Content-Type": "text/csv"},
         body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-"].join(",")
       });
-      out.innerHTML = await r.text();
+      if (btn.id === "a04") ppage = parseInt(await resp.text(), 10) || 0;
+      else out.innerHTML = await r.text();
     });
   }
 });
