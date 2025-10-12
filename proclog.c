@@ -64,8 +64,17 @@ int main(void) {
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     lastserial=atol(row[0]);
     mysql_free_result(res);
-    // MANCA UPDATE SERIAL
-
+    sprintf(buf,"select callsign,start from log where mycall='%s' and serial=0 order by start",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      lastserial++;
+      sprintf(aux1,"update log set serial=%ld where mycall='%s' and callsign='%s' and start='%s'",lastserial,mycall,row[0],row[1]);
+      mysql_query(con,aux1);
+    }
+    mysql_free_result(res);
     if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
       from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
     else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
@@ -74,7 +83,7 @@ int main(void) {
     res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
-      if(row==NULL)exit(1);
+      if(row==NULL)break;
       aux1[0]='\0';
       if(atoi(row[8])==1)strcat(aux1,"L");
       if(atoi(row[9])==1)strcat(aux1,"E");
