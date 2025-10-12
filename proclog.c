@@ -25,7 +25,7 @@ int main(void) {
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2;
-  struct data2 {char lab[10]; long num;} data2[10][100];
+  struct data2 {char lab[10]; long num;} data2[10][400];
 
   for(len=0;;){
     c=getchar();
