@@ -137,7 +137,6 @@ int main(void) {
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("Set dxcc: %ld\nNot found dxcc: %ld</pre>",l1,l2);
     goto end;
   }
   
