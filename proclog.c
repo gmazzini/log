@@ -44,7 +44,7 @@ int main(void) {
   strcpy(mycall,row[0]);
   mysql_free_result(res);
   
-  if(strcmp(tok[1],"a01")==0){
+  if(strcmp(tok[1],"a01")==0 || strcmp(tok[1],"a02")==0 || strcmp(tok[1],"a03")==0){
     printf("<pre>");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
