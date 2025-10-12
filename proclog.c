@@ -200,7 +200,7 @@ int main(void) {
         else data2[7][l1].num++;
       }
     }
-    qsort(data2[0],nadata2[0],sizeof(struct data2),cmp_lab);
+    qsort(data2[0],ndata2[0],sizeof(struct data2),cmp_lab);
     for(l1=0;l1<ndata2[0];l1++){
       printf("%s %ld",data2[0][l1].lab,data2[0][l1].num);
       for(l2=0;l2<ndata2[1];l2++)if(strcmp(data2[0][l1].lab,data2[1][l2].lab)==0)break;
