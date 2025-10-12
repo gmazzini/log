@@ -11,7 +11,7 @@ int main(void) {
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
-  MYSQL_ROW row;
+  MYSQL_ROW row,row1;
   struct tm ts,te;
   time_t epoch,td;
   long lastserial;
@@ -117,6 +117,9 @@ int main(void) {
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       printf("%s %s\n",row[0],row[1]);
+      row1=searchcty(con,row[1]);
+      printf("%s\n",row1[0]);
+      
     }
     mysql_free_result(res);
     printf("</pre>");
