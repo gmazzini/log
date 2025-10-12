@@ -51,7 +51,7 @@ int main(void) {
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     printf("%ld\n",atol(row[0]));
     mysql_free_result(res);
-    goto end:
+    goto end;
   }
   else if(act==1 || act==2 || act==3 || act==4){
     printf("<pre>");
