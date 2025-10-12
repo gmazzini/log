@@ -157,7 +157,7 @@ int main(void) {
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s' limit 80000",mycall);
+    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s' limit 70000",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     ndata2[0]=ndata2[1]=ndata2[2]=ndata2[3]=0;
