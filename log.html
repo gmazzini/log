@@ -50,7 +50,10 @@ document.querySelectorAll("button[id]").forEach(btn => {
         headers: {"Content-Type": "text/csv"},
         body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-"].join(",")
       });
-      if (btn.id === "a05") page = parseInt(await r.text(), 10) || 0;
+      if (btn.id === "a05") {
+        page = parseInt(await r.text(), 10) || 0;
+        document.getElementById("a04").click();
+      }
       else out.innerHTML = await r.text();
       document.getElementById("debug").innerHTML=`page:${page}`;
     });
