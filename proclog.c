@@ -161,7 +161,7 @@ int main(void) {
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       if(row[1][0]=='\0')continue;
-      sprintf(aux1,"%s%s",mymode(row[2]),myband[(int)(atol(row[1])/1000000.0)]);
+      sprintf(aux1,"%s%s",myband[(int)(atol(row[1])/1000000.0)],mymode(row[2]));
       for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
       if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
       else data2[0][l1].num++;
