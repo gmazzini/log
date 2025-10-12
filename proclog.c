@@ -116,7 +116,7 @@ int main(void) {
     printf("</pre>");
     goto end;
   }
-
+ 
   if(act==9){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
@@ -149,7 +149,7 @@ int main(void) {
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s' limit 50000",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
-    ndata2[0]=0;
+    ndata2[0]=ndata2[1]=ndata2[2]=ndata2[3]=0;
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
@@ -158,6 +158,23 @@ int main(void) {
       for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
       if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
       else data2[0][l1].num++;
+      if(atoi(row[3])==1){
+        for(l1=0;l1<ndata2[1];l1++)if(strcmp(data2[1][l1].lab,aux1)==0)break;
+        if(l1==ndata2[1]){strcpy(data2[1][ndata2[1]].lab,aux1); data2[1][ndata2[1]].num=1; ndata2[1]++; }
+        else data2[1][l1].num++;
+      }
+      if(atoi(row[4])==1){
+        for(l1=0;l1<ndata2[2];l1++)if(strcmp(data2[2][l1].lab,aux1)==0)break;
+        if(l1==ndata2[2]){strcpy(data2[2][ndata2[2]].lab,aux1); data2[2][ndata2[2]].num=1; ndata2[2]++; }
+        else data2[2][l1].num++;
+      }
+      if(atoi(row[5])==1){
+        for(l1=0;l1<ndata2[3];l1++)if(strcmp(data2[3][l1].lab,aux1)==0)break;
+        if(l1==ndata2[3]){strcpy(data2[3][ndata2[3]].lab,aux1); data2[3][ndata2[3]].num=1; ndata2[3]++; }
+        else data2[3][l1].num++;
+      }
+     
+     
     }
     for(l1=0;l1<ndata2[0];l1++)printf("%s %ld\n",data2[0][l1].lab,data2[0][l1].num);
     printf("</pre>");
