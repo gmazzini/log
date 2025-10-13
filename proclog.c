@@ -249,7 +249,10 @@ int incdata2(int cha,char *key){
   while(lo<=hi){
     mid=lo+(hi-lo)/2;
     cmp=strcmp(data2[cha][mid].lab,key);
-    if(cmp==0){data2[cha][mid].num++;return mid;}
+    if(cmp==0){
+      data2[cha][mid].num++;
+      return mid;
+    }
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
   }
@@ -261,21 +264,6 @@ int incdata2(int cha,char *key){
     return lo;
   }
   else return n;
-}
-
-
-int xxincdata2(int cha,char *key){
-  int i1;
-  for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
-  if(i1==ndata2[cha]){
-    if(ndata2[cha]<TOTL2){
-      strcpy(data2[cha][ndata2[cha]].lab,key);
-      data2[cha][ndata2[cha]].num=1;
-      ndata2[cha]++;
-    }
-  }
-  else data2[cha][i1].num++;
-  return i1;
 }
 
 long incdata3(int cha,int idx,char *key){
