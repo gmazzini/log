@@ -252,5 +252,5 @@ void incdata(int cha,char *key){
 long numdata(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(key,data2[cha][i1].lab)==0)break;
-  return (i1<ndata2[cha])?0:data2[cha][i1].num;
+  return (i1==ndata2[cha])?0:data2[cha][i1].num;
 }
