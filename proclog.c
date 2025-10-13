@@ -7,11 +7,11 @@
 #define TOTTOK 5
 
 MYSQL_ROW searchcty(MYSQL *,char *);
-void incdata(int,char *);
-long numdata(int,char *);
-struct data {char lab[10]; long num;} **data2;
+void incdata2(int,char *);
+long numdata2(int,char *);
+struct data {char lab[10]; long num;} **data2,***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
-int *ndata2;
+int *ndata2,**ndata3;
 char *mymode(char *s){
   if(!s)return"ND";
   if(!strcmp(s,"CW"))return"CW";
@@ -40,9 +40,14 @@ int main(void){
   time_t epoch,td;
   long lastserial,l1,l2;
  
-  c=8; data2=(struct data **)malloc(c*sizeof(struct data *)); 
-  for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(400*sizeof(struct data)); 
-  ndata2=malloc(c*sizeof(int));
+  c=8; data2=(struct data **)malloc(c*sizeof(struct data *)); ndata2=malloc(c*sizeof(int));
+  for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(400*sizeof(struct data));
+  c=4; data3=(struct data ***)malloc(c*sizeof(struct data **)); ndata3=malloc(c*sizeof(int *));
+  for(l1=0;l1<c;l1++){
+    data3[l1]=(struct data **)malloc(400*sizeof(struct data *));
+    ndata3[l1]=malloc(400*sizeof(int));
+    for(l2=0;l2<400;l2++)data3[l1][l2]=(struct data *)malloc(100000*sizeof(struct data));
+  }
   for(len=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -173,22 +178,22 @@ int main(void){
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
-      incdata(0,aux1);
-      if(atoi(row[3])==1)incdata(1,aux1);
-      if(atoi(row[4])==1)incdata(2,aux1);
-      if(atoi(row[5])==1)incdata(3,aux1);
+      incdata2(0,aux1);
+      if(atoi(row[3])==1)incdata2(1,aux1);
+      if(atoi(row[4])==1)incdata2(2,aux1);
+      if(atoi(row[5])==1)incdata2(3,aux1);
       sprintf(aux1,"%03d",atoi(row[6]));
       incdata(4,aux1);
-      if(atoi(row[3])==1)incdata(5,aux1);
-      if(atoi(row[4])==1)incdata(6,aux1);
-      if(atoi(row[5])==1)incdata(7,aux1);
+      if(atoi(row[3])==1)incdata2(5,aux1);
+      if(atoi(row[4])==1)incdata2(6,aux1);
+      if(atoi(row[5])==1)incdata2(7,aux1);
     }
     mysql_free_result(res);
     qsort(data2[0],ndata2[0],sizeof(struct data),cmp1);
     qsort(data2[4],ndata2[4],sizeof(struct data),cmp2);
-    for(l1=0;l1<ndata2[0];l1++)printf("%s %ld %ld %ld %ld\n",data2[0][l1].lab,data2[0][l1].num,numdata(1,data2[0][l1].lab),numdata(2,data2[0][l1].lab),numdata(3,data2[0][l1].lab));
+    for(l1=0;l1<ndata2[0];l1++)printf("%s %ld %ld %ld %ld\n",data2[0][l1].lab,data2[0][l1].num,numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("<br>");
-    for(l1=0;l1<ndata2[4];l1++)printf("%s %ld %ld %ld %ld\n",data2[4][l1].lab,data2[4][l1].num,numdata(5,data2[04][l1].lab),numdata(6,data2[4][l1].lab),numdata(7,data2[4][l1].lab));
+    for(l1=0;l1<ndata2[4];l1++)printf("%s %ld %ld %ld %ld\n",data2[4][l1].lab,data2[4][l1].num,numdata2(5,data2[04][l1].lab),numdata2(6,data2[4][l1].lab),numdata2(7,data2[4][l1].lab));
     printf("</pre>");
     goto end;
   }
@@ -229,7 +234,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
   return row;
 }
 
-void incdata(int cha,char *key){
+void incdata2(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
   if(i1==ndata2[cha]){
@@ -240,7 +245,7 @@ void incdata(int cha,char *key){
   else data2[cha][i1].num++;
 }
 
-long numdata(int cha,char *key){
+long numdata2(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(key,data2[cha][i1].lab)==0)break;
   return (i1==ndata2[cha])?0:data2[cha][i1].num;
