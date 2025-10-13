@@ -261,7 +261,7 @@ long incdata3(int cha,int idx,char *key){
   if(i1==ndata3[cha][idx]){
     strcpy(data3[cha][idx][ndata3[cha][idx]].lab,key);
     data3[cha][idx][ndata3[cha][idx]].num=1; 
-    if(ndata3[cha][idx]<TOTL3-1)ndata3[cha][idx]++;
+    if(ndata3[cha][idx]<TOTL3-2)ndata3[cha][idx]++;
   }
   else data3[cha][idx][i1].num++;
   return i1;
