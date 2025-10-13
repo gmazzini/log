@@ -173,43 +173,14 @@ int main(void){
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
       incdata(0,aux1);
-     // for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
-     // if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
-     // else data2[0][l1].num++;
-      if(atoi(row[3])==1){
-        for(l1=0;l1<ndata2[1];l1++)if(strcmp(data2[1][l1].lab,aux1)==0)break;
-        if(l1==ndata2[1]){strcpy(data2[1][ndata2[1]].lab,aux1); data2[1][ndata2[1]].num=1; ndata2[1]++; }
-        else data2[1][l1].num++;
-      }
-      if(atoi(row[4])==1){
-        for(l1=0;l1<ndata2[2];l1++)if(strcmp(data2[2][l1].lab,aux1)==0)break;
-        if(l1==ndata2[2]){strcpy(data2[2][ndata2[2]].lab,aux1); data2[2][ndata2[2]].num=1; ndata2[2]++; }
-        else data2[2][l1].num++;
-      }
-      if(atoi(row[5])==1){
-        for(l1=0;l1<ndata2[3];l1++)if(strcmp(data2[3][l1].lab,aux1)==0)break;
-        if(l1==ndata2[3]){strcpy(data2[3][ndata2[3]].lab,aux1); data2[3][ndata2[3]].num=1; ndata2[3]++; }
-        else data2[3][l1].num++;
-      }
+      if(atoi(row[3])==1)incdata(1,aux1);
+      if(atoi(row[4])==1)incdata(2,aux1);
+      if(atoi(row[5])==1)incdata(3,aux1);
       sprintf(aux1,"%03d",atoi(row[6]));
-      for(l1=0;l1<ndata2[4];l1++)if(strcmp(data2[4][l1].lab,aux1)==0)break;
-      if(l1==ndata2[4]){strcpy(data2[4][ndata2[4]].lab,aux1); data2[4][ndata2[4]].num=1; ndata2[4]++; }
-      else data2[4][l1].num++;
-      if(atoi(row[3])==1){
-        for(l1=0;l1<ndata2[5];l1++)if(strcmp(data2[5][l1].lab,aux1)==0)break;
-        if(l1==ndata2[5]){strcpy(data2[5][ndata2[5]].lab,aux1); data2[5][ndata2[5]].num=1; ndata2[5]++; }
-        else data2[5][l1].num++;
-      }
-      if(atoi(row[4])==1){
-        for(l1=0;l1<ndata2[6];l1++)if(strcmp(data2[6][l1].lab,aux1)==0)break;
-        if(l1==ndata2[6]){strcpy(data2[6][ndata2[6]].lab,aux1); data2[6][ndata2[6]].num=1; ndata2[6]++; }
-        else data2[6][l1].num++;
-      }
-      if(atoi(row[5])==1){
-        for(l1=0;l1<ndata2[7];l1++)if(strcmp(data2[7][l1].lab,aux1)==0)break;
-        if(l1==ndata2[7]){strcpy(data2[7][ndata2[7]].lab,aux1); data2[7][ndata2[7]].num=1; ndata2[7]++; }
-        else data2[7][l1].num++;
-      }
+      incdata(4,aux1);
+      if(atoi(row[3])==1)incdata(5,aux1);
+      if(atoi(row[4])==1)incdata(6,aux1);
+      if(atoi(row[5])==1)incdata(7,aux1);
     }
     mysql_free_result(res);
     qsort(data2[0],ndata2[0],sizeof(struct data),cmp1);
