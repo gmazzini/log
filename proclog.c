@@ -8,9 +8,8 @@
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 void incdata(int,char *){
-struct data {char lab[10]; long num;};
+struct data {char lab[10]; long num;} **data2;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
-struct data **data2;
 int *ndata2;
 char *mymode(char *s){
   if(!s)return"ND";
