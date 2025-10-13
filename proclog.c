@@ -276,6 +276,10 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
 void incdata(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
-  if(i1==ndata2[cha]){strcpy(data2[cha][ndata2[cha]].lab,key); data2[cha][ndata2[cha]].num=1; ndata2[cha]++; }
+  if(i1==ndata2[cha]){
+    strcpy(data2[cha][ndata2[cha]].lab,key);
+    data2[cha][ndata2[cha]].num=1; 
+    ndata2[cha]++;
+  }
   else data2[cha][i1].num++;
 }
