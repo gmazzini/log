@@ -14,7 +14,6 @@ MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
 long incdata3(int,int,char *);
 long numdata2(int,char *);
-int idxdata2(int,char *);
 long numdata3(int,int,char *);
 struct data {char lab[20]; long num;} **data2,***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
@@ -201,8 +200,7 @@ int main(void){
     qsort(data2[0],ndata2[0],sizeof(struct data),cmp1);
     qsort(data2[4],ndata2[4],sizeof(struct data),cmp2);
     for(l1=0;l1<ndata2[0];l1++){
-      idx=idxdata2(0,data2[0][l1].lab);
-      printf("%s %ld %ld %ld %ld %ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
+      printf("%s %ld %ld %ld %ld %ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][l1],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     }
     printf("<br>");
     for(l1=0;l1<ndata2[4];l1++)printf("%s %ld %ld %ld %ld\n",data2[4][l1].lab,data2[4][l1].num,numdata2(5,data2[04][l1].lab),numdata2(6,data2[4][l1].lab),numdata2(7,data2[4][l1].lab));
@@ -294,20 +292,6 @@ long incdata3(int cha,int idx,char *key){
     return lo;
   }
   else return n;
-}
-
-int idxdata2(int cha,char *key){
-  int lo,hi,mid,cmp;
-  lo=0;
-  hi=ndata2[cha]-1;
-  while(lo<=hi){
-    mid=lo+(hi-lo)/2;
-    cmp=strcmp(data2[cha][mid].lab,key);
-    if(cmp==0)return mid;
-    else if(cmp<0)lo=mid+1;
-    else hi=mid-1;
-  }
-  return -1;
 }
 
 long numdata2(int cha,char *key){
