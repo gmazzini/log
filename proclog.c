@@ -282,7 +282,7 @@ long incdata3(int cha,int idx,char *key){
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
   }
-  if(n<TOTL2){
+  if(n<TOTL3){
     for(j=n;j>lo;--j)data3[cha][idx][j]=data3[cha][idx][j-1];
     strcpy(data3[cha][idx][lo].lab,key);
     data3[cha][idx][lo].num=1;
