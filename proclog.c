@@ -14,6 +14,7 @@ MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
 long incdata3(int,int,char *);
 long numdata2(int,char *);
+long numdata3(int,int,char *);
 struct data {char lab[20]; long num;} **data2,***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 int *ndata2;
@@ -299,6 +300,20 @@ long numdata2(int cha,char *key){
     mid=lo+(hi-lo)/2;
     cmp=strcmp(data2[cha][mid].lab,key);
     if(cmp==0)return data2[cha][mid].num;
+    else if(cmp<0)lo=mid+1;
+    else hi=mid-1;
+  }
+  return 0;
+}
+
+long numdata3(int cha,int idx,char *key){
+  long lo,hi,mid,cmp;
+  lo=0;
+  hi=ndata3[cha][idx]-1;
+  while(lo<=hi){
+    mid=lo+(hi-lo)/2;
+    cmp=strcmp(data3[cha][idx][mid].lab,key);
+    if(cmp==0)return data3[cha][idx][mid].num;
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
   }
