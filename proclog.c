@@ -39,7 +39,7 @@ int main(void){
   time_t epoch,td;
   long lastserial,l1,l2;
  
-  c=8; data2=malloc(c*sizeof(*data)); for(l1=0;l1<c;l1++)a[l1]=malloc(400*sizeof(data)); ndata2=malloc(c*sizeof(int));
+  c=8; data2=malloc(c*sizeof(struct *data)); for(l1=0;l1<c;l1++)data2[l1]=malloc(400*sizeof(struct data)); ndata2=malloc(c*sizeof(int));
   for(len=0;;){
     c=getchar();
     if(c==EOF)break;
