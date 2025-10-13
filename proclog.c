@@ -247,9 +247,11 @@ int incdata2(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
   if(i1==ndata2[cha]){
-    strcpy(data2[cha][ndata2[cha]].lab,key);
-    data2[cha][ndata2[cha]].num=1; 
-    if(ndata2[cha]<TOTL2-1)ndata2[cha]++;
+    if(ndata2[cha]<TOTL2){
+      strcpy(data2[cha][ndata2[cha]].lab,key);
+      data2[cha][ndata2[cha]].num=1;
+      ndata2[cha]++;
+    }
   }
   else data2[cha][i1].num++;
   return i1;
@@ -259,9 +261,11 @@ long incdata3(int cha,int idx,char *key){
   long i1;
   for(i1=0;i1<ndata3[cha][idx];i1++)if(strcmp(data3[cha][idx][i1].lab,key)==0)break;
   if(i1==ndata3[cha][idx]){
-    strcpy(data3[cha][idx][ndata3[cha][idx]].lab,key);
-    data3[cha][idx][ndata3[cha][idx]].num=1; 
-    if(ndata3[cha][idx]<TOTL3-2)ndata3[cha][idx]++;
+    if(ndata3[cha][idx]<TOTL3){
+      strcpy(data3[cha][idx][ndata3[cha][idx]].lab,key);
+      data3[cha][idx][ndata3[cha][idx]].num=1; 
+      indata3[cha][idx]++;
+    }
   }
   else data3[cha][idx][i1].num++;
   return i1;
