@@ -267,23 +267,28 @@ int incdata2(int cha,char *key){
 }
 
 long incdata3(int cha,int idx,char *key){
-  long i1;
-  for(i1=0;i1<ndata3[cha][idx];i1++)if(strcmp(data3[cha][idx][i1].lab,key)==0)break;
-  if(i1==ndata3[cha][idx]){
-    if(ndata3[cha][idx]<TOTL3){
-      strcpy(data3[cha][idx][ndata3[cha][idx]].lab,key);
-      data3[cha][idx][ndata3[cha][idx]].num=1; 
-      ndata3[cha][idx]++;
+  long n,lo,hi,mid,cmp,j;
+  n=ndata3[cha][idx];
+  lo=0;
+  hi=n-1;
+  while(lo<=hi){
+    mid=lo+(hi-lo)/2;
+    cmp=strcmp(data3[cha][idx][mid].lab,key);
+    if(cmp==0){
+      data3[cha][idx][mid].num++;
+      return mid;
     }
+    else if(cmp<0)lo=mid+1;
+    else hi=mid-1;
   }
-  else data3[cha][idx][i1].num++;
-  return i1;
-}
-
-long xxnumdata2(int cha,char *key){
-  int i1;
-  for(i1=0;i1<ndata2[cha];i1++)if(strcmp(key,data2[cha][i1].lab)==0)break;
-  return (i1==ndata2[cha])?0:data2[cha][i1].num;
+  if(n<TOTL2){
+    for(j=n;j>lo;--j)data3[cha][idx][j]=data3[cha][idx][j-1];
+    strcpy(data3[cha][idx][lo].lab,key);
+    data3[cha][idx][lo].num=1;
+    ndata3[cha][idx]=n+1;
+    return lo;
+  }
+  else return n;
 }
 
 long numdata2(int cha,char *key){
