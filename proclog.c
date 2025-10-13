@@ -210,8 +210,8 @@ int main(void){
       }
     }
     mysql_free_result(res);
-    qsort(data2[0],ndata2[0],sizeof(struct data2),cmp1);
-    qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
+    qsort(data2[0],ndata2[0],sizeof(struct data),cmp1);
+    qsort(data2[4],ndata2[4],sizeof(struct data),cmp2);
     for(l1=0;l1<ndata2[0];l1++){
       printf("%s %ld",data2[0][l1].lab,data2[0][l1].num);
       for(l2=0;l2<ndata2[1];l2++)if(strcmp(data2[0][l1].lab,data2[1][l2].lab)==0)break;
