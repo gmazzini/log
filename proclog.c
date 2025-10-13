@@ -7,28 +7,31 @@
 #define TOTTOK 5
 
 MYSQL_ROW searchcty(MYSQL *,char *);
-struct data2 {char lab[10]; long num;};
+void incdata(int,char *){
+struct data {char lab[10]; long num;};
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
+struct data **data2;
+int *ndata2;
 char *mymode(char *s){
- if(!s)return"ND";
- if(!strcmp(s,"CW"))return"CW";
- if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
- if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
- return"ND";
+  if(!s)return"ND";
+  if(!strcmp(s,"CW"))return"CW";
+  if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
+  if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
+  return"ND";
 }
 int cmp1(const void *a,const void *b){
-  const struct data2 *x=a;
-  const struct data2 *y=b;
+  const struct data *x=a;
+  const struct data *y=b;
   return strcmp(x->lab,y->lab);
 }
 int cmp2(const void *a,const void *b){
-  const struct data2 *x=a;
-  const struct data2 *y=b;
+  const struct data *x=a;
+  const struct data *y=b;
   return y->num-x->num;
 }
 
-int main(void) {
-  int c,len,act,ndata2[10];
+int main(void){
+  int c,len,act;
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
@@ -36,8 +39,8 @@ int main(void) {
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2;
-  struct data2 data2[10][400];
-
+ 
+  c=8; data2=malloc(c*sizeof(*data)); for(l1=0;l1<c;l1++)a[l1]=malloc(400*sizeof(data)); ndata2=malloc(c*sizeof(int));
   for(len=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -168,9 +171,10 @@ int main(void) {
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
-      for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
-      if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
-      else data2[0][l1].num++;
+      incdata(0,aux1);
+     // for(l1=0;l1<ndata2[0];l1++)if(strcmp(data2[0][l1].lab,aux1)==0)break;
+     // if(l1==ndata2[0]){strcpy(data2[0][ndata2[0]].lab,aux1); data2[0][ndata2[0]].num=1; ndata2[0]++; }
+     // else data2[0][l1].num++;
       if(atoi(row[3])==1){
         for(l1=0;l1<ndata2[1];l1++)if(strcmp(data2[1][l1].lab,aux1)==0)break;
         if(l1==ndata2[1]){strcpy(data2[1][ndata2[1]].lab,aux1); data2[1][ndata2[1]].num=1; ndata2[1]++; }
@@ -268,4 +272,11 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
     if(row!=NULL)break;
   }
   return row;
+}
+
+void incdata(int cha,char *key){
+  int i1,i2;
+  for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
+  if(i1==ndata2[cha]){strcpy(data2[cha][ndata2[cha]].lab,key); data2[cha][ndata2[cha]].num=1; ndata2[cha]++; }
+  else data2[cha][l1].num++;
 }
