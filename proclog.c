@@ -190,7 +190,7 @@ int main(void){
       if(atoi(row[3])==1)incdata2(1,aux1);
       if(atoi(row[4])==1)incdata2(2,aux1);
       if(atoi(row[5])==1)incdata2(3,aux1);
-      incdata3(0,idx,"1234");
+      // incdata3(0,idx,row[0]);
       sprintf(aux1,"%03d",atoi(row[6]));
       incdata2(4,aux1);
       if(atoi(row[3])==1)incdata2(5,aux1);
