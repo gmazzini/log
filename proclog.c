@@ -7,12 +7,13 @@
 #define TOTTOK 5
 
 MYSQL_ROW searchcty(MYSQL *,char *);
-void incdata2(int,char *);
-void incdata3(int,char *,char *);
+int incdata2(int,char *);
+long incdata3(int,int,char *);
 long numdata2(int,char *);
 struct data {char lab[10]; long num;} **data2,***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
-int *ndata2,**ndata3;
+int *ndata2;
+long **ndata3;
 char *mymode(char *s){
   if(!s)return"ND";
   if(!strcmp(s,"CW"))return"CW";
@@ -44,10 +45,10 @@ int main(void){
   c=8; data2=(struct data **)malloc(c*sizeof(struct data *)); ndata2=malloc(c*sizeof(int));
   for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(400*sizeof(struct data));
   
-  c=4; data3=(struct data ***)malloc(c*sizeof(struct data **)); ndata3=malloc(c*sizeof(int *));
+  c=4; data3=(struct data ***)malloc(c*sizeof(struct data **)); ndata3=malloc(c*sizeof(long *));
   for(l1=0;l1<c;l1++){
     data3[l1]=(struct data **)malloc(400*sizeof(struct data *));
-    ndata3[l1]=malloc(400*sizeof(int));
+    ndata3[l1]=malloc(400*sizeof(long));
     for(l2=0;l2<400;l2++)data3[l1][l2]=(struct data *)malloc(100000*sizeof(struct data));
   }
   
@@ -237,7 +238,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
   return row;
 }
 
-void incdata2(int cha,char *key){
+int incdata2(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
   if(i1==ndata2[cha]){
@@ -246,6 +247,19 @@ void incdata2(int cha,char *key){
     ndata2[cha]++;
   }
   else data2[cha][i1].num++;
+  return i1;
+}
+
+long incdata3(int cha,int idx,char *key){
+  long i1;
+  for(i1=0;i1<ndata3[cha][idx];i1++)if(strcmp(data3[cha][idx][i1].lab,key)==0)break;
+  if(i1==ndata2[cha][idx]){
+    strcpy(data2[cha][idx][ndata2[cha][idx]].lab,key);
+  data2[cha][idx][ndata2[cha][idx]].num=1; 
+    ndata2[cha][idx]++;
+  }
+  else data2[cha][idx][i1].num++;
+  return i1;
 }
 
 long numdata2(int cha,char *key){
