@@ -52,7 +52,6 @@ int main(void){
     ndata3[l1]=malloc(TOTL2*sizeof(long));
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data *)malloc(TOTL3*sizeof(struct data));
   }
-  
   for(len=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -174,7 +173,7 @@ int main(void){
     printf("<pre>");
     for(l1=0;l1<8;l1++){
       ndata2[l1]=0;
-      for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
+//      for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     }
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
