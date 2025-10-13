@@ -186,7 +186,7 @@ int main(void){
     mysql_free_result(res);
     qsort(data2[0],ndata2[0],sizeof(struct data),cmp1);
     qsort(data2[4],ndata2[4],sizeof(struct data),cmp2);
-    for(l1=0;l1<ndata2[0];l1++)printf("%s %ld %ld %ld %ls\n",data2[0][l1].lab,data2[0][l1].num,numdata(1,data2[0][l1].lab),numdata(2,data2[0][l1].lab),numdata(3,data2[0][l1].lab));
+    for(l1=0;l1<ndata2[0];l1++)printf("%s %ld %ld %ld %ld\n",data2[0][l1].lab,data2[0][l1].num,numdata(1,data2[0][l1].lab),numdata(2,data2[0][l1].lab),numdata(3,data2[0][l1].lab));
     printf("<br>");
     for(l1=0;l1<ndata2[4];l1++){
       printf("%s %ld",data2[4][l1].lab,data2[4][l1].num);
