@@ -42,14 +42,14 @@ int main(void){
  
   c=8; data2=(struct data **)malloc(c*sizeof(struct data *)); ndata2=malloc(c*sizeof(int));
   for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(400*sizeof(struct data));
-  /*
+  
   c=4; data3=(struct data ***)malloc(c*sizeof(struct data **)); ndata3=malloc(c*sizeof(int *));
   for(l1=0;l1<c;l1++){
     data3[l1]=(struct data **)malloc(400*sizeof(struct data *));
     ndata3[l1]=malloc(400*sizeof(int));
     for(l2=0;l2<400;l2++)data3[l1][l2]=(struct data *)malloc(100000*sizeof(struct data));
   }
-  */
+  
   for(len=0;;){
     c=getchar();
     if(c==EOF)break;
