@@ -242,6 +242,29 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
 }
 
 int incdata2(int cha,char *key){
+  int n,lo,hi,mid,cmp,j;
+  n=ndata2[cha];
+  lo=0;
+  hi=n-1;
+  while(lo<=hi){
+    mid=lo+(hi-lo)/2;
+    cmp=strcmp(data2[cha][mid].lab,key);
+    if(cmp==0){data2[cha][mid].num++;return mid;}
+    else if(cmp<0)lo=mid+1;
+    else hi=mid-1;
+  }
+  if(n<TOTL2){
+    for(j=n;j>lo;--j)data2[cha][j]=data2[cha][j-1];
+    strcpy(data2[cha][lo].lab,key);
+    data2[cha][lo].num=1;
+    ndata2[cha]=n+1;
+    return lo;
+  }
+  else return n;
+}
+
+
+int xxincdata2(int cha,char *key){
   int i1;
   for(i1=0;i1<ndata2[cha];i1++)if(strcmp(data2[cha][i1].lab,key)==0)break;
   if(i1==ndata2[cha]){
