@@ -183,7 +183,7 @@ int main(void){
       if(atoi(row[4])==1)incdata2(2,aux1);
       if(atoi(row[5])==1)incdata2(3,aux1);
       sprintf(aux1,"%03d",atoi(row[6]));
-      incdata(4,aux1);
+      incdata2(4,aux1);
       if(atoi(row[3])==1)incdata2(5,aux1);
       if(atoi(row[4])==1)incdata2(6,aux1);
       if(atoi(row[5])==1)incdata2(7,aux1);
