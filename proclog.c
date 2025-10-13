@@ -253,12 +253,12 @@ int incdata2(int cha,char *key){
 long incdata3(int cha,int idx,char *key){
   long i1;
   for(i1=0;i1<ndata3[cha][idx];i1++)if(strcmp(data3[cha][idx][i1].lab,key)==0)break;
-  if(i1==ndata2[cha][idx]){
-    strcpy(data2[cha][idx][ndata2[cha][idx]].lab,key);
-  data2[cha][idx][ndata2[cha][idx]].num=1; 
-    ndata2[cha][idx]++;
+  if(i1==ndata3[cha][idx]){
+    strcpy(data3[cha][idx][ndata3[cha][idx]].lab,key);
+    data3[cha][idx][ndata3[cha][idx]].num=1; 
+    ndata3[cha][idx]++;
   }
-  else data2[cha][idx][i1].num++;
+  else data3[cha][idx][i1].num++;
   return i1;
 }
 
