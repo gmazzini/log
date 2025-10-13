@@ -5,6 +5,8 @@
 #include <mysql/mysql.h>
 #include "log.def"
 #define TOTTOK 5
+#define TOT2 8
+#define TOT3 4
 #define TOTL2 400
 #define TOTL3 100000
 
@@ -44,10 +46,10 @@ int main(void){
   time_t epoch,td;
   long lastserial,l1,l2;
  
-  c=8; data2=(struct data **)malloc(c*sizeof(struct data *)); ndata2=malloc(c*sizeof(int));
-  for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(TOTL2*sizeof(struct data));
-  c=4; data3=(struct data ***)malloc(c*sizeof(struct data **)); ndata3=malloc(c*sizeof(long *));
-  for(l1=0;l1<c;l1++){
+  data2=(struct data **)malloc(TOT2*sizeof(struct data *)); ndata2=malloc(TOT2*sizeof(int));
+  for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data *)malloc(TOTL2*sizeof(struct data));
+  data3=(struct data ***)malloc(TOT3*sizeof(struct data **)); ndata3=malloc(TOT3*sizeof(long *));
+  for(l1=0;l1<TOT3;l1++){
     data3[l1]=(struct data **)malloc(TOTL2*sizeof(struct data *));
     ndata3[l1]=malloc(TOTL2*sizeof(long));
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data *)malloc(TOTL3*sizeof(struct data));
@@ -171,10 +173,8 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    for(l1=0;l1<8;l1++){
-      ndata2[l1]=0;
-//      for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
-    }
+    for(l1=0;l1<TOT2;l1++)ndata2[l1]=0;
+    for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
