@@ -5,6 +5,7 @@
 #include <mysql/mysql.h>
 #include "log.def"
 #define TOTTOK 5
+#define TOTL2 400
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
@@ -33,7 +34,7 @@ int cmp2(const void *a,const void *b){
 }
 
 int main(void){
-  int c,len,act;
+  int c,len,act,idx;
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
   MYSQL *con;
   MYSQL_RES *res;
@@ -43,13 +44,13 @@ int main(void){
   long lastserial,l1,l2;
  
   c=8; data2=(struct data **)malloc(c*sizeof(struct data *)); ndata2=malloc(c*sizeof(int));
-  for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(400*sizeof(struct data));
+  for(l1=0;l1<c;l1++)data2[l1]=(struct data *)malloc(TOTL2*sizeof(struct data));
   
   c=4; data3=(struct data ***)malloc(c*sizeof(struct data **)); ndata3=malloc(c*sizeof(long *));
   for(l1=0;l1<c;l1++){
-    data3[l1]=(struct data **)malloc(400*sizeof(struct data *));
-    ndata3[l1]=malloc(400*sizeof(long));
-    for(l2=0;l2<400;l2++)data3[l1][l2]=(struct data *)malloc(100000*sizeof(struct data));
+    data3[l1]=(struct data **)malloc(TOTL2*sizeof(struct data *));
+    ndata3[l1]=malloc(TOTL2*sizeof(long));
+    for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data *)malloc(100000*sizeof(struct data));
   }
   
   for(len=0;;){
@@ -174,18 +175,21 @@ int main(void){
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
-    ndata2[0]=ndata2[1]=ndata2[2]=ndata2[3]=0;
-    ndata2[4]=ndata2[5]=ndata2[6]=ndata2[7]=0;
+    for(l1=0;l1<8;l1++){
+      ndata2[l1]=0;
+      for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
+    }
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
-      incdata2(0,aux1);
+      idx=incdata2(0,aux1);
       if(atoi(row[3])==1)incdata2(1,aux1);
       if(atoi(row[4])==1)incdata2(2,aux1);
       if(atoi(row[5])==1)incdata2(3,aux1);
+      incdata3(0,idx,row[0]);
       sprintf(aux1,"%03d",atoi(row[6]));
       incdata2(4,aux1);
       if(atoi(row[3])==1)incdata2(5,aux1);
