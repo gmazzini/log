@@ -14,7 +14,8 @@ MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
 long incdata3(int,int,char *);
 long numdata2(int,char *);
-struct data {char lab[20]; long num;} **data2,***data3;
+struct data2 {char lab[20]; long num;} **data2;
+struct data3 {char lab[20];} ***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 int *ndata2;
 long **ndata3;
@@ -26,13 +27,13 @@ char *mymode(char *s){
   return"ND";
 }
 int cmp1(const void *a,const void *b){
-  const struct data *x=a;
-  const struct data *y=b;
+  const struct data2 *x=a;
+  const struct data2 *y=b;
   return strcmp(x->lab,y->lab);
 }
 int cmp2(const void *a,const void *b){
-  const struct data *x=a;
-  const struct data *y=b;
+  const struct data2 *x=a;
+  const struct data2 *y=b;
   return y->num-x->num;
 }
 
@@ -46,13 +47,13 @@ int main(void){
   time_t epoch,td;
   long lastserial,l1,l2;
  
-  data2=(struct data **)malloc(TOT2*sizeof(struct data *)); ndata2=malloc(TOT2*sizeof(int));
-  for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data *)malloc(TOTL2*sizeof(struct data));
-  data3=(struct data ***)malloc(TOT3*sizeof(struct data **)); ndata3=malloc(TOT3*sizeof(long *));
+  data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
+  for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
+  data3=(struct data3 ***)malloc(TOT3*sizeof(struct data3 **)); ndata3=malloc(TOT3*sizeof(long *));
   for(l1=0;l1<TOT3;l1++){
-    data3[l1]=(struct data **)malloc(TOTL2*sizeof(struct data *));
+    data3[l1]=(struct data3 **)malloc(TOTL2*sizeof(struct data3 *));
     ndata3[l1]=malloc(TOTL2*sizeof(long));
-    for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data *)malloc(TOTL3*sizeof(struct data));
+    for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
   for(len=0;;){
     c=getchar();
@@ -276,17 +277,13 @@ long incdata3(int cha,int idx,char *key){
   while(lo<=hi){
     mid=lo+(hi-lo)/2;
     cmp=strcmp(data3[cha][idx][mid].lab,key);
-    if(cmp==0){
-      data3[cha][idx][mid].num++;
-      return mid;
-    }
+    if(cmp==0)return mid;
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
   }
   if(n<TOTL3){
     for(j=n;j>lo;--j)data3[cha][idx][j]=data3[cha][idx][j-1];
     strcpy(data3[cha][idx][lo].lab,key);
-    data3[cha][idx][lo].num=1;
     ndata3[cha][idx]=n+1;
     return lo;
   }
