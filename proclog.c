@@ -173,13 +173,13 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
-    mysql_query(con,buf);
-    res=mysql_store_result(con);
     for(l1=0;l1<8;l1++){
       ndata2[l1]=0;
       for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     }
+    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
