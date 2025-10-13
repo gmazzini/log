@@ -6,6 +6,7 @@
 #include "log.def"
 #define TOTTOK 5
 #define TOTL2 400
+#define TOTL3 100000
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
@@ -50,7 +51,7 @@ int main(void){
   for(l1=0;l1<c;l1++){
     data3[l1]=(struct data **)malloc(TOTL2*sizeof(struct data *));
     ndata3[l1]=malloc(TOTL2*sizeof(long));
-    for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data *)malloc(100000*sizeof(struct data));
+    for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data *)malloc(TOTL3*sizeof(struct data));
   }
   
   for(len=0;;){
@@ -248,7 +249,7 @@ int incdata2(int cha,char *key){
   if(i1==ndata2[cha]){
     strcpy(data2[cha][ndata2[cha]].lab,key);
     data2[cha][ndata2[cha]].num=1; 
-    ndata2[cha]++;
+    if(ndata2[cha]<TOTL2-1)ndata2[cha]++;
   }
   else data2[cha][i1].num++;
   return i1;
@@ -260,9 +261,9 @@ long incdata3(int cha,int idx,char *key){
   if(i1==ndata3[cha][idx]){
     strcpy(data3[cha][idx][ndata3[cha][idx]].lab,key);
     data3[cha][idx][ndata3[cha][idx]].num=1; 
-    ndata3[cha][idx]++;
+    if(ndata3[cha][idx]<TOTL3-1)ndata3[cha][idx]++;
   }
-  else data3[cha][idx][i1].num++;
+  else if(data3[cha][idx][i1].num++;
   return i1;
 }
 
