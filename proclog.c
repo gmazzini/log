@@ -263,7 +263,7 @@ long incdata3(int cha,int idx,char *key){
     data3[cha][idx][ndata3[cha][idx]].num=1; 
     if(ndata3[cha][idx]<TOTL3-1)ndata3[cha][idx]++;
   }
-  else if(data3[cha][idx][i1].num++;
+  else data3[cha][idx][i1].num++;
   return i1;
 }
 
