@@ -246,7 +246,7 @@ int main(void){
     }
     mysql_free_result(res);
     qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
-    for(l1=0;l1<ndata3[0][0];l1++)if(l1<10)printf("%s %ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
+    for(l1=0,l2=min(ndata3[0][0],tok[3]);l1<l2;l1++)printf("%s %ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
     printf("</pre>");
     goto end;
   }
