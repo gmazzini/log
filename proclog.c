@@ -226,7 +226,7 @@ int main(void){
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
     printf("<p id=\"myh2\">%6s %7d %8s %8s %8d %8d %8d</p>","Tot",ndata2[4],"","",ndata2[5],ndata2[6],ndata2[7]);
     for(l1=0;l1<ndata2[4];l1++){
-      printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld",data2[4][l1].lab,data2[4][l1].num,ndata3[2][data2[4][l1].idx],ndata3[4][data2[4][l1].idx],numdata3(0,5,data3[4][l1].lab),numdata2(0,6,data2[4][l1].lab),numdata2(0,7,data2[4][l1].lab));
+      printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld",data2[4][l1].lab,data2[4][l1].num,ndata3[2][data2[4][l1].idx],ndata3[4][data2[4][l1].idx],numdata3(0,5,data2[4][l1].lab),numdata2(0,6,data2[4][l1].lab),numdata2(0,7,data2[4][l1].lab));
       sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data2[4][l1].lab));
       mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
       if(row!=NULL)printf(" %s",row[0]);
