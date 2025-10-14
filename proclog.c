@@ -46,7 +46,7 @@ int main(void){
   MYSQL_ROW row,row1;
   struct tm ts,te;
   time_t epoch,td;
-  long lastserial,l1,l2;
+  long lastserial,l1,l2,suml[10];
  
   data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
   for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
@@ -204,7 +204,11 @@ int main(void){
     qsort(data2[0],ndata2[0],sizeof(struct data2),cmp1);
     qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %8s</p>","Band/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
-    printf("<p id=\"myh2\">%10s %6ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",0,0,0,0,0,0);
+    for(c=0;c<8;c++){
+      suml[c]=0;
+      for(l1=0;l1<ndata2[c];l1++)sum[c]+=data2[c][l1].num;
+    }
+    printf("<p id=\"myh2\">%10s %6ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],0L,0L,suml[1],suml[2],suml[3]);
     for(l1=0;l1<ndata2[0];l1++)printf("%10s %6ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][data2[0][l1].idx],ndata3[1][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
