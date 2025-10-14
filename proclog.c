@@ -246,7 +246,8 @@ int main(void){
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       incdata3(0,0,row[0]);
-      incdata3(0,1,myband[c]);
+      sprintf(aux1,"%04d",myband[c]);
+      incdata3(0,1,aux1);
     }
     mysql_free_result(res);
     qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
