@@ -243,11 +243,18 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
+      c=(int)(atol(row[1])/1000000.0);
+      if(c>433)continue;
       incdata3(0,0,row[0]);
+      incdata3(0,1,myband[c]);
     }
     mysql_free_result(res);
     qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
-    for(l1=0,l2=min(ndata3[0][0],atol(tok[3]));l1<l2;l1++)printf("%s %ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
+    qsort(data3[0][1],ndata3[0][1],sizeof(struct data3),cmp3);
+    printf("call\n");
+    for(l1=0,l2=min(ndata3[0][0],atol(tok[3]));l1<l2;l1++)printf("%10s %l6d\n",data3[0][0][l1].lab,data3[0][0][l1].num);
+    printf("band\n");
+    for(l1=0,l2=min(ndata3[0][1],atol(tok[3]));l1<l2;l1++)printf("%10s %l6d\n",data3[0][1][l1].lab,data3[0][1][l1].num);
     printf("</pre>");
     goto end;
   }
