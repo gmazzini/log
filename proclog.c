@@ -218,9 +218,9 @@ int main(void){
       printf("---");
       sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data2[4][l1].lab));
       printf(" %s ",buf);
-      mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+     // mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
       printf(" %s",row[0]);
-      mysql_free_result(res);
+    //  mysql_free_result(res);
       printf("\n");
     }
     printf("</pre>");
