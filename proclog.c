@@ -8,7 +8,7 @@
 #define TOT2 8
 #define TOT3 4
 #define TOTL2 400
-#define TOTL3 100000
+#define TOTL3 200000
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
