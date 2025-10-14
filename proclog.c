@@ -253,9 +253,9 @@ int main(void){
     qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
     qsort(data3[0][1],ndata3[0][1],sizeof(struct data3),cmp3);
     printf("call\n");
-    for(l1=0,l2=min(ndata3[0][0],atol(tok[3]));l1<l2;l1++)printf("%10s %l6d\n",data3[0][0][l1].lab,data3[0][0][l1].num);
+    for(l1=0,l2=min(ndata3[0][0],atol(tok[3]));l1<l2;l1++)printf("%10s %6ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
     printf("band\n");
-    for(l1=0,l2=min(ndata3[0][1],atol(tok[3]));l1<l2;l1++)printf("%10s %l6d\n",data3[0][1][l1].lab,data3[0][1][l1].num);
+    for(l1=0,l2=min(ndata3[0][1],atol(tok[3]));l1<l2;l1++)printf("%10s %6ld\n",data3[0][1][l1].lab,data3[0][1][l1].num);
     printf("</pre>");
     goto end;
   }
