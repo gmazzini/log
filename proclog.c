@@ -205,7 +205,7 @@ int main(void){
     qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     for(l1=0;l1<ndata2[0];l1++)printf("%s %ld %ld %ld %ld %ld %ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][data2[0][l1].idx],ndata3[1][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("<br>");
-    for(l1=0;l1<ndata2[4];l1++)printf("%s %ld %ld %ld %ld %ld %ld\n",data2[4][l1].lab,data2[4][l1].num,ndata3[1][data2[4][l1].idx],ndata3[1][data2[4][l1].idx],numdata2(5,data2[04][l1].lab),numdata2(6,data2[4][l1].lab),numdata2(7,data2[4][l1].lab));
+    for(l1=0;l1<ndata2[4];l1++)printf("%s %ld %ld %ld %ld %ld %ld\n",data2[4][l1].lab,data2[4][l1].num,ndata3[1][data2[4][l1].idx],ndata3[3][data2[4][l1].idx],numdata2(5,data2[04][l1].lab),numdata2(6,data2[4][l1].lab),numdata2(7,data2[4][l1].lab));
     printf("</pre>");
     goto end;
   }
