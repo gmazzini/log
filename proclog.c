@@ -186,7 +186,7 @@ int main(void){
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
-      strcpy(aux2,wpx(row[0]))
+      strcpy(aux2,wpx(row[0]));
       idx=incdata2(0,aux1);
       incdata3(0,idx,row[0]);
       incdata3(0,TOT2-1,row[0]);
