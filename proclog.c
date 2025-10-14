@@ -53,7 +53,7 @@ int main(void){
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
-  const char *l11[]={"call","band","mode","call.lotw","dxcc.lotw","call.eqsl","dxcc.eqsl","call.qrz","dxcc.qrz"};
+  const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
  
   data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
   for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
@@ -249,13 +249,13 @@ int main(void){
       sprintf(aux1,"%04d",myband[c]);
       incdata3(0,1,aux1);
       incdata3(0,2,row[2]);
-      if(atoi(row[3])==1){incdata3(0,3,row[0]); incdata3(0,4,row[6]);}
-      if(atoi(row[4])==1){incdata3(0,5,row[0]); incdata3(0,6,row[6]);}
-      if(atoi(row[5])==1){incdata3(0,7,row[0]); incdata3(0,8,row[6]);}
+      if(atoi(row[3])==1)incdata3(0,3,row[0]); 
+      if(atoi(row[4])==1)incdata3(0,4,row[0]);
+      if(atoi(row[5])==1)incdata3(0,5,row[0]);
     }
     mysql_free_result(res);
     printf("<table>");
-    for(c=0;c<9;c++){
+    for(c=0;c<6;c++){
       qsort(data3[0][c],ndata3[0][c],sizeof(struct data3),cmp3);
       printf("<td><pre>%s\n",l11[c]);
       for(l1=0,l2=min(ndata3[0][c],atol(tok[3]));l1<l2;l1++)printf("%7.7s %5ld\n",data3[0][c][l1].lab,data3[0][c][l1].num);
