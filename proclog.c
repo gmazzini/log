@@ -247,15 +247,19 @@ int main(void){
       incdata3(0,0,row[0]);
       sprintf(aux1,"%04d",myband[c]);
       incdata3(0,1,aux1);
+      incdata3(0,2,row[2]);
     }
     mysql_free_result(res);
     qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
     qsort(data3[0][1],ndata3[0][1],sizeof(struct data3),cmp3);
+    qsort(data3[0][2],ndata3[0][2],sizeof(struct data3),cmp3);
     printf("<table>");
     printf("<td><pre>call\n");
     for(l1=0,l2=min(ndata3[0][0],atol(tok[3]));l1<l2;l1++)printf("%10s %6ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
     printf("</pre></td><td><pre>band\n");
     for(l1=0,l2=min(ndata3[0][1],atol(tok[3]));l1<l2;l1++)printf("%10s %6ld\n",data3[0][1][l1].lab,data3[0][1][l1].num);
+    printf("</pre></td><td><pre>band\n");
+    for(l1=0,l2=min(ndata3[0][2],atol(tok[3]));l1<l2;l1++)printf("%10s %6ld\n",data3[0][2][l1].lab,data3[0][2][l1].num);
     printf("</pre></td></table>");
     goto end;
   }
