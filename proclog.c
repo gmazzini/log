@@ -37,6 +37,11 @@ int cmp2(const void *a,const void *b){
   const struct data2 *y=b;
   return y->num-x->num;
 }
+int cmp3(const void *a,const void *b){
+  const struct data3 *x=a;
+  const struct data3 *y=b;
+  return y->num-x->num;
+}
 
 int main(void){
   int c,len,act,idx;
@@ -239,7 +244,8 @@ int main(void){
       if(row==NULL)break;
       incdata3(0,0,row[0]);
     }
-    mysql_free_result(res);  
+    mysql_free_result(res);
+    qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
     for(l1=0;l1<ndata3[0][0];l1++)if(l1<10)printf("%s %ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
     printf("</pre>");
     goto end;
