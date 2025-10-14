@@ -14,6 +14,7 @@ MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
 void incdata3(int,int,char *);
 long numdata2(int,char *);
+long numdata3(int,int,char *);
 char * wpx(char *);
 long min(long,long);
 struct data2 {char lab[20]; long num; int idx;} **data2;
@@ -220,7 +221,7 @@ int main(void){
 
     
     printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[1],suml[2],suml[3]);
-    for(l1=0;l1<ndata2[0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
+    for(l1=0;l1<ndata2[0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata3(0,1,data3[0][1][l1].lab),numdata3(0,2,data3[0][2][l1].lab),numdata3(0,3,data3[0][3][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
     printf("<p id=\"myh2\">%6s %7d %8s %8s %8d %8d %8d</p>","Tot",ndata2[4],"","",ndata2[5],ndata2[6],ndata2[7]);
@@ -362,6 +363,20 @@ long numdata2(int cha,char *key){
     mid=lo+(hi-lo)/2;
     cmp=strcmp(data2[cha][mid].lab,key);
     if(cmp==0)return data2[cha][mid].num;
+    else if(cmp<0)lo=mid+1;
+    else hi=mid-1;
+  }
+  return 0;
+}
+
+long numdata3(int cha,int idx,char *key){
+  int lo,hi,mid,cmp;
+  lo=0;
+  hi=ndata3[cha][idx]-1;
+  while(lo<=hi){
+    mid=lo+(hi-lo)/2;
+    cmp=strcmp(data3[cha][idx][mid].lab,key);
+    if(cmp==0)return data3[cha][idx][mid].num;
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
   }
