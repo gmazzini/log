@@ -53,7 +53,7 @@ int main(void){
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
-  const char l11[]={"call","band","mode","call.lotw","dxcc.lotw","call.eqsl","dxcc.eqsl","call.qrz","dxcc.qrz"};
+  const char *l11[]={"call","band","mode","call.lotw","dxcc.lotw","call.eqsl","dxcc.eqsl","call.qrz","dxcc.qrz"};
  
   data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
   for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
