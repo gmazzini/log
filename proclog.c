@@ -41,12 +41,12 @@ int cmp2(const void *a,const void *b){
 int main(void){
   int c,len,act,idx;
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
-  MYSQL *con;
-  MYSQL_RES *res;
-  MYSQL_ROW row,row1;
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2,suml[10];
+  MYSQL *con;
+  MYSQL_RES *res;
+  MYSQL_ROW row,row1;
  
   data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
   for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
