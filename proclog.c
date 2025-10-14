@@ -53,6 +53,7 @@ int main(void){
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
+  const char l11[]={"call","band","mode","call.lotw","dxcc.lotw","call.eqsl","dxcc.eqsl","call.qrz","dxcc.qrz"};
  
   data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
   for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
@@ -253,10 +254,10 @@ int main(void){
       if(atoi(row[5])==1){incdata3(0,7,row[0]); incdata3(0,8,row[6]);}
     }
     mysql_free_result(res);
-    qsort(data3[0][0],ndata3[0][0],sizeof(struct data3),cmp3);
     printf("<table>");
     for(c=0;c<8;c++){
-      printf("<td><pre>xxx\n");
+      qsort(data3[0][c],ndata3[0][c],sizeof(struct data3),cmp3);
+      printf("<td><pre>%s\n",l11[c]);
       for(l1=0,l2=min(ndata3[0][c],atol(tok[3]));l1<l2;l1++)printf("%.7s %5ld\n",data3[0][c][l1].lab,data3[0][c][l1].num);
       printf("</pre></td>");
     }
