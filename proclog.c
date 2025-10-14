@@ -204,7 +204,7 @@ int main(void){
     qsort(data2[0],ndata2[0],sizeof(struct data2),cmp1);
     qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %8s</p>","Band/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
-    printf("<p id=\"myh2\">%10s %6ld %8ld %8ld %8ld %8ld %8ld</p>","Tot,0,0,0,0,0,0);
+    printf("<p id=\"myh2\">%10s %6ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",0,0,0,0,0,0);
     for(l1=0;l1<ndata2[0];l1++)printf("%10s %6ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][data2[0][l1].idx],ndata3[1][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
