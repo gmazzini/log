@@ -199,9 +199,9 @@ int main(void){
       incdata3(1,TOT2-1,row[0]);
       incdata3(3,idx,aux2);
       incdata3(3,TOT2-1,aux2);
-      if(atoi(row[3])==1)incdata2(1,aux1);
-      if(atoi(row[4])==1)incdata2(2,aux1);
-      if(atoi(row[5])==1)incdata2(3,aux1);
+      if(atoi(row[3])==1)incdata3(0,1,aux1);
+      if(atoi(row[4])==1)incdata3(0,2,aux1);
+      if(atoi(row[5])==1)incdata3(0,3,aux1);
       sprintf(aux1,"%03d",atoi(row[6]));
       idx=incdata2(4,aux1);
       incdata3(2,idx,row[0]);
@@ -215,6 +215,10 @@ int main(void){
     qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata2[c];l1++)suml[c]+=data2[c][l1].num;
+
+    for(c=1;c<4;c++)for(suml[c]=0,l1=0;l1<ndata3[0][c];l1++)suml[c]+=data3[0][c][l1].num;
+
+    
     printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[1],suml[2],suml[3]);
     for(l1=0;l1<ndata2[0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("\n");
