@@ -305,7 +305,7 @@ long numdata2(int cha,char *key){
 
 char * wpx(char *s){
   int i;
-  static chat out[20];
+  static char out[20];
   strcpy(out,s);
   for(i=strlen(out)-1;i>=0;i--)if(out[i]>"0" && out[i]<="9")break;
   out[i+1]='\0';
