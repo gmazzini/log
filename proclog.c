@@ -15,6 +15,7 @@ int incdata2(int,char *);
 void incdata3(int,int,char *);
 long numdata2(int,char *);
 char * wpx(char *);
+long min(long,long);
 struct data2 {char lab[20]; long num; int idx;} **data2;
 struct data3 {char lab[20]; long num;} ***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
@@ -358,4 +359,8 @@ char * wpx(char *s){
   for(i=strlen(out)-1;i>=0;i--)if(out[i]>'0' && out[i]<='9')break;
   out[i+1]='\0';
   return out;
+}
+
+long min(long a,long b){
+  return (a<b)?a:b;
 }
