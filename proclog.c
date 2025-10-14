@@ -198,6 +198,8 @@ int main(void){
       idx=incdata2(4,aux1);
       incdata3(1,idx,row[0]);
       incdata3(3,idx,wpx(row[0]));
+      incdata3(1,TOT2-1,row[0]);
+      incdata3(3,TOT2-1,wpx(row[0]));
       if(atoi(row[3])==1)incdata2(5,aux1);
       if(atoi(row[4])==1)incdata2(6,aux1);
       if(atoi(row[5])==1)incdata2(7,aux1);
@@ -211,7 +213,7 @@ int main(void){
     for(l1=0;l1<ndata2[0];l1++)printf("%10s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][data2[0][l1].idx],ndata3[1][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%10s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
-    printf("<p id=\"myh2\">%10s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[4],0L,0L,suml[5],suml[6],suml[7]);
+    printf("<p id=\"myh2\">%10s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[4],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[5],suml[6],suml[7]);
     for(l1=0;l1<ndata2[4];l1++)printf("%10s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[4][l1].lab,data2[4][l1].num,ndata3[1][data2[4][l1].idx],ndata3[3][data2[4][l1].idx],numdata2(5,data2[04][l1].lab),numdata2(6,data2[4][l1].lab),numdata2(7,data2[4][l1].lab));
     printf("</pre>");
     goto end;
