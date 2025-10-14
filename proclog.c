@@ -206,7 +206,7 @@ int main(void){
     printf("<p id=\"myh1\">%10s %6s %8s %8s %8s %8s %8s</p>","Band/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(c=0;c<8;c++){
       suml[c]=0;
-      for(l1=0;l1<ndata2[c];l1++)sum[c]+=data2[c][l1].num;
+      for(l1=0;l1<ndata2[c];l1++)suml[c]+=data2[c][l1].num;
     }
     printf("<p id=\"myh2\">%10s %6ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],0L,0L,suml[1],suml[2],suml[3]);
     for(l1=0;l1<ndata2[0];l1++)printf("%10s %6ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][data2[0][l1].idx],ndata3[1][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
