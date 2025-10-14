@@ -186,6 +186,7 @@ int main(void){
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
       idx=incdata2(0,aux1);
+      if(idx==30)printf(".\n");
       incdata3(0,idx,row[0]);
       if(atoi(row[3])==1)incdata2(1,aux1);
       if(atoi(row[4])==1)incdata2(2,aux1);
