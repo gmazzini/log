@@ -6,7 +6,7 @@
 #include "log.def"
 #define TOTTOK 5
 #define TOT2 8
-#define TOT3 4
+#define TOT3 5
 #define TOTL2 400
 #define TOTL3 200000
 
