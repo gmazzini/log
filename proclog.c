@@ -224,6 +224,26 @@ int main(void){
     printf("</pre>");
     goto end;
   }
+
+  if(act==11){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
+    for(l1=0;l1<TOT2;l1++)ndata2[l1]=0;
+    for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
+    sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      incdata3(0,0,row[0]);
+    }
+    mysql_free_result(res);  
+    for(l1=0;l1<ndata3[0][0];l1++)if(l1<10)printf("%s\n",data3[0][0][l1].lab);
+    printf("</pre>");
+    goto end;
+  }
   
   end:
   mysql_close(con);
