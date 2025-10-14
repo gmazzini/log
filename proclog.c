@@ -240,7 +240,7 @@ int main(void){
       incdata3(0,0,row[0]);
     }
     mysql_free_result(res);  
-    for(l1=0;l1<ndata3[0][0];l1++)if(l1<10)printf("%s\n",data3[0][0][l1].lab);
+    for(l1=0;l1<ndata3[0][0];l1++)if(l1<10)printf("%s %ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
     printf("</pre>");
     goto end;
   }
