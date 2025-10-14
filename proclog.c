@@ -207,7 +207,7 @@ int main(void){
     qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     printf("<p id=\"myh1\">%10s %7s %8s %8s %8s %8s %8s</p>","Band/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(c=0;c<8;c++)for(suml[c]=0,l1=0;l1<ndata2[c];l1++)suml[c]+=data2[c][l1].num;
-    printf("<p id=\"myh2\">%10s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[0][TOT2-1],nadat3[2][TOT2-1],suml[1],suml[2],suml[3]);
+    printf("<p id=\"myh2\">%10s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[0][TOT2-1],ndata3[2][TOT2-1],suml[1],suml[2],suml[3]);
     for(l1=0;l1<ndata2[0];l1++)printf("%10s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[0][data2[0][l1].idx],ndata3[1][data2[0][l1].idx],numdata2(1,data2[0][l1].lab),numdata2(2,data2[0][l1].lab),numdata2(3,data2[0][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%10s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
