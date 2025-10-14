@@ -189,9 +189,9 @@ int main(void){
       strcpy(aux2,wpx(row[0]));
       idx=incdata2(0,aux1);
       incdata3(0,idx,row[0]);
-    //  incdata3(0,TOT2-1,row[0]);
+      incdata3(0,TOT2-1,row[0]);
       incdata3(2,idx,aux2);
-     // incdata3(2,TOT2-1,aux2);
+      incdata3(2,TOT2-1,aux2);
       if(atoi(row[3])==1)incdata2(1,aux1);
       if(atoi(row[4])==1)incdata2(2,aux1);
       if(atoi(row[5])==1)incdata2(3,aux1);
@@ -218,9 +218,9 @@ int main(void){
       printf("---");
       sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data2[4][l1].lab));
       printf(" %s ",buf);
-     // mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+      mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
       printf(" %s",row[0]);
-    //  mysql_free_result(res);
+      mysql_free_result(res);
       printf("\n");
     }
     printf("</pre>");
