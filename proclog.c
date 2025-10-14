@@ -258,7 +258,7 @@ int main(void){
     for(c=0;c<8;c++){
       qsort(data3[0][c],ndata3[0][c],sizeof(struct data3),cmp3);
       printf("<td><pre>%s\n",l11[c]);
-      for(l1=0,l2=min(ndata3[0][c],atol(tok[3]));l1<l2;l1++)printf("%.7s %5ld\n",data3[0][c][l1].lab,data3[0][c][l1].num);
+      for(l1=0,l2=min(ndata3[0][c],atol(tok[3]));l1<l2;l1++)printf("%7.7s %5ld\n",data3[0][c][l1].lab,data3[0][c][l1].num);
       printf("</pre></td>");
     }
     printf("</table>");
