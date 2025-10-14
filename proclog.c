@@ -217,7 +217,7 @@ int main(void){
       printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld",data2[4][l1].lab,data2[4][l1].num,ndata3[1][data2[4][l1].idx],ndata3[3][data2[4][l1].idx],numdata2(5,data2[04][l1].lab),numdata2(6,data2[4][l1].lab),numdata2(7,data2[4][l1].lab));
       sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data2[4][l1].lab));
       mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    //  printf(" %s",row[0]);
+    //  printf(" %.5s",row[0]);
       mysql_free_result(res);
       printf("\n");
     }
