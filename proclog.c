@@ -5,7 +5,7 @@
 #include <mysql/mysql.h>
 #include "log.def"
 #define TOTTOK 5
-#define TOT2 9
+#define TOT2 8
 #define TOT3 4
 #define TOTL2 400
 #define TOTL3 200000
@@ -186,19 +186,19 @@ int main(void){
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
+      strcpy(aux2,wpx(row[0]))
       idx=incdata2(0,aux1);
       incdata3(0,idx,row[0]);
       incdata3(0,TOT2-1,row[0]);
-      incdata3(2,idx,wpx(row[0]));
-      incdata3(2,TOT2-1,wpx(row[0]));
+      incdata3(2,idx,aux2);
+      incdata3(2,TOT2-1,aux2);
       if(atoi(row[3])==1)incdata2(1,aux1);
       if(atoi(row[4])==1)incdata2(2,aux1);
       if(atoi(row[5])==1)incdata2(3,aux1);
       sprintf(aux1,"%03d",atoi(row[6]));
       idx=incdata2(4,aux1);
-      incdata2(8,wpx(row[0]));
       incdata3(1,idx,row[0]);
-      incdata3(3,idx,wpx(row[0]));
+      incdata3(3,idx,aux2);
       if(atoi(row[3])==1)incdata2(5,aux1);
       if(atoi(row[4])==1)incdata2(6,aux1);
       if(atoi(row[5])==1)incdata2(7,aux1);
