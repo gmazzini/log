@@ -415,7 +415,7 @@ int cmp2(const void *a,const void *b){
   for(;;aa++,bb++){
     if(*aa<*bb)return -1;
     if(*aa>*bb)return 1;
-    if(*aa==*b && *aa=='\0')return 0;
+    if(*aa==*bb && *aa=='\0')return 0;
     if(*bb=='\0')return -1;
     if(*aa=='\0')return 1;
   }
