@@ -263,7 +263,7 @@ int main(void){
     }
     mysql_free_result(res);
     for(l1=0;l1<ndata3[0][0];l1++){
-      printf("%s\n",data3[0][0][l1].lab);
+      printf("%s %ld %ld %ld %ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,data3[0][4][l1].num,data3[0][5][l1].num,data3[0][6][l1].num);
     }
     printf("<pre>");
     goto end;
