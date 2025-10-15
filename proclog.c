@@ -15,6 +15,7 @@ long numdata3(int,int,char *);
 char * wpx(char *);
 long min(long,long);
 int cmp3(const void *,const void *);
+int cmp2(const void *,const void *);
 char *mymode(char *);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
@@ -349,7 +350,7 @@ long incdata3(int cha,int idx,char *key){
   hi=n-1;
   while(lo<=hi){
     mid=lo+(hi-lo)/2;
-    cmp=strcmp(data3[cha][idx][mid].lab,key);
+    cmp=cmp2(data3[cha][idx][mid].lab,key);
     if(cmp==0){
       data3[cha][idx][mid].num++;
       return data3[cha][idx][mid].idx;;
@@ -373,7 +374,7 @@ long numdata3(int cha,int idx,char *key){
   hi=ndata3[cha][idx]-1;
   while(lo<=hi){
     mid=lo+(hi-lo)/2;
-    cmp=strcmp(data3[cha][idx][mid].lab,key);
+    cmp=cmp2(data3[cha][idx][mid].lab,key);
     if(cmp==0)return data3[cha][idx][mid].num;
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
@@ -399,6 +400,14 @@ int cmp3(const void *a,const void *b){
   const struct data3 *x=a;
   const struct data3 *y=b;
   return y->num-x->num;
+}
+
+int cmp2(const void *a,const void *b){
+  size_t la=strlen(a);
+  size_t lb=strlen(b);
+  if(la>lb)return -1;
+  else if(la < lb)reyurn 1;
+  else strcmp(a,b);
 }
 
 char *mymode(char *s){
