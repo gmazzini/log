@@ -11,13 +11,10 @@
 #define TOTL3 200000
 
 MYSQL_ROW searchcty(MYSQL *,char *);
-int incdata2(int,char *);
 long incdata3(int,int,char *);
-long numdata2(int,char *);
 long numdata3(int,int,char *);
 char * wpx(char *);
 long min(long,long);
-// struct data2 {char lab[20]; long num; int idx;} **data2;
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 int *ndata2;
@@ -303,31 +300,6 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
   return row;
 }
 
-int incdata2(int cha,char *key){
-  int n,lo,hi,mid,cmp,j;
-  n=ndata2[cha];
-  lo=0;
-  hi=n-1;
-  while(lo<=hi){
-    mid=lo+(hi-lo)/2;
-    cmp=strcmp(data2[cha][mid].lab,key);
-    if(cmp==0){
-      data2[cha][mid].num++;
-      return data2[cha][mid].idx;
-    }
-    else if(cmp<0)lo=mid+1;
-    else hi=mid-1;
-  }
-  if(n<TOTL2){
-    for(j=n;j>lo;--j)data2[cha][j]=data2[cha][j-1];
-    strcpy(data2[cha][lo].lab,key);
-    data2[cha][lo].idx=n;
-    data2[cha][lo].num=1;
-    ndata2[cha]=n+1;
-  }
-  return n;
-}
-
 long incdata3(int cha,int idx,char *key){
   long n,lo,hi,mid,cmp,j;
   n=ndata3[cha][idx];
@@ -351,20 +323,6 @@ long incdata3(int cha,int idx,char *key){
     ndata3[cha][idx]=n+1;
   }
   return n;
-}
-
-long numdata2(int cha,char *key){
-  int lo,hi,mid,cmp;
-  lo=0;
-  hi=ndata2[cha]-1;
-  while(lo<=hi){
-    mid=lo+(hi-lo)/2;
-    cmp=strcmp(data2[cha][mid].lab,key);
-    if(cmp==0)return data2[cha][mid].num;
-    else if(cmp<0)lo=mid+1;
-    else hi=mid-1;
-  }
-  return 0;
 }
 
 long numdata3(int cha,int idx,char *key){
