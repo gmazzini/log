@@ -46,11 +46,11 @@ int cmp3(const void *a,const void *b){
 }
 
 int main(void){
-  int c,len,act,idx;
+  int c,len,act;
   char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
   struct tm ts,te;
   time_t epoch,td;
-  long lastserial,l1,l2,suml[10];
+  long lastserial,l1,l2,idx,suml[10];
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -221,7 +221,7 @@ int main(void){
     printf("\n");
     qsort(data3[0][4],ndata3[0][4],sizeof(struct data3),cmp3);
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
-    printf("<p id=\"myh2\">%6s %7d %8s %8s %8d %8d %8d</p>","Tot",ndata3[0][4],"","",ndata3[0][5],ndata3[0][6],ndata3[0][7]);
+    printf("<p id=\"myh2\">%6s %7ld %8s %8s %8ld %8ld %8ld</p>","Tot",ndata3[0][4],"","",ndata3[0][5],ndata3[0][6],ndata3[0][7]);
     for(l1=0;l1<ndata3[0][4];l1++){
       printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld",data3[0][4][l1].lab,data3[0][4][l1].num,ndata3[2][data3[0][4][l1].idx],ndata3[4][data3[0][4][l1].idx],numdata3(0,5,data3[0][4][l1].lab),numdata3(0,6,data3[0][4][l1].lab),numdata3(0,7,data3[0][4][l1].lab));
       sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data2[4][l1].lab));
