@@ -248,8 +248,8 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      sprintf(aux1,"*.4s",row[1]);
-      strcpy(aux2,mumode(row[2]);
+      sprintf(aux1,"%.4s",row[1]);
+      strcpy(aux2,mymode(row[2]);
       idx=incdata3(0,0,aux1);
       incdata3(1,idx,row[0]);
       incdata3(2,idx,wpx(row[0]));
