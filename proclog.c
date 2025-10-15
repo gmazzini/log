@@ -299,7 +299,7 @@ int main(void){
     suml[0]=4; suml[1]=7; suml[2]=10;
     strcpy(aux1,"YYYY-MM-DD");
     for(c=0;c<3;c++){
-      printf("<p id=\"myh1\">%*10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>",suml[c],aux1,"QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+      printf("<p id=\"myh1\">%10.*s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>",suml[c],aux1,"QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
       for(l1=ndata3[0][0]-1;l1>0;l1--){
         if(strlen(data3[0][0][l1].lab)==suml[c]){
           printf("%10s %8ld %8ld %8ld %8ld",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,4,data3[0][0][l1].lab),numdata3(0,5,data3[0][0][l1].lab),numdata3(0,6,data3[0][0][l1].lab));
