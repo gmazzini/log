@@ -262,10 +262,11 @@ int main(void){
       if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
     }
     mysql_free_result(res);
+    printf("<p id=\"myh1\">%10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","YYYY","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(l1=0;l1<ndata3[0][0];l1++){
-      printf("%s %ld %ld %ld %ld",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,4,data3[0][0][l1].lab),numdata3(0,5,data3[0][0][l1].lab),numdata3(0,6,data3[0][0][l1].lab));
-      printf(" %ld %ld %ld",ndata3[1][data3[0][0][l1].idx],0L,0L);
-      printf(" %ld %ld %ld\n",numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
+      printf("%10s %8ld %8ld %8ld %8ld",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,4,data3[0][0][l1].lab),numdata3(0,5,data3[0][0][l1].lab),numdata3(0,6,data3[0][0][l1].lab));
+      printf(" %8ld %8ld %8ld",ndata3[1][data3[0][0][l1].idx],ndata3[2][data3[0][0][l1].idx],ndata3[3][data3[0][0][l1].idx]);
+      printf(" %8ld %8ld %8ld\n",numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
     }
     printf("<pre>");
     goto end;
