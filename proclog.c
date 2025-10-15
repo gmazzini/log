@@ -187,7 +187,7 @@ int main(void){
     mysql_free_result(res);
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata3[0][c];l1++)suml[c]+=data3[0][c][l1].num;
-    printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[1],suml[2],suml[3]);
+    printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOTL2-1],ndata3[3][TOTL2-1],suml[1],suml[2],suml[3]);
     for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,ndata3[1][data3[0][0][l1].idx],ndata3[2][data3[0][0][l1].idx],numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
     printf("\n");
     qsort(data3[0][4],ndata3[0][4],sizeof(struct data3),cmp3);
