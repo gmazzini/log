@@ -407,7 +407,7 @@ int cmp2(const void *a,const void *b){
   size_t lb=strlen(b);
   if(la>lb)return -1;
   else if(la<lb)return 1;
-  else strcmp(a,b);
+  else return strcmp(a,b);
 }
 
 char *mymode(char *s){
