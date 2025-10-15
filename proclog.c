@@ -18,7 +18,7 @@ long numdata3(int,int,char *);
 char * wpx(char *);
 long min(long,long);
 struct data2 {char lab[20]; long num; int idx;} **data2;
-struct data3 {char lab[20]; long num;} ***data3;
+struct data3 {char lab[20]; long num; long idx;} ***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 int *ndata2;
 long **ndata3;
@@ -331,7 +331,7 @@ int incdata2(int cha,char *key){
   return n;
 }
 
-void incdata3(int cha,int idx,char *key){
+long incdata3(int cha,int idx,char *key){
   long n,lo,hi,mid,cmp,j;
   n=ndata3[cha][idx];
   lo=0;
@@ -341,7 +341,7 @@ void incdata3(int cha,int idx,char *key){
     cmp=strcmp(data3[cha][idx][mid].lab,key);
     if(cmp==0){
       data3[cha][idx][mid].num++;
-      return;
+      return data3[cha][idx][mid].idx;;
     }
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
@@ -349,10 +349,11 @@ void incdata3(int cha,int idx,char *key){
   if(n<TOTL3){
     for(j=n;j>lo;--j)data3[cha][idx][j]=data3[cha][idx][j-1];
     strcpy(data3[cha][idx][lo].lab,key);
+    data3[cha][idx][lo].idx=n;
     data3[cha][idx][lo].num=1;
     ndata3[cha][idx]=n+1;
   }
-  return;
+  return n;
 }
 
 long numdata2(int cha,char *key){
