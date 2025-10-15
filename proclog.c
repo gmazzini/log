@@ -23,7 +23,7 @@ long **ndata3;
 
 int main(void){
   int c,len,act;
-  char buf[1001],aux1[300],aux2[300],aux3[300],aux4[300],*token,tok[TOTTOK][100],mycall[16];
+  char buf[1001],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[TOTTOK][100],mycall[16];
   struct tm ts,te,*tm_now;
   time_t epoch,td;
   long lastserial,l1,l2,idx,suml[10];
@@ -246,7 +246,10 @@ int main(void){
     tm_now=localtime(&epoch); ts=*tm_now;
     ts.tm_year-=2; mktime(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m",&ts);
-    strftime(aux4,sizeof(aux4),"%Y-%m",tm_now);    
+    strftime(aux4,sizeof(aux4),"%Y-%m",tm_now);
+    ts.tm_year+=2; tm_past.tm_mon-=1; mktime(&ts);
+    strftime(aux5,sizeof(aux5),"%Y-%m-%d",&ts);
+    strftime(aux6,sizeof(aux6),"%Y-%m-%d",tm_now);
     sprintf(buf,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
@@ -278,7 +281,19 @@ int main(void){
         if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
         if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
       }
-      
+      sprintf(aux1,"%.10s",row[1])
+      if(strcmp(aux1,aux5)>=0 && strcmp(aux1,aux6)<0){
+        idx=incdata3(0,0,aux1);
+        incdata3(1,idx,row[0]);
+        incdata3(2,idx,wpx(row[0]));
+        incdata3(3,idx,row[6]);
+        if(atoi(row[3])==1)incdata3(0,1,aux1);
+        if(atoi(row[4])==1)incdata3(0,2,aux1);
+        if(atoi(row[5])==1)incdata3(0,3,aux1);
+        if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1);
+        if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
+        if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
+      } 
     }
     mysql_free_result(res);
     printf("<p id=\"myh1\">%10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","YYYY","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
