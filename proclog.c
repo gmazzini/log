@@ -246,7 +246,7 @@ int main(void){
     tm_now=localtime(&epoch); ts=*tm_now;
     ts.tm_year-=1; mktime(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m",&ts);
-    strftime(aux4,sizeof(aux4,"%Y-%m",tm_now);    
+    strftime(aux4,sizeof(aux4),"%Y-%m",tm_now);    
     sprintf(buf,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
