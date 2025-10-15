@@ -170,9 +170,9 @@ int main(void){
       strcpy(aux2,wpx(row[0]));
       idx=incdata3(0,0,aux1);
       incdata3(1,idx,row[0]);
-      incdata3(1,TOT2-1,row[0]);
+      incdata3(1,TOTL2-1,row[0]);
       incdata3(3,idx,aux2);
-      incdata3(3,TOT2-1,aux2);
+      incdata3(3,TOTL2-1,aux2);
       if(atoi(row[3])==1)incdata3(0,1,aux1);
       if(atoi(row[4])==1)incdata3(0,2,aux1);
       if(atoi(row[5])==1)incdata3(0,3,aux1);
