@@ -253,8 +253,8 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      sprintf(aux1,"%.4s",row[1]);
       strcpy(aux2,mymode(row[2]));
+      sprintf(aux1,"%.4s",row[1]);
       idx=incdata3(0,0,aux1);
       incdata3(1,idx,row[0]);
       incdata3(2,idx,wpx(row[0]));
@@ -265,6 +265,20 @@ int main(void){
       if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1);
       if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
       if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
+      sprintf(aux1,"%.7s",row[1]);
+      if(strcmp(aux1,aux3)>=0 && strcmp(aux1,aux4)<0){
+        idx=incdata3(0,0,aux1);
+        incdata3(1,idx,row[0]);
+        incdata3(2,idx,wpx(row[0]));
+        incdata3(3,idx,row[6]);
+        if(atoi(row[3])==1)incdata3(0,1,aux1);
+        if(atoi(row[4])==1)incdata3(0,2,aux1);
+        if(atoi(row[5])==1)incdata3(0,3,aux1);
+        if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1);
+        if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
+        if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
+      }
+      
     }
     mysql_free_result(res);
     printf("<p id=\"myh1\">%10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","YYYY","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
