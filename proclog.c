@@ -247,7 +247,7 @@ int main(void){
     ts.tm_year-=2; mktime(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m",&ts);
     strftime(aux4,sizeof(aux4),"%Y-%m",tm_now);
-    ts.tm_year+=2; tm_past.tm_mon-=1; mktime(&ts);
+    ts.tm_year+=2; ts.tm_mon-=1; mktime(&ts);
     strftime(aux5,sizeof(aux5),"%Y-%m-%d",&ts);
     strftime(aux6,sizeof(aux6),"%Y-%m-%d",tm_now);
     sprintf(buf,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
@@ -281,7 +281,7 @@ int main(void){
         if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
         if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
       }
-      sprintf(aux1,"%.10s",row[1])
+      sprintf(aux1,"%.10s",row[1]);
       if(strcmp(aux1,aux5)>=0 && strcmp(aux1,aux6)<0){
         idx=incdata3(0,0,aux1);
         incdata3(1,idx,row[0]);
