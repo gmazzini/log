@@ -195,7 +195,7 @@ int main(void){
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
       strcpy(aux2,wpx(row[0]));
-      idx=incdata2(0,aux1);
+      idx=incdata3(0,0,aux1);
       incdata3(1,idx,row[0]);
       incdata3(1,TOT2-1,row[0]);
       incdata3(3,idx,aux2);
@@ -212,16 +212,16 @@ int main(void){
       if(atoi(row[5])==1)incdata3(0,7,aux1);
     }
     mysql_free_result(res);
-    qsort(data2[0],ndata2[0],sizeof(struct data2),cmp1);
+   // qsort(data2[0],ndata2[0],sizeof(struct data2),cmp1);
     qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
-    for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata2[c];l1++)suml[c]+=data2[c][l1].num;
+   // for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata2[c];l1++)suml[c]+=data2[c][l1].num;
 
-    for(c=1;c<4;c++)for(suml[c]=0,l1=0;l1<ndata3[0][c];l1++)suml[c]+=data3[0][c][l1].num;
+    for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata3[0][c];l1++)suml[c]+=data3[0][c][l1].num;
 
     
     printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[1],suml[2],suml[3]);
-    for(l1=0;l1<ndata2[0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data2[0][l1].lab,data2[0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata3(0,1,data2[0][l1].lab),numdata3(0,2,data2[0][l1].lab),numdata3(0,3,data2[0][l1].lab));
+    for(l1=0;l1<ndata2[0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata3(0,1,data2[0][l1].lab),numdata3(0,2,data2[0][l1].lab),numdata3(0,3,data2[0][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
     printf("<p id=\"myh2\">%6s %7d %8s %8s %8d %8d %8d</p>","Tot",ndata2[4],"","",ndata2[5],ndata2[6],ndata2[7]);
