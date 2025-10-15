@@ -12,7 +12,7 @@
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 int incdata2(int,char *);
-void incdata3(int,int,char *);
+long incdata3(int,int,char *);
 long numdata2(int,char *);
 long numdata3(int,int,char *);
 char * wpx(char *);
