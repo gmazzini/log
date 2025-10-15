@@ -221,7 +221,7 @@ int main(void){
 
     
     printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[1],suml[2],suml[3]);
-    for(l1=0;l1<ndata2[0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata3(0,1,data2[0][l1].lab),numdata3(0,2,data2[0][l1].lab),numdata3(0,3,data2[0][l1].lab));
+    for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,ndata3[1][data2[0][l1].idx],ndata3[2][data2[0][l1].idx],numdata3(0,1,data2[0][l1].lab),numdata3(0,2,data2[0][l1].lab),numdata3(0,3,data2[0][l1].lab));
     printf("\n");
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
     printf("<p id=\"myh2\">%6s %7d %8s %8s %8d %8d %8d</p>","Tot",ndata2[4],"","",ndata2[5],ndata2[6],ndata2[7]);
