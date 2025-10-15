@@ -23,7 +23,7 @@ long **ndata3;
 
 int main(void){
   int c,len,act;
-  char buf[1001],aux1[300],aux2[300],*token,tok[TOTTOK][100],mycall[16];
+  char buf[1001],aux1[300],aux2[300],aux3[300],*token,tok[TOTTOK][100],mycall[16];
   struct tm ts,te;
   time_t epoch,td;
   long lastserial,l1,l2,idx,suml[10];
@@ -234,6 +234,38 @@ int main(void){
       printf("</pre></td>");
     }
     printf("</table>");
+    goto end;
+  }
+
+  if(act==12){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
+    for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
+    sprintf(buf,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      sprintf(aux1,"*.4s",row[1]);
+      strcpy(aux2,mumode(row[2]);
+      idx=incdata3(0,0,aux1);
+      incdata3(1,idx,row[0]);
+      incdata3(2,idx,wpx(row[0]));
+      incdata3(3,idx,row[6]);
+      if(atoi(row[3])==1)incdata3(0,1,aux1);
+      if(atoi(row[4])==1)incdata3(0,2,aux1);
+      if(atoi(row[5])==1)incdata3(0,3,aux1);
+      if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1);
+      if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
+      if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
+    }
+    mysql_free_result(res);
+    for(l1=0;l1<ndata3[0][0];l1++){
+      printf("%s\n",data3[0][0][l1].lab);
+    }
+    printf("<pre>");
     goto end;
   }
   
