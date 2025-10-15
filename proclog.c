@@ -411,13 +411,12 @@ int xcmp2(const void *a,const void *b){
 }
 
 int cmp2(const void *a,const void *b){
-  char *aa=(char *)a,*bb=(char *)b;
-  for(;;aa++,bb++){
-    if(*aa<*bb)return -1;
-    if(*aa>*bb)return 1;
-    if(*aa==*bb && *aa=='\0')return 0;
-    if(*bb=='\0')return -1;
-    if(*aa=='\0')return 1;
+  for(;;a++,b++){
+    if(*a<*b)return -1;
+    if(*a>*b)return 1;
+    if(*a==*b && *a=='\0')return 0;
+    if(*b=='\0')return -1;
+    if(*a=='\0')return 1;
   }
 }
 
