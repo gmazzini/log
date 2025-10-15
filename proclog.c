@@ -402,12 +402,23 @@ int cmp3(const void *a,const void *b){
   return y->num-x->num;
 }
 
-int cmp2(const void *a,const void *b){
+int xcmp2(const void *a,const void *b){
   size_t la=strlen(a);
   size_t lb=strlen(b);
   if(la>lb)return -1;
   else if(la<lb)return 1;
   else return strcmp(a,b);
+}
+
+int cmp2(const void *a,const void *b){
+  char *aa=(char *)a,*bb=(char *)b;
+  for(;;aa++,bb++){
+    if(*aa<*bb)return -1;
+    if(*aa>*bb)return 1;
+    if(*aa==*bb && *aa=='\0')return 0;
+    if(*bb=='\0')return -1;
+    if(*aa=='\0')return 1;
+  }
 }
 
 char *mymode(char *s){
