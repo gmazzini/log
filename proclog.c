@@ -15,7 +15,6 @@ long numdata3(int,int,char *);
 char * wpx(char *);
 long min(long,long);
 int cmp3(const void *,const void *);
-int cmp2(const void *,const void *);
 char *mymode(char *);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
@@ -297,11 +296,16 @@ int main(void){
       } 
     }
     mysql_free_result(res);
-    printf("<p id=\"myh1\">%10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","YYYY","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
-    for(l1=ndata3[0][0]-1;l1>0;l1--){
-      printf("%10s %8ld %8ld %8ld %8ld",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,4,data3[0][0][l1].lab),numdata3(0,5,data3[0][0][l1].lab),numdata3(0,6,data3[0][0][l1].lab));
-      printf(" %8ld %8ld %8ld",ndata3[1][data3[0][0][l1].idx],ndata3[2][data3[0][0][l1].idx],ndata3[3][data3[0][0][l1].idx]);
-      printf(" %8ld %8ld %8ld\n",numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
+    suml[0]=4; suml[1]=7; suml[2]=10;
+    for(c=0;c<3;c++){
+      printf("<p id=\"myh1\">%10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>","YYYY","QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+      for(l1=ndata3[0][0]-1;l1>0;l1--){
+        if(strlen(data3[0][0][l1].lab)==suml[c]){
+          printf("%10s %8ld %8ld %8ld %8ld",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,4,data3[0][0][l1].lab),numdata3(0,5,data3[0][0][l1].lab),numdata3(0,6,data3[0][0][l1].lab));
+          printf(" %8ld %8ld %8ld",ndata3[1][data3[0][0][l1].idx],ndata3[2][data3[0][0][l1].idx],ndata3[3][data3[0][0][l1].idx]);
+          printf(" %8ld %8ld %8ld\n",numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
+        }
+      }
     }
     printf("<pre>");
     goto end;
@@ -350,7 +354,7 @@ long incdata3(int cha,int idx,char *key){
   hi=n-1;
   while(lo<=hi){
     mid=lo+(hi-lo)/2;
-    cmp=cmp2(data3[cha][idx][mid].lab,key);
+    cmp=strcmp(data3[cha][idx][mid].lab,key);
     if(cmp==0){
       data3[cha][idx][mid].num++;
       return data3[cha][idx][mid].idx;;
@@ -374,7 +378,7 @@ long numdata3(int cha,int idx,char *key){
   hi=ndata3[cha][idx]-1;
   while(lo<=hi){
     mid=lo+(hi-lo)/2;
-    cmp=cmp2(data3[cha][idx][mid].lab,key);
+    cmp=strcmp(data3[cha][idx][mid].lab,key);
     if(cmp==0)return data3[cha][idx][mid].num;
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
@@ -400,25 +404,6 @@ int cmp3(const void *a,const void *b){
   const struct data3 *x=a;
   const struct data3 *y=b;
   return y->num-x->num;
-}
-
-int cmp2(const void *a,const void *b){
-  size_t la=strlen(a);
-  size_t lb=strlen(b);
-  if(la>lb)return -1;
-  else if(la<lb)return 1;
-  else return strcmp(a,b);
-}
-
-int xcmp2(const void *a,const void *b){
-  char *aa=(char *)a,*bb=(char *)b;
-  for(;;aa++,bb++){
-    if(*aa<*bb)return -1;
-    if(*aa>*bb)return 1;
-    if(*aa==*bb && *aa=='\0')return 0;
-    if(*bb=='\0')return -1;
-    if(*aa=='\0')return 1;
-  }
 }
 
 char *mymode(char *s){
