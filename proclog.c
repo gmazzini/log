@@ -5,7 +5,6 @@
 #include <mysql/mysql.h>
 #include "log.def"
 #define TOTTOK 5
-#define TOT2 8
 #define TOT3 5
 #define TOTL2 400
 #define TOTL3 200000
@@ -15,32 +14,12 @@ long incdata3(int,int,char *);
 long numdata3(int,int,char *);
 char * wpx(char *);
 long min(long,long);
+int cmp3(const void *,const void *);
+char *mymode(char *);
+
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
-int *ndata2;
 long **ndata3;
-char *mymode(char *s){
-  if(!s)return"ND";
-  if(!strcmp(s,"CW"))return"CW";
-  if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
-  if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
-  return"ND";
-}
-int cmp1(const void *a,const void *b){
-  const struct data2 *x=a;
-  const struct data2 *y=b;
-  return strcmp(x->lab,y->lab);
-}
-int cmp2(const void *a,const void *b){
-  const struct data2 *x=a;
-  const struct data2 *y=b;
-  return y->num-x->num;
-}
-int cmp3(const void *a,const void *b){
-  const struct data3 *x=a;
-  const struct data3 *y=b;
-  return y->num-x->num;
-}
 
 int main(void){
   int c,len,act;
@@ -53,8 +32,6 @@ int main(void){
   MYSQL_ROW row,row1;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
  
-  data2=(struct data2 **)malloc(TOT2*sizeof(struct data2 *)); ndata2=malloc(TOT2*sizeof(int));
-  for(l1=0;l1<TOT2;l1++)data2[l1]=(struct data2 *)malloc(TOTL2*sizeof(struct data2));
   data3=(struct data3 ***)malloc(TOT3*sizeof(struct data3 **)); ndata3=malloc(TOT3*sizeof(long *));
   for(l1=0;l1<TOT3;l1++){
     data3[l1]=(struct data3 **)malloc(TOTL2*sizeof(struct data3 *));
@@ -180,7 +157,6 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    for(l1=0;l1<TOT2;l1++)ndata2[l1]=0;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
@@ -209,8 +185,6 @@ int main(void){
       if(atoi(row[5])==1)incdata3(0,7,aux1);
     }
     mysql_free_result(res);
-   
-    qsort(data2[4],ndata2[4],sizeof(struct data2),cmp2);
     printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata3[0][c];l1++)suml[c]+=data3[0][c][l1].num;
     printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOT2-1],ndata3[3][TOT2-1],suml[1],suml[2],suml[3]);
@@ -221,7 +195,7 @@ int main(void){
     printf("<p id=\"myh2\">%6s %7ld %8s %8s %8ld %8ld %8ld</p>","Tot",ndata3[0][4],"","",ndata3[0][5],ndata3[0][6],ndata3[0][7]);
     for(l1=0;l1<ndata3[0][4];l1++){
       printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld",data3[0][4][l1].lab,data3[0][4][l1].num,ndata3[2][data3[0][4][l1].idx],ndata3[4][data3[0][4][l1].idx],numdata3(0,5,data3[0][4][l1].lab),numdata3(0,6,data3[0][4][l1].lab),numdata3(0,7,data3[0][4][l1].lab));
-      sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data2[4][l1].lab));
+      sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data3[0][4][l1].lab));
       mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
       if(row!=NULL)printf(" %s",row[0]);
       mysql_free_result(res);
@@ -234,7 +208,6 @@ int main(void){
   if(act==11){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    for(l1=0;l1<TOT2;l1++)ndata2[l1]=0;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
@@ -351,4 +324,18 @@ char * wpx(char *s){
 
 long min(long a,long b){
   return (a<b)?a:b;
+}
+
+int cmp3(const void *a,const void *b){
+  const struct data3 *x=a;
+  const struct data3 *y=b;
+  return y->num-x->num;
+}
+
+char *mymode(char *s){
+  if(!s)return"ND";
+  if(!strcmp(s,"CW"))return"CW";
+  if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
+  if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
+  return"ND";
 }
