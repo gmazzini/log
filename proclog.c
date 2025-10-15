@@ -23,8 +23,8 @@ long **ndata3;
 
 int main(void){
   int c,len,act;
-  char buf[1001],aux1[300],aux2[300],aux3[300],*token,tok[TOTTOK][100],mycall[16];
-  struct tm ts,te;
+  char buf[1001],aux1[300],aux2[300],aux3[300],aux4[300],*token,tok[TOTTOK][100],mycall[16];
+  struct tm ts,te,*tm_now;
   time_t epoch,td;
   long lastserial,l1,l2,idx,suml[10];
   MYSQL *con;
@@ -242,6 +242,11 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
+    epoch=time(NULL);
+    tm_now=localtime(&epoch); ts=*tm_now;
+    ts.tm_year-=1; mktime(&ts);
+    strftime(aux3,sizeof(aux3),"%Y-%m",&ts);
+    strftime(aux4,sizeof(aux4,"%Y-%m",tm_now);    
     sprintf(buf,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
