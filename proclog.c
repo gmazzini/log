@@ -297,7 +297,7 @@ int main(void){
     }
     mysql_free_result(res);
     suml[0]=4; suml[1]=7; suml[2]=10;
-    strcoy(aux1,"DD-MM-YYYY");
+    strcpy(aux1,"DD-MM-YYYY");
     for(c=0;c<3;c++){
       printf("<p id=\"myh1\">%10s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>",aux1+10-suml[c],"QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
       for(l1=ndata3[0][0]-1;l1>0;l1--){
