@@ -4,7 +4,6 @@
 #include <time.h>
 #include <mysql/mysql.h>
 #include "log.def"
-#define TOTTOK 5
 #define TOT3 5
 #define TOTL2 400
 #define TOTL3 200000
@@ -22,11 +21,11 @@ int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=1
 long **ndata3;
 
 int main(void){
-  int c,len,act;
-  char buf[1001],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[TOTTOK][100],mycall[16];
+  int c,act;
+  char buf[1001],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[5][100],mycall[16];
   struct tm ts,te,*tm_now;
   time_t epoch,td;
-  long lastserial,l1,l2,idx,suml[10];
+  long lastserial,l1,l2,idx,suml[10],len;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -46,12 +45,10 @@ int main(void){
   }
   buf[len++]='\0';
   token=strtok(buf,",");
-  for(c=0;;c++){
+  for(c=0;c<5;c++){
     strcpy(tok[c],token);
     token=strtok(NULL,",");
-    if(token==NULL)break;
   }
-  if(c!=TOTTOK-1)exit(1);
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
