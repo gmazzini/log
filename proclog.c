@@ -308,7 +308,19 @@ int main(void){
         }
       }
     }
+    printf("</pre>");
+    goto end;
+  }
+
+  if(act==13){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    l1=(row==NULL)?1:atol(row[0]);
+    mysql_free_result(res);
     printf("<pre>");
+    printf("</pre>");
     goto end;
   }
   
