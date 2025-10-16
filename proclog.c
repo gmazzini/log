@@ -45,6 +45,12 @@ int main(void){
     if(len<20000000L)len++;
   }
   buf[len++]='\0';
+
+
+char rrr[10000];
+  strcpy(rrr,buf);
+
+  
   token=strtok(buf,",");
   for(c=0;c<5;c++){
     strcpy(tok[c],token);
@@ -339,10 +345,17 @@ int main(void){
     printf("</pre>");
     goto end;
   }
+
+  if(act==15){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    sprintf("%s\n",rrr);
+    printf("</pre>");
+    goto end;
+  }
   
   end:
   mysql_close(con);
- //  printf("---- %ld\n",zzz);
   return 0;
 }
 
