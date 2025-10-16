@@ -315,11 +315,28 @@ int main(void){
   if(act==13){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall);
+    epoch=time(NULL);
+    tm_now=localtime(&epoch); ts=*tm_now;
+    ts.tm_month-=1; mktime(&ts);
+    strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S"",&ts);
+    sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     l1=(row==NULL)?1:atol(row[0]);
     mysql_free_result(res);
     printf("<pre>");
+    sprintf(buf,"select callsign,start from log where mycall='%s' and start>='%s' order by start",mycall,aux3);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(l2=l1;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      sprintf(aux1,"update log set serial=%ld where mycall='%s' and callsign='%s' and start='%s'",l1,mycall,row[0],row[1]);
+      mysql_query(con,aux1);
+      l1++;
+      if(l1%1000==0)printf("%ld\n",l1);
+    }
+    res=mysql_store_result(con);
+    printf("Processed QSO: %ld\n",l2-l1);
     printf("</pre>");
     goto end;
   }
