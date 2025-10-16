@@ -67,7 +67,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (btn.id === "a01" || btn.id === "a06") page = 0;
       else if (btn.id === "a02" || btn.id === "a07") page -= mypage;
       else if (btn.id === "a03" || btn.id === "a08") page += mypage;
-      let data = "666666";
+      let data = "";
       if (btn.id === "a15") {
         const file = document.getElementById("ff").files[0];
         if (file) {
