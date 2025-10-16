@@ -23,10 +23,10 @@ long **ndata3;
 
 int main(void){
   int c,act,vv;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[5][100],mycall[16],*ff;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],*ff;
   struct tm ts,te,*tm_now;
   time_t epoch,td;
-  long lastserial,l1,l2,idx,suml[10],len,gg;
+  long lastserial,l1,l2,idx,suml[10],gg;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -362,7 +362,7 @@ int main(void){
   if(act>=15){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    printf("%s\n",rrr);
+    printf("%s\n",ff);
     printf("</pre>");
     goto end;
   }
