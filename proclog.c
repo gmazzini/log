@@ -64,13 +64,15 @@ int main(void){
     if(vv<5)tok[vv][gg++]=(char)c;
     else {
       if(c=='=')break;
-      in[gg%4]=c;
-      if(gg%4==3){
+      in[gg]=c;
+      if(gg==3){
         t=((uint32_t)B64DEC[in[0]] << 18) | ((uint32_t)B64DEC[in[1]] << 12) | ((uint32_t)B64DEC[in[2]] <<  6) | ((uint32_t)B64DEC[in[3]]);
         if(len<MAXFF)ff[len++]=(uint8_t)(t >> 16);
         if(len<MAXFF)ff[len++]=(uint8_t)(t >> 8);
         if(len<MAXFF)ff[len++]=(uint8_t)(t);
+        gg=0;
       }
+      gg++;
     }
   }
   ff[len]='\0';
