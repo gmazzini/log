@@ -346,7 +346,7 @@ char rrr[10000];
     goto end;
   }
 
-  if(act==15){
+  if(act>=15){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     sprintf("%s\n",rrr);
