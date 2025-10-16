@@ -349,7 +349,7 @@ char rrr[10000];
   if(act>=15){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    sprintf("%s\n",rrr);
+    sprintf("%.10s\n",rrr);
     printf("</pre>");
     goto end;
   }
