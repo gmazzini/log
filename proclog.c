@@ -334,10 +334,9 @@ int main(void){
       sprintf(aux1,"update log set serial=%ld where mycall='%s' and callsign='%s' and start='%s'",l1,mycall,row[0],row[1]);
       mysql_query(con,aux1);
       l1++;
-      if(l1%1000==0)printf("%ld\n",l1);
     }
     res=mysql_store_result(con);
-    printf("Processed QSO: %ld\n",l1-l2);
+    printf("Serialized QSO: %ld\n",l1-l2);
     printf("</pre>");
     goto end;
   }
