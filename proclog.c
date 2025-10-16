@@ -20,13 +20,30 @@ char *mymode(char *);
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 long **ndata3;
+static const uint8_t B64DEC[256] = {
+    [0 ... 255] = 0,
+    ['A']=0,  ['B']=1,  ['C']=2,  ['D']=3,  ['E']=4,  ['F']=5,  ['G']=6,  ['H']=7,
+    ['I']=8,  ['J']=9,  ['K']=10, ['L']=11, ['M']=12, ['N']=13, ['O']=14, ['P']=15,
+    ['Q']=16, ['R']=17, ['S']=18, ['T']=19, ['U']=20, ['V']=21, ['W']=22, ['X']=23,
+    ['Y']=24, ['Z']=25,
+    ['a']=26, ['b']=27, ['c']=28, ['d']=29, ['e']=30, ['f']=31, ['g']=32, ['h']=33,
+    ['i']=34, ['j']=35, ['k']=36, ['l']=37, ['m']=38, ['n']=39, ['o']=40, ['p']=41,
+    ['q']=42, ['r']=43, ['s']=44, ['t']=45, ['u']=46, ['v']=47, ['w']=48, ['x']=49,
+    ['y']=50, ['z']=51,
+    ['0']=52, ['1']=53, ['2']=54, ['3']=55, ['4']=56, ['5']=57, ['6']=58, ['7']=59,
+    ['8']=60, ['9']=61,
+    ['+']=62, ['/']=63,
+    ['-']=62, ['_']=63
+};
 
 int main(void){
-  int c,act,vv;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],*ff;
+  int c,act,vv,gg;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],*ff,*p;
   struct tm ts,te,*tm_now;
+  uint8_t in[4];
+  uint32_t t;
   time_t epoch,td;
-  long lastserial,l1,l2,idx,suml[10],gg;
+  long lastserial,l1,l2,idx,suml[10],len;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -39,36 +56,23 @@ int main(void){
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
-  for(vv=0,gg=0;;){
+  for(vv=0,gg=0,len=0;;){
     c=getchar();
     if(c==EOF)break;
     if(c==','){vv++; tok[vv][gg]='\0'; gg=0; continue;}
     if(vv<5)tok[vv][gg++]=(char)c;
-    else if(gg<MAXFF)ff[gg++]=(char)c;
-  }
-  ff[gg]='\0';
-
-/*
-  void base64toff(const char* s){
-  const char *A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",*p;
-  unsigned char c;
-  size_t C=0,o=0; 
-  int v=0,vb=-8;
-  for(;*s;s++){
-    c=(unsigned char)*s;
-    if(c=='=')break;
-    p=strchr(A,c);
-    if(!p)continue;
-    v=(v<<6)+(int)(p-A); 
-    vb+=6;
-    if(vb>=0){
-      ff[o++]=(v>>vb)&255;
-      vb-=8;
+    else {
+      if(c=='=')break;
+      in[gg%4]=c;
+      if(gg%4==3){
+        t=((uint32_t)B64DEC[in[0]] << 18) | ((uint32_t)B64DEC[in[1]] << 12) | ((uint32_t)B64DEC[in[2]] <<  6) | ((uint32_t)B64DEC[in[3]]);
+        if(len<MAXFF)ff[len++]=(uint8_t)(t >> 16);
+        if(len<MAXFF)ff[len++]=(uint8_t)(t >> 8);
+        if(len<MAXFF)ff[len++]=(uint8_t)(t);
+      }
     }
   }
-  ff[o]=0;
-}
-*/
+  ff[len]='\0';
  
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
