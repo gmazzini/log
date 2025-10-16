@@ -456,3 +456,23 @@ char *mymode(char *s){
   if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
   return"ND";
 }
+
+void base64toff(const char* s){
+  const char *A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",*p;
+  unsigned char c;
+  size_t C=0,o=0; 
+  int v=0,vb=-8;
+  for(;*s;s++){
+    c=(unsigned char)*s;
+    if(c=='=')break;
+    p=strchr(A,c);
+    if(!p)continue;
+    v=(v<<6)+(int)(p-A); 
+    vb+=6;
+    if(vb>=0){
+      ff[o++]=(v>>vb)&255;
+      vb-=8;
+    }
+  }
+  ff[o]=0;
+}
