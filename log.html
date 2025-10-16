@@ -71,9 +71,9 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (btn.id === "a15") {
         const file = document.getElementById("ff").files[0];
         if (file) {
-          const gzipStream = file.stream().pipeThrough(new CompressionStream('gzip'));
-          const gzBlob = await new Response(gzipStream).blob();
-          const buf = await gzBlob.arrayBuffer();
+          const plainStream = file.stream();
+          const plainBlob = await new Response(plainStream).blob();
+          const buf = await plainBlob.arrayBuffer();
           let chunk = 0x8000, bytes = new Uint8Array(buf);
           for (let i = 0; i < bytes.length; i += chunk) {
             data += btoa(String.fromCharCode(...bytes.subarray(i, i + chunk)));
