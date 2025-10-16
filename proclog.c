@@ -72,7 +72,7 @@ int main(void){
         if(len<MAXFF)ff[len++]=(uint8_t)(t);
         gg=0;
       }
-      gg++;
+      else gg++;
     }
   }
   ff[len]='\0';
