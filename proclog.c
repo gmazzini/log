@@ -312,12 +312,13 @@ int main(void){
     goto end;
   }
 
-  if(act==13){
+  if(act==13 || act==14){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     epoch=time(NULL);
     tm_now=localtime(&epoch); ts=*tm_now;
-    ts.tm_mon-=1; mktime(&ts);
+    ts.tm_mon-=(act==13)?1:6; 
+    mktime(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S",&ts);
     sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
@@ -336,7 +337,7 @@ int main(void){
       if(l1%1000==0)printf("%ld\n",l1);
     }
     res=mysql_store_result(con);
-    printf("Processed QSO: %ld\n",l2-l1);
+    printf("Processed QSO: %ld\n",l1-l2);
     printf("</pre>");
     goto end;
   }
