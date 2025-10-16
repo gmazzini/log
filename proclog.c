@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdint.h>
 #include <mysql/mysql.h>
 #include "log.def"
 #define TOT3 5
