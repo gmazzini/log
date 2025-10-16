@@ -318,7 +318,7 @@ int main(void){
     epoch=time(NULL);
     tm_now=localtime(&epoch); ts=*tm_now;
     ts.tm_mon-=1; mktime(&ts);
-    strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S"",&ts);
+    strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S",&ts);
     sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     l1=(row==NULL)?1:atol(row[0]);
