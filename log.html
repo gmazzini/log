@@ -67,11 +67,24 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (btn.id === "a01" || btn.id === "a06") page = 0;
       else if (btn.id === "a02" || btn.id === "a07") page -= mypage;
       else if (btn.id === "a03" || btn.id === "a08") page += mypage;
+      let data = "";
+      if (btn.id === "a15") {
+        const file = document.getElementById("ff").files[0];
+        if (file) {
+          const gzipStream = file.stream().pipeThrough(new CompressionStream('gzip'));
+          const gzBlob = await new Response(gzipStream).blob();
+          const buf = await gzBlob.arrayBuffer();
+          let chunk = 0x8000, bytes = new Uint8Array(buf);
+          for (let i = 0; i < bytes.length; i += chunk) {
+            data += btoa(String.fromCharCode(...bytes.subarray(i, i + chunk)));
+          }
+        }
+      }
       if (page < 0) page = 0;
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
-        body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-"].join(",")
+        body: ["3KY2pRIOeP8x44ht",btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-",data].join(",")
       });
       if (btn.id === "a05") {
         page = parseInt(await r.text(), 10) || 0;
