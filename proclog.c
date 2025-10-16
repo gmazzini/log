@@ -7,6 +7,7 @@
 #define TOT3 5
 #define TOTL2 400
 #define TOTL3 200000
+#define MAXFF 20000000L
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 long incdata3(int,int,char *);
@@ -21,11 +22,11 @@ int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=1
 long **ndata3;
 
 int main(void){
-  int c,act;
-  char *buf,aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[5][100],mycall[16];
+  int c,act,vv;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[5][100],mycall[16],*ff;
   struct tm ts,te,*tm_now;
   time_t epoch,td;
-  long lastserial,l1,l2,idx,suml[10],len;
+  long lastserial,l1,l2,idx,suml[10],len,gg;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -37,26 +38,38 @@ int main(void){
     ndata3[l1]=malloc(TOTL2*sizeof(long));
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
-  buf=(char *)malloc(20000000L*sizeof(char));
-  for(len=0;;){
+  ff=(char *)malloc((MAXFF+1)*sizeof(char));
+  for(vv=0,gg=0;;){
     c=getchar();
     if(c==EOF)break;
-    buf[len]=(char)c;
-    if(len<20000000L)len++;
+    if(c==','){vv++; tok[vv][gg]='\0'; gg=0; continue;}
+    if(vv<5)tok[vv][gg++]=(char)c;
+    else if(gg<MAXFF)ff[gg++]=(char)c;
   }
-  buf[len++]='\0';
+  ff[gg]='\0';
 
-
-char rrr[10000];
-  strcpy(rrr,buf);
-
-  
-  token=strtok(buf,",");
-  for(c=0;c<5;c++){
-    strcpy(tok[c],token);
-    token=strtok(NULL,",");
+/*
+  void base64toff(const char* s){
+  const char *A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",*p;
+  unsigned char c;
+  size_t C=0,o=0; 
+  int v=0,vb=-8;
+  for(;*s;s++){
+    c=(unsigned char)*s;
+    if(c=='=')break;
+    p=strchr(A,c);
+    if(!p)continue;
+    v=(v<<6)+(int)(p-A); 
+    vb+=6;
+    if(vb>=0){
+      ff[o++]=(v>>vb)&255;
+      vb-=8;
+    }
   }
-  // long zzz=strlen(token);
+  ff[o]=0;
+}
+*/
+ 
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
@@ -455,24 +468,4 @@ char *mymode(char *s){
   if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
   if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
   return"ND";
-}
-
-void base64toff(const char* s){
-  const char *A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",*p;
-  unsigned char c;
-  size_t C=0,o=0; 
-  int v=0,vb=-8;
-  for(;*s;s++){
-    c=(unsigned char)*s;
-    if(c=='=')break;
-    p=strchr(A,c);
-    if(!p)continue;
-    v=(v<<6)+(int)(p-A); 
-    vb+=6;
-    if(vb>=0){
-      ff[o++]=(v>>vb)&255;
-      vb-=8;
-    }
-  }
-  ff[o]=0;
 }
