@@ -50,6 +50,7 @@ int main(void){
     strcpy(tok[c],token);
     token=strtok(NULL,",");
   }
+  printf("--- %ld\n",strlen(token));
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
