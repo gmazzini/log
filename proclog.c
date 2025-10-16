@@ -22,7 +22,7 @@ long **ndata3;
 
 int main(void){
   int c,act;
-  char buf[1001],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[5][100],mycall[16];
+  char *buf,aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],*token,tok[5][100],mycall[16];
   struct tm ts,te,*tm_now;
   time_t epoch,td;
   long lastserial,l1,l2,idx,suml[10],len;
@@ -37,11 +37,12 @@ int main(void){
     ndata3[l1]=malloc(TOTL2*sizeof(long));
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
+  buf=(char *)malloc(20000000L*sizeof(char));
   for(len=0;;){
     c=getchar();
     if(c==EOF)break;
     buf[len]=(char)c;
-    if(len<1000)len++;
+    if(len<20000000L)len++;
   }
   buf[len++]='\0';
   token=strtok(buf,",");
