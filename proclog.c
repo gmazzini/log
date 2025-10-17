@@ -373,10 +373,9 @@ int main(void){
   if(act>=15){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    printf("%s\n",ff);
     len=sizeof(adif1);
     l1=adifextract(ff,adif1,len);
-    for(c=0;c<l1;c++)printf("%d %s\n",c,adif[c]);
+    for(c=0;c<len;c++)printf("%ld %d %s\n",l1,c,adif[c]);
       
     printf("</pre>");
     goto end;
