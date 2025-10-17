@@ -482,7 +482,7 @@ char *mymode(char *s){
 
 void adifextract(char *in,char *tok,int ntok){  
   char *p0,*p1,*p2,*p3;
-  int i,nret=0.len;
+  int i,nret=0,len;
   for(i=0;i<ntok;i++)adif[i][0]='\0';
   for(p0=in;;){
     p0=strchr(in,'<');
