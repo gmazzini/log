@@ -371,7 +371,7 @@ int main(void){
   }
 
   if(act>=15){
-    const char *adif1[]={"call","time_on","qso_date","qsl_rcvd"};
+    const char *adif1[]={"CALL","TIME_ON","QSO_DATE","APP_LoTW_RXQSL"};
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -383,10 +383,10 @@ int main(void){
       epoch=timegm(&ts);
       epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
-  //    if(adif1[3][0]=='Y'){
+      if(adif[3][0]!='\0'){
         sprintf(buf,"update log set lotw=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",mycall,adif[0],aux1,aux2);
         printf("%s\n",buf);
-   //   }
+      }
       gg=adifextract(NULL,adif1,vv);
     }  
     printf("</pre>");
