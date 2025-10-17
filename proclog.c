@@ -42,7 +42,7 @@ static const uint8_t B64DEC[256] = {
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],*ff;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],adif1[4][20],*ff;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -371,7 +371,7 @@ int main(void){
   }
 
   if(act>=15 && act<=19){
-    char *adif1[]={"CALL","TIME_ON","QSO_DATE",""};
+    strcpy(adif1[0],"CALL"); strcpy(adif1[1],"TIME_ON"); strcpy(adif1[2],"QSO_DATE");
     if(act==17)strcpy(adif1[3],"APP_LoTW_RXQSL");
     else if(act==18)strcpy(adif1[3],"EQSL_QSLRDATE");
     printf("Status: 200 OK\r\n");
