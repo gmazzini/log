@@ -372,8 +372,8 @@ int main(void){
 
   if(act>=15 && act<=19){
     char *adif1[]={"CALL","TIME_ON","QSO_DATE",""};
-    if(act==17)strcpy(adif[3],"APP_LoTW_RXQSL");
-    else if(act==18)strcpy(adif[3],"EQSL_QSLRDATE");
+    if(act==17)strcpy(adif1[3],"APP_LoTW_RXQSL");
+    else if(act==18)strcpy(adif1[3],"EQSL_QSLRDATE");
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
