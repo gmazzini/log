@@ -383,7 +383,7 @@ int main(void){
       epoch=timegm(&ts);
       epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
-      if(adir1[3][0]=='Y'){
+      if(adif1[3][0]=='Y'){
         sprintf(aux3,"update log set lotw=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",mycall,adif[0],aux1,aux2);
         printf("%s\n",aux3);
       }
