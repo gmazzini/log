@@ -374,6 +374,7 @@ int main(void){
     strcpy(adif1[0],"CALL"); strcpy(adif1[1],"TIME_ON"); strcpy(adif1[2],"QSO_DATE");
     if(act==17){strcpy(adif1[3],"APP_LoTW_RXQSL"); strcpy(aux4,"lotw");}
     else if(act==18){strcpy(adif1[3],"EQSL_QSLRDATE"); strcpy(aux4,"eqsl");}
+    else if(act==19){strcpy(adif1[3],"app_qrzlog_status"); strcpy(aux4,"qrz");}
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
