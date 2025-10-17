@@ -371,7 +371,7 @@ int main(void){
   }
 
   if(act>=15 && act<=19){
-    char adif1[4][]={"CALL","TIME_ON","QSO_DATE"};
+    char *adif1[]={"CALL","TIME_ON","QSO_DATE",""};
     if(act==17)strcpy(adif[3],"APP_LoTW_RXQSL");
     else if(act==18)strcpy(adif[3],"EQSL_QSLRDATE");
     printf("Status: 200 OK\r\n");
