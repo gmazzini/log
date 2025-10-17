@@ -500,9 +500,9 @@ int adifextract(char *input,const char **tok,int ntok){
     printf("%c\n",*(p1+1));
     p2=strchr(p1+1,'>');
     if(p2==NULL)return nret;
+    p0=p2+1;
     if(strncasecmp("EOR",p1+1,3)==0)return nret;
     p3=strchr(p1+1,':');
-    p0=p2+1;
     if(p3==NULL)continue;
     len=atoi(p3+1);
     p0=p2+1+len;
