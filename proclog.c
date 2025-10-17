@@ -497,6 +497,7 @@ int adifextract(char *input,const char **tok,int ntok){
   for(;;){
     p1=strchr(p0,'<');
     if(p1==NULL)return nret;
+    printf("%c\n",*(p1+1));
     p2=strchr(p1+1,'>');
     if(p2==NULL)return nret;
     if(strncasecmp("EOR",p1+1,3)==0)return nret;
