@@ -486,9 +486,11 @@ char *mymode(char *s){
   return"ND";
 }
 
-int adifextract(char *in,const char **tok,int ntok){  
-  char *p0,*p1,*p2,*p3;
+int adifextract(char *input,const char **tok,int ntok){  
+  char *p1,*p2,*p3;
   int i,nret=0,len;
+  static char *p0;
+  if(input!=NULL)p0=input;
   for(i=0;i<ntok;i++)adif[i][0]='\0';
   for(p0=in;;){
     p1=strchr(p0,'<');
