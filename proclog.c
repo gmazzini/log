@@ -376,9 +376,11 @@ int main(void){
     printf("<pre>");
     vv=sizeof(adif1)/sizeof(adif1[0]);
     gg=adifextract(ff,adif1,vv);
-    printf("%d %d\n",vv,gg);  
-    for(c=0;c<vv;c++)printf("%d %s %s\n",c,adif1[c],adif[c]);
-      
+    for(;gg>0;){
+      printf("%d %d\n",vv,gg);  
+      for(c=0;c<vv;c++)printf("%d %s %s\n",c,adif1[c],adif[c]);
+      gg=adifextract(NULL,adif1,vv);
+    }  
     printf("</pre>");
     goto end;
   }
