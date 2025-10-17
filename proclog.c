@@ -372,8 +372,8 @@ int main(void){
 
   if(act>=15 && act<=19){
     strcpy(adif1[0],"CALL"); strcpy(adif1[1],"TIME_ON"); strcpy(adif1[2],"QSO_DATE");
-    if(act==17)strcpy(adif1[3],"APP_LoTW_RXQSL");
-    else if(act==18)strcpy(adif1[3],"EQSL_QSLRDATE");
+    if(act==17){strcpy(adif1[3],"APP_LoTW_RXQSL"); strcpy(aux4,"lotw");}
+    else if(act==18){strcpy(adif1[3],"EQSL_QSLRDATE"); strcpy(aux4,"eqsl");}
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -385,7 +385,7 @@ int main(void){
       epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       if(adif[3][0]!='\0'){
-        sprintf(buf,"update log set lotw=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",mycall,adif[0],aux1,aux2);
+        sprintf(buf,"update log set %s=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
         printf("%s\n",buf);
       }
       gg=adifextract(NULL,vv);
