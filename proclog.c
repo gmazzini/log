@@ -387,6 +387,7 @@ int main(void){
       epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       if(adif[3][0]!='\0'){
         sprintf(buf,"update log set %s=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
+        mysql_query(con,buf);
         printf("%s\n",buf);
       }
       gg=adifextract(NULL,vv);
