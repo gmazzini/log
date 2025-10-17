@@ -373,6 +373,7 @@ int main(void){
   if(act>=15){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
     vv=sizeof(adif1)/sizeof(adif1[0]);
     gg=adifextract(ff,adif1,vv);
     printf("%d %d\n",vv,gg);  
