@@ -378,7 +378,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    gg=adifextract(ff,4);
+    vv=4; gg=adifextract(ff,vv);
     for(;gg>0;){
       sscanf(adif[2],"%4ld%2ld%2ld",&l1,&l2,&l3); ts.tm_year=l1-1900; ts.tm_mon=l2-1; ts.tm_mday=l3;
       l3=0; sscanf(adif[1],"%2ld%2ld%2ld",&l1,&l2,&l3); ts.tm_hour=l1; ts.tm_min=l2; ts.tm_sec=l3;
@@ -403,7 +403,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    gg=adifextract(ff,4);
+    vv=15; gg=adifextract(ff,vv);
     for(;gg>0;){
       for(c=0;c<15;c++)printf("%s=%s ",adif1[c],adif[c]); printf("\n");
       gg=adifextract(NULL,vv);
