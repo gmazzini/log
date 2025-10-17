@@ -17,10 +17,12 @@ char * wpx(char *);
 long min(long,long);
 int cmp3(const void *,const void *);
 char *mymode(char *);
+void adifextract(char *,char *,int);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
-int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 long **ndata3;
+char adif[20][200];
+int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 static const uint8_t B64DEC[256] = {
     [0 ... 255] = 0,
     ['A']=0,  ['B']=1,  ['C']=2,  ['D']=3,  ['E']=4,  ['F']=5,  ['G']=6,  ['H']=7,
@@ -57,6 +59,7 @@ int main(void){
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
+  // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
   for(vv=0,gg=0,len=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -475,4 +478,28 @@ char *mymode(char *s){
   if(!strcmp(s,"FT8")||!strcmp(s,"RTTY")||!strcmp(s,"MFSK")||!strcmp(s,"FT4")||!strcmp(s,"PKT")||!strcmp(s,"TOR")||!strcmp(s,"AMTOR")||!strcmp(s,"PSK"))return"DG";
   if(!strcmp(s,"SSB")||!strcmp(s,"USB")||!strcmp(s,"LSB")||!strcmp(s,"FM")||!strcmp(s,"AM"))return"PH";
   return"ND";
+}
+
+void adifextract(char *in,char *tok,int ntok){  
+  char *p0,*p1,*p2,*p3;
+  int i,nret=0.len;
+  for(i=0;i<ntok;i++)adif[i][0]='\0';
+  for(p0=in;;){
+    p0=strchr(in,'<');
+    if(p1==NULL)return nret;
+    p2=strchr(p1+1,'>');
+    if(p2==NULL)return nret;
+    if(strncasecmp("EOR",p1+1,3)==0)return nret;
+    p3=strchr(p1+1,':');
+    p0=p2+1;
+    if(p3==NULL)continue;
+    len=atoi(p3+1);
+    p0=p2+1+len;
+    for(i=0;i<ntok;i++)if(strncasecmp(tok[i],p1+1,p3-p1-1)==0)break;
+    if(i==ntok)continue;
+    strncpy(adif[i],p2+1,len);
+    adif[i][len]='\0';
+    nret++;
+  }
+  return nret;
 }
