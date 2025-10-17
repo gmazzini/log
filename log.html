@@ -31,12 +31,12 @@ Call <input type="text" id="call">
 <br>
 <button id="a15">adi&#8680;</button>
 <button id="a16">lzh&#8680;</button>
-<button id="a17">&#8680;adi</button>
-<button id="a18">&#8680;cbr</button>
+<button id="a20">&#8680;adi</button>
+<button id="a21">&#8680;cbr</button>
 <br>
-<button id="a19">QSL.lotw</button>
-<button id="a20">QSL.eqsl</button>
-<button id="a21">QSL.qrz</button>
+<button id="a17">QSL.lotw</button>
+<button id="a18">QSL.eqsl</button>
+<button id="a19">QSL.qrz</button>
 <br>
 <button id="a22">cbr&#8680;c</button>
 <br>
@@ -64,11 +64,12 @@ let mypage = 30;
 document.querySelectorAll("button[id]").forEach(btn => {
   if (/^a\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
-      if (btn.id === "a01" || btn.id === "a06") page = 0;
+      const num = parseInt(btn.id.slice(1), 10);
+      if (num==1 || num==6) page = 0;
       else if (btn.id === "a02" || btn.id === "a07") page -= mypage;
       else if (btn.id === "a03" || btn.id === "a08") page += mypage;
       let data = "";
-      if (btn.id === "a15") {
+      if (num>=15 && num<=19) {
         const file = document.getElementById("ff").files[0];
         if (file) {
           const plainStream = file.stream();
