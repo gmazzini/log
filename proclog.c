@@ -492,7 +492,7 @@ int adifextract(char *input,const char **tok,int ntok){
   static char *p0;
   if(input!=NULL)p0=input;
   for(i=0;i<ntok;i++)adif[i][0]='\0';
-  for(p0=in;;){
+  for(;;){
     p1=strchr(p0,'<');
     if(p1==NULL)return nret;
     p2=strchr(p1+1,'>');
