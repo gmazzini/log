@@ -411,9 +411,7 @@ int main(void){
       if(adif[7][0]=='\0')strcpy(adif[7],adif[6]);
       if(adif[4][4]=='\0'){adif[4][4]='0'; adif[4][5]='0'; adif[4][6]='\0';}
       sprintf(aux2,"%4.s-%.2s-%.2s %.2d:%.2d:%.2d",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
-      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) \
-        value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",\
-        mycall,adif[0],aux1,aux2,adif[5],atol(adif[1])*1000000,atol(adif[2])*1000000,adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
+      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,adif[0],aux1,aux2,adif[5],atol(adif[1])*1000000,atol(adif[2])*1000000,adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
       printf("%s\n",buf);
 
       for(c=0;c<15;c++)printf("%s=%s ",adif1[c],adif[c]); printf("\n");
