@@ -18,11 +18,11 @@ char * wpx(char *);
 long min(long,long);
 int cmp3(const void *,const void *);
 char *mymode(char *);
-int adifextract(char *,char **,int);
+int adifextract(char *,int);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
-char adif[20][200];
+char adif[20][200],adif1[20][20];
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 static const uint8_t B64DEC[256] = {
   [0 ... 255] = 0,
@@ -42,7 +42,7 @@ static const uint8_t B64DEC[256] = {
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],**adif1,*ff;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],*ff;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -59,7 +59,6 @@ int main(void){
     ndata3[l1]=malloc(TOTL2*sizeof(long));
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
-  adif1=malloc(4*sizeof(char *)); for(c=0;c<4;c++)adif1[c]=malloc(20);
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
   for(vv=0,gg=0,lff=0;;){
@@ -498,7 +497,7 @@ char *mymode(char *s){
   return"ND";
 }
 
-int adifextract(char *input,char **tok,int ntok){  
+int adifextract(char *input,int ntok){  
   char *p1,*p2,*p3;
   int i,nret=0,len;
   static char *p0;
@@ -515,7 +514,7 @@ int adifextract(char *input,char **tok,int ntok){
     if(p3==NULL)continue;
     len=atoi(p3+1);
     p0=p2+1+len;
-    for(i=0;i<ntok;i++)if(strncasecmp(tok[i],p1+1,p3-p1-1)==0)break;
+    for(i=0;i<ntok;i++)if(strncasecmp(adif1[i],p1+1,p3-p1-1)==0)break;
     if(i==ntok)continue;
     strncpy(adif[i],p2+1,len);
     adif[i][len]='\0';
