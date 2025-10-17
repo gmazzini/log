@@ -42,7 +42,7 @@ static const uint8_t B64DEC[256] = {
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],adif1[4][20],*ff;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],**adif1,*ff;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -59,6 +59,7 @@ int main(void){
     ndata3[l1]=malloc(TOTL2*sizeof(long));
     for(l2=0;l2<TOTL2;l2++)data3[l1][l2]=(struct data3 *)malloc(TOTL3*sizeof(struct data3));
   }
+  adif1=malloc(4*sizeof(char *)); for(c=0;c<4;c++)adif1[c]=malloc(20);
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
   for(vv=0,gg=0,lff=0;;){
