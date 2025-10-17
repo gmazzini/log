@@ -370,7 +370,7 @@ int main(void){
     goto end;
   }
 
-  if(act>=15 && act<=19){
+  if(act>=17 && act<=19){
     strcpy(adif1[0],"CALL"); strcpy(adif1[1],"TIME_ON"); strcpy(adif1[2],"QSO_DATE");
     if(act==17){strcpy(adif1[3],"APP_LoTW_RXQSL"); strcpy(aux4,"lotw");}
     else if(act==18){strcpy(adif1[3],"EQSL_QSLRDATE"); strcpy(aux4,"eqsl");}
@@ -390,6 +390,22 @@ int main(void){
         mysql_query(con,buf);
         printf("%s\n",buf);
       }
+      gg=adifextract(NULL,vv);
+    }  
+    printf("</pre>");
+    goto end;
+  }
+
+  if(act==15){
+    strcpy(adif1[0],"call"); strcpy(adif1[1],"freq"); strcpy(adif1[2],"freq_rx"); strcpy(adif1[3],"rst_sent"); strcpy(adif1[4],"rst_rcvd"); strcpy(adif1[5],"mode");
+    strcpy(adif1[6],"time_on"); strcpy(adif1[7],"time_off"); strcpy(adif1[8],"stx_string"); strcpy(adif1[9],"stx"); strcpy(adif1[10],"srx_string"); strcpy(adif1[11],"srx");
+    strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off");
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
+    gg=adifextract(ff,4);
+    for(;gg>0;){
+      for(c=0;c<15;c++)printf("%s ",adif[c]); printf("\n");
       gg=adifextract(NULL,vv);
     }  
     printf("</pre>");
