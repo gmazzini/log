@@ -371,10 +371,9 @@ int main(void){
   }
 
   if(act>=15 && act<=19){
-    switch(act){
-      case 17: const char *adif1[]={"CALL","TIME_ON","QSO_DATE","APP_LoTW_RXQSL"}; break;
-      case 18: const char *adif1[]={"CALL","TIME_ON","QSO_DATE","EQSL_QSLRDATE"}; break;
-    }
+    char adif1[4][]={"CALL","TIME_ON","QSO_DATE"};
+    if(act==17)strcpy(adif[3],"APP_LoTW_RXQSL");
+    else if(act==18)strcpy(adif[3],"EQSL_QSLRDATE");
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
