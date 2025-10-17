@@ -405,7 +405,7 @@ int main(void){
     printf("<pre>");
     gg=adifextract(ff,4);
     for(;gg>0;){
-      for(c=0;c<15;c++)printf("%s ",adif[c]); printf("\n");
+      for(c=0;c<15;c++)printf("%s=%s ",adif1[c],adif[c]); printf("\n");
       gg=adifextract(NULL,vv);
     }  
     printf("</pre>");
