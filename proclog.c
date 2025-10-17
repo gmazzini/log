@@ -405,6 +405,14 @@ int main(void){
     printf("<pre>");
     vv=15; gg=adifextract(ff,vv);
     for(;gg>0;){
+      if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
+      sprintf(aux1,"%4.s-%.2s-%.2s %.2d:%.2d:%.2d",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
+      
+      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) \
+        value ('%s','%s','%s','$end','%s',%ld,%ld,'%s','%s','%s','%s','%s')",\
+        mycall,adif[0],aux1,adif[5],atol(adif[1])*1000000,atol(adif[2])*1000000,adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
+
+      
       for(c=0;c<15;c++)printf("%s=%s ",adif1[c],adif[c]); printf("\n");
       gg=adifextract(NULL,vv);
     }  
