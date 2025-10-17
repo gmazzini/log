@@ -46,7 +46,7 @@ int main(void){
   uint8_t in[4];
   uint32_t t;
   time_t epoch,td;
-  long lastserial,l1,l2,idx,suml[10],len;
+  long lastserial,l1,l2,idx,suml[10],lff;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -61,7 +61,7 @@ int main(void){
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
-  for(vv=0,gg=0,len=0;;){
+  for(vv=0,gg=0,lff=0;;){
     c=getchar();
     if(c==EOF)break;
     if(c==','){vv++; tok[vv][gg]='\0'; gg=0; continue;}
@@ -71,15 +71,15 @@ int main(void){
       in[gg]=c;
       if(gg==3){
         t=((uint32_t)B64DEC[in[0]] << 18) | ((uint32_t)B64DEC[in[1]] << 12) | ((uint32_t)B64DEC[in[2]] <<  6) | ((uint32_t)B64DEC[in[3]]);
-        if(len<MAXFF)ff[len++]=(uint8_t)(t >> 16);
-        if(len<MAXFF)ff[len++]=(uint8_t)(t >> 8);
-        if(len<MAXFF)ff[len++]=(uint8_t)(t);
+        if(lff<MAXFF)ff[lff++]=(uint8_t)(t >> 16);
+        if(lff<MAXFF)ff[lff++]=(uint8_t)(t >> 8);
+        if(lff<MAXFF)ff[lff++]=(uint8_t)(t);
         gg=0;
       }
       else gg++;
     }
   }
-  ff[len]='\0';
+  ff[lff]='\0';
 
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
@@ -377,7 +377,7 @@ int main(void){
     vv=sizeof(adif1)/sizeof(adif1[0]);
     gg=adifextract(ff,adif1,vv);
     for(;gg>0;){
-      printf("%d %d\n",vv,gg);  
+      printf("%d %d %lf\n",vv,gg,lff);  
       for(c=0;c<vv;c++)printf("%d %s %s\n",c,adif1[c],adif[c]);
       gg=adifextract(NULL,adif1,vv);
     }  
