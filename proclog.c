@@ -17,7 +17,7 @@ char * wpx(char *);
 long min(long,long);
 int cmp3(const void *,const void *);
 char *mymode(char *);
-int adifextract(char *,char **,int);
+int adifextract(char *,const char **,int);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
@@ -485,7 +485,7 @@ char *mymode(char *s){
   return"ND";
 }
 
-int adifextract(char *in,char **tok,int ntok){  
+int adifextract(char *in,const char **tok,int ntok){  
   char *p0,*p1,*p2,*p3;
   int i,nret=0,len;
   for(i=0;i<ntok;i++)adif[i][0]='\0';
