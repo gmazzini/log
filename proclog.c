@@ -17,7 +17,7 @@ char * wpx(char *);
 long min(long,long);
 int cmp3(const void *,const void *);
 char *mymode(char *);
-int adifextract(char *,char *,int);
+int adifextract(char *,char **,int);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
