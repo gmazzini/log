@@ -377,7 +377,7 @@ int main(void){
     vv=sizeof(adif1)/sizeof(adif1[0]);
     gg=adifextract(ff,adif1,vv);
     for(;gg>0;){
-      printf("%d %d %lf\n",vv,gg,lff);  
+      printf("%d %d %ld\n",vv,gg,lff);  
       for(c=0;c<vv;c++)printf("%d %s %s\n",c,adif1[c],adif[c]);
       gg=adifextract(NULL,adif1,vv);
     }  
