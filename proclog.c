@@ -83,7 +83,7 @@ int main(void){
 
   FILE *fp;
   fp=fopen("/tmp/pippo.txt","w+");
-  fprintf(fp,"pippo\n",ff);
+  fprintf(fp,"pippo\n");
   fclose(fp);
  
   con=mysql_init(NULL);
