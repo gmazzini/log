@@ -378,8 +378,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    vv=sizeof(adif1)/sizeof(adif1[0]);
-    gg=adifextract(ff,adif1,vv);
+    gg=adifextract(ff,adif1,4);
     for(;gg>0;){
       sscanf(adif[2],"%4ld%2ld%2ld",&l1,&l2,&l3); ts.tm_year=l1-1900; ts.tm_mon=l2-1; ts.tm_mday=l3;
       l3=0; sscanf(adif[1],"%2ld%2ld%2ld",&l1,&l2,&l3); ts.tm_hour=l1; ts.tm_min=l2; ts.tm_sec=l3;
