@@ -75,9 +75,11 @@ document.querySelectorAll("button[id]").forEach(btn => {
           const plainBlob = await new Response(plainStream).blob();
           const buf = await plainBlob.arrayBuffer();
           let chunk = 0x8000, bytes = new Uint8Array([...new Uint8Array(buf), 0x20, 0x20, 0x20, 0x20]);
+          let binary = "";
           for (let i = 0; i < bytes.length; i += chunk) {
-            data += btoa(String.fromCharCode(...bytes.subarray(i, i + chunk)));
+            binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
           }
+          data = btoa(binary);
         }
       }
       if (page < 0) page = 0;
