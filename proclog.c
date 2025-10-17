@@ -375,7 +375,7 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("%s\n",ff);
     len=sizeof(adif1);
-    l1=adifextrct(ff,adif1,len);
+    l1=adifextract(ff,adif1,len);
     for(c=0;c<l1;c++)printf("%d %s\n",c,adif[c]);
       
     printf("</pre>");
