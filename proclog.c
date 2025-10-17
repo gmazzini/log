@@ -376,7 +376,7 @@ int main(void){
     vv=sizeof(adif1)/sizeof(adif1[0]);
     gg=adifextract(ff,adif1,vv);
     printf("%d %d\n",vv,gg);  
-//    for(c=0;c<len;c++)printf("%ld %d %s\n",l1,c,adif[c]);
+    for(c=0;c<vv;c++)printf("%d %s %s\n",adif[c],adif[c]);
       
     printf("</pre>");
     goto end;
@@ -490,13 +490,10 @@ int adifextract(char *in,const char **tok,int ntok){
   int i,nret=0,len;
   for(i=0;i<ntok;i++)adif[i][0]='\0';
   for(p0=in;;){
-       printf("w0\n");
     p1=strchr(p0,'<');
     if(p1==NULL)return nret;
-       printf("w1\n");
     p2=strchr(p1+1,'>');
     if(p2==NULL)return nret;
-    printf("w2\n");
     if(strncasecmp("EOR",p1+1,3)==0)return nret;
     p3=strchr(p1+1,':');
     p0=p2+1;
