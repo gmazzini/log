@@ -51,6 +51,7 @@ int main(void){
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
+  const char *adif1[]={"call","qso_date"};
  
   data3=(struct data3 ***)malloc(TOT3*sizeof(struct data3 **)); ndata3=malloc(TOT3*sizeof(long *));
   for(l1=0;l1<TOT3;l1++){
@@ -373,6 +374,10 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("%s\n",ff);
+    len=sizeof(adif1);
+    l1=adifextrct(ff,adif1,len);
+    for(c=0;c<l1;c++)printf("%d %s\n",c,adif[c]);
+      
     printf("</pre>");
     goto end;
   }
