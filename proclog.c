@@ -9,6 +9,7 @@
 #define TOTL2 400
 #define TOTL3 200000
 #define MAXFF 20000000L
+#define QSLWIN 240
 
 MYSQL_ROW searchcty(MYSQL *,char *);
 long incdata3(int,int,char *);
@@ -46,7 +47,7 @@ int main(void){
   uint8_t in[4];
   uint32_t t;
   time_t epoch,td;
-  long lastserial,l1,l2,idx,suml[10],lff;
+  long lastserial,l1,l2,l3,idx,suml[10],lff;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -377,7 +378,15 @@ int main(void){
     vv=sizeof(adif1)/sizeof(adif1[0]);
     gg=adifextract(ff,adif1,vv);
     for(;gg>0;){
-      printf("%s %s %s %s\n",adif[0],adif[1],adif[2],adif[3]);
+      sscanf(adif[2],"%4ld%2ld%2ld",&l1,&l2,&l3); ts.tm_year=l1-1900; ts.tm_mon=l2-1; ts.tm_mday=l3;
+      l3=0; sscanf(adif[1],"%2ld%2ld%2ld",&l1,&l2,&l3); ts.tm_hour=l1; ts.tm_min=l2; ts.tm_sec=l3;
+      epoch=timegm(&ts);
+      epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
+      epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
+
+      printf("%s %s %s %s %s %s\n",adif[0],adif[1],adif[2],adif[3],aux1,aux2);
+
+      
       gg=adifextract(NULL,adif1,vv);
     }  
     printf("</pre>");
