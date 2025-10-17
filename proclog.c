@@ -82,7 +82,7 @@ int main(void){
   ff[len]='\0';
 
   FILE *fp;
-  fp=fopen("/home/www/log/pippo.txt","w+");
+  fp=fopen("/tmp/pippo.txt","w+");
   fprintf(fp,"%s",ff);
   fclose(fp);
  
