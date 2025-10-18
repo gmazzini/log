@@ -406,12 +406,12 @@ int main(void){
     vv=15; gg=adifextract(ff,vv);
     for(;gg>0;){
       if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
-      sprintf(aux1,"%4.s-%.2s-%.2s %.2d:%.2d:%.2d",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
+      sprintf(aux1,"%4.s-%.2s-%.2s %.2s:%.2s:%.2s",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
       if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
       if(adif[7][0]=='\0')strcpy(adif[7],adif[6]);
       if(adif[7][4]=='\0'){adif[7][4]='0'; adif[7][5]='0'; adif[7][6]='\0';}
-      sprintf(aux2,"%4.s-%.2s-%.2s %.2d:%.2d:%.2d",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
-      sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,adif[0],aux1,aux2,adif[5],(long)(atol(adif[1])*1000000.0),(long)(atol(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
+      sprintf(aux2,"%4.s-%.2s-%.2s %.2s:%.2s:%.2s",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
+      sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
       printf("%s\n",aux3);
 
      // sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,adif[0],aux1,aux2,adif[5],(long)(atol(adif[1])*1000000.0),(long)(atol(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
