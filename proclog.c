@@ -298,7 +298,7 @@ int main(void){
       if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1);
       if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
       sprintf(aux1,"%.7s",row[1]);
-      if(strcmp(aux1,aux3)>=0 && strcmp(aux1,aux4)<0){
+      if(strcmp(aux1,aux3)>=0 && strcmp(aux1,aux4)<=0){
         idx=incdata3(0,0,aux1);
         incdata3(1,idx,row[0]);
         incdata3(2,idx,wpx(row[0]));
@@ -311,7 +311,7 @@ int main(void){
         if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1);
       }
       sprintf(aux1,"%.10s",row[1]);
-      if(strcmp(aux1,aux5)>=0 && strcmp(aux1,aux6)<0){
+      if(strcmp(aux1,aux5)>=0 && strcmp(aux1,aux6)<=0){
         idx=incdata3(0,0,aux1);
         incdata3(1,idx,row[0]);
         incdata3(2,idx,wpx(row[0]));
