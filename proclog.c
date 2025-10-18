@@ -141,7 +141,7 @@ int main(void){
       if(atoi(row[10])==1)strcat(aux1,"Q");
       sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
       sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
-      td=mktime(&te)-mktime(&ts);
+      td=timegm(&te)-timegm(&ts);
       if(td==0)strcpy(aux2,"(0s)");
       else if(td<60)sprintf(aux2,"(%lds)",td);
       else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
@@ -272,11 +272,11 @@ int main(void){
     printf("<pre>");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     epoch=time(NULL);
-    tm_now=localtime(&epoch); ts=*tm_now;
-    ts.tm_year-=2; mktime(&ts);
+    tm_now=gmtime(&epoch); ts=*tm_now;
+    ts.tm_year-=2; timegm(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m",&ts);
     strftime(aux4,sizeof(aux4),"%Y-%m",tm_now);
-    ts.tm_year+=2; ts.tm_mon-=1; mktime(&ts);
+    ts.tm_year+=2; ts.tm_mon-=1; timegm(&ts);
     strftime(aux5,sizeof(aux5),"%Y-%m-%d",&ts);
     strftime(aux6,sizeof(aux6),"%Y-%m-%d",tm_now);
     sprintf(buf,"select callsign,start,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
@@ -345,9 +345,9 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     epoch=time(NULL);
-    tm_now=localtime(&epoch); ts=*tm_now;
+    tm_now=gmtime(&epoch); ts=*tm_now;
     ts.tm_mon-=(act==13)?1:6; 
-    mktime(&ts);
+    timegm(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S",&ts);
     sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
