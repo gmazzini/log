@@ -42,7 +42,7 @@ static const uint8_t B64DEC[256] = {
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],tok[5][100],mycall[16],*ff,*pp,*qq;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],tok[5][100],mycall[16],*ff,*pp,*qq;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -528,8 +528,10 @@ int main(void){
         if(aux7[0]=='\0')strcpy(aux7,"59");
         if(aux8[0]=='\0')strcpy(aux8,"59");
         sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
-        sprintf(buf,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8);
-        printf("%s\n",buf);
+        sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8);
+        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value %s",aux9);
+        mysql_query(con,buf);
+        printf("%s\n",aux9);
       }
       pp=strtok(NULL,"\n");
     }
