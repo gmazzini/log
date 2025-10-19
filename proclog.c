@@ -497,7 +497,7 @@ int main(void){
     for(l1=0;;l1++){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      fprintf(fp,"QSO: %5ld %2s %.04d-%.02d-%.02d %.02d%.02d",atol(row[2]/1000),mymode(row[3]),row[0],row[0]+5,row[0]+8,row[0]+11,row[0]+14);
+      fprintf(fp,"QSO: %5ld %2s %.04d-%.02d-%.02d %.02d%.02d",atol(row[2])/1000L,mymode(row[3]),row[0],row[0]+5,row[0]+8,row[0]+11,row[0]+14);
       fprintf(fp," %-13s %3s %-6s %-13s %3s %-6s 0\n",mycall,row[4],row[6],row[1],row[5],row[7]);
     }
     res=mysql_store_result(con);
