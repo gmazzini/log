@@ -453,7 +453,8 @@ int main(void){
        fprintf(fp,"<RST_RCVD:%d>%s\n",strlen(row[5]),row[5]);
        fprintf(fp,"<STX_STRING:%d>%s\n",strlen(row[8]),row[8]);
        fprintf(fp,"<SRX_STRING:%d>%s\n",strlen(row[9]),row[9]);
-       fprintf(fp,"<CONTEST_ID:%d>%s\n",strlen(row[10]),row[10]);       
+       fprintf(fp,"<CONTEST_ID:%d>%s\n",strlen(row[10]),row[10]);
+       fprintf(fp,"\n");
      }
      res=mysql_store_result(con);
      fclose(fp);
