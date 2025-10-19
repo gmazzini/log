@@ -51,6 +51,7 @@ int main(void){
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
+  FILE *fp;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
  
   data3=(struct data3 ***)malloc(TOT3*sizeof(struct data3 **)); ndata3=malloc(TOT3*sizeof(long *));
