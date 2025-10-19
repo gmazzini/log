@@ -522,7 +522,7 @@ int main(void){
       if(pp[0]=='D')strcpy(aux1,pp+1);
       else if(pp[0]=='F')strcpy(aux2,pp+1);
       else if(pp[0]=='M')strcpy(aux3,pp+1);
-      else if(aux1[0]!='\0' && aux2[0]!='\0' && aux3[0]!='\0'){
+      else if(pp[0]!='\0' && aux1[0]!='\0' && aux2[0]!='\0' && aux3[0]!='\0'){
         aux7[0]=aux8[0]='\0'; sscanf(pp,"%s %s %s %s",aux5,aux6,aux7,aux8);
         for(qq=aux6;*qq!='\0';qq++)*qq=toupper(*qq);
         if(aux7[0]=='\0')strcpy(aux7,"59");
@@ -536,9 +536,6 @@ int main(void){
     printf("</pre>");
     goto end;
   }
-
-//     echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','','','')\n";
-
   end:
   mysql_close(con);
   return 0;
