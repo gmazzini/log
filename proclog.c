@@ -423,8 +423,11 @@ int main(void){
   }
 
    if(act==20){
+     strcpy(adif1[0],"export_from"); strcpy(adif1[1],"export_to"); strcpy(adif1[2],"export_contest");
      printf("Status: 200 OK\r\n");
      printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+     vv=3; gg=adifextract(ff,vv);
+     if(gg==0)goto end;
      srand((unsigned)time(NULL));
      sprintf(aux1,"%d%d%d%d.adi",rand(),rand(),rand(),rand());
      sprintf(aux2,"/home/www/log/files/%s",aux1);
@@ -433,8 +436,9 @@ int main(void){
      fprintf(fp,"<EOH>\n\n");
      fclose(fp);
      printf("<pre>");
-     printf("<pre><a href='https://log.mazzini.org/files/%s' download>Download ADIF</a><br>",aux1);
- // echo "$export_from $export_to\n";
+     printf("<pre><a href='https://log.mazzini.org/files/%s' download>Download ADIF</a>",aux1);
+     if(adif[2][0]=='\0')printf("from:%s to:%s\n",adif[0],adif[1]);
+     else printf("contest:%s\n",adif[0]);
      printf("</pre>");
      goto end;
   }
