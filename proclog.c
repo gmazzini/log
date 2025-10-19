@@ -511,37 +511,35 @@ int main(void){
     goto end;
   }
   
+  if(act==16){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
+    aux1[0]=aux2[0]=aux3[0]='\0';
+    pp=strtok(ff,"\n");
+    for(;;){
+      if(pp==NULL)break;
+      if(pp[0]=='D')strcpy(aux1,pp+1);
+      else if(pp[0]=='F')strcpy(aux2,pp+1);
+      else if(pp[0]=='M')strcpy(aux3,pp+1);
+      else if(aux1[0]!='\0' && aux2[0]!='\0' && aux3[0]!='\0'){
+        aux7[0]=aux8[0]='\0'; sscanf(pp,"%s %s %s %s",aux5,aux6,aux7,aux8);
+        sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
+        sprintf(buf,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'','','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L);
+        printf("%s\n",buf);
+      }
+      pp=strtok(NULL,"\n");
+    }
+    printf("</pre>");
+    goto end;
+  }
+
+//     echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','','','')\n";
+
   end:
   mysql_close(con);
   return 0;
 }
-
-if(act==16){
-  printf("Status: 200 OK\r\n");
-  printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-  printf("<pre>");
-  aux1[0]=aux2[0]=aux3[0]='\0';
-  pp=strtok(ff,"\n");
-  for(;;){
-    if(pp==NULL)break;
-    if(pp[0]=='D')strcpy(aux1,pp+1);
-    else if(pp[0]=='F')strcpy(aux2,pp+1);
-    else if(pp[0]=='M')strcpy(aux3,pp+1);
-    else if(aux1[0]!='\0' && aux2[0]!='\0' && aux3[0]!='\0'){
-      aux7[0]=aux8[0]='\0'; sscanf(pp,"%s %s %s %s",aux5,aux6,aux7,aux8);
-      sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
-      sprintf(buf,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'','','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L);
-      printf("%s\n",buf);
-    }
-    pp=strtok(NULL,"\n");
-  }
-  printf("</pre>");
-  goto end;
-}
-
-//     echo "('$mycall','$callsign','$start','$end','$mode',$freqtx,$freqrx,'$signaltx','$signalrx','','','')\n";
-
-
 
 MYSQL_ROW searchcty(MYSQL *con,char *incall){
   char buf[1000],*p,call[20];
