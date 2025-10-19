@@ -465,6 +465,70 @@ int main(void){
      printf("</pre>");
      goto end;
   }
+
+  if(act==21){
+    strcpy(adif1[0],"export_from"); strcpy(adif1[1],"export_to"); strcpy(adif1[2],"export_contest");
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    vv=3; gg=adifextract(ff,vv);
+    if(gg==0)goto end;
+    srand((unsigned)time(NULL));
+    sprintf(aux1,"%d%d%d%d.cbr",rand(),rand(),rand(),rand());
+    sprintf(aux2,"/home/www/log/files/%s",aux1);
+    fp=fopen(aux2,"w");
+    fprintf(fp,"START-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
+    fprintf(fp,"CONTEST: xxxxxx\nCALLSIGN: %s\nOPERATORS: %s\n",mycall,mycall);
+    fprintf(fp,"CATEGORY-OPERATOR: SINGLE-OP\nCATEGORY-ASSISTED: ASSISTED\nCATEGORY-BAND: ALL\nCATEGORY-POWER: LOW\nCATEGORY-TRANSMITTER: ONE\n");    
+    sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='%s'",mycall);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    fprintf(fp,"NAME: %s %s\n",row[0],row[1]);
+    if(row[7][0]!='\0')fprintf(fp,"EMAIL: %s\n",row[7]);
+    if(row[2][0]!='\0')fprintf(fp,"ADDRESS: %s\n",row[2]);
+    if(row[3][0]!='\0')fprintf(fp,"ADDRESS-CITY: %s\n",row[3]);
+    if(row[4][0]!='\0')fprintf(fp,"ADDRESS-STATE-PROVINCE: %s\n",row[4]);
+    if(row[5][0]!='\0')fprintf(fp,"ADDRESS-POSTALCODE: %s\n",row[5]);
+    if(row[6][0]!='\0')fprintf(fp,"ADDRESS-COUNTRY: %s\n",row[6]);
+    fprintf(fp,"CLUB: Italian Contest Club\n");
+    mysql_free_result(res);
+    if(adif[2][0]=='\0')sprintf(buf,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx,contest from log where mycall='%s' and start>='%s' and start<='%s' order by start",mycall,adif[0],adif[1]);
+    else sprintf(buf,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx,contest from log where mycall='%s' and contest='%s' order by start",mycall,adif[2]);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(l1=0;;l1++){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+
+ fprintf($fp,"QSO: %5d %2s %04d-%02d-%02d ",$row["freqtx"]/1000,$mymode[$row["mode"]],substr($row["start"],0,4),substr($row["start"],5,2),substr($row["start"],8,2));
+    fprintf($fp,"%02d%02d %-13s %3s %-6s %-13s %3s %-6s 0\n",substr($row["start"],11,2),substr($row["start"],14,2),$mycall,$row["signaltx"],$row["contesttx"],$row["callsign"],$row["signalrx"],$row["contestrx"]);
+
+
+       
+       fprintf(fp,"<CALL:%d>%s\n",strlen(row[1]),row[1]);
+       fprintf(fp,"<QSO_DATE:8>%.4s%.2s%.2s\n",row[0],row[0]+5,row[0]+8);
+       fprintf(fp,"<QSO_DATE_OFF:8>%.4s%.2s%.2s\n",row[6],row[6]+5,row[6]+8);
+       fprintf(fp,"<TIME_ON:6>%.2s%.2s%.2s\n",row[0]+11,row[0]+14,row[0]+17);
+       fprintf(fp,"<TIME_OFF:6>%.2s%.2s%.2s\n",row[6]+11,row[6]+14,row[6]+17);
+       sprintf(aux4,"%7.5f",atol(row[2])/1000000.0); fprintf(fp,"<FREQ:%d>%s\n",strlen(aux4),aux4);
+       sprintf(aux4,"%7.5f",atol(row[7])/1000000.0); fprintf(fp,"<FREQ_RX:%d>%s\n",strlen(aux4),aux4);
+       fprintf(fp,"<MODE:%d>%s\n",strlen(row[3]),row[3]);
+       fprintf(fp,"<RST_SENT:%d>%s\n",strlen(row[4]),row[4]);
+       fprintf(fp,"<RST_RCVD:%d>%s\n",strlen(row[5]),row[5]);
+       fprintf(fp,"<STX_STRING:%d>%s\n",strlen(row[8]),row[8]);
+       fprintf(fp,"<SRX_STRING:%d>%s\n",strlen(row[9]),row[9]);
+       fprintf(fp,"<CONTEST_ID:%d>%s\n",strlen(row[10]),row[10]);
+       fprintf(fp,"\n");
+     }
+     res=mysql_store_result(con);
+      fprintf($fp,"END-OF-LOG:\n");
+
+     fclose(fp);
+     printf("<pre>");
+     printf("<pre><a href='https://log.mazzini.org/files/%s' download>Download ADIF</a>\n",aux1);
+     if(adif[2][0]=='\0')printf("from:%s to:%s\n",adif[0],adif[1]);
+     else printf("contest:%s\n",adif[2]);
+     printf("</pre>");
+     goto end;
+  }
   
   end:
   mysql_close(con);
