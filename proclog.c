@@ -429,7 +429,7 @@ int main(void){
      sprintf(aux1,"%d%d%d%d.adi",rand(),rand(),rand(),rand());
      sprintf(aux2,"/home/www/log/files/%s",aux1);
      fp=fopen(aux2,"w");
-     strcpy(aux3,"PROGRAMID"); fprintf(fp,"<LZHlogger:%d>%s\n",stdlen(aux3),aux3);
+     strcpy(aux3,"PROGRAMID"); fprintf(fp,"<LZHlogger:%d>%s\n",strlen(aux3),aux3);
      fprintf(fp,"<EOH>\n\n");
      fclose(fp);
      printf("<pre>");
