@@ -461,7 +461,7 @@ int main(void){
      printf("<pre>");
      printf("<pre><a href='https://log.mazzini.org/files/%s' download>Download ADIF</a>\n",aux1);
      if(adif[2][0]=='\0')printf("from:%s to:%s\n",adif[0],adif[1]);
-     else printf("contest:%s\n",adif[0]);
+     else printf("contest:%s\n",adif[2]);
      printf("</pre>");
      goto end;
   }
