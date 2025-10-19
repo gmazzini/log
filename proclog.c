@@ -516,8 +516,8 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     aux1[0]=aux2[0]=aux3[0]='\0';
-    pp=strtok(ff,"\n");
     for(;;){
+      pp=strtok(ff,"\n");
       if(pp==NULL)break;
       if(pp[0]=='D')strcpy(aux1,pp+1);
       else if(pp[0]=='F')strcpy(aux2,pp+1);
@@ -531,7 +531,7 @@ int main(void){
         sprintf(buf,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8);
         printf("%s\n",buf);
       }
-      pp=strtok(NULL,"\n");
+      ff=NULL;
     }
     printf("</pre>");
     goto end;
