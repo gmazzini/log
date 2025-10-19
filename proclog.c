@@ -65,7 +65,7 @@ int main(void){
   for(vv=0,gg=0,lff=0;;){
     c=getchar();
     if(c==EOF)break;
-    if(c==','){vv++; tok[vv][gg]='\0'; gg=0; continue;}
+    if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
     if(vv<5)tok[vv][gg++]=(char)c;
     else {
       if(c=='=')break;
