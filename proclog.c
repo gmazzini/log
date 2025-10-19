@@ -446,8 +446,8 @@ int main(void){
        fprintf(fp,"<QSO_DATE_OFF:8>%.4s%.2s%.2s\n",row[6],row[6]+5,row[6]+8);
        fprintf(fp,"<TIME_ON:6>%.2s%.2s%.2s\n",row[0]+11,row[0]+14,row[0]+17);
        fprintf(fp,"<TIME_OFF:6>%.2s%.2s%.2s\n",row[6]+11,row[6]+14,row[6]+17);
-       sprintf(aux4,"%7.5f",row[2]/1000000.0); fprintf(fp,"<FREQ:%d>%s\n",strlen(aux4),aux4);
-       sprintf(aux4,"%7.5f",row[7]/1000000.0); fprintf(fp,"<FREQ_RX:%d>%s\n",strlen(aux4),aux4);
+       sprintf(aux4,"%7.5f",atol(row[2])/1000000.0); fprintf(fp,"<FREQ:%d>%s\n",strlen(aux4),aux4);
+       sprintf(aux4,"%7.5f",atol(row[7])/1000000.0); fprintf(fp,"<FREQ_RX:%d>%s\n",strlen(aux4),aux4);
        fprintf(fp,"<MODE:%d>%s\n",strlen(row[3]),row[3]);
        fprintf(fp,"<RST_SENT:%d>%s\n",strlen(row[4]),row[4]);
        fprintf(fp,"<RST_RCVD:%d>%s\n",strlen(row[5]),row[5]);
