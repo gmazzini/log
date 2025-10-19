@@ -529,7 +529,7 @@ int main(void){
         if(aux8[0]=='\0')strcpy(aux8,"59");
         sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
         sprintf(buf,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8);
-        printf("%s--%s--\n",buf,pp);
+        printf("%s\n",buf);
       }
       pp=strtok(NULL,"\n");
     }
