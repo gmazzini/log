@@ -422,7 +422,7 @@ int main(void){
     goto end;
   }
 
-   if(act==17){
+   if(act==20){
      printf("Status: 200 OK\r\n");
      printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
      srand((unsigned)time(NULL));
