@@ -524,7 +524,7 @@ int main(void){
       else if(pp[0]=='M')strcpy(aux3,pp+1);
       else if(aux1[0]!='\0' && aux2[0]!='\0' && aux3[0]!='\0'){
         aux7[0]=aux8[0]='\0'; sscanf(pp,"%s %s %s %s",aux5,aux6,aux7,aux8);
-        for(qq=aux6;*qq!='\0';qq++)*qq)toupper(*qq);
+        for(qq=aux6;*qq!='\0';qq++)*qq=toupper(*qq);
         sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
         sprintf(buf,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'','','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L);
         printf("%s\n",buf);
