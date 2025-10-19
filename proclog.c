@@ -420,6 +420,23 @@ int main(void){
     printf("</pre>");
     goto end;
   }
+
+   if(act==17){
+     printf("Status: 200 OK\r\n");
+     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+     srand((unsigned)time(NULL));
+     sprintf(aux1,"%d%d%d%d.adi",rand(),rand(),rand(),rand());
+     sprintf(aux2,"/home/www/log/files/%s",aux1);
+     fp=fopen(aux2,"w");
+     strcpy(aux3,"PROGRAMID"); fprintf(fp,"<LZHlogger:%d>%s\n",stdlen(aux3),aux3);
+     fprintf(fp,"<EOH>\n\n");
+     fclose(fp);
+     printf("<pre>");
+     printf("<pre><a href='https://log.mazzini.org/files/%s' download>Download ADIF</a><br>",aux1);
+ // echo "$export_from $export_to\n";
+     printf("</pre>");
+     goto end;
+  }
   
   end:
   mysql_close(con);
