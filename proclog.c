@@ -42,7 +42,7 @@ static const uint8_t B64DEC[256] = {
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],tok[5][100],mycall[16],*ff,*pp;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],tok[5][100],mycall[16],*ff;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
