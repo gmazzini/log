@@ -35,6 +35,7 @@
 </div>
 <div id="out"></div>
 <div id="debug"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script type="module">
 const out = document.getElementById("out");
 const callInput = document.getElementById("call");
@@ -91,7 +92,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       const r = await fetch("plogin.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
-        body: [l01.value.trim().toUpperCase(),l02.value].join(",")
+        body: [l01.value.trim().toUpperCase(),CryptoJS.MD5(l02.value).toString()].join(",")
       });
       ota = await r.text();
       hh2.style.display = "block";
