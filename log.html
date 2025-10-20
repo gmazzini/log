@@ -87,10 +87,15 @@ document.querySelectorAll("button[id]").forEach(btn => {
   }
   if (btn.id === "l03") {
     btn.addEventListener("click", async () => {
+      const encoder = new TextEncoder();
+      const ddd = encoder.encode(l02.value);
+      const hashBuffer = await crypto.subtle.digest("MD5", ddd);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
       const r = await fetch("plogin.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
-        body: [l01.value,l02.value].join(",")
+        body: [l01.value.trim().toUpperCase(),hashHex].join(",")
       });
       ota = await r.text();
       hh2.style.display = "block";
