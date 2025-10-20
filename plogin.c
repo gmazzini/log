@@ -19,6 +19,12 @@ int main(void){
     if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
     if(vv<2)tok[vv][gg++]=(char)c;
   }
+
+  FILE *fp;
+  fp=fopen("/home/www/log/q1.txt","w");
+  fprintf(fp,"%s\n%s\n",tok[0],tok[1]);
+  fclose(fp);
+
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
