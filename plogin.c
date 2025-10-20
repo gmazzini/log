@@ -24,7 +24,7 @@ int main(void){
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   epoch=time(NULL);
   printf("1\n");
-  sprintf(buf,"select ota from user where mycall='%s' and md5password='%s' and lota>%ld limit 1",tok[0],tok[1],epoch);
+  sprintf(buf,"select ota from user where mycall='%s' and md5passwd='%s' and lota>%ld limit 1",tok[0],tok[1],epoch);
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     printf("2\n%s\n",buf);
 
