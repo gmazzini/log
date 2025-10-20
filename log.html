@@ -86,6 +86,12 @@ document.querySelectorAll("button[id]").forEach(btn => {
       document.getElementById("debug").innerHTML=`page:${page}`;
     });
   }
+  if (btn.id === "l03") {
+    btn.addEventListener("click", async () => {
+      hh2.style.display = "block";
+      hh1.style.display = "none";
+    });
+  }
 });
 
 hh2.style.display = "block";
