@@ -38,8 +38,8 @@
 <script type="module">
 const out = document.getElementById("out");
 const callInput = document.getElementById("call");
-const hh1 = document.getElementById("hh1");
-const hh2 = document.getElementById("hh2");
+const l01 = document.getElementById("l01");
+const l02 = document.getElementById("l02");
 callInput.addEventListener("keydown", e => {
   if (e.key === ",") e.preventDefault();
 });
@@ -83,13 +83,19 @@ document.querySelectorAll("button[id]").forEach(btn => {
         document.getElementById("a04").click();
       }
       else out.innerHTML = await r.text();
-      document.getElementById("debug").innerHTML=`page:${page}`;
     });
   }
   if (btn.id === "l03") {
     btn.addEventListener("click", async () => {
+      const r = await fetch("proclogin.cgi", {
+        method: "POST", cache: "no-store", credentials: "same-origin",
+        headers: {"Content-Type": "text/csv"},
+        body: [l01.value,l02.value].join(",")
+      });
+      ota = await r.text();
       hh2.style.display = "block";
       hh1.style.display = "none";
+      document.getElementById("debug").innerHTML=ota;
     });
   }
 });
