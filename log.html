@@ -6,6 +6,9 @@
 </head>
 <body>
 <div id="hh1">
+  ciao
+</div>
+<div id="hh2">
   <table>
     <td><pre>
       Call <input type="text" id="call">
@@ -33,6 +36,8 @@
 <script type="module">
 const out = document.getElementById("out");
 const callInput = document.getElementById("call");
+const hh1 = document.getElementById("hh1");
+const hh2 = document.getElementById("hh2");
 callInput.addEventListener("keydown", e => {
   if (e.key === ",") e.preventDefault();
 });
@@ -80,6 +85,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
     });
   }
 });
+
+  
 </script>
 
 </body>
