@@ -34,7 +34,7 @@ int main(void){
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
   if(row==NULL)exit(1);
   printf("Content-Type: text/plain\r\n\r\n");
-  printf("%s",row[0]);
+  printf("%s\n",row[0]);
 
  fp=fopen("/home/www/log/q2.txt","w");
   fprintf(fp,"%s\n",row[0]);
