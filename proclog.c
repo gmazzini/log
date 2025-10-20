@@ -543,7 +543,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("To be done\n";
+    printf("To be done\n");
     printf("</pre>");
     goto end;
   }
