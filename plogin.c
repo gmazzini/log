@@ -26,7 +26,7 @@ int main(void){
   printf("1\n");
   sprintf(buf,"select ota from user where mycall='%s' and md5password='%s' and lota>%ld limit 1",tok[0],tok[1],epoch);
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    printf("2\n");
+    printf("2\n%s\n",buf);
 
   if(row==NULL)exit(1);
   printf("Content-Type: text/plain\r\n\r\n");
