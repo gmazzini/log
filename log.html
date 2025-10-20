@@ -87,7 +87,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
   }
   if (btn.id === "l03") {
     btn.addEventListener("click", async () => {
-      const r = await fetch("proclogin.cgi", {
+      const r = await fetch("plogin.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
         body: [l01.value,l02.value].join(",")
