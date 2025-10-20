@@ -19,6 +19,7 @@ int main(void){
     if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
     if(vv<2)tok[vv][gg++]=(char)c;
   }
+  tok[vv][gg]='\0';
 
   FILE *fp;
   fp=fopen("/home/www/log/q1.txt","w");
