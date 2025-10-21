@@ -4,14 +4,16 @@
 #include <time.h>
 #include <mysql/mysql.h>
 #include "log.def"
+#define VALIDITY 86400
 
 int main(void){
   int c,vv,gg;
-  char buf[1000],tok[2][100];
+  char buf[1000],aux1[300],tok[2][100];
   time_t epoch;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
+  const char charset[]="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   
   for(vv=0,gg=0;;){
     c=getchar();
@@ -20,27 +22,24 @@ int main(void){
     if(vv<2)tok[vv][gg++]=(char)c;
   }
   tok[vv][gg]='\0';
-
-  FILE *fp;
-  fp=fopen("/home/www/log/q1.txt","w");
-  fprintf(fp,"%s\n%s\n",tok[0],tok[1]);
-  fclose(fp);
-
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   epoch=time(NULL);
-  sprintf(buf,"select ota from user where mycall='%s' and md5passwd='%s' and lota>%ld limit 1",tok[0],tok[1],epoch);
+  sprintf(buf,"select count(*) from user where mycall='%s' and md5passwd='%s' limit 1",tok[0],tok[1]);
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-  if(row==NULL)exit(1);
-  printf("Content-Type: text/plain\r\n\r\n");
-  printf("%s\n",row[0]);
-
- fp=fopen("/home/www/log/q2.txt","w");
-  fprintf(fp,"%s\n",row[0]);
-  fclose(fp);
-  
+  if(row==NULL || atoi(row[0])==0)strcpy(aux1,"");
+  else {
+    srand((unsigned int)epoch);
+    gg=sizeof(charset)-1;
+    for(c=0;c<16;c++)aux1[c]=charset[rand()%gg];
+    aux1[16]='\0';
+    sprintf(buf,"update uset set ota='%s',lota=%ld where mycall='%s' and md5passwd='%s'",aux1,epoch+VALIDITY,tok[0],tok[1]);
+    mysql_query(con,buf);
+  }
   mysql_free_result(res);
+  printf("Content-Type: text/plain\r\n\r\n");
+  printf("%s\n",aux1);
   mysql_close(con);
   return 0;
 }
