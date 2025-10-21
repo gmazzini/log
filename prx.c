@@ -10,7 +10,7 @@ char adif[20][200],adif1[20][20];
 int adifextract(char *,int);
 
 int main(void) {
-  int sockfd,vv,gg;
+  int sockfd,vv,gg,opt;
   struct sockaddr_in server_addr,client_addr;
   socklen_t addr_len=sizeof(client_addr);
   ssize_t len;
@@ -21,6 +21,11 @@ int main(void) {
   strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off"); strcpy(adif1[15],"comment"); strcpy(adif1[16],"station_callsign");
   sockfd=socket(AF_INET,SOCK_DGRAM,0);
   if(sockfd<0)exit(-1);
+
+  opt=1;
+  if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEPORT,&opt,sizeof(opt))<0)exit(-1);
+
+  
   memset(&server_addr,0,sizeof(server_addr));
   server_addr.sin_family=AF_INET;
   server_addr.sin_addr.s_addr=INADDR_ANY;
