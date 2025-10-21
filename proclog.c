@@ -89,9 +89,14 @@ int main(void){
   epoch=time(NULL);
   sprintf(buf,"select mycall from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-  if(row==NULL)exit(1);
   strcpy(mycall,row[0]);
   mysql_free_result(res);
+  if(row==NULL){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>Login expired\n</pre>");
+    goto end;
+  }
   act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
 
   if(act==5){
