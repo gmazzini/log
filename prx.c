@@ -41,6 +41,9 @@ printf("3\n");
     len=recvfrom(sockfd,buffer,sizeof(buffer)-1,0,(struct sockaddr *)&client_addr,&addr_len);
     if(len<0)continue;
     buffer[len]='\0';
+
+
+    printf("%s\n",buffer);
     vv=16; gg=adifextract(buffer,vv);
     if(strcmp(adif[15],secret_rx)==0)continue;
     if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
