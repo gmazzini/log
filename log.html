@@ -97,6 +97,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       ota = await r.text();
       hh2.style.display = "block";
       hh1.style.display = "none";
+      debug.innerHTML = `${ota}`;
     });
   }
 });
