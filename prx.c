@@ -20,7 +20,7 @@ int main(void) {
   strcpy(adif1[6],"time_on"); strcpy(adif1[7],"time_off"); strcpy(adif1[8],"stx_string"); strcpy(adif1[9],"stx"); strcpy(adif1[10],"srx_string"); strcpy(adif1[11],"srx");
   strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off"); strcpy(adif1[15],"comment");
   sockfd=socket(AF_INET,SOCK_DGRAM,0);
-  if(sockfd<0)return;
+  if(sockfd<0)exit(-1);
   memset(&server_addr,0,sizeof(server_addr));
   server_addr.sin_family=AF_INET;
   server_addr.sin_addr.s_addr=INADDR_ANY;
