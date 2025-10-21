@@ -12,16 +12,12 @@ int main(void) {
   socklen_t addr_len=sizeof(client_addr);
   char buffer[1000];
 
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sockfd < 0) {
-        perror("socket");
-        exit(EXIT_FAILURE);
-    }
-
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(PORT);
+  sockfd=socket(AF_INET,SOCK_DGRAM,0);
+  if(sockfd<0)return;
+  memset(&server_addr,0,sizeof(server_addr));
+    server_addr.sin_family=AF_INET;
+    server_addr.sin_addr.s_addr=INADDR_ANY;
+    server_addr.sin_port=htons(PORT);
 
     if (bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         perror("bind");
