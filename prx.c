@@ -25,7 +25,7 @@ int main(void) {
   server_addr.sin_family=AF_INET;
   server_addr.sin_addr.s_addr=INADDR_ANY;
   server_addr.sin_port=htons(PORT);
-  if(bind(sockfd,(struct sockaddr *)&server_addr,sizeof(server_addr))<0)return;
+  if(bind(sockfd,(struct sockaddr *)&server_addr,sizeof(server_addr))<0)exit(-1);
   for(;;){
     len=recvfrom(sockfd,buffer,sizeof(buffer)-1,0,(struct sockaddr *)&client_addr,&addr_len);
     if(len<0)continue;
