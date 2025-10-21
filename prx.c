@@ -22,10 +22,12 @@ int main(void) {
   sockfd=socket(AF_INET,SOCK_DGRAM,0);
   if(sockfd<0)exit(-1);
 
+  printf("1\n");
   opt=1;
   if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEPORT,&opt,sizeof(opt))<0)exit(-1);
 
-  
+    printf("2\n");
+
   memset(&server_addr,0,sizeof(server_addr));
   server_addr.sin_family=AF_INET;
   server_addr.sin_addr.s_addr=INADDR_ANY;
