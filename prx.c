@@ -5,13 +5,12 @@
 #include <arpa/inet.h>
 
 #define PORT 2333
-#define BUFSIZE 1000
 
 int main(void) {
-    int sockfd;
-    struct sockaddr_in server_addr, client_addr;
-    socklen_t addr_len = sizeof(client_addr);
-    char buffer[BUFSIZE];
+  int sockfd;
+  struct sockaddr_in server_addr,client_addr;
+  socklen_t addr_len=sizeof(client_addr);
+  char buffer[1000];
 
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     if (sockfd < 0) {
