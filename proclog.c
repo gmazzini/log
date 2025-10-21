@@ -92,7 +92,7 @@ int main(void){
   if(row==NULL){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    printf("<pre>Login expired\n</pre>");
+    printf("<pre><b>Login expired</b>\nPlease login again\n</pre>");
     mysql_free_result(res);
     goto end;
   }
