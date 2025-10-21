@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include "log.def"
 #define PORT 2333
 
 char adif[20][200],adif1[20][20];
@@ -17,7 +18,7 @@ int main(void) {
 
   strcpy(adif1[0],"call"); strcpy(adif1[1],"freq"); strcpy(adif1[2],"freq_rx"); strcpy(adif1[3],"rst_sent"); strcpy(adif1[4],"rst_rcvd"); strcpy(adif1[5],"mode");
   strcpy(adif1[6],"time_on"); strcpy(adif1[7],"time_off"); strcpy(adif1[8],"stx_string"); strcpy(adif1[9],"stx"); strcpy(adif1[10],"srx_string"); strcpy(adif1[11],"srx");
-  strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off");
+  strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off"); strcpy(adif1[15],"comment");
   sockfd=socket(AF_INET,SOCK_DGRAM,0);
   if(sockfd<0)return;
   memset(&server_addr,0,sizeof(server_addr));
@@ -29,7 +30,8 @@ int main(void) {
     len=recvfrom(sockfd,buffer,sizeof(buffer)-1,0,(struct sockaddr *)&client_addr,&addr_len);
     if(len<0)continue;
     buffer[len]='\0';
-    vv=15; gg=adifextract(buffer,vv);
+    vv=16; gg=adifextract(buffer,vv);
+    if(strcmp(adif[15],secret_rx)==0)continue;
     if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
     sprintf(aux1,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
     if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
