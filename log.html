@@ -93,10 +93,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
         headers: {"Content-Type": "text/csv"},
         body: [l01.value.trim().toUpperCase(),CryptoJS.MD5(l02.value).toString()].join(",")
       });
-      ota = "ciao";
       hh2.style.display = "block";
       hh1.style.display = "none";
-      document.getElementById("debug").innerHTML=ota;
     });
   }
 });
