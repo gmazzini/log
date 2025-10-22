@@ -28,16 +28,11 @@ int main(void) {
   server_addr.sin_addr.s_addr=INADDR_ANY;
   server_addr.sin_port=htons(PORT);
   if(bind(sockfd,(struct sockaddr *)&server_addr,sizeof(server_addr))<0)exit(-1);
-
   printf("start\n");
-  
   for(;;){
     len=recvfrom(sockfd,buffer,sizeof(buffer)-1,0,(struct sockaddr *)&client_addr,&addr_len);
     if(len<0)continue;
     buffer[len]='\0';
-
-    printf("%s\n",buffer);
-
     vv=17; gg=adifextract(buffer,vv);
     if(strcmp(adif[15],secret_rx)!=0)continue;
     if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
@@ -48,8 +43,8 @@ int main(void) {
     sprintf(aux2,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
     sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",adif[16],adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
     printf("%s\n",aux3);
-    // sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value %s",aux3);
-    // mysql_query(con,buf);
+    sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value %s",aux3);
+    mysql_query(con,buf);
   }
 }
 
