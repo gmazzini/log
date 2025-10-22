@@ -567,6 +567,7 @@ int main(void){
     printf("%s\n%s\n",row[7],row[8]);
     printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
     printf("</pre></td>");
+    if(row[13][0]!='\0')printf("<td><img align=\top\" src=\"%s\" width=\"200\"></a></td>",row[13]);
     printf("</table>\n");
     mysql_free_result(res);
     goto end;
@@ -574,9 +575,7 @@ int main(void){
 
 
 /*
-  printf("<table>");
-  printf("<td><pre>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s %s\n</pre></td>",cyrlat($row["firstname"],$tra),cyrlat($row["lastname"],$tra),cyrlat($row["addr1"],$tra),cyrlat($row["addr2"],$tra),cyrlat($row["state"],$tra),$row["zip"],cyrlat($row["country"],$tra),$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"],$row["src"]);
-  if(strlen($row["image"])>0)printf("<td><a href=\"%s\" target=\"_blank\"><img align=\top\" src=\"%s\" width=\"200\"></a></td>",$row["image"],$row["image"]);
+
   echo "<td id=\"myq1\">";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew qrz\">QRZ.com</button><br>";
   echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew ru\">QRZ.ru</button>";
