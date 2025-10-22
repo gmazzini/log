@@ -34,8 +34,20 @@ int main(void) {
 
   p=strtok(tok[3],":");
   buf[0]='\0';
-  if(strcmp(p,"DEL")==0 || strcmp(p,"DELETE")==0)sprintf(buf,"delete from log where mycall='%s' and callsign='%s' and start='%s'",mycall,tok[2],tok[1]);
-  
+  if(strcmp(p,"DEL")==0 || strcmp(p,"DELETE")==0)
+    sprintf(buf,"delete from log where mycall='%s' and callsign='%s' and start='%s'",mycall,tok[2],tok[1]);
+  else if(strcmp(p,"FT")==0 || strcmp(p,"FREQTX")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set freqtx=%ld where mycall='%s' and callsign='%s' and start='%s'",atol(p)*1000L,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"FR")==0 || strcmp(p,"FREQRX")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set freqrx=%ld where mycall='%s' and callsign='%s' and start='%s'",atol(p)*1000L,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"M")==0 || strcmp(p,"MODE")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set mode='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
   
 FILE *fp;
   fp=fopen("/home/www/log/pcmd.txt","w");
