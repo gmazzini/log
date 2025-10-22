@@ -6,6 +6,7 @@
 #include <mysql/mysql.h>
 #include "log.def"
 #define PORT 2333
+#define LOG "/home/www/log/prx.log"
 
 char adif[20][200],adif1[20][20];
 int adifextract(char *,int);
@@ -19,8 +20,6 @@ int main(void) {
   MYSQL *con;
   FILE *fp;
 
-  fp=fopen("/home/www/log/prx.log","a");
-  if(fp==NULL)exit(-1);
   strcpy(adif1[0],"call"); strcpy(adif1[1],"freq"); strcpy(adif1[2],"freq_rx"); strcpy(adif1[3],"rst_sent"); strcpy(adif1[4],"rst_rcvd"); strcpy(adif1[5],"mode");
   strcpy(adif1[6],"time_on"); strcpy(adif1[7],"time_off"); strcpy(adif1[8],"stx_string"); strcpy(adif1[9],"stx"); strcpy(adif1[10],"srx_string"); strcpy(adif1[11],"srx");
   strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off"); strcpy(adif1[15],"comment"); strcpy(adif1[16],"station_callsign");
@@ -33,7 +32,8 @@ int main(void) {
   server_addr.sin_addr.s_addr=INADDR_ANY;
   server_addr.sin_port=htons(PORT);
   if(bind(sockfd,(struct sockaddr *)&server_addr,sizeof(server_addr))<0)exit(-1);
-  fprintf(fp,"Start %ld\n",time(NULL)); fflush(fp);
+  fp=fopen(LOG,"a");
+  if(fp!=NULL){fprintf(fp,"Start %ld\n",time(NULL)); fclose(fp);}
   for(;;){
     len=recvfrom(sockfd,buffer,sizeof(buffer)-1,0,(struct sockaddr *)&client_addr,&addr_len);
     if(len<0)continue;
@@ -47,7 +47,8 @@ int main(void) {
     if(adif[7][4]=='\0'){adif[7][4]='0'; adif[7][5]='0'; adif[7][6]='\0';}
     sprintf(aux2,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
     sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",adif[16],adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
-    fprintf(fp,"%s\n",aux3); fflush(fp);
+    fp=fopen(LOG,"a");
+    if(fp!=NULL){fprintf(fp,"%s\n",aux3); fclose(fp);}
     sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value %s",aux3);
     con=mysql_init(NULL);
     if(con==NULL)continue;
