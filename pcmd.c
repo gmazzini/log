@@ -8,10 +8,10 @@
 
 int main(void) {
   int c,vv,gg;
-  char buf[1000],aux1[300],tok[4][100],mycall[16],*p;
+  char buf[1000],tok[4][100],mycall[16],*p;
   MYSQL *con;
   MYSQL_RES *res;
-  MYSQL_ROW row,row1;
+  MYSQL_ROW row;
   time_t epoch;
 
   for(vv=0,gg=0;;){
@@ -48,10 +48,38 @@ int main(void) {
     p=strtok(NULL,":");
     if(p!=NULL)sprintf(buf,"update log set mode='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
   }
+  else if(strcmp(p,"ST")==0 || strcmp(p,"SIGNALTX")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set signaltx='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"SR")==0 || strcmp(p,"SIGNALRX")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set signalrx='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"C")==0 || strcmp(p,"CALL")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set callsign='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"DT")==0 || strcmp(p,"DATETIME")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set start='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"CO")==0 || strcmp(p,"CONTEST")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set contest='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"COT")==0 || strcmp(p,"CONTESTTX")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set contesttx='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
+  else if(strcmp(p,"COR")==0 || strcmp(p,"CONTESTRX")==0){
+    p=strtok(NULL,":");
+    if(p!=NULL)sprintf(buf,"update log set contestrx='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
+  }
   
 FILE *fp;
   fp=fopen("/home/www/log/pcmd.txt","w");
-  fprintf(fp,"%s,%s,%s,%s,%s,%d\n",tok[0],tok[1],tok[2],tok[3],buf,strlen(p));
+  fprintf(fp,"%s,%s,%s,%s,%s\n",tok[0],tok[1],tok[2],tok[3],buf);
   fclose(fp);
   
 }
