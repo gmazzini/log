@@ -101,7 +101,7 @@ int main(void){
   mysql_free_result(res);
   act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
 
-  if(act==5){
+  if(act==5){ // Go button
     printf("Content-Type: text/plain\r\n\r\n");
     sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
@@ -115,7 +115,7 @@ int main(void){
     goto end;
   }
 
-  if(act<=8){
+  if(act<=8){ // List buttons(4) and Find buttons(3) 
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -154,7 +154,7 @@ int main(void){
       else if(td<60)sprintf(aux2,"(%lds)",td);
       else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
       else sprintf(aux2,"(%ldh)",td/3600);
-      // MANCA BUTTON
+      printf("<button type=\"button\" id=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],$row[2]);
       printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
       if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
