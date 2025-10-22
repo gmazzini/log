@@ -562,10 +562,10 @@ int main(void){
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     printf("<table><td><pre>");
     printf("%s %s\n",row[0],row[1]);
-    printf("%s\n%s\n",row[2],row[3]);
-    printf("%s %s %s\n",row[4],row[5],row[6]);
-    printf("%s\n%s\n",row[7],row[8]);
-    printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
+   // printf("%s\n%s\n",row[2],row[3]);
+   // printf("%s %s %s\n",row[4],row[5],row[6]);
+   // printf("%s\n%s\n",row[7],row[8]);
+   // printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
     printf("</pre></td>");
     printf("</table>\n");
     mysql_free_result(res);
