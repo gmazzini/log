@@ -558,7 +558,7 @@ int main(void){
   if(act==23){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image from who where callsign='%s'",row[0]);
+    sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     printf("<table><td><pre>");
     printf("%s %s\n",row[0],row[1]);
