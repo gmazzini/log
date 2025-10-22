@@ -51,7 +51,7 @@ int main(void) {
   
 FILE *fp;
   fp=fopen("/home/www/log/pcmd.txt","w");
-  fprintf(fp,"%s,%s,%s,%s,%s\n",tok[0],tok[1],tok[2],tok[3],buf);
+  fprintf(fp,"%s,%s,%s,%s,%s,%d\n",tok[0],tok[1],tok[2],tok[3],buf,strlen(p));
   fclose(fp);
   
 }
