@@ -1,3 +1,4 @@
+// prx.c UDP port 2333 ADIF entry receiver by GM @2025 V 2.0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
