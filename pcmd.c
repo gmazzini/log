@@ -76,10 +76,6 @@ int main(void) {
     p=strtok(NULL,":");
     if(p!=NULL)sprintf(buf,"update log set contestrx='%s' where mycall='%s' and callsign='%s' and start='%s'",p,mycall,tok[2],tok[1]);
   }
-  
-FILE *fp;
-  fp=fopen("/home/www/log/pcmd.txt","w");
-  fprintf(fp,"%s,%s,%s,%s,%s\n",tok[0],tok[1],tok[2],tok[3],buf);
-  fclose(fp);
-  
+  if(buf[0]!='\0')mysql_query(con,buf);
+  mysql_close(con);
 }
