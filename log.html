@@ -106,8 +106,14 @@ document.querySelectorAll("button[id]").forEach(btn => {
 });
 
 window.cmd1 = (a,b) => {
-  const p = prompt("DEL DELETE FT,xxx FREQTX,xxx FR,xxx FREQRX,xxx M,xxx MODE,xxx ST,xxx SIGNALTX,xxx SR,xxx SIGNALRX,xxx C,xxx CALL,xxx DT,xxx DATETIME,xxx CO,xxx CONTEST,xxx COT,xxx CONTESTTX,xxx COR,xxx CONTESTRX,xxx","");
-  if (p) fetch("pippo.php?"+new URLSearchParams({mycall:a, md5passwd:b, command:p}));
+  const p = prompt("DEL DELETE FT:xxx FREQTX:xxx FR:xxx FREQRX:xxx M:xxx MODE:xxx ST:xxx SIGNALTX:xxx SR:xxx SIGNALRX:xxx C:xxx CALL:xxx DT:xxx DATETIME:xxx CO:xxx CONTEST:xxx COT:xxx CONTESTTX:xxx COR:xxx CONTESTRX:xxx","");
+  if (p) {
+    const r = await fetch("pcmd.cgi", {
+      method: "POST", cache: "no-store", credentials: "same-origin",
+      headers: {"Content-Type": "text/csv"},
+      body: [ota,a,b,p].join(",")
+    });
+  }
 };
   
 hh2.style.display = "none";
