@@ -554,12 +554,43 @@ int main(void){
     printf("</pre>");
     goto end;
   }
+
+  if(act==23){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image from who where callsign='%s'",row[0]);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    printf("<table><td><pre>");
+    printf("%s %s\n",row[0],row[1]);
+    printf("%s\n%s\n",row[2],row[3]);
+    printf("%s %s %s\n",row[4],row[5],row[6]);
+    printf("%s\n%s\n",row[7],row[8]);
+    printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
+    printf("</pre></td>");
+    printf("</table>\n");
+    mysql_free_result(res);
+    goto end;
+  }
+
+
+/*
+  printf("<table>");
+  printf("<td><pre>%s %s\n%s\n%s\n%s %s %s\n%s\n%s\n%s %s %s %s\n</pre></td>",cyrlat($row["firstname"],$tra),cyrlat($row["lastname"],$tra),cyrlat($row["addr1"],$tra),cyrlat($row["addr2"],$tra),cyrlat($row["state"],$tra),$row["zip"],cyrlat($row["country"],$tra),$row["grid"],$row["email"],$row["cqzone"],$row["ituzone"],$row["born"],$row["src"]);
+  if(strlen($row["image"])>0)printf("<td><a href=\"%s\" target=\"_blank\"><img align=\top\" src=\"%s\" width=\"200\"></a></td>",$row["image"],$row["image"]);
+  echo "<td id=\"myq1\">";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew qrz\">QRZ.com</button><br>";
+  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew ru\">QRZ.ru</button>";
+  echo "</td>";
+  printf("<table>");
+
+*/
   
   end:
   mysql_close(con);
   return 0;
 }
 
+// -------------------------------------------------------------------------------------------------------------------------------
 MYSQL_ROW searchcty(MYSQL *con,char *incall){
   char buf[1000],*p,call[20];
   static MYSQL_RES *res;
