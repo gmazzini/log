@@ -1,3 +1,4 @@
+// proclog.c log data processing by GM @2025 V 2.0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
