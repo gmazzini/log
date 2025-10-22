@@ -15,7 +15,7 @@ int main(void) {
   struct sockaddr_in server_addr,client_addr;
   socklen_t addr_len=sizeof(client_addr);
   ssize_t len;
-  char buffer[1000],aux1[300],aux2[300],aux3[300];
+  char buffer[1000],buf[1000],aux1[300],aux2[300],aux3[300];
   MYSQL *con;
 
   strcpy(adif1[0],"call"); strcpy(adif1[1],"freq"); strcpy(adif1[2],"freq_rx"); strcpy(adif1[3],"rst_sent"); strcpy(adif1[4],"rst_rcvd"); strcpy(adif1[5],"mode");
