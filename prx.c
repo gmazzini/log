@@ -38,7 +38,7 @@ int main(void) {
 
     printf("%s\n",buffer);
 
-    vv=16; gg=adifextract(buffer,vv);
+    vv=17; gg=adifextract(buffer,vv);
     if(strcmp(adif[15],secret_rx)!=0)continue;
     if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
     sprintf(aux1,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
