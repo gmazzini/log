@@ -113,7 +113,7 @@ window.cmd1 = async (a,b) => {
       cache: "no-store",
       credentials: "same-origin",
       headers: { "Content-Type": "text/csv" },
-      body: [ota, a, b, p].join(",")
+      body: [ota, a, b, p.toUpperCase()].join(",")
     });
   }
 };
