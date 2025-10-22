@@ -34,7 +34,7 @@ int main(void) {
 
   p=strtok(tok[3],":");
   buf[0]='\0';
-  if(strcmp(p,"DEL")==0 || strcmp(p,"DELETE")==0)sprintf(buf,"delete from log where mycall='%s' and callsign='%s' and start='%s'",mycall,tok[1],tok[2]);
+  if(strcmp(p,"DEL")==0 || strcmp(p,"DELETE")==0)sprintf(buf,"delete from log where mycall='%s' and callsign='%s' and start='%s'",mycall,tok[2],tok[1]);
   
   
 FILE *fp;
