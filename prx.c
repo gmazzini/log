@@ -21,31 +21,25 @@ int main(void) {
   strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off"); strcpy(adif1[15],"comment"); strcpy(adif1[16],"station_callsign");
   sockfd=socket(AF_INET,SOCK_DGRAM,0);
   if(sockfd<0)exit(-1);
-
-  printf("1\n");
   opt=1;
   if(setsockopt(sockfd,SOL_SOCKET,SO_REUSEPORT,&opt,sizeof(opt))<0)exit(-1);
-
-    printf("2\n");
-
   memset(&server_addr,0,sizeof(server_addr));
   server_addr.sin_family=AF_INET;
   server_addr.sin_addr.s_addr=INADDR_ANY;
   server_addr.sin_port=htons(PORT);
   if(bind(sockfd,(struct sockaddr *)&server_addr,sizeof(server_addr))<0)exit(-1);
 
-
-printf("3\n");
+  printf("start\n");
   
   for(;;){
     len=recvfrom(sockfd,buffer,sizeof(buffer)-1,0,(struct sockaddr *)&client_addr,&addr_len);
     if(len<0)continue;
     buffer[len]='\0';
 
-
     printf("%s\n",buffer);
+
     vv=16; gg=adifextract(buffer,vv);
-    if(strcmp(adif[15],secret_rx)==0)continue;
+    if(strcmp(adif[15],secret_rx)!=0)continue;
     if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
     sprintf(aux1,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
     if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
