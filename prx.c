@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <mysql/mysql.h>
 #include "log.def"
 #define PORT 2333
 
