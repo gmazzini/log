@@ -713,3 +713,47 @@ int adifextract(char *input,int ntok){
   }
   return nret;
 }
+
+char *search(char *buf,char *key){
+  char aux1[100],*p,*q;
+  static char out[100];
+  out[0]='\0';
+  sprintf(aux1,"<%s>",key);
+  p=strstr(buf,aux1);
+  if(p==NULL)return out;
+  p+=strlen(aux1);
+  sprintf(aux1,"</%s>",key);
+  q=strstr(buf,aux1);
+  if(q==NULL || q<p)return out;
+  strncpy(out,p,q-p);
+  out[q-p]='\0';
+  return out;
+}
+
+void qrz(){
+  struct addrinfo h={0},*r=0;
+  int s,n;
+  char buf[100001],aux1[300];
+  const char *qrzkey[]={"fname","nickname","name","addr1","addr2","state","zip","country","grid","email","cqzone","ituzone","born","image"};
+  h.ai_socktype=SOCK_STREAM;
+  getaddrinfo("xmldata.qrz.com","80",&h,&r);
+  s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
+  connect(s,r->ai_addr,r->ai_addrlen);
+  sprintf(buf,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",argv[1],argv[2]);
+  send(s,buf,strlen(buf),0);
+  n=recv(s,buf,10000,0);
+  buf[n]='\0';
+  strcpy(aux1,search(buf,"Key"));
+  close(s);
+  s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
+  connect(s,r->ai_addr,r->ai_addrlen);
+  sprintf(buf,"GET /xml/current/?s=%s;callsign=%s HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",aux1,argv[3]);
+  send(s,buf,strlen(buf),0);
+  n=recv(s,buf,10000,0);
+  buf[n]='\0';
+  s=sizeof(qrzkey)/sizeof(qrzkey[0]);
+  for(n=0;n<s;n++)strcpy(aux1,search(buf,(char *)qrzkey[n]));
+    
+  
+  close(s);
+}
