@@ -24,6 +24,8 @@ long min(long,long);
 int cmp3(const void *,const void *);
 char *mymode(char *);
 int adifextract(char *,int);
+void qrz(MYSQL *,char *);
+
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
