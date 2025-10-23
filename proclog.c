@@ -577,6 +577,13 @@ int main(void){
     mysql_free_result(res);
     goto end;
   }
+
+  if(act==24){
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    qrz(con,tok[4]);
+    goto end;
+  }
   
   end:
   mysql_close(con);
