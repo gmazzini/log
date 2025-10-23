@@ -26,7 +26,6 @@ char *mymode(char *);
 int adifextract(char *,int);
 void qrz(MYSQL *,char *);
 
-
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
 char adif[20][200],adif1[20][20];
@@ -171,7 +170,7 @@ int main(void){
     goto end;
   }
  
-  if(act==9){
+  if(act==9){ // Appy button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -190,13 +189,12 @@ int main(void){
       }
       else l2++;
     }
-    // MANCA PROCESSA LABEL
     mysql_free_result(res);
     printf("Set dxcc: %ld\nNot found dxcc: %ld</pre>",l1,l2);
     goto end;
   }
 
-  if(act==10){
+  if(act==10){ // Report button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -248,7 +246,7 @@ int main(void){
     goto end;
   }
 
-  if(act==11){
+  if(act==11){ // Curio button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
@@ -280,7 +278,7 @@ int main(void){
     goto end;
   }
 
-  if(act==12){
+  if(act==12){ // Activity button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -355,7 +353,7 @@ int main(void){
     goto end;
   }
 
-  if(act==13 || act==14){
+  if(act==13 || act==14){ // Reserialize 1m and 6m buttons
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     epoch=time(NULL);
@@ -384,7 +382,7 @@ int main(void){
     goto end;
   }
 
-  if(act>=17 && act<=19){
+  if(act>=17 && act<=19){ // QSL.lotw QSL.eqsl QSL.qrz buttons
     strcpy(adif1[0],"CALL"); strcpy(adif1[1],"TIME_ON"); strcpy(adif1[2],"QSO_DATE");
     if(act==17){strcpy(adif1[3],"APP_LoTW_RXQSL"); strcpy(aux4,"lotw");}
     else if(act==18){strcpy(adif1[3],"EQSL_QSLRDATE"); strcpy(aux4,"eqsl");}
@@ -410,7 +408,7 @@ int main(void){
     goto end;
   }
 
-  if(act==15){
+  if(act==15){ // adi in button
     strcpy(adif1[0],"call"); strcpy(adif1[1],"freq"); strcpy(adif1[2],"freq_rx"); strcpy(adif1[3],"rst_sent"); strcpy(adif1[4],"rst_rcvd"); strcpy(adif1[5],"mode");
     strcpy(adif1[6],"time_on"); strcpy(adif1[7],"time_off"); strcpy(adif1[8],"stx_string"); strcpy(adif1[9],"stx"); strcpy(adif1[10],"srx_string"); strcpy(adif1[11],"srx");
     strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off");
@@ -435,7 +433,7 @@ int main(void){
     goto end;
   }
 
-   if(act==20){
+   if(act==20){ // adi out button
      strcpy(adif1[0],"export_from"); strcpy(adif1[1],"export_to"); strcpy(adif1[2],"export_contest");
      printf("Status: 200 OK\r\n");
      printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
@@ -479,7 +477,7 @@ int main(void){
      goto end;
   }
 
-  if(act==21){
+  if(act==21){ // cbr out button
     strcpy(adif1[0],"export_from"); strcpy(adif1[1],"export_to"); strcpy(adif1[2],"export_contest");
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
@@ -524,7 +522,7 @@ int main(void){
     goto end;
   }
   
-  if(act==16){
+  if(act==16){ // lzh in button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -552,7 +550,7 @@ int main(void){
     goto end;
   }
   
-  if(act==22){
+  if(act==22){ // cbr to contest button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -561,7 +559,7 @@ int main(void){
     goto end;
   }
 
-  if(act==23){
+  if(act==23){ // start button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image from who where callsign='%s'",tok[4]);
@@ -579,7 +577,7 @@ int main(void){
     goto end;
   }
 
-  if(act==24){
+  if(act==24){ // QRZ.com button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     qrz(con,tok[4]);
