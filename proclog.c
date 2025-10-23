@@ -574,8 +574,7 @@ int main(void){
     printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
     printf("</pre></td>");
     if(row[13][0]!='\0')printf("<td><img align=\top\" src=\"%s\" width=\"200\"></a></td>",row[13]);
-    printf("<td id=\"myq1\"><button id=\"a24\">QRZ.com</button>");
-    printf("</td></table>\n");
+    printf("</table>\n");
     mysql_free_result(res);
     goto end;
   }
