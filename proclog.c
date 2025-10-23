@@ -730,7 +730,7 @@ char *search(char *buf,char *key){
   return out;
 }
 
-void qrz(char *call){
+void qrz(MYSQL *con,char *call){
   struct addrinfo h={0},*r=0;
   int s,n;
   char buf[100001],aux1[300],key[13][201],ee[40];
@@ -742,7 +742,7 @@ void qrz(char *call){
   getaddrinfo("xmldata.qrz.com","80",&h,&r);
   s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
   connect(s,r->ai_addr,r->ai_addrlen);
-  sprintf(buf,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",argv[1],argv[2]);
+  sprintf(buf,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",qrzuser,qrzpassword);
   send(s,buf,strlen(buf),0);
   n=recv(s,buf,10000,0);
   buf[n]='\0';
@@ -757,7 +757,6 @@ void qrz(char *call){
   for(n=0;n<13;n++)strcpy(key[n],search(buf,(char *)qrzkey[n]),200);
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
   sprintf(buf,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee)
-        
-  
+      
   close(s);
 }
