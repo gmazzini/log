@@ -572,21 +572,11 @@ int main(void){
     printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
     printf("</pre></td>");
     if(row[13][0]!='\0')printf("<td><img align=\top\" src=\"%s\" width=\"200\"></a></td>",row[13]);
-    printf("</table>\n");
+    printf("<td id=\"myq1\"><button id=\"a24\">QRZ.com</button>
+    printf("</td></table>\n");
     mysql_free_result(res);
     goto end;
   }
-
-
-/*
-
-  echo "<td id=\"myq1\">";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew qrz\">QRZ.com</button><br>";
-  echo "<button type=\"submit\" id=\"myb1\" name=\"run\" value=\"renew ru\">QRZ.ru</button>";
-  echo "</td>";
-  printf("<table>");
-
-*/
   
   end:
   mysql_close(con);
@@ -758,9 +748,9 @@ void qrz(MYSQL *con,char *call){
   send(s,buf,strlen(buf),0);
   n=recv(s,buf,10000,0);
   buf[n]='\0';
-  for(n=0;n<13;n++)strcpy(key[n],search(buf,(char *)qrzkey[n]),200);
+  for(n=0;n<13;n++)strcpy(key[n],search(buf,(char *)qrzkey[n]));
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
-  sprintf(buf,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee)
-      
+  sprintf(buf,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
+  printf("%s\n",buf);
   close(s);
 }
