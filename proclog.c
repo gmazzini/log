@@ -761,5 +761,6 @@ void qrz(MYSQL *con,char *call){
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
   sprintf(buf,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
   printf("%s\n",buf);
+  mysql_query(con,buf);
   close(s);
 }
