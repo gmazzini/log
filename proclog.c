@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <mysql/mysql.h>
+#include <curl/curl.h>
 #include "log.def"
 #define TOT3 5
 #define TOTL2 400
@@ -24,11 +25,13 @@ long min(long,long);
 int cmp3(const void *,const void *);
 char *mymode(char *);
 int adifextract(char *,int);
-void qrz(MYSQL *,char *);
+void qrzcom(MYSQL *,char *);
+void qrzru(MYSQL *,char *);
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
-char adif[20][200],adif1[20][20];
+size_t wrused;
+char adif[20][200],adif1[20][20],wrbuf[10000];
 int myband[434]={[0]=0,[1]=1600,[3]=800,[5]=600,[7]=400,[10]=300,[14]=200,[18]=170,[21]=150,[24]=120,[28]=100,[29]=100,[50]=60,[144]=20,[145]=20,[430]=7,[431]=7,[432]=7,[433]=7};
 static const uint8_t B64DEC[256] = {
   [0 ... 255] = 0,
@@ -580,7 +583,14 @@ int main(void){
   if(act==24){ // QRZ.com button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    qrz(con,tok[4]);
+    qrzcom(con,tok[4]);
+    goto end;
+  }
+
+  if(act==25){ // QRZ.ru button
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    qrzru(con,tok[4]);
     goto end;
   }
   
@@ -730,10 +740,10 @@ char *search(char *buf,char *key){
   return out;
 }
 
-void qrz(MYSQL *con,char *call){
+void qrzcom(MYSQL *con,char *call){
   struct addrinfo h={0},*r=0;
   int s,n;
-  char buf[100001],aux1[300],key[13][201],ee[40];
+  char aux1[300],key[13][201],ee[40];
   time_t now;
   struct tm *utc;
   
@@ -742,22 +752,48 @@ void qrz(MYSQL *con,char *call){
   getaddrinfo("xmldata.qrz.com","80",&h,&r);
   s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
   connect(s,r->ai_addr,r->ai_addrlen);
-  sprintf(buf,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",qrzuser,qrzpassword);
-  send(s,buf,strlen(buf),0);
-  n=recv(s,buf,10000,0);
-  buf[n]='\0';
-  strcpy(aux1,search(buf,"Key"));
+  sprintf(aux1,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",qrzuser,qrzpassword);
+  send(s,aux1,strlen(buf),0);
+  n=recv(s,wrbuf,10000,0);
+  wrbuf[n]='\0';
+  strcpy(aux1,search(wrbuf,"Key"));
   close(s);
   s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
   connect(s,r->ai_addr,r->ai_addrlen);
-  sprintf(buf,"GET /xml/current/?s=%s;callsign=%s HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",aux1,call);
-  send(s,buf,strlen(buf),0);
-  n=recv(s,buf,10000,0);
-  buf[n]='\0';
-  for(n=0;n<13;n++)strcpy(key[n],search(buf,(char *)qrzkey[n]));
+  sprintf(aux1,"GET /xml/current/?s=%s;callsign=%s HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",aux1,call);
+  send(s,aux1,strlen(buf),0);
+  n=recv(s,wrbuf,10000,0);
+  wrbuf[n]='\0';
+  for(n=0;n<13;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
-  sprintf(buf,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
-  printf("%s\n",buf);
-  mysql_query(con,buf);
+  sprintf(aux1,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
+  printf("%s\n",aux1);
+  mysql_query(con,aux1);
   close(s);
+}
+
+size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
+  size_t total=size*nmemb;
+  if(wrused+total>=sizeof(wrbuf))total=sizeof(wrbuf)-wrused-1;
+  memcpy(wrbuf+wrused,ptr,total);
+  wrused+=total;
+  wrbuf[wrused]=0;
+  return size*nmemb;
+}
+
+void qrzru(MYSQL *con,char *call){
+  CURL *h;
+  char aux1[300];
+  wrused=0
+  h=curl_easy_init();
+  if(!h)return;
+  sprintf(aux1,"https://api.qrz.ru/login?u=%s&p=%s&agent=LZH23",ruuser,rupassword);
+  curl_easy_setopt(h,CURLOPT_URL,aux1);
+  curl_easy_setopt(h,CURLOPT_FOLLOWLOCATION,1L);
+  curl_easy_setopt(h,CURLOPT_SSL_VERIFYPEER,1L);
+  curl_easy_setopt(h,CURLOPT_SSL_VERIFYHOST,2L);
+  curl_easy_setopt(h,CURLOPT_WRITEFUNCTION,write_cb);
+  curl_easy_perform(h);
+  curl_easy_cleanup(h);
+  printf("Risposta:\n%s\n", buf);
 }
