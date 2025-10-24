@@ -826,7 +826,7 @@ char *cyrlat(char *input){
 
 void qrzru(MYSQL *con,char *call){
   CURL *h;
-  char aux1[300],aux2[300],key[12][201];
+  char aux1[300],aux2[300],key[12][201],ee[40];
   int n;
   const char *qrzkey[12]={"name","surname","street","city","state","zip","country","qthloc","cq_zone","itu_zone","birthday","file"};
   
@@ -843,7 +843,6 @@ void qrzru(MYSQL *con,char *call){
   curl_easy_cleanup(h);
   strcpy(aux1,search(wrbuf,"session_id"));
   printf("%s\n",aux1);
-  printf("Risposta:\n%s\n",wrbuf);
   h=curl_easy_init();
   if(!h)return;
   sprintf(aux2,"https://api.qrz.ru/callsign?id=%s&callsign=%s",aux1,call);
@@ -857,7 +856,10 @@ void qrzru(MYSQL *con,char *call){
   for(n=0;n<12;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
   printf("<pre>");
   for(n=0;n<12;n++)printf("%s: %s\n",qrzkey[n],cyrlat(key[n]));
+  now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
+  sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%.4s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],"",atoi(key[8]),atoi(key[9]),key[10]+6,key[11],ee);
+  printf("%s\n",aux2);
+  
   printf("</pre>");
-  printf("Risposta:\n%s\n",wrbuf);
 }
 
