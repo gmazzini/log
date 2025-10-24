@@ -797,6 +797,8 @@ char *cyrlat(char *input){
   };
   int matched;
   size_t i,clen,len;
+  time_t now;
+  struct tm *utc;
   
   size_t n=sizeof(cyr)/sizeof(cyr[0]);
   output[0]='\0';
