@@ -797,8 +797,6 @@ char *cyrlat(char *input){
   };
   int matched;
   size_t i,clen,len;
-  time_t now;
-  struct tm *utc;
   
   size_t n=sizeof(cyr)/sizeof(cyr[0]);
   output[0]='\0';
@@ -831,6 +829,8 @@ void qrzru(MYSQL *con,char *call){
   char aux1[300],aux2[300],key[12][201],ee[40];
   int n;
   const char *qrzkey[12]={"name","surname","street","city","state","zip","country","qthloc","cq_zone","itu_zone","birthday","file"};
+  time_t now;
+  struct tm *utc;
   
   wrused=0;
   h=curl_easy_init();
