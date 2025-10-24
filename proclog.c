@@ -783,7 +783,7 @@ size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
 
 void qrzru(MYSQL *con,char *call){
   CURL *h;
-  char aux1[300],key[12][201];
+  char aux1[300],aux2[300],key[12][201];
   int n;
   const char *qrzkey[12]={"name","surname","street","city","state","zip","country","qthloc","cq_zone","itu_zone","birthday","file"};
   
@@ -803,8 +803,8 @@ void qrzru(MYSQL *con,char *call){
   printf("Risposta:\n%s\n",wrbuf);
   h=curl_easy_init();
   if(!h)return;
-  sprintf(aux1,"https://api.qrz.ru/callsign?id=%s&callsign=%s",aux1,call);
-  curl_easy_setopt(h,CURLOPT_URL,aux1);
+  sprintf(aux2,"https://api.qrz.ru/callsign?id=%s&callsign=%s",aux1,call);
+  curl_easy_setopt(h,CURLOPT_URL,aux2);
   curl_easy_setopt(h,CURLOPT_FOLLOWLOCATION,1L);
   curl_easy_setopt(h,CURLOPT_SSL_VERIFYPEER,1L);
   curl_easy_setopt(h,CURLOPT_SSL_VERIFYHOST,2L);
