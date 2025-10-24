@@ -743,7 +743,7 @@ char *search(char *buf,char *key){
 void qrzcom(MYSQL *con,char *call){
   struct addrinfo h={0},*r=0;
   int s,n;
-  char aux1[300],key[13][201],ee[40];
+  char aux1[300],aux2[300],key[13][201],ee[40];
   time_t now;
   struct tm *utc;
   
@@ -752,23 +752,23 @@ void qrzcom(MYSQL *con,char *call){
   getaddrinfo("xmldata.qrz.com","80",&h,&r);
   s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
   connect(s,r->ai_addr,r->ai_addrlen);
-  sprintf(aux1,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",qrzuser,qrzpassword);
-  send(s,aux1,strlen(aux1),0);
+  sprintf(aux2,"GET /xml/current/?username=%s;password=%s;agent=GM02 HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",qrzuser,qrzpassword);
+  send(s,aux2,strlen(aux2),0);
   n=recv(s,wrbuf,10000,0);
   wrbuf[n]='\0';
   strcpy(aux1,search(wrbuf,"Key"));
   close(s);
   s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
   connect(s,r->ai_addr,r->ai_addrlen);
-  sprintf(aux1,"GET /xml/current/?s=%s;callsign=%s HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",aux1,call);
-  send(s,aux1,strlen(aux1),0);
+  sprintf(aux2,"GET /xml/current/?s=%s;callsign=%s HTTP/1.0\r\nHost: xmldata.qrz.com\r\nConnection: close\r\n\r\n",aux1,call);
+  send(s,aux2,strlen(aux2),0);
   n=recv(s,wrbuf,10000,0);
   wrbuf[n]='\0';
   for(n=0;n<13;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
-  sprintf(aux1,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
-  printf("%s\n",aux1);
-  mysql_query(con,aux1);
+  sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
+  printf("%s\n",aux2);
+  mysql_query(con,aux2);
   close(s);
 }
 
