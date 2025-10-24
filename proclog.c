@@ -799,6 +799,8 @@ void qrzru(MYSQL *con,char *call){
   curl_easy_perform(h);
   curl_easy_cleanup(h);
   strcpy(aux1,search(wrbuf,"session_id"));
+  printf("%s\n",aux1);
+  printf("Risposta:\n%s\n",wrbuf);
   h=curl_easy_init();
   if(!h)return;
   sprintf(aux1,"https://api.qrz.ru/callsign?id=%s&callsign=%s",aux1,call);
@@ -810,7 +812,8 @@ void qrzru(MYSQL *con,char *call){
   curl_easy_perform(h);
   curl_easy_cleanup(h);
   for(n=0;n<12;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
+  printf("<pre>");
   for(n=0;n<12;n++)printf("%s: %s\n",qrzkey[n],key[n]);
-
+  printf("</pre>");
   printf("Risposta:\n%s\n",wrbuf);
 }
