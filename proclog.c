@@ -766,6 +766,7 @@ void qrzcom(MYSQL *con,char *call){
   wrbuf[n]='\0';
   for(n=0;n<13;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
+  for(n=0;n<13;n++)printf("%s: %s\n",qrzkey[n],key[n]);
   sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
   mysql_query(con,aux2);
   close(s);
