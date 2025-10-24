@@ -746,8 +746,8 @@ void qrzcom(MYSQL *con,char *call){
   char aux1[300],aux2[300],key[13][201],ee[40];
   time_t now;
   struct tm *utc;
-  
   const char *qrzkey[13]={"fname","name","addr1","addr2","state","zip","country","grid","email","cqzone","ituzone","born","image"};
+  
   h.ai_socktype=SOCK_STREAM;
   getaddrinfo("xmldata.qrz.com","80",&h,&r);
   s=socket(r->ai_family,r->ai_socktype,r->ai_protocol);
@@ -783,7 +783,10 @@ size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
 
 void qrzru(MYSQL *con,char *call){
   CURL *h;
-  char aux1[300];
+  char aux1[300],key[12][201];
+  int n;
+  const char *qrzkey[12]={"name","surname","street","city","state","zip","country","qthloc","cq_zone","itu_zone","birthday","file"};
+  
   wrused=0;
   h=curl_easy_init();
   if(!h)return;
@@ -795,5 +798,19 @@ void qrzru(MYSQL *con,char *call){
   curl_easy_setopt(h,CURLOPT_WRITEFUNCTION,write_cb);
   curl_easy_perform(h);
   curl_easy_cleanup(h);
+  strcpy(aux1,search(wrbuf,"session_id"));
+  h=curl_easy_init();
+  if(!h)return;
+  sprintf(aux1,"https://api.qrz.ru/callsign?id=%s&callsign=%s",aux1,call);
+  curl_easy_setopt(h,CURLOPT_URL,aux1);
+  curl_easy_setopt(h,CURLOPT_FOLLOWLOCATION,1L);
+  curl_easy_setopt(h,CURLOPT_SSL_VERIFYPEER,1L);
+  curl_easy_setopt(h,CURLOPT_SSL_VERIFYHOST,2L);
+  curl_easy_setopt(h,CURLOPT_WRITEFUNCTION,write_cb);
+  curl_easy_perform(h);
+  curl_easy_cleanup(h);
+  for(n=0;n<12;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
+  for(n=0;n<12;n++)printf("%s: %s\n",qrzkey[n],key[n]);
+
   printf("Risposta:\n%s\n",wrbuf);
 }
