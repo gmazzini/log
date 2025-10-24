@@ -855,7 +855,7 @@ void qrzru(MYSQL *con,char *call){
   curl_easy_setopt(h,CURLOPT_WRITEFUNCTION,write_cb);
   curl_easy_perform(h);
   curl_easy_cleanup(h);
-  for(n=0;n<12;n++)strcpy(key[n],cyrlat(search(wrbuf,(char *)qrzkey[n]));
+  for(n=0;n<12;n++)strcpy(key[n],cyrlat(search(wrbuf,(char *)qrzkey[n])));
   printf("<pre>");
   for(n=0;n<12;n++)printf("%s: %s\n",qrzkey[n],key[n]);
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
