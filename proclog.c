@@ -855,11 +855,11 @@ void qrzru(MYSQL *con,char *call){
   curl_easy_setopt(h,CURLOPT_WRITEFUNCTION,write_cb);
   curl_easy_perform(h);
   curl_easy_cleanup(h);
-  for(n=0;n<12;n++)strcpy(key[n],search(wrbuf,(char *)qrzkey[n]));
+  for(n=0;n<12;n++)strcpy(key[n],cyrlat(search(wrbuf,(char *)qrzkey[n]));
   printf("<pre>");
-  for(n=0;n<12;n++)printf("%s: %s\n",qrzkey[n],cyrlat(key[n]));
+  for(n=0;n<12;n++)printf("%s: %s\n",qrzkey[n],key[n]);
   now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
-  sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%.4s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],"",atoi(key[8]),atoi(key[9]),key[10]+6,key[11],ee);
+  sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],"",atoi(key[8]),atoi(key[9]),atoi(key[10]+6),key[11],ee);
   printf("%s\n",aux2);
   
   printf("</pre>");
