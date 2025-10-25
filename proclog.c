@@ -540,6 +540,7 @@ int main(void){
     sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='%s' and mycall='%s' order by start desc",tok[4],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
+    vv=0;
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
@@ -551,24 +552,30 @@ int main(void){
       if(atoi(row[8])==1){strcat(aux1,"L"); incdata3(0,1,aux3);}
       if(atoi(row[9])==1){strcat(aux1,"E"); incdata3(0,2,aux3);}
       if(atoi(row[10])==1){strcat(aux1,"Q"); incdata3(0,3,aux3);}
-      sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
-      sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
-      td=timegm(&te)-timegm(&ts);
-      if(td==0)strcpy(aux2,"(0s)");
-      else if(td<60)sprintf(aux2,"(%lds)",td);
-      else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
-      else sprintf(aux2,"(%ldh)",td/3600);
-      printf("<button type=\"button\" id=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
-      printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
-      if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
-      if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
-      printf("\n");
+      if(++vv<5){
+        sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
+        sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
+        td=timegm(&te)-timegm(&ts);
+        if(td==0)strcpy(aux2,"(0s)");
+        else if(td<60)sprintf(aux2,"(%lds)",td);
+        else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
+        else sprintf(aux2,"(%ldh)",td/3600);
+        printf("<button type=\"button\" id=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
+        printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
+        if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
+        if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
+        printf("\n");
+      }
     }
     mysql_free_result(res);
     printf("<p id=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
 
 
+
+
+
+    
     
     printf("</pre>");
     goto end;
