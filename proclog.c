@@ -536,7 +536,7 @@ int main(void){
     }
     mysql_free_result(res);
     printf("<pre>");
-    sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='%s' and mycall='%s' order by start desc limit 5",tok[4],mycall,);
+    sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='%s' and mycall='%s' order by start desc limit 5",tok[4],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
