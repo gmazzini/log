@@ -565,7 +565,7 @@ int main(void){
       printf("\n");
     }
     mysql_free_result(res);
-
+    printf("<p id=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
 
 
