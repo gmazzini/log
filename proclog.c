@@ -1,10 +1,5 @@
 // proclog.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
-#define TOT3 5
-#define TOTL2 400
-#define TOTL3 200000
-#define MAXFF 20000000L
-#define QSLWIN 240
 
 int main(void){
   int c,act,vv,gg;
