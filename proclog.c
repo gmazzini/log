@@ -517,6 +517,7 @@ int main(void){
   if(act==23){ // start button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select count(*) from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
     mysql_free_result(res);
@@ -542,10 +543,14 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
+      c=(int)(atol(row[3])/1000000.0);
+      if(c>433)continue;
+      sprintf(aux3,"%04d%s",myband[c],mymode(row[5]));
+      incdata3(0,0,aux3);
       aux1[0]='\0';
-      if(atoi(row[8])==1)strcat(aux1,"L");
-      if(atoi(row[9])==1)strcat(aux1,"E");
-      if(atoi(row[10])==1)strcat(aux1,"Q");
+      if(atoi(row[8])==1){strcat(aux1,"L"); incdata3(0,1,aux3);}
+      if(atoi(row[9])==1){strcat(aux1,"E"); incdata3(0,2,aux3);}
+      if(atoi(row[10])==1){strcat(aux1,"Q"); incdata3(0,3,aux3);}
       sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
       sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
       td=timegm(&te)-timegm(&ts);
@@ -560,6 +565,10 @@ int main(void){
       printf("\n");
     }
     mysql_free_result(res);
+
+
+
+    
     printf("</pre>");
     goto end;
   }
