@@ -6,17 +6,6 @@
 #define MAXFF 20000000L
 #define QSLWIN 240
 
-MYSQL_ROW searchcty(MYSQL *,char *);
-long incdata3(int,int,char *);
-long numdata3(int,int,char *);
-char * wpx(char *);
-long min(long,long);
-int cmp3(const void *,const void *);
-char *mymode(char *);
-int adifextract(char *,int);
-void qrzcom(MYSQL *,char *);
-void qrzru(MYSQL *,char *);
-
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
 size_t wrused;
