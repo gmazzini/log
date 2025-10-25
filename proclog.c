@@ -566,6 +566,7 @@ int main(void){
     }
     mysql_free_result(res);
 
+    for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %7ld\n",data3[0][0][l1].lab,data3[0][0][l1].num);
 
 
     
