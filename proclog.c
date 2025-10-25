@@ -517,6 +517,11 @@ int main(void){
   if(act==23){ // start button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    row=searchcty(con,tok[4]);
+    f(row!=NULL)printf("<pre>base:%s\nname:%s\ndxcc:%s\ncont:%s\ncqzone:%s\nituzone:%s\nlatitude:%s\nlongitude:%s\ngmtshift:%s\n</pre>",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]);
+
+
+    
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select count(*) from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
@@ -570,13 +575,6 @@ int main(void){
     mysql_free_result(res);
     printf("<p id=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
-
-
-
-
-
-    
-    
     printf("</pre>");
     goto end;
   }
