@@ -552,7 +552,7 @@ int main(void){
       if(atoi(row[8])==1){strcat(aux1,"L"); incdata3(0,1,aux3);}
       if(atoi(row[9])==1){strcat(aux1,"E"); incdata3(0,2,aux3);}
       if(atoi(row[10])==1){strcat(aux1,"Q"); incdata3(0,3,aux3);}
-      if(++vv<5){
+      if(++vv<=5){
         sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
         sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
         td=timegm(&te)-timegm(&ts);
