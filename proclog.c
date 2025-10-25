@@ -523,7 +523,7 @@ int main(void){
     if(c==0)qrzcom(con,tok[4]);
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    if(row[0][0]!='\0'){
+    if(row!=NULL){
       printf("<table><td><pre>");
       printf("%s %s\n",row[0],row[1]);
       printf("%s\n%s\n",row[2],row[3]);
