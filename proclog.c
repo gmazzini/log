@@ -1,16 +1,5 @@
 // proclog.c log data processing by GM @2025 V 2.0
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <mysql/mysql.h>
-#include <curl/curl.h>
-#include "log.def"
+#include "pfunc.c"
 #define TOT3 5
 #define TOTL2 400
 #define TOTL3 200000
