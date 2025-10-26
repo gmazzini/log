@@ -304,7 +304,7 @@ void qrzru(MYSQL *con,char *call){
 }
 
 double distance(double lat1,double lon1,double lat2,double lon2){
-  double a,c;
+  double a;
   lat1*=M_PI/180.0;
   lon1*=M_PI/180.0;
   lat2*=M_PI/180.0;
