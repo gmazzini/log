@@ -517,13 +517,13 @@ int main(void){
   if(act==23){ // start button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<table><td>");
     row=searchcty(con,tok[4]);
     if(row!=NULL)printf("<pre>base:%s\nname:%s\ndxcc:%s\ncont:%s\ncqzone:%s\nituzone:%s\nlatitude:%s\nlongitude:%s\ngmtshift:%s\n</pre>",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]);
-
-    
-
-
-    
+    printf("</td><td>");
+    row1=searchcty(con,mycall);
+    printf("<pre>distance:%f\nbearing:%f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),bearing(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),0);
+    printf("</td></table>");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select count(*) from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
