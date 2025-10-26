@@ -301,3 +301,25 @@ void qrzru(MYSQL *con,char *call){
     mysql_query(con,aux2);
   }
 }
+
+double distance(double lat1,double lon1,double lat2,double lon2){
+  double a,c;
+  lat1*=M_PI/180.0;
+  lon1*=M_PI/180.0;
+  lat2*=M_PI/180.0;
+  lon2*=M_PI/180.0;
+  a=pow(sin((lat1-lat2)/2),2)+cos(lat1)*cos(lat2)*pow(sin((lon1-lon2)/2),2);
+  return 6371.0*2*atan2(sqrt(a),sqrt(1-a));
+}
+
+double bearing(double lat1,double lon1,double lat2,double lon2){
+  double b,dlon;
+  lat1*=M_PI/180.0;
+  lon1*=M_PI/180.0;
+  lat2*=M_PI/180.0;
+  lon2*=M_PI/180.0;
+  dlon=lon2-lon1;
+  b=atan2(sin(dlon)*cos(lat2),cos(lat1)*sin(lat2)-sin(lat1)*cos(lat2)*cos(dlon))*180.0/M_PI;
+  if(b<0)b+=360.0;
+  return b;
+}
