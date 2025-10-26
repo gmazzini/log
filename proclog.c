@@ -523,7 +523,7 @@ int main(void){
     if(row!=NULL)printf("<pre>base:%s\nname:%s\ndxcc:%s\ncont:%s\ncqzone:%s\nituzone:%s\nlatitude:%s\nlongitude:%s\ngmtshift:%s\n</pre>",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]);
     printf("</td><td>");
     row1=searchcty(con,mycall);
-    printf("<pre>distance:%f\nbearing:%f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),bearing(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),atoi(row[8])-atoi(row1[8]));
+    printf("<pre>distance:%5.0f\nbearing:%5.0f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),bearing(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),atoi(row[8])-atoi(row1[8]));
     printf("</td><td>");
     sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux1,row[0]);
@@ -536,18 +536,8 @@ int main(void){
     lat2=((aux2[1]-'A')*10.0+(aux2[3]-'0')+(aux2[5]-'a')/24.0+1.0/48.0-90.0);
     lon1=-((aux1[0]-'A')*20.0+(aux1[2]-'0')*2.0+(aux1[4]-'a')/12.0+1.0/24.0-180.0);
     lon2=-((aux2[0]-'A')*20.0+(aux2[2]-'0')*2.0+(aux2[4]-'a')/12.0+1.0/24.0-180.0);
-    printf("distance:%f\nbearing:%f\n</pre>",distance(lat1,lon1,lat2,lon2),bearing(lat1,lon1,lat1,lon2),atoi(row[8])-atoi(row1[8]));
-
-
-    
+    printf("distance:%5.0f\nbearing:%5.0f\n</pre>",distance(lat1,lon1,lat2,lon2),bearing(lat1,lon1,lat1,lon2),atoi(row[8])-atoi(row1[8]));
     printf("</td></table>");
-
-
-
-
-
-
-    
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select count(*) from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
