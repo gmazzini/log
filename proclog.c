@@ -13,6 +13,7 @@ int main(void){
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
   FILE *fp;
+  double lat1,lat2,lon1,lon2;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
  
   data3=(struct data3 ***)malloc(TOT3*sizeof(struct data3 **)); ndata3=malloc(TOT3*sizeof(long *));
@@ -522,7 +523,7 @@ int main(void){
     if(row!=NULL)printf("<pre>base:%s\nname:%s\ndxcc:%s\ncont:%s\ncqzone:%s\nituzone:%s\nlatitude:%s\nlongitude:%s\ngmtshift:%s\n</pre>",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]);
     printf("</td><td>");
     row1=searchcty(con,mycall);
-    printf("<pre>distance:%f\nbearing:%f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),bearing(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),atoi(row[8])-atoi(row1[8]));
+    printf("<pre>distance:%f\nbearing:%f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),bearing(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),atoi(row[8])-atoi(row1[8]));
     printf("</td><td>");
     sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux1,row[0]);
@@ -530,7 +531,15 @@ int main(void){
     sprintf(buf,"select grid from who where callsign='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux2,row[0]);
     mysql_free_result(res);
-    printf("<pre>gridyou:%s\ngridme:%s\n</pre>",aux1,aux2);
+    printf("<pre>gridyou:%s\ngridme:%s\n",aux1,aux2);
+    lat1=((aux1[1]-'A')*10.0+(aux1[3]-'0')+(aux1[5]-'a')/24.0+1.0/48.0-90.0);
+    lat2=((aux2[1]-'A')*10.0+(aux2[3]-'0')+(aux2[5]-'a')/24.0+1.0/48.0-90.0);
+    lon1=-((aux1[0]-'A')*20.0+(aux1[2]-'0')*2.0+(aux1[4]-'a')/12.0+1.0/24.0-180.0);
+    lon2=-((aux2[0]-'A')*20.0+(aux2[2]-'0')*2.0+(aux2[4]-'a')/12.0+1.0/24.0-180.0);
+    printf("distance:%f\nbearing:%f\n</pre>",distance(lat1,lon1,lat2,lon2),bearing(lat1,lon1,lat1,lon2),atoi(row[8])-atoi(row1[8]));
+
+
+    
     printf("</td></table>");
 
 
