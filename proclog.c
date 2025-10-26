@@ -522,8 +522,23 @@ int main(void){
     if(row!=NULL)printf("<pre>base:%s\nname:%s\ndxcc:%s\ncont:%s\ncqzone:%s\nituzone:%s\nlatitude:%s\nlongitude:%s\ngmtshift:%s\n</pre>",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]);
     printf("</td><td>");
     row1=searchcty(con,mycall);
-    printf("<pre>distance:%f\nbearing:%f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),bearing(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),0);
+    printf("<pre>distance:%f\nbearing:%f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),bearing(atof(row[6]),atof(row1[6]),atof(row[7]),atof(row1[7])),atoi(row[8])-atoi(row1[8]));
+    printf("</td><td>");
+    sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux1,row[0]);
+    mysql_free_result(res);
+    sprintf(buf,"select grid from who where callsign='%s'",mycall);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux2,row[0]);
+    mysql_free_result(res);
+    printf("<pre>gridyou:%s\ngridme:%s\n</pre>",aux1,aux2);
     printf("</td></table>");
+
+
+
+
+
+
+    
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select count(*) from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
