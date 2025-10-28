@@ -153,6 +153,7 @@ async function radioread() {
     headers: { "Content-Type": "text/csv" },
     body: ota
   });
+  out.innerHTML = await r.text();
 }
 setInterval(radioread, 10000);
 radioread();
