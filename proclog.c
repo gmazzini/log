@@ -600,6 +600,15 @@ int main(void){
     goto end;
   }
 
+  if(act==26){ // end button
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    if(strlen(tok[4]<3 && strlen(tok[6])<2)goto end;
+    printf("insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value \
+      ('%s','%s','','','%s','%s','%s'),mycall,tok[4],tok[6],tok[7],tok[8])";
+    goto end;
+  }
+
   if(act==24){ // QRZ.com button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
