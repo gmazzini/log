@@ -54,17 +54,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script type="module">
 const out = document.getElementById("out");
-const callInput = document.getElementById("call");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
-callInput.addEventListener("keydown", e => {
-  if (e.key === ",") e.preventDefault();
+const call = document.getElementById("call");
+const freq = document.getElementById("freq");
+const mode = document.getElementById("mode");
+const sigtx = document.getElementById("sigtx");
+const sigrx = document.getElementById("sigrx");
+const contest = document.getElementById("contest");
+const contx = document.getElementById("contx");
+const conrx = document.getElementById("conrx");
+
+const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
+inputs.forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener("keydown", e => {
+    if (e.key === ",") e.preventDefault();
+  });
+  el.addEventListener("input", () => {
+    el.value = el.value.replace(/,/g, "");
+  });
 });
-callInput.addEventListener("input", e => {
-  if (callInput.value.includes(",")) {
-    callInput.value = callInput.value.replace(/,/g, "");
-  }
-});
+
 let page = 0;
 let mypage = 30;
 let ota = "";
