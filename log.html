@@ -61,7 +61,6 @@ const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
 const b01 = document.getElementById("b01");
-const c01 = document.getElementById("c01");
 let s01 = false;
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
@@ -170,10 +169,17 @@ radioread();
 
 b01.addEventListener("click", () => {
   s01 = !s01;
-  c01.textContent = s01 ? "On" : "Off";
+  if (s01) {
+    document.getElementById("freq").disabled = false;
+    document.getElementById("c01") = "Off";
+  } 
+  else {
+    document.getElementById("freq").disabled = true;
+    document.getElementById("c01") = "Off";
+  } 
 });
   
-c01.textContent = s01 ? "On" : "Off";
+document.getElementById("c01") = "Off";
 hh2.style.display = "none";
 hh1.style.display = "block";
   
