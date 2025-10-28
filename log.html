@@ -154,7 +154,7 @@ async function radioread() {
     body: ota
   });
   const text = await r.text();
-  const [freq, mode] = text.split(":");
+  const [freq, mode] = text.split(",");
   document.getElementById("freq").value = freq;
   document.getElementById("mode").value = mode;
 }
