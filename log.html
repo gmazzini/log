@@ -60,6 +60,9 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
+const b01 = document.getElementById("b01");
+const c01 = document.getElementById("c01");
+let s01 = false;
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
   const el = document.getElementById(id);
@@ -164,6 +167,11 @@ async function radioread() {
 setInterval(radioread, 10000);
 radioread();
 
+b01.addEventListener("click", () => {
+  s01 = !s01;
+  c01.textContent = s01 ? "On" : "Off";
+});
+  
 hh2.style.display = "none";
 hh1.style.display = "block";
   
