@@ -115,7 +115,7 @@ int main(void){
       else if(td<60)sprintf(aux2,"(%lds)",td);
       else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
       else sprintf(aux2,"(%ldh)",td/3600);
-      printf("<button type=\"button\" id=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
+      printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
       printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
       if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
@@ -182,14 +182,14 @@ int main(void){
       if(atoi(row[5])==1)incdata3(0,7,aux1);
     }
     mysql_free_result(res);
-    printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+    printf("<p class=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(c=0;c<4;c++)for(suml[c]=0,l1=0;l1<ndata3[0][c];l1++)suml[c]+=data3[0][c][l1].num;
-    printf("<p id=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOTL2-1],ndata3[3][TOTL2-1],suml[1],suml[2],suml[3]);
+    printf("<p class=\"myh2\">%6s %7ld %8ld %8ld %8ld %8ld %8ld</p>","Tot",suml[0],ndata3[1][TOTL2-1],ndata3[3][TOTL2-1],suml[1],suml[2],suml[3]);
     for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,ndata3[1][data3[0][0][l1].idx],ndata3[2][data3[0][0][l1].idx],numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
     printf("\n");
     qsort(data3[0][4],ndata3[0][4],sizeof(struct data3),cmp3);
-    printf("<p id=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
-    printf("<p id=\"myh2\">%6s %7ld %8s %8s %8ld %8ld %8ld</p>","Tot",ndata3[0][4],"","",ndata3[0][5],ndata3[0][6],ndata3[0][7]);
+    printf("<p class=\"myh1\">%6s %7s %8s %8s %8s %8s %8s %s</p>","dxcc","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ","Country");
+    printf("<p class=\"myh2\">%6s %7ld %8s %8s %8ld %8ld %8ld</p>","Tot",ndata3[0][4],"","",ndata3[0][5],ndata3[0][6],ndata3[0][7]);
     for(l1=0;l1<ndata3[0][4];l1++){
       printf("%6s %7ld %8ld %8ld %8ld %8ld %8ld",data3[0][4][l1].lab,data3[0][4][l1].num,ndata3[2][data3[0][4][l1].idx],ndata3[4][data3[0][4][l1].idx],numdata3(0,5,data3[0][4][l1].lab),numdata3(0,6,data3[0][4][l1].lab),numdata3(0,7,data3[0][4][l1].lab));
       sprintf(buf,"select name from cty where dxcc='%d' limit 1",atoi(data3[0][4][l1].lab));
@@ -296,7 +296,7 @@ int main(void){
     suml[0]=4; suml[1]=7; suml[2]=10;
     strcpy(aux1,"YYYY-MM-DD");
     for(c=0;c<3;c++){
-      printf("<p id=\"myh1\">%10.*s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>",(int)suml[c],aux1,"QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+      printf("<p class=\"myh1\">%10.*s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s</p>",(int)suml[c],aux1,"QSO","QSO.cw","QSO.dg","QSO.ph","QSO.uniq","QSO.wpx","DXCC","QSL.LOTW","QSL.EQSL","QSL.QRZ");
       for(l1=ndata3[0][0]-1;l1>0;l1--){
         if(strlen(data3[0][0][l1].lab)==suml[c]){
           printf("%10s %8ld %8ld %8ld %8ld",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,4,data3[0][0][l1].lab),numdata3(0,5,data3[0][0][l1].lab),numdata3(0,6,data3[0][0][l1].lab));
@@ -592,7 +592,7 @@ int main(void){
         else if(td<60)sprintf(aux2,"(%lds)",td);
         else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
         else sprintf(aux2,"(%ldh)",td/3600);
-        printf("<button type=\"button\" id=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
+        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
         printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
         if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
         if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
@@ -600,7 +600,7 @@ int main(void){
       }
     }
     mysql_free_result(res);
-    printf("<p id=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
+    printf("<p class=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
     printf("</pre>");
     goto end;
