@@ -152,6 +152,7 @@ window.cmd1 = async (a,b) => {
 };
 
 async function radioread() {
+  if (!s01) return;
   const r = await fetch("pradioread.cgi", {
     method: "POST",
     cache: "no-store",
