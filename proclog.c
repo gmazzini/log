@@ -603,9 +603,10 @@ int main(void){
   if(act==26){ // end button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    if(strlen(tok[4])<3 && strlen(tok[6])<2)goto end;
+    l1=(long)(atof(tok[5])*1000);
+    if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2)goto end;
     printf("insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value \
-      ('%s','%s','','','%s','%s','%s')",mycall,tok[4],tok[6],tok[7],tok[8]);
+      ('%s','%s','','','%s',%ld,%ld,'%s','%s')",mycall,tok[4],tok[6],l1,l1,tok[7],tok[8]);
     goto end;
   }
 
