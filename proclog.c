@@ -620,10 +620,11 @@ int main(void){
     if(tok[11][0]=='-')tok[11][0]='\0';
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
-    printf("insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value \
-      ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,tok[4],aux3,aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9]);
+    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,tok[4],aux3,aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9]);
+    mysql_query(con,buf);
     sprintf(aux2,"update user set p1='' where ota='%s'",tok[0]);
     mysql_query(con,aux2);
+    printf("%s inserted\n",tok[4]);
     goto end;
   }
 
