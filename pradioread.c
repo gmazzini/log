@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
-int main(void,void) {
+int main(void) {
   int fd,r,i;
   struct addrinfo *res;
   char h,out[100],*p;
