@@ -103,10 +103,18 @@ document.querySelectorAll("button[id]").forEach(btn => {
         }
       }
       if (page < 0) page = 0;
+      const body = [
+        ota,
+        btn.id,
+        page,
+        mypage,
+        ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
+        data
+      ].join(",");
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
-        body: [ota,btn.id,page,mypage,callInput.value.trim().toUpperCase()||"-",data].join(",")
+        body
       });
       if (num == 5) {
         page = parseInt(await r.text(), 10) || 0;
