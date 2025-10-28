@@ -604,9 +604,9 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     l1=(long)(atof(tok[5])*1000);
-    if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2)goto end;
+    if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
     printf("insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value \
-      ('%s','%s','','','%s',%ld,%ld,'%s','%s')",mycall,tok[4],tok[6],l1,l1,tok[7],tok[8]);
+      ('%s','%s','','','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,tok[4],tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9]);
     goto end;
   }
 
