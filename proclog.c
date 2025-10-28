@@ -518,6 +518,12 @@ int main(void){
   if(act==23){ // start button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    l1=(long)(atof(tok[5])*1000);
+    if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
+    tm_now=gmtime(&epoch); ts=*tm_now; timegm(&ts);
+    strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
+    sprintf(aux2,"update user set p1='%s' where ota='%s'",aux1,tok[0]);
+    mysql_query(con,aux2);
     printf("<table><td>");
     row=searchcty(con,tok[4]);
     vv=atoi(row[2]);
