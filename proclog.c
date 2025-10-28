@@ -611,13 +611,17 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     l1=(long)(atof(tok[5])*1000);
     if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
+    sprintf(buf,"select p1 from user where ota='%s'",tok[0]);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux3,row[0]);
+    mysql_free_result(res);
+    if(aux3[0]=='\0')goto end;
     if(tok[9][0]=='-')tok[9][0]='\0';
     if(tok[10][0]=='-')tok[10][0]='\0';
     if(tok[11][0]=='-')tok[11][0]='\0';
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
     printf("insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value \
-      ('%s','%s','','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,tok[4],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9]);
+      ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,tok[4],aux3,aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9]);
     goto end;
   }
 
