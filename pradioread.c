@@ -9,6 +9,7 @@ int main(void) {
   int fd,r,i;
   struct addrinfo *res;
   char h,out[100],*p;
+  printf("Content-Type: text/plain\r\n\r\n");
   getaddrinfo("188.209.85.92","6789",&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res);
   fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
   r=connect(fd,res->ai_addr,res->ai_addrlen);
