@@ -5,11 +5,11 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
-int main(int c, char **v) {
+int main(void,void) {
   int fd,r,i;
   struct addrinfo *res;
   char h,out[100],*p;
-  getaddrinfo(v[1], v[2], &(struct addrinfo){.ai_socktype=SOCK_STREAM}, &res);
+  getaddrinfo("188.209.85.92","6789",&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res);
   fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
   r=connect(fd,res->ai_addr,res->ai_addrlen);
   if(r==-1){printf("0,ND\n"); close(fd); return 0;}
