@@ -162,10 +162,11 @@ async function radioread() {
   });
   const text = await r.text();
   const [freq, mode] = text.split(",");
-  
-  document.getElementById("freq").value = (freq / 1000).toFixed(1);
+
+  const fff = (freq / 1000).toFixed(1);
+  document.getElementById("freq").value = fff;
   document.getElementById("mode").value = mode;
-  document.getElementById("c02").textContent = "ciao";
+  document.getElementById("c02").textContent = fff + " " + mode;
 }
 setInterval(radioread, 10000);
 radioread();
