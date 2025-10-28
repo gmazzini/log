@@ -39,7 +39,6 @@
       <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button>
     </td>
     <td class="myq1">
-      <span id="c02"></span><br>
       <button class="btn" id="b01">RigOO</button><span id="c01"></span>
     </td>
     <td class="myq1">
@@ -166,7 +165,6 @@ async function radioread() {
   const fff = (freq / 1000).toFixed(1);
   document.getElementById("freq").value = fff;
   document.getElementById("mode").value = mode;
-  document.getElementById("c02").textContent = fff + " " + mode;
 }
 setInterval(radioread, 10000);
 radioread();
