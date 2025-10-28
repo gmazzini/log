@@ -73,7 +73,7 @@ inputs.forEach(id => {
     if (e.key === ",") e.preventDefault();
   });
   el.addEventListener("input", () => {
-    el.value = el.value.replace(/,/g, "");
+    el.value = el.value.replace(/,/g, "").toUpperCase();
   });
 });
 
