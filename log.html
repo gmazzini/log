@@ -153,7 +153,10 @@ async function radioread() {
     headers: { "Content-Type": "text/csv" },
     body: ota
   });
-  out.innerHTML = await r.text();
+  const text = await r.text();
+  const [freq, mode] = text.split(":");
+  document.getElementById("freq").value = freq;
+  document.getElementById("mode").value = mode;
 }
 setInterval(radioread, 10000);
 radioread();
