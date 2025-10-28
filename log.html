@@ -144,7 +144,19 @@ window.cmd1 = async (a,b) => {
     });
   }
 };
-  
+
+async function radioread() {
+  const r = await fetch("preadradio.cgi", {
+    method: "POST",
+    cache: "no-store",
+    credentials: "same-origin",
+    headers: { "Content-Type": "text/csv" },
+    body: ota
+  });
+}
+setInterval(radioread, 10000);
+radioread();
+
 hh2.style.display = "none";
 hh1.style.display = "block";
   
