@@ -186,12 +186,30 @@ b01.addEventListener("click", () => {
   } 
 });
 
-let b02f;
+let b02f, b02m, b04f, b04m, b06f, b06m;
 b02.addEventListener("click", () => {
   b02f = document.getElementById("freq").value;
+  b02m = document.getElementById("mode").value;
 });
 b03.addEventListener("click", () => {
   document.getElementById("freq").value = b02f;
+  document.getElementById("mode").value = b02m;
+});
+b04.addEventListener("click", () => {
+  b04f = document.getElementById("freq").value;
+  b04m = document.getElementById("mode").value;
+});
+b05.addEventListener("click", () => {
+  document.getElementById("freq").value = b04f;
+  document.getElementById("mode").value = b04m;
+});
+b06.addEventListener("click", () => {
+  b06f = document.getElementById("freq").value;
+  b06m = document.getElementById("mode").value;
+});
+b07.addEventListener("click", () => {
+  document.getElementById("freq").value = b06f;
+  document.getElementById("mode").value = b06m;
 });
   
 document.getElementById("c01").textContent = "Off";
