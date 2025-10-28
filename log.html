@@ -165,9 +165,7 @@ async function radioread() {
   const [freq, mode] = text.split(",");
   
   document.getElementById("freq").value = (freq / 1000).toFixed(1);
-  document.getElementById("c02").textContent = (freq / 1000).toFixed(1);
   document.getElementById("mode").value = mode;
-  document.getElementById("c03").textContent = mode;
 }
 setInterval(radioread, 10000);
 radioread();
