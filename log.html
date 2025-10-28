@@ -170,13 +170,13 @@ radioread();
 b01.addEventListener("click", () => {
   s01 = !s01;
   if (s01) {
-    document.getElementById("freq").disabled = false;
-    document.getElementById("mode").disabled = false;
+    document.getElementById("freq").disabled = true;
+    document.getElementById("mode").disabled = true;
     document.getElementById("c01").textContent = "On";
   } 
   else {
-    document.getElementById("freq").disabled = true;
-    document.getElementById("mode").disabled = true;
+    document.getElementById("freq").disabled = false;
+    document.getElementById("mode").disabled = false;
     document.getElementById("c01").textContent = "Off";
   } 
 });
