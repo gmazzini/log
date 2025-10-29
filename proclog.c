@@ -530,6 +530,7 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
         sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0);
         mysql_query(con,buf);
+        l1++;
       }
       pp=strtok_r(NULL,"\n",&save1);
     }
