@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <mysql/mysql.h>
+#include "log.def"
 
 static pid_t child_pid=-1;
 static volatile sig_atomic_t timedout=0;
