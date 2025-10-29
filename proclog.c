@@ -645,6 +645,7 @@ int main(void){
   if(act==27){ // contest list button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
     sprintf(buf,"select contest,min(start),max(start),count(callsign) from log where mycall='%s' and contest<>'' group by contest order by max(start) desc",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
@@ -654,6 +655,7 @@ int main(void){
       printf("<button type=\"button\" class=\"myb2\">%20s</button>: [%4d] %s -> %s\n",row[0],atoi(row[3]),row[1],row[2]);
     }
     mysql_free_result(res);
+    printf("</pre>");
     goto end;
   }
   
