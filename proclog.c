@@ -641,6 +641,12 @@ int main(void){
     qrzru(con,tok[4]);
     goto end;
   }
+
+  if(act==26){ // contest list button
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    goto end;
+  }
   
   end:
   mysql_close(con);
