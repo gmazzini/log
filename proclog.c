@@ -513,7 +513,7 @@ int main(void){
     pp=strtok_r(ff,"\n",&save1);
     for(;;){
       if(pp==NULL)break;
-      if(strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)-1]='\0';}
+      if(strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0';}
       if(strncmp(pp,"QSO:",4)==0){
         qq=strtok_r(pp," \t",&save2);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux1,qq);
