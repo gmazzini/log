@@ -192,7 +192,7 @@ b02.addEventListener("click", () => {
   b02m = document.getElementById("mode").value;
 });
 b03.addEventListener("click", () => {
-  if (typeof b02f !== "undefined" && typeof b02m !== "undefined") {
+  if (s01 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
     document.getElementById("freq").value = b02f;
     document.getElementById("mode").value = b02m;
   }
