@@ -506,7 +506,7 @@ int main(void){
     goto end;
   }
   
-  if(act==22){ // cbr to contest button
+  if(act==22){ // cbr button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -515,8 +515,23 @@ int main(void){
       if(pp==NULL)break;
       if(strncmp(pp,"QSO:",4)==0){
         qq=strtok_r(pp," \t",&save2);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux1,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux2,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux3,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux4,qq);
         qq=strtok_r(NULL," \t",&save2);
-        printf("%s\n",qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux5,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux6,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
+        sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest)\ 
+          value ('%s','%s','%s %s','%s %s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux3,aux4,aux2,\
+          atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,"");
+
+        
+        
+        printf("%s\n",buf);
       }
       pp=strtok_r(NULL,"\n",&save1);
     }
