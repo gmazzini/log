@@ -645,7 +645,15 @@ int main(void){
   if(act==27){ // contest list button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    printf("ciao\n");
+    sprintf(buf,"select contest,min(start),max(start),count(callsign) from log where mycall='%s' and contest<>'' group by contest order by max(start) desc",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      
+    }
+    mysql_free_result(res);
     goto end;
   }
   
