@@ -191,9 +191,11 @@ b08.addEventListener("click", () => {
   s08 = !s08;
   if (s08) {
     document.getElementById("c08").textContent = "On";
+    document.getElementById("contest").disabled = true;
   } 
   else {
     document.getElementById("c08").textContent = "Off";
+    document.getElementById("contest").disabled = false;
   } 
 });
 
