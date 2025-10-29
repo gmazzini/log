@@ -642,7 +642,7 @@ int main(void){
     goto end;
   }
 
-  if(act==26){ // contest list button
+  if(act==27){ // contest list button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("ciao\n");
