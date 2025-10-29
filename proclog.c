@@ -511,9 +511,11 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     pp=strtok_r(ff,"\n",&save1);
+    l1=0;
+    gg=1;
     for(;;){
       if(pp==NULL)break;
-      if(strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0';}
+      if(gg && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; gg=0;}
       if(strncmp(pp,"QSO:",4)==0){
         qq=strtok_r(pp," \t",&save2);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux1,qq);
@@ -527,13 +529,12 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
         sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0);
-
-        
-        
+        mysql_query(con,buf);
         printf("%s\n",buf);
       }
       pp=strtok_r(NULL,"\n",&save1);
     }
+    printf("Inserted %ld QSO\n",l1);
     printf("</pre>");
     goto end;
   }
