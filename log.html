@@ -191,11 +191,15 @@ b08.addEventListener("click", () => {
   s08 = !s08;
   if (s08) {
     document.getElementById("c08").textContent = "On";
-    document.getElementById("contest").disabled = true;
+    document.getElementById("contest").disabled = false;
+    document.getElementById("contx").disabled = false;
+    document.getElementById("conrx").disabled = false;
   } 
   else {
     document.getElementById("c08").textContent = "Off";
-    document.getElementById("contest").disabled = false;
+    document.getElementById("contest").disabled = true;
+    document.getElementById("contx").disabled = true;
+    document.getElementById("conrx").disabled = true;
   } 
 });
 
