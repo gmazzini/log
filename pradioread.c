@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <mysql/mysql.h>
 
 static pid_t child_pid=-1;
 static volatile sig_atomic_t timedout=0;
@@ -18,11 +19,15 @@ static void on_alarm(int sig){
 int main(void){
   int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256]tok[1][100];
+  char h,out[100],*p,buf[256]tok[1][100],ip[15],port[9];
   size_t len;
+  time_t epoch;
   struct sigaction sa;
   ssize_t n;
-  
+  MYSQL *con;
+  MYSQL_RES *res;
+  MYSQL_ROW row;
+
   if(pipe(fds)==-1){
     printf("Content-Type: text/plain\r\n\r\n0,ND\n");
     return 0;
@@ -39,11 +44,17 @@ int main(void){
       if(vv<1)tok[vv][gg++]=(char)c;
      }
     tok[vv][gg]='\0';
-
-    if(getaddrinfo("188.209.85.92","6789",&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){
-      write(1,"0,ND\n",5);
-      _exit(0);
-    }
+    con=mysql_init(NULL);
+    if(con==NULL){write(1,"0,ND\n",5); _exit(0);}
+    if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); write(1,"0,ND\n",5); _exit(0);}
+    epoch=time(NULL);
+    sprintf(buf,"select rigctld_ip,rigctld_poert from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+    if(row==NULL){mysql_close(con); write(1,"0,ND\n",5); _exit(0);}
+    strcpy(ip,row[0]); strcpy(port,row[1]);
+    mysql_free_result(res);
+    mysql_close(con);
+    if(getaddrinfo(ip,port,&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){write(1,"0,ND\n",5); _exit(0);}
     fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
     if(fd<0){write(1,"0,ND\n",5); freeaddrinfo(res); _exit(0);}
     r=connect(fd,res->ai_addr,res->ai_addrlen);
