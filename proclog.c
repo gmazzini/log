@@ -3,7 +3,7 @@
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],tok[12][100],mycall[16],*ff,*pp,*qq;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -510,7 +510,16 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("To be done\n");
+    pp=strtok_r(ff,"\n",&save1);
+    for(;;){
+      if(pp==NULL)break;
+      if(strncmp(pp,"QSO:",4)==0){
+        qq=strtok_r(pp," \t",&save2);
+        qq=strtok_r(NULL," \t",&save2);
+        printf("%s\n",qq);
+      }
+      pp=strtok_r(NULL,"\n",&save1);
+    }
     printf("</pre>");
     goto end;
   }
