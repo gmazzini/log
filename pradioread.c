@@ -20,7 +20,7 @@ static void on_alarm(int sig){
 int main(void){
   int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256],tok[1][100],ip[15],port[9];
+  char h,out[100],*p,buf[256],tok[1][100],ip[20],port[10];
   size_t len;
   time_t epoch;
   struct sigaction sa;
@@ -49,7 +49,7 @@ int main(void){
     if(con==NULL){write(1,"0,ND\n",5); _exit(0);}
     if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); write(1,"0,ND\n",5); _exit(0);}
     epoch=time(NULL);
-    sprintf(buf,"select rigctld_ip,rigctld_poert from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
+    sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
     mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
     if(row==NULL){mysql_close(con); write(1,"0,ND\n",5); _exit(0);}
     strcpy(ip,row[0]); strcpy(port,row[1]);
