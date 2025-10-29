@@ -3,7 +3,7 @@
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -513,6 +513,7 @@ int main(void){
     pp=strtok_r(ff,"\n",&save1);
     for(;;){
       if(pp==NULL)break;
+      if(strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)-1]='\0';}
       if(strncmp(pp,"QSO:",4)==0){
         qq=strtok_r(pp," \t",&save2);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux1,qq);
@@ -525,9 +526,7 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
-        sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest)\
-          value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,\
-          atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,"");
+        sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0);
 
         
         
