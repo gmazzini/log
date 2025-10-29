@@ -525,8 +525,8 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
-        sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest)\ 
-          value ('%s','%s','%s %s','%s %s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux3,aux4,aux2,\
+        sprintf(buf,"replace into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest)\
+          value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,\
           atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,"");
 
         
