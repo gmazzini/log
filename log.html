@@ -36,7 +36,8 @@
       <button class="btn" id="a01">List</button><button class="btn" id="a02">&#8679;</button><button class="btn" id="a03">&#8681;</button><button class="btn" id="a04">R</button><button class="btn" id="a05">G</button><br>
       <button class="btn" id="a06">Find</button><button class="btn" id="a07">&#8679;</button><button class="btn" id="a08">&#8681;</button><br>
       <button class="btn" id="a09">Apply</button><button class="btn" id="a10">Report</button><br>
-      <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button>
+      <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button><br>
+      <button class="btn" id="b08">RigOO</button><span id="c08"></span><br>
     </td>
     <td class="myq1">
       <button class="btn" id="b01">RigOO</button><span id="c01"></span><br>
@@ -64,7 +65,8 @@ const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
 const b01 = document.getElementById("b01");
-let s01 = false;
+const b08 = document.getElementById("b08");
+let s01 = false, s08 = false;
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
   const el = document.getElementById(id);
@@ -185,6 +187,15 @@ b01.addEventListener("click", () => {
     document.getElementById("c01").textContent = "Off";
   } 
 });
+b08.addEventListener("click", () => {
+  s08 = !s08;
+  if (s01) {
+    document.getElementById("c08").textContent = "On";
+  } 
+  else {
+    document.getElementById("c08").textContent = "Off";
+  } 
+});
 
 let b02f, b02m, b04f, b04m, b06f, b06m;
 b02.addEventListener("click", () => {
@@ -219,6 +230,7 @@ b07.addEventListener("click", () => {
 });
   
 document.getElementById("c01").textContent = "Off";
+document.getElementById("c08").textContent = "Off";
 hh2.style.display = "none";
 hh1.style.display = "block";
 document.getElementById("sigtx").value = "59";
