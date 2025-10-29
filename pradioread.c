@@ -19,7 +19,7 @@ static void on_alarm(int sig){
 int main(void){
   int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256]tok[1][100],ip[15],port[9];
+  char h,out[100],*p,buf[256],tok[1][100],ip[15],port[9];
   size_t len;
   time_t epoch;
   struct sigaction sa;
