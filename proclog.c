@@ -710,7 +710,7 @@ int main(void){
       c=(int)(atol(row[1])/1000000.0);
       vv=atoi(row[2]);
       sprintf(aux1,"%s:%d",row[0],c);
-      sprintf(aux1,"%d:%d",vv,c);
+      sprintf(aux2,"%d:%d",vv,c);
       gg=248;
 
       
