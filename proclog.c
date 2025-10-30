@@ -685,6 +685,15 @@ int main(void){
     printf("</pre>");
     goto end;
   }
+
+  if(act==31){ // contest score button
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("<pre>");
+    printf("To be done\n");
+    printf("</pre>");
+    goto end;
+  }
   
   end:
   mysql_close(con);
