@@ -702,11 +702,15 @@ int main(void){
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
       sprintf(aux1,"%s:%d",row[0],myband[c]);
-      incdata3(0,0,aux1,1,0);
+      if(row1[3]!=row2[3])incdata3(0,0,aux1,3,0);
+      else if(row2[3]=="NA" && row1[3]=="NA" && row2[0]!=row1[0])incdata3(0,0,aux1,2,0);
+      else if(row2[3]==row1[3] && row2[0]!=row1[0])incdata3(0,0,aux1,1,0);
+      else incdata3(0,0,aux1,0,0);
+
       
     }
     for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l1].num;
-    printf("%ld",ndata3[0][0]);
+    printf("%ld",l1);
     
     mysql_free_result(res);
     printf("</pre>");
