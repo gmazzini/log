@@ -691,14 +691,17 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
+    row1=searchcty(con,mycall);
     sprintf(buf,"select callsign,freqtx from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      
-      sprintf(aux1,"%s:%s",row[0],row[1]);
+      row2=searchcty(con,row[0]);
+      c=(int)(atol(row[1])/1000000.0);
+      if(c>433)continue;
+      sprintf(aux1,"%s:%d",row[0],myband[c]);
       incdata3(0,0,aux1,1,0);
       
     }
