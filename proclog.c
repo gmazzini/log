@@ -12,7 +12,7 @@ int main(void){
   long lastserial,l1,l2,l3,idx,suml[10],lff;
   MYSQL *con;
   MYSQL_RES *res;
-  MYSQL_ROW row,row1,row2;
+  MYSQL_ROW row,row1;
   FILE *fp;
   double lat1,lat2,lon1,lon2;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
@@ -713,7 +713,7 @@ int main(void){
       vv=atoi(row[2]);
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
       else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
-      else if((strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
+      else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
       else incdata3(0,0,aux1,0,0);
 
       
