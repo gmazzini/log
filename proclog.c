@@ -717,7 +717,7 @@ int main(void){
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
       else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
       else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
-      else incdata3(0,0,aux1,0,0);
+      else {incdata3(0,0,aux1,0,0); printf("--%s %s\n",row[0],row[1]);}
       incdata3(0,1,aux2,1,0);
 
 printf("%s %s %d %d %s %s\n",aux1,aux2,gg,vv,cont[gg],cont[vv]);
