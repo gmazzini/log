@@ -713,9 +713,10 @@ int main(void){
       if(row==NULL)break;
       c=(int)(atol(row[1])/1000000.0);
       vv=atoi(row[2]);
-      sprintf(aux1,"%s:%d",row[0],c);
-      sprintf(aux2,"%d:%d",vv,c);
-      sprintf(aux3,"%d:%d",cqz[vv],c);
+      sprintf(aux1,"%d:%s",c,row[0]);
+      sprintf(aux2,"%d:%d",c,vv);
+      sprintf(aux3,"%d:%d",c,cqz[vv]);
+      sprintf(aux4,"%d",c);
       gg=248;
       
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
@@ -723,7 +724,11 @@ int main(void){
       else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
       else incdata3(0,0,aux1,0,0);
       incdata3(0,1,aux2,1,0);
-      incdata3(0,2,aux3,1,0); 
+      incdata3(0,2,aux3,1,0);
+      incdata3(0,3,aux4,1,0);
+    }
+    for(c=0;c<ndata3[0][3];c++){
+      printf("%s\n",data3[0][3].lab);
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
     printf("Points:%ld Cty:%ld Zone:%ld Total:%ld\n",l1,ndata3[0][1],ndata3[0][2],l1*(ndata3[0][1]+ndata3[0][2]));
