@@ -691,6 +691,9 @@ int main(void){
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    const char conid[]={"CQWWSSB","CQWWCW"};
+    for(contype=0;contype<2;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))=0)break;
+    if(contype==2)goto end;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
     sprintf(buf,"select dxcc,cont,cqzone,ituzone from cty");
@@ -709,13 +712,12 @@ int main(void){
     mysql_query(con,buf);
     res=mysql_store_result(con);
     gg=248;
-    contype=1;
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       c=myband[(int)(atol(row[1])/1000000.0)]/10;
       vv=atoi(row[2]);
-      if(contype==1){
+      if(contype==0||contype==1){
         sprintf(aux1,"%03d:%s",c,row[0]);
         sprintf(aux2,"%03d:%d",c,vv);
         sprintf(aux3,"%03d:Z%d",c,cqz[vv]);
