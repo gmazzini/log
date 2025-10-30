@@ -692,7 +692,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     const char *conid[]={"CQWWSSB","CQWWCW"};
-    for(contype=0;contype<2;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))=0)break;
+    for(contype=0;contype<2;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
     if(contype==2)goto end;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
