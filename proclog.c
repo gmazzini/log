@@ -702,6 +702,7 @@ int main(void){
       c=atoi(row[0]);
       strncpy(cont[c],row[1],2);
       cqz[c]=atoi(row[2]);
+      printf("%d %d\n",c,cqz[c]);
       ituz[c]=atoi(row[3]);
     }
     mysql_free_result(res);
