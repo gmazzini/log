@@ -690,7 +690,19 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("To be done\n");
+
+    sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+
+
+
+      
+    }
+    mysql_free_result(res);
     printf("</pre>");
     goto end;
   }
