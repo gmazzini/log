@@ -733,7 +733,7 @@ int main(void){
       else if(contype==2||contype==3){
         sprintf(aux1,"%03d:%s",c,row[0]);
         sprintf(aux2,"%03d:%s",c,wpx(row[0]));
-        sprintf(aux3,"ALL:%s",c,wpx(row[0]));
+        sprintf(aux3,"ALL:%s",wpx(row[0]));
         sprintf(aux4,"%03d",c);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,0,aux1,3,0); else incdata3(0,0,aux1,6,0);}
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,0,aux1,2,0); else incdata3(0,0,aux1,4,0);}
@@ -751,7 +751,7 @@ int main(void){
       printf("%3s %8ld %4ld\n",data3[0][3][c].lab,l1,l2);
     }
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
-  //  for(l2=0,idx=0;idx<ndata3[0][2];idx++)l2+=data3[0][2][idx].num;
+    for(l2=0,idx=0;idx<ndata3[0][2];idx++)l2+=data3[0][2][idx].num;
     printf("ALL %8ld %4ld\n",l1,l2);
     printf("Score %9ld\n",l1*l2);
     mysql_free_result(res);
