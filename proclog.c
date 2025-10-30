@@ -679,7 +679,7 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      printf("<button type=\"button\" class=\"myb2\">%20s</button>: [%4d] %s -> %s\n",row[0],atoi(row[3]),row[1],row[2]);
+      printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd2('%s')\">%20s</button>: [%4d] %s -> %s\n",row[0],row[0],atoi(row[3]),row[1],row[2]);
     }
     mysql_free_result(res);
     printf("</pre>");
