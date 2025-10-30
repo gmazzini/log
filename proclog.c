@@ -641,7 +641,7 @@ int main(void){
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW"};
+    const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI"};
     for(contype=0;contype<4;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
     if(contype==4)goto end;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
@@ -658,7 +658,7 @@ int main(void){
       ituz[c]=atoi(row[3]);
     }
     mysql_free_result(res);
-    sprintf(buf,"select callsign,freqtx,dxcc from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+    sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     gg=248;
@@ -691,6 +691,22 @@ int main(void){
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,1,aux1,2,0); else incdata3(0,1,aux1,4,0);}
         else if(gg!=vv){if(c<=20)incdata3(0,1,aux1,1,0); else incdata3(0,1,aux1,2,0);}
         else incdata3(0,1,aux1,1,0);
+        incdata3(0,2,aux2,1,0);
+        incdata3(0,3,aux3,1,0);
+        incdata3(0,4,aux4,1,0);
+      }
+      else if(contype==4){
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        lat1=((row[3][1]-'A')*10.0+(row[3][3]-'0')+1.0/48.0-90.0);
+        lon1=-((row[3][0]-'A')*20.0+(row[3][2]-'0')*2.0+1.0/24.0-180.0);
+        lat2=((row[4][1]-'A')*10.0+(row[4][3]-'0')+1.0/48.0-90.0);
+        lon2=-((row[4][0]-'A')*20.0+(row[4][2]-'0')*2.0+1.0/24.0-180.0);
+        gg=1+distance(lat1,lon1,lat2,lon2)/3000;
+        sprintf(aux2,"%03d:%.2s",c,row[4]);
+        sprintf(aux3,"ALL:%.2s",row[4]);
+        sprintf(aux4,"%03d",c);
+        incdata3(0,0,aux1,1,0);
+        incdata3(0,1,aux1,gg,0);
         incdata3(0,2,aux2,1,0);
         incdata3(0,3,aux3,1,0);
         incdata3(0,4,aux4,1,0);
