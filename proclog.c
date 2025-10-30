@@ -709,7 +709,7 @@ int main(void){
 
       
     }
-    for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l1].num;
+    for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l2].num;
     printf("%ld",l1);
     
     mysql_free_result(res);
