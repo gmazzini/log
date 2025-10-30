@@ -728,7 +728,7 @@ int main(void){
       incdata3(0,3,aux4,1,0);
     }
     for(c=0;c<ndata3[0][3];c++){
-      printf("%s\n",data3[0][3].lab);
+      printf("%s\n",data3[0][3][c].lab);
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
     printf("Points:%ld Cty:%ld Zone:%ld Total:%ld\n",l1,ndata3[0][1],ndata3[0][2],l1*(ndata3[0][1]+ndata3[0][2]));
