@@ -165,21 +165,21 @@ int main(void){
       if(c>433)continue;
       sprintf(aux1,"%04d%s",myband[c],mymode(row[2]));
       strcpy(aux2,wpx(row[0]));
-      idx=incdata3(0,0,aux1,1);
-      incdata3(1,idx,row[0],1);
-      incdata3(1,TOTL2-1,row[0],1);
-      incdata3(3,idx,aux2,1);
-      incdata3(3,TOTL2-1,aux2,1);
-      if(atoi(row[3])==1)incdata3(0,1,aux1,1);
-      if(atoi(row[4])==1)incdata3(0,2,aux1,1);
-      if(atoi(row[5])==1)incdata3(0,3,aux1,1);
+      idx=incdata3(0,0,aux1,1,1);
+      incdata3(1,idx,row[0],1,1);
+      incdata3(1,TOTL2-1,row[0],1,1);
+      incdata3(3,idx,aux2,1,1);
+      incdata3(3,TOTL2-1,aux2,1,1);
+      if(atoi(row[3])==1)incdata3(0,1,aux1,1,1);
+      if(atoi(row[4])==1)incdata3(0,2,aux1,1,1);
+      if(atoi(row[5])==1)incdata3(0,3,aux1,1,1);
       sprintf(aux1,"%03d",atoi(row[6]));
-      idx=incdata3(0,4,aux1,1);
-      incdata3(2,idx,row[0],1);
-      incdata3(4,idx,aux2,1);
-      if(atoi(row[3])==1)incdata3(0,5,aux1,1);
-      if(atoi(row[4])==1)incdata3(0,6,aux1,1);
-      if(atoi(row[5])==1)incdata3(0,7,aux1,1);
+      idx=incdata3(0,4,aux1,1,1);
+      incdata3(2,idx,row[0],1,1);
+      incdata3(4,idx,aux2,1,1);
+      if(atoi(row[3])==1)incdata3(0,5,aux1,1,1);
+      if(atoi(row[4])==1)incdata3(0,6,aux1,1,1);
+      if(atoi(row[5])==1)incdata3(0,7,aux1,1,1);
     }
     mysql_free_result(res);
     printf("<p class=\"myh1\">%6s %7s %8s %8s %8s %8s %8s</p>","B/Mode","QSO","QSO.uniq","QSO.wpx","QSL.LOTW","QSL.EQSL","QSL.QRZ");
@@ -214,13 +214,13 @@ int main(void){
       if(row==NULL)break;
       c=(int)(atol(row[1])/1000000.0);
       if(c>433)continue;
-      incdata3(0,0,row[0],1);
+      incdata3(0,0,row[0],1,1);
       sprintf(aux1,"%04d",myband[c]);
-      incdata3(0,1,aux1,1);
-      incdata3(0,2,row[2],1);
-      if(atoi(row[3])==1)incdata3(0,3,row[0],1); 
-      if(atoi(row[4])==1)incdata3(0,4,row[0],1);
-      if(atoi(row[5])==1)incdata3(0,5,row[0],1);
+      incdata3(0,1,aux1,1,1);
+      incdata3(0,2,row[2],1,1);
+      if(atoi(row[3])==1)incdata3(0,3,row[0],1,1); 
+      if(atoi(row[4])==1)incdata3(0,4,row[0],1,1);
+      if(atoi(row[5])==1)incdata3(0,5,row[0],1,1);
     }
     mysql_free_result(res);
     printf("<table>");
@@ -255,41 +255,41 @@ int main(void){
       if(row==NULL)break;
       strcpy(aux2,mymode(row[2]));
       sprintf(aux1,"%.4s",row[1]);
-      idx=incdata3(0,0,aux1,1);
-      incdata3(1,idx,row[0],1);
-      incdata3(2,idx,wpx(row[0]),1);
-      incdata3(3,idx,row[6],1);
-      if(atoi(row[3])==1)incdata3(0,1,aux1,1);
-      if(atoi(row[4])==1)incdata3(0,2,aux1,1);
-      if(atoi(row[5])==1)incdata3(0,3,aux1,1);
-      if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1,1);
-      if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1,1);
-      if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1,1);
+      idx=incdata3(0,0,aux1,1,1);
+      incdata3(1,idx,row[0],1,1);
+      incdata3(2,idx,wpx(row[0]),1,1);
+      incdata3(3,idx,row[6],1,1);
+      if(atoi(row[3])==1)incdata3(0,1,aux1,1,1);
+      if(atoi(row[4])==1)incdata3(0,2,aux1,1,1);
+      if(atoi(row[5])==1)incdata3(0,3,aux1,1,1);
+      if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1,1,1);
+      if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1,1,1);
+      if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1,1,1);
       sprintf(aux1,"%.7s",row[1]);
       if(strcmp(aux1,aux3)>=0 && strcmp(aux1,aux4)<=0){
-        idx=incdata3(0,0,aux1,1);
-        incdata3(1,idx,row[0],1);
-        incdata3(2,idx,wpx(row[0]),1);
-        incdata3(3,idx,row[6],1);
-        if(atoi(row[3])==1)incdata3(0,1,aux1,1);
-        if(atoi(row[4])==1)incdata3(0,2,aux1,1);
-        if(atoi(row[5])==1)incdata3(0,3,aux1,1);
-        if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1,1);
-        if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1,1);
-        if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1,1);
+        idx=incdata3(0,0,aux1,1,1);
+        incdata3(1,idx,row[0],1,1);
+        incdata3(2,idx,wpx(row[0]),1,1);
+        incdata3(3,idx,row[6],1,1);
+        if(atoi(row[3])==1)incdata3(0,1,aux1,1,1);
+        if(atoi(row[4])==1)incdata3(0,2,aux1,1,1);
+        if(atoi(row[5])==1)incdata3(0,3,aux1,1,1);
+        if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1,1,1);
+        if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1,1,1);
+        if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1,1,1);
       }
       sprintf(aux1,"%.10s",row[1]);
       if(strcmp(aux1,aux5)>=0 && strcmp(aux1,aux6)<=0){
-        idx=incdata3(0,0,aux1,1);
-        incdata3(1,idx,row[0],1);
-        incdata3(2,idx,wpx(row[0]),1);
-        incdata3(3,idx,row[6],1);
-        if(atoi(row[3])==1)incdata3(0,1,aux1,1);
-        if(atoi(row[4])==1)incdata3(0,2,aux1,1);
-        if(atoi(row[5])==1)incdata3(0,3,aux1,1);
-        if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1,1);
-        if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1,1);
-        if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1,1);
+        idx=incdata3(0,0,aux1,1,1);
+        incdata3(1,idx,row[0],1,1);
+        incdata3(2,idx,wpx(row[0]),1,1);
+        incdata3(3,idx,row[6],1,1);
+        if(atoi(row[3])==1)incdata3(0,1,aux1,1,1);
+        if(atoi(row[4])==1)incdata3(0,2,aux1,1,1);
+        if(atoi(row[5])==1)incdata3(0,3,aux1,1,1);
+        if(strcmp(aux2,"CW")==0)incdata3(0,4,aux1,1,1);
+        if(strcmp(aux2,"DG")==0)incdata3(0,5,aux1,1,1);
+        if(strcmp(aux2,"PH")==0)incdata3(0,6,aux1,1,1);
       } 
     }
     mysql_free_result(res);
@@ -606,11 +606,11 @@ int main(void){
       c=(int)(atol(row[3])/1000000.0);
       if(c>433)continue;
       sprintf(aux3,"%04d%s",myband[c],mymode(row[5]));
-      incdata3(0,0,aux3,1);
+      incdata3(0,0,aux3,1,1);
       aux1[0]='\0';
-      if(atoi(row[8])==1){strcat(aux1,"L"); incdata3(0,1,aux3,1);}
-      if(atoi(row[9])==1){strcat(aux1,"E"); incdata3(0,2,aux3,1);}
-      if(atoi(row[10])==1){strcat(aux1,"Q"); incdata3(0,3,aux3,1);}
+      if(atoi(row[8])==1){strcat(aux1,"L"); incdata3(0,1,aux3,1,1);}
+      if(atoi(row[9])==1){strcat(aux1,"E"); incdata3(0,2,aux3,1,1);}
+      if(atoi(row[10])==1){strcat(aux1,"Q"); incdata3(0,3,aux3,1,1);}
       if(++vv<=5){
         sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
         sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
@@ -699,9 +699,10 @@ int main(void){
       if(row==NULL)break;
       
       sprintf(aux1,"%s:%s",row[0],row[1]);
-      incdata3(0,0,aux1,1);
+      incdata3(0,0,aux1,1,0);
       
     }
+    for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l1].num;
     printf("%ld",ndata3[0][0]);
     
     mysql_free_result(res);
