@@ -11,7 +11,7 @@ int main(void){
   long lastserial,l1,l2,l3,idx,suml[10],lff;
   MYSQL *con;
   MYSQL_RES *res;
-  MYSQL_ROW row,row1;
+  MYSQL_ROW row,row1,row2;
   FILE *fp;
   double lat1,lat2,lon1,lon2;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
