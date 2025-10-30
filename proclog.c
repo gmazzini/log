@@ -10,7 +10,7 @@ int main(void){
   uint8_t in[4];
   uint32_t t;
   time_t epoch,td;
-  long lastserial,l1,l2,l3,idx,suml[10],lff;
+  long l1,l2,l3,idx,suml[10],lff;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -292,38 +292,6 @@ int main(void){
         }
       }
     }
-    printf("</pre>");
-    goto end;
-  }
-
-  if(act==13 || act==14){ // Reserialize 1m and ALL buttons
-    printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    if(act==13){
-      epoch=time(NULL); tm_now=gmtime(&epoch); ts=*tm_now; ts.tm_mon-=1; timegm(&ts);
-      strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S",&ts);
-      sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
-      mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-      l1=(row==NULL)?1:atol(row[0]);
-      mysql_free_result(res);
-      sprintf(buf,"select callsign,start from log where mycall='%s' and start>='%s' order by start",mycall,aux3);
-    } 
-    else {
-      l1=1;
-      sprintf(buf,"select callsign,start from log where mycall='%s' order by start",mycall);
-    }
-    printf("<pre>");
-    mysql_query(con,buf);
-    res=mysql_store_result(con);
-    for(l2=l1;;){
-      row=mysql_fetch_row(res);
-      if(row==NULL)break;
-      sprintf(aux1,"update log set serial=%ld where mycall='%s' and callsign='%s' and start='%s'",l1,mycall,row[0],row[1]);
-      mysql_query(con,aux1);
-      l1++;
-    }
-    res=mysql_store_result(con);
-    printf("Serialized QSO: %ld\n",l1-l2);
     printf("</pre>");
     goto end;
   }
