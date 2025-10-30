@@ -720,7 +720,7 @@ int main(void){
       else incdata3(0,0,aux1,0,0);
       incdata3(0,1,aux2,1,0);
 
-printf("%s %s\n",aux1,aux2);
+printf("%s %s %d %d %s %s\n",aux1,aux2,gg,vv,cont[gg],cont[vv]);
       
     }
     for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l2].num;
