@@ -713,10 +713,10 @@ int main(void){
       if(row==NULL)break;
       c=myband[(int)(atol(row[1])/1000000.0)]/10;
       vv=atoi(row[2]);
-      sprintf(aux1,"%d:%s",c,row[0]);
-      sprintf(aux2,"%d:%d",c,vv);
-      sprintf(aux3,"%d:Z%d",c,cqz[vv]);
-      sprintf(aux4,"%d",c);
+      sprintf(aux1,"03%d:%s",c,row[0]);
+      sprintf(aux2,"%03d:%d",c,vv);
+      sprintf(aux3,"%03d:Z%d",c,cqz[vv]);
+      sprintf(aux4,"%03d",c);
       gg=248;
       
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
