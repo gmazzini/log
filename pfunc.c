@@ -69,7 +69,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
   return row;
 }
 
-long incdata3(int cha,int idx,char *key,int delta){
+long incdata3(int cha,int idx,char *key,long ss,long dd){
   long n,lo,hi,mid,cmp,j;
   n=ndata3[cha][idx];
   lo=0;
@@ -78,8 +78,8 @@ long incdata3(int cha,int idx,char *key,int delta){
     mid=lo+(hi-lo)/2;
     cmp=strcmp(data3[cha][idx][mid].lab,key);
     if(cmp==0){
-      data3[cha][idx][mid].num+=delta;
-      return data3[cha][idx][mid].idx;;
+      data3[cha][idx][mid].num+=dd;
+      return data3[cha][idx][mid].idx;
     }
     else if(cmp<0)lo=mid+1;
     else hi=mid-1;
@@ -88,7 +88,7 @@ long incdata3(int cha,int idx,char *key,int delta){
     for(j=n;j>lo;--j)data3[cha][idx][j]=data3[cha][idx][j-1];
     strcpy(data3[cha][idx][lo].lab,key);
     data3[cha][idx][lo].idx=n;
-    data3[cha][idx][lo].num=delta;
+    data3[cha][idx][lo].num=ss;
     ndata3[cha][idx]=n+1;
   }
   return n;
