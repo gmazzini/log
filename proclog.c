@@ -711,7 +711,7 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      c=(int)(atol(row[1])/1000000.0);
+      c=myband[(int)(atol(row[1])/1000000.0)]/10;
       vv=atoi(row[2]);
       sprintf(aux1,"%d:%s",c,row[0]);
       sprintf(aux2,"%d:%d",c,vv);
