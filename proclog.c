@@ -691,7 +691,7 @@ int main(void){
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    const char *conid[]={"CQWWSSB","CQWWCW"};
+    const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW"};
     for(contype=0;contype<2;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
     if(contype==2)goto end;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
@@ -728,6 +728,17 @@ int main(void){
         else incdata3(0,0,aux1,0,0);
         incdata3(0,1,aux2,1,0);
         incdata3(0,1,aux3,1,0);
+        incdata3(0,2,aux4,1,0);
+      }
+      else if(contype==2||contype==3){
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        sprintf(aux2,"%03d:%d",c,vv);
+        sprintf(aux4,"%03d",c);
+        if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,0,aux1,3,0); else incdata3(0,0,aux1,6,0);}
+        else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,0,aux1,2,0); else incdata3(0,0,aux1,4,0);}
+        else if(gg!=vv){if(c<=20)incdata3(0,0,aux1,1,0); else incdata3(0,0,aux1,2,0);}
+        else incdata3(0,0,aux1,1,0);
+        incdata3(0,1,aux2,1,0);
         incdata3(0,2,aux4,1,0);
       }
     }
