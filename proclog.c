@@ -24,6 +24,7 @@ int main(void){
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
+  // 0:ota 1:btn.id 2:page 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:FILE
   for(vv=0,gg=0,lff=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -76,7 +77,7 @@ int main(void){
     goto end;
   }
 
-  if(act<=8){ // List buttons(4) and Find buttons(3) 
+  if((act>=1 && act<=8) || (act>=28 && act<=30)){ // List buttons(4: 1 2 3 4) and List Find buttons(3: 5 6 7) and List Contest buttons(3:28 29 30) 
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -95,10 +96,9 @@ int main(void){
       mysql_query(con,aux1);
     }
     mysql_free_result(res);
-    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
-      from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
-    else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest \
-      from log where callsign like '%s' and mycall='%s' order by start desc limit %d offset %ld",tok[4],mycall,atoi(tok[3]),atol(tok[2]));
+    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' and serial<=%ld order by serial desc limit %d",mycall,lastserial-atol(tok[2]),atoi(tok[3]));
+    else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc limit %d offset %ld",tok[4],mycall,atoi(tok[3]),atol(tok[2]));
+    else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc limit %d offset %ld",tok[9],mycall,atoi(tok[3]),atol(tok[2]));
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
