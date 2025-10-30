@@ -719,7 +719,7 @@ int main(void){
       
     }
     for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l2].num;
-    printf("%ld",l1);
+    printf("%ld %ld\n",l1,ndata3[0][0]);
     
     mysql_free_result(res);
     printf("</pre>");
