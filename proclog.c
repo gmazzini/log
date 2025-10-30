@@ -689,8 +689,8 @@ int main(void){
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
-
     sprintf(buf,"select callsign,freqtx from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
@@ -698,10 +698,12 @@ int main(void){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       
-      sprintf(aux1,"%s_%s",row[1]);
-      idx=incdata3(0,0,aux1,1);
+      sprintf(aux1,"%s:%s",row[0],row[1]);
+      incdata3(0,0,aux1,1);
       
     }
+    printf("%ld",ndata3[0][0]);
+    
     mysql_free_result(res);
     printf("</pre>");
     goto end;
