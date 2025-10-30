@@ -723,7 +723,8 @@ int main(void){
       else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
       else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
       else incdata3(0,0,aux1,0,0);
-      incdata3(0,1,aux2,1,0);      
+      incdata3(0,1,aux2,1,0);
+      incdata3(0,2,aux3,1,0); 
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
     printf("Points:%ld Cty:%ld Zone:%ld Total:%ld\n",l1,ndata3[0][1],ndata3[0][2],l1*(ndata3[0][1]+ndata3[0][2]));
