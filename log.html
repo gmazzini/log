@@ -144,7 +144,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
 });
 
 window.cmd1 = async (a,b) => {
-  const p = prompt("DEL DELETE FT:xxx FREQTX:xxx FR:xxx FREQRX:xxx M:xxx MODE:xxx ST:xxx SIGNALTX:xxx SR:xxx SIGNALRX:xxx C:xxx CALL:xxx DT:xxx DATETIME:xxx CO:xxx CONTEST:xxx COT:xxx CONTESTTX:xxx COR:xxx CONTESTRX:xxx","");
+  const p = prompt("DEL DELETE FT=xxx FREQTX=xxx FR=xxx FREQRX=xxx M=xxx MODE=xxx ST=xxx SIGNALTX=xxx SR=xxx SIGNALRX=xxx C=xxx CALL=xxx DTS=xxx DATETIMESTART=xxx DTE=xxx DATETIMEEND=xxx CO=xxx CONTEST=xxx COT=xxx CONTESTTX=xxx COR=xxx CONTESTRX=xxx","");
   if (p) {
     const r = await fetch("pcmd.cgi", {
       method: "POST",
