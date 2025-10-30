@@ -715,7 +715,7 @@ int main(void){
       vv=atoi(row[2]);
       sprintf(aux1,"%d:%s",c,row[0]);
       sprintf(aux2,"%d:%d",c,vv);
-      sprintf(aux3,"%d:%d",c,cqz[vv]);
+      sprintf(aux3,"%d:Z%d",c,cqz[vv]);
       sprintf(aux4,"%d",c);
       gg=248;
       
@@ -724,13 +724,14 @@ int main(void){
       else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
       else incdata3(0,0,aux1,0,0);
       incdata3(0,1,aux2,1,0);
-      incdata3(0,2,aux3,1,0);
-      incdata3(0,3,aux4,1,0);
+      incdata3(0,1,aux3,1,0);
+      incdata3(0,2,aux4,1,0);
     }
-    for(c=0;c<ndata3[0][3];c++){
-      gg=strlen(data3[0][3][c].lab);
+    for(c=0;c<ndata3[0][2];c++){
+      gg=strlen(data3[0][2][c].lab);
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][3][c].lab,gg)==0)l1+=data3[0][0][idx].num;
-      printf("%3s %8ld \n",data3[0][3][c].lab,l1);
+      for(l2=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][3][c].lab,gg)==0)l1+=data3[0][1][idx].num;
+      printf("%3s %8ld %04ld\n",data3[0][3][c].lab,l1,l2);
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
     printf("Points:%ld Cty:%ld Zone:%ld Total:%ld\n",l1,ndata3[0][1],ndata3[0][2],l1*(ndata3[0][1]+ndata3[0][2]));
