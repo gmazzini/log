@@ -707,19 +707,24 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      sprintf(aux1,"%s:%d",row[0],(int)(atol(row[1])/1000000.0));
+      c=(int)(atol(row[1])/1000000.0);
+      vv=atoi(row[2]);
+      sprintf(aux1,"%s:%d",row[0],c);
+      sprintf(aux1,"%d:%d",vv,c);
       gg=248;
 
-      vv=atoi(row[2]);
+      
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
       else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
       else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
       else incdata3(0,0,aux1,0,0);
+      incdata2(0,1,aux2,1,0);
+
 
       
     }
     for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l2].num;
-    printf("%ld %ld\n",l1,ndata3[0][0]);
+    printf("%ld %ld %ld\n",l1,ndata3[0][0],ndata3[0][1]);
     
     mysql_free_result(res);
     printf("</pre>");
