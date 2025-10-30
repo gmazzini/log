@@ -309,20 +309,23 @@ int main(void){
     goto end;
   }
 
-  if(act==13 || act==14){ // Reserialize 1m and 6m buttons
+  if(act==13 || act==14){ // Reserialize 1m and ALL buttons
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    epoch=time(NULL);
-    tm_now=gmtime(&epoch); ts=*tm_now;
-    ts.tm_mon-=(act==13)?1:6; 
-    timegm(&ts);
-    strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S",&ts);
-    sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    l1=(row==NULL)?1:atol(row[0]);
-    mysql_free_result(res);
+    if(act==13){
+      epoch=time(NULL); tm_now=gmtime(&epoch); ts=*tm_now; ts.tm_mon-=1; timegm(&ts);
+      strftime(aux3,sizeof(aux3),"%Y-%m-%d %H:%M:%S",&ts);
+      sprintf(buf,"select serial from log where mycall='%s' and start>='%s' order by start limit 1",mycall,aux3);
+      mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
+      l1=(row==NULL)?1:atol(row[0]);
+      mysql_free_result(res);
+      sprintf(buf,"select callsign,start from log where mycall='%s' and start>='%s' order by start",mycall,aux3);
+    } 
+    else {
+      l1=1;
+      sprintf(buf,"select callsign,start from log where mycall='%s' order by start",mycall);
+    }
     printf("<pre>");
-    sprintf(buf,"select callsign,start from log where mycall='%s' and start>='%s' order by start",mycall,aux3);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(l2=l1;;){
