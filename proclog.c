@@ -723,7 +723,7 @@ int main(void){
 printf("%s %s %d %d %s %s\n",aux1,aux2,gg,vv,cont[gg],cont[vv]);
       
     }
-    for(l1=0,l2=0;l2<TOTL2;l2++)l1+=data3[0][0][l2].num;
+    for(l1=0,l2=0;l2<ndata[0][0];l2++)l1+=data3[0][0][l2].num;
     printf("%ld %ld %ld\n",l1,ndata3[0][0],ndata3[0][1]);
     
     mysql_free_result(res);
