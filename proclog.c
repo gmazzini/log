@@ -83,21 +83,6 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    sprintf(buf,"select max(serial) from log where mycall='%s'",mycall);
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    lastserial=atol(row[0]);
-    mysql_free_result(res);
-    sprintf(buf,"select callsign,start from log where mycall='%s' and serial=0 order by start",mycall);
-    mysql_query(con,buf);
-    res=mysql_store_result(con);
-    for(;;){
-      row=mysql_fetch_row(res);
-      if(row==NULL)break;
-      lastserial++;
-      sprintf(aux1,"update log set serial=%ld where mycall='%s' and callsign='%s' and start='%s'",lastserial,mycall,row[0],row[1]);
-      mysql_query(con,aux1);
-    }
-    mysql_free_result(res);
     if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,atol(tok[3]),atoi(tok[2]));
     else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,atoi(tok[3]),atol(tok[2]));
     else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,atoi(tok[3]),atol(tok[2]));
