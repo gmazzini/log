@@ -693,7 +693,7 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
-    sprintf(buf,"select dxcc,cont,cq,itu from cty");
+    sprintf(buf,"select dxcc,cont,cqzone,ituzone from cty");
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
