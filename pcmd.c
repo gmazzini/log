@@ -21,6 +21,8 @@ int main(void) {
     if(vv<4)tok[vv][gg++]=(char)c;
   }
   tok[vv][gg]='\0';
+
+  FILE *fp; fp=fopne("/home/www/log/q1.txt","w"); for(c=0;c<4;c++)fprintf(fp,"%s",tok[c]); fclose(fp);  
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
