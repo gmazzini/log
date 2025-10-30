@@ -729,7 +729,7 @@ int main(void){
     }
     for(c=0;c<ndata3[0][2];c++){
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][2][c].lab,3)==0)l1+=data3[0][0][idx].num;
-      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][2][c].lab,3)==0)l1+=data3[0][1][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][2][c].lab,3)==0)l2+=data3[0][1][idx].num;
       printf("%3s %8ld %4ld\n",data3[0][2][c].lab,l1,l2);
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
