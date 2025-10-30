@@ -732,7 +732,7 @@ int main(void){
       }
       else if(contype==2||contype==3){
         sprintf(aux1,"%03d:%s",c,row[0]);
-        sprintf(aux2,"%03d:%d",c,wpx(row[0]));
+        sprintf(aux2,"%03d:%s",c,wpx(row[0]));
         sprintf(aux3,"%03d",c);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,0,aux1,3,0); else incdata3(0,0,aux1,6,0);}
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,0,aux1,2,0); else incdata3(0,0,aux1,4,0);}
