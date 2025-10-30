@@ -727,7 +727,7 @@ int main(void){
         else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
         else incdata3(0,0,aux1,0,0);
         incdata3(0,1,aux2,1,0); incdata3(0,1,aux3,1,0);
-        incdata3(0,2,aux2,2,0); incdata3(0,2,aux3,2,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,2,aux3,1,0);
         incdata3(0,3,aux4,1,0);
       }
       else if(contype==2||contype==3){
