@@ -732,14 +732,14 @@ int main(void){
       }
       else if(contype==2||contype==3){
         sprintf(aux1,"%03d:%s",c,row[0]);
-        sprintf(aux2,"%03d:%d",c,vv);
-        sprintf(aux4,"%03d",c);
+        sprintf(aux2,"%03d:%d",c,wpx(row[0]));
+        sprintf(aux3,"%03d",c);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,0,aux1,3,0); else incdata3(0,0,aux1,6,0);}
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,0,aux1,2,0); else incdata3(0,0,aux1,4,0);}
         else if(gg!=vv){if(c<=20)incdata3(0,0,aux1,1,0); else incdata3(0,0,aux1,2,0);}
         else incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux2,1,0);
-        incdata3(0,2,aux4,1,0);
+        incdata3(0,2,aux3,1,0);
       }
     }
     printf("%s\n",tok[9]);
