@@ -5,6 +5,7 @@ int main(void){
   int c,act,vv,gg;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;
   char cont[1000][2];
+  int cqz[1000],ituz[1000];
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -692,13 +693,16 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
-    sprintf(buf,"select dxcc,cont from cty");
+    sprintf(buf,"select dxcc,cont,cq,itu from cty");
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      strncpy(cont[atoi(row[0])],row[1],2);
+      c=atoi(row[0]);
+      strncpy(cont[c],row[1],2);
+      cqz[c]=atoi(row[2]);
+      ituz[c]=atoi(row[3]);
     }
     mysql_free_result(res);
     sprintf(buf,"select callsign,freqtx,dxcc from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
@@ -711,20 +715,18 @@ int main(void){
       vv=atoi(row[2]);
       sprintf(aux1,"%s:%d",row[0],c);
       sprintf(aux2,"%d:%d",vv,c);
+      sprintf(aux3,"%d:%d",cqz[vv],c);
       gg=248;
 
       
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
       else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
       else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
-      else {incdata3(0,0,aux1,0,0); printf("--%s %s\n",row[0],row[1]);}
-      incdata3(0,1,aux2,1,0);
-
-printf("%s %s %d %d %s %s\n",aux1,aux2,gg,vv,cont[gg],cont[vv]);
-      
+      else incdata3(0,0,aux1,0,0);
+      incdata3(0,1,aux2,1,0);      
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
-    printf("%ld %ld %ld\n",l1,ndata3[0][0],ndata3[0][1]);
+    printf("Points:%ld Cty:%ld Zone:%ld Total:%ld\n",l1,ndata3[0][1],ndata3[0][2],l1*(ndata3[0][1]+ndata3[0][2]));
     
     mysql_free_result(res);
     printf("</pre>");
