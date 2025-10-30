@@ -691,15 +691,15 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
 
-    sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+    sprintf(buf,"select callsign,freqtx from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-
-
-
+      
+      sprintf(aux1,"%s_%s",row[1]);
+      idx=incdata3(0,0,aux1,1);
       
     }
     mysql_free_result(res);
