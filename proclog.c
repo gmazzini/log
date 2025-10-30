@@ -727,6 +727,7 @@ int main(void){
       incdata3(0,1,aux3,1,0);
       incdata3(0,2,aux4,1,0);
     }
+    printf("%s\n",tok[9]);
     for(c=0;c<ndata3[0][2];c++){
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][2][c].lab,3)==0)l1+=data3[0][0][idx].num;
       for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][2][c].lab,3)==0)l2+=data3[0][1][idx].num;
