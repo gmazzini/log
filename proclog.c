@@ -696,7 +696,7 @@ int main(void){
         incdata3(0,4,aux4,1,0);
       }
     }
-    printf("%s\n",tok[9]);
+    printf("<p class=\"myh1\">%s</p>\n",tok[9]);
     for(c=0;c<ndata3[0][4];c++){
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][4][c].lab,3)==0)l1+=data3[0][0][idx].num;
       for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][4][c].lab,3)==0)l2+=data3[0][1][idx].num;
@@ -706,8 +706,8 @@ int main(void){
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
     for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
     for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
-    printf("ALL %5ld %8ld %4ld\n",l1,l2,l3);
-    printf("Score %9ld\n",l2*l3);
+    printf("<p class=\"myh1\">ALL %5ld %8ld %4ld</p>\n",l1,l2,l3);
+    printf("<p class=\"myh2\">Score %9ld</p>\n",l2*l3);
     mysql_free_result(res);
     printf("</pre>");
     goto end;
