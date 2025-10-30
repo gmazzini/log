@@ -713,7 +713,7 @@ int main(void){
       if(row==NULL)break;
       c=myband[(int)(atol(row[1])/1000000.0)]/10;
       vv=atoi(row[2]);
-      sprintf(aux1,"03%d:%s",c,row[0]);
+      sprintf(aux1,"%03d:%s",c,row[0]);
       sprintf(aux2,"%03d:%d",c,vv);
       sprintf(aux3,"%03d:Z%d",c,cqz[vv]);
       sprintf(aux4,"%03d",c);
@@ -728,9 +728,8 @@ int main(void){
       incdata3(0,2,aux4,1,0);
     }
     for(c=0;c<ndata3[0][2];c++){
-      gg=strlen(data3[0][2][c].lab);
-      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][2][c].lab,gg)==0)l1+=data3[0][0][idx].num;
-      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][2][c].lab,gg)==0)l1+=data3[0][1][idx].num;
+      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][2][c].lab,3)==0)l1+=data3[0][0][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][2][c].lab,3)==0)l1+=data3[0][1][idx].num;
       printf("%3s %8ld %4ld\n",data3[0][2][c].lab,l1,l2);
     }
     for(l1=0,l2=0;l2<ndata3[0][0];l2++)l1+=data3[0][0][l2].num;
