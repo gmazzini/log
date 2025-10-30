@@ -98,7 +98,7 @@ int main(void){
       mysql_query(con,aux1);
     }
     mysql_free_result(res);
-    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' and serial<=%ld order by start desc, callsign desc limit %d offset %ld",mycall,atol(tok[3]),atoi(tok[2]));
+    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,atol(tok[3]),atoi(tok[2]));
     else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,atoi(tok[3]),atol(tok[2]));
     else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,atoi(tok[3]),atol(tok[2]));
     mysql_query(con,buf);
