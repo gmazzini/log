@@ -702,7 +702,6 @@ int main(void){
       c=atoi(row[0]);
       strncpy(cont[c],row[1],2);
       cqz[c]=atoi(row[2]);
-      printf("%d %d\n",c,cqz[c]);
       ituz[c]=atoi(row[3]);
     }
     mysql_free_result(res);
@@ -718,8 +717,6 @@ int main(void){
       sprintf(aux2,"%d:%d",vv,c);
       sprintf(aux3,"%d:%d",cqz[vv],c);
       gg=248;
-
-      printf("%s %s %s\n",aux1,aux2,aux3);
       
       if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
       else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
