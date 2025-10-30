@@ -751,7 +751,7 @@ int main(void){
       printf("%3s %8ld %4ld\n",data3[0][3][c].lab,l1,l2);
     }
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
-    for(l2=0,idx=0;idx<ndata3[0][2];idx++)l2+=data3[0][2][idx].num;
+  //  for(l2=0,idx=0;idx<ndata3[0][2];idx++)l2+=data3[0][2][idx].num;
     printf("ALL %8ld %4ld\n",l1,l2);
     printf("Score %9ld\n",l1*l2);
     mysql_free_result(res);
