@@ -3,7 +3,8 @@
 
 int main(void){
   int c,act,vv,gg;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;
+  char cont[1000][2];
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -691,20 +692,28 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
-    row1=searchcty(con,mycall);
-    sprintf(buf,"select callsign,freqtx from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+    sprintf(buf,"select dxcc,cont from cty");
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      row2=searchcty(con,row[0]);
-      c=(int)(atol(row[1])/1000000.0);
-      if(c>433)continue;
-      sprintf(aux1,"%s:%d",row[0],myband[c]);
-      if(row1[3]!=row2[3])incdata3(0,0,aux1,3,0);
-      else if(row2[3]=="NA" && row1[3]=="NA" && row2[0]!=row1[0])incdata3(0,0,aux1,2,0);
-      else if(row2[3]==row1[3] && row2[0]!=row1[0])incdata3(0,0,aux1,1,0);
+      strncpy(cont[atoi(row[0])],row[1],2);
+    }
+    mysql_free_result(res);
+    sprintf(buf,"select callsign,freqtx,dxcc from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      sprintf(aux1,"%s:%d",row[0],(int)(atol(row[1])/1000000.0));
+      gg=248;
+
+      vv=atoi(row[2]);
+      if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,0,aux1,3,0);
+      else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
+      else if((strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
       else incdata3(0,0,aux1,0,0);
 
       
