@@ -726,31 +726,32 @@ int main(void){
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,0,aux1,2,0);
         else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,0,aux1,1,0);
         else incdata3(0,0,aux1,0,0);
-        incdata3(0,1,aux2,1,0);
-        incdata3(0,1,aux3,1,0);
-        incdata3(0,2,aux4,1,0);
+        incdata3(0,1,aux2,1,0); incdata3(0,1,aux3,1,0);
+        incdata3(0,1,aux2,2,0); incdata3(0,1,aux3,2,0);
+        incdata3(0,3,aux4,1,0);
       }
       else if(contype==2||contype==3){
         sprintf(aux1,"%03d:%s",c,row[0]);
         sprintf(aux2,"%03d:%s",c,wpx(row[0]));
-        sprintf(aux3,"%03d",c);
+        sprintf(aux3,"ALL:%s",c,wpx(row[0]));
+        sprintf(aux4,"%03d",c);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,0,aux1,3,0); else incdata3(0,0,aux1,6,0);}
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,0,aux1,2,0); else incdata3(0,0,aux1,4,0);}
         else if(gg!=vv){if(c<=20)incdata3(0,0,aux1,1,0); else incdata3(0,0,aux1,2,0);}
         else incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux2,1,0);
         incdata3(0,2,aux3,1,0);
-        printf("%s %s %s\n",aux1,aux2,aux3);
+        incdata3(0,3,aux4,1,0);
       }
     }
     printf("%s\n",tok[9]);
-    for(c=0;c<ndata3[0][2];c++){
-      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][2][c].lab,3)==0)l1+=data3[0][0][idx].num;
-      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][2][c].lab,3)==0)l2+=data3[0][1][idx].num;
-      printf("%3s %8ld %4ld\n",data3[0][2][c].lab,l1,l2);
+    for(c=0;c<ndata3[0][3];c++){
+      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][3][c].lab,3)==0)l1+=data3[0][0][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][3][c].lab,3)==0)l2+=data3[0][1][idx].num;
+      printf("%3s %8ld %4ld\n",data3[0][3][c].lab,l1,l2);
     }
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
-    for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
+    for(l2=0,idx=0;idx<ndata3[0][2];idx++)l2+=data3[0][2][idx].num;
     printf("ALL %8ld %4ld\n",l1,l2);
     printf("Score %9ld\n",l1*l2);
     mysql_free_result(res);
