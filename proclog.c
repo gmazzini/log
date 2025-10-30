@@ -722,6 +722,7 @@ int main(void){
         sprintf(aux2,"%03d:%d",c,vv);
         sprintf(aux3,"%03d:Z%d",c,cqz[vv]);
         sprintf(aux4,"%03d",c);
+        incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,3,0);
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0 && gg!=vv)incdata3(0,1,aux1,2,0);
         else if(strncmp(cont[vv],cont[gg],2)==0 && gg!=vv)incdata3(0,1,aux1,1,0);
@@ -735,6 +736,7 @@ int main(void){
         sprintf(aux2,"%03d:%s",c,wpx(row[0]));
         sprintf(aux3,"ALL:%s",wpx(row[0]));
         sprintf(aux4,"%03d",c);
+        incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,1,aux1,3,0); else incdata3(0,1,aux1,6,0);}
         else if(strncmp(cont[vv],"NA",2)==0 && strncmp(cont[gg],"NA",2)==0){if(c<=20)incdata3(0,1,aux1,2,0); else incdata3(0,1,aux1,4,0);}
         else if(gg!=vv){if(c<=20)incdata3(0,1,aux1,1,0); else incdata3(0,1,aux1,2,0);}
@@ -746,14 +748,16 @@ int main(void){
     }
     printf("%s\n",tok[9]);
     for(c=0;c<ndata3[0][4];c++){
-      for(l1=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][4][c].lab,3)==0)l1+=data3[0][1][idx].num;
-      for(l2=0,idx=0;idx<ndata3[0][2];idx++)if(strncmp(data3[0][2][idx].lab,data3[0][4][c].lab,3)==0)l2+=data3[0][2][idx].num;
-      printf("%3s %8ld %4ld\n",data3[0][4][c].lab,l1,l2);
+      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][4][c].lab,3)==0)l1+=data3[0][0][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][4][c].lab,3)==0)l2+=data3[0][1][idx].num;
+      for(l3=0,idx=0;idx<ndata3[0][2];idx++)if(strncmp(data3[0][2][idx].lab,data3[0][4][c].lab,3)==0)l3+=data3[0][2][idx].num;
+      printf("%3s %05ld %8ld %4ld\n",data3[0][4][c].lab,l1,l2,l3);
     }
-    for(l1=0,idx=0;idx<ndata3[0][1];idx++)l1+=data3[0][1][idx].num;
+    for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
+    for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
     for(l2=0,idx=0;idx<ndata3[0][3];idx++)l2+=data3[0][3][idx].num;
-    printf("ALL %8ld %4ld\n",l1,l2);
-    printf("Score %9ld\n",l1*l2);
+    printf("ALL %05ld %8ld %4ld\n",l1,l2,l3);
+    printf("Score %9ld\n",l2*l3);
     mysql_free_result(res);
     printf("</pre>");
     goto end;
