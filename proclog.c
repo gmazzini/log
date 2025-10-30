@@ -740,6 +740,7 @@ int main(void){
         else incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux2,1,0);
         incdata3(0,2,aux3,1,0);
+        printf("%s %s %s\n",aux1,aux2,aux3);
       }
     }
     printf("%s\n",tok[9]);
