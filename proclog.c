@@ -257,7 +257,7 @@ int main(void){
       sprintf(aux1,"%.4s",row[1]);
       idx=incdata3(0,0,aux1,1);
       incdata3(1,idx,row[0],1);
-      incdata3(2,idx,wpx(row[0],1));
+      incdata3(2,idx,wpx(row[0]),1);
       incdata3(3,idx,row[6],1);
       if(atoi(row[3])==1)incdata3(0,1,aux1,1);
       if(atoi(row[4])==1)incdata3(0,2,aux1,1);
@@ -283,7 +283,7 @@ int main(void){
         idx=incdata3(0,0,aux1,1);
         incdata3(1,idx,row[0],1);
         incdata3(2,idx,wpx(row[0]),1);
-        incdata3(3,idx,row[6]);
+        incdata3(3,idx,row[6],1);
         if(atoi(row[3])==1)incdata3(0,1,aux1,1);
         if(atoi(row[4])==1)incdata3(0,2,aux1,1);
         if(atoi(row[5])==1)incdata3(0,3,aux1,1);
