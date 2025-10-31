@@ -1,6 +1,6 @@
 // pconscore.c contest score function by GM @2025 V 2.0
 
-void conscore(MYSQL *con,char **tok){
+void conscore(MYSQL *con,char **tok,char *mycall){
   const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080"};
   int contype,c,gg,vv;
   long l1,l2;
@@ -11,7 +11,7 @@ void conscore(MYSQL *con,char **tok){
   double lat1,lat2,lon1,lon2;
   
   for(contype=0;contype<6;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
-  if(contype==6)goto end;
+  if(contype==6)return;
   for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
   sprintf(buf,"select dxcc,cont,cqzone,ituzone from cty");
   mysql_query(con,buf);
