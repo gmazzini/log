@@ -1,5 +1,6 @@
 // proclog.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
+#include "pconscore.c"
 // Notra sono liberi 13 e 14
 
 int main(void){
