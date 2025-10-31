@@ -97,4 +97,5 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         break;
     }
   }
+  mysql_free_result(res);
 }
