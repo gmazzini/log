@@ -338,7 +338,7 @@ int main(void){
       sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(row1[2]));
       sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux3);
       mysql_query(con,buf);
-      l1+=mysql_affected_rows(con);
+      l1=mysql_affected_rows(con);
       if(l1>0){nnn+=l1; printf("%s\n",aux3);}
       gg=adifextract(NULL,vv);
     }
@@ -457,7 +457,7 @@ int main(void){
         sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','',%d)",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8,atoi(row1[2]));
         sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux9);
         mysql_query(con,buf);
-        l1+=mysql_affected_rows(con);
+        l1=mysql_affected_rows(con);
         if(l1>0){nnn+=l1; printf("%s\n",aux9);}
       }
       pp=strtok(NULL,"\n");
