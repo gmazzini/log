@@ -713,7 +713,7 @@ int main(void){
         incdata3(0,4,aux4,1,0);
       }
       else if(contype==5){ // 4080
-        scp(aux5,mymode(row[5]));
+        strcpy(aux5,mymode(row[5]));
         sprintf(aux1,"%02d%2s:%s",c,aux5,row[0]);
         sprintf(aux2,"%02d%2s:%.2s",c,aux5,row[4]);
         sprintf(aux3,"%02d%2s:%.2s",c,aux5,row[4]);
