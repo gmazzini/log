@@ -81,10 +81,8 @@ void conscore(MYSQL *con,char **tok){
         incdata3(0,2,aux2,1,0);
         incdata3(0,3,aux3,1,0);
         incdata3(0,4,aux4,1,0);
-      
-      
-    
-      else if(contype==5){ // 4080
+        break;
+      case 5: // 4080
         strcpy(aux5,mymode(row[5]));
         sprintf(aux1,"%02d%2s:%s",c,aux5,row[0]);
         sprintf(aux2,"%02d%2s:%.2s",c,aux5,row[4]);
@@ -97,5 +95,7 @@ void conscore(MYSQL *con,char **tok){
         incdata3(0,2,aux2,1,0);
         incdata3(0,3,aux3,1,0);
         incdata3(0,4,aux4,1,0);
-      }
+        break;
     }
+  }
+}
