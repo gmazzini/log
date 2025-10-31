@@ -1,17 +1,17 @@
 // pconscore.c contest score function by GM @2025 V 2.0
 
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080"};
-  int contype,c,gg,vv;
+  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF"};
+  int contype,c,gg,vv,cqz[1000],ituz[1000];
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300];
   MYSQL_RES *res;
   MYSQL_ROW row;
-  int cqz[1000],ituz[1000];
   double lat1,lat2,lon1,lon2;
-  
-  for(contype=0;contype<6;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
-  if(contype==6)return;
+
+  vv=sizeof(conid)/sizeof(conid[0]);
+  for(contype=0;contype<vv;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
+  if(contype==vv)return;
   for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
   sprintf(buf,"select dxcc,cont,cqzone,ituzone from cty");
   mysql_query(con,buf);
@@ -85,7 +85,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         strcpy(aux5,mymode(row[5]));
         sprintf(aux1,"%02d%2s:%s",c,aux5,row[0]);
         sprintf(aux2,"%02d%2s:%.2s",c,aux5,row[4]);
-        sprintf(aux3,"%02d%2s:%.2s",c,aux5,row[4]);
+        strcpy(aux3,aux2);
         sprintf(aux4,"%02d%2s",c,aux5);
         incdata3(0,0,aux1,1,0);
         if(strncmp(aux5,"PH",2)==0)incdata3(0,1,aux1,1,0);
@@ -95,6 +95,20 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,3,aux3,1,0);
         incdata3(0,4,aux4,1,0);
         break;
+      case 6: // IARUHF
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        if(!isdigit(row[4][0]))sprintf(aux2,"%03d:%s",c,row[4]); else sprintf(aux2,"%03d:%d",c,ituz[vv]);
+        strcpy(aux3,aux2);
+        sprintf(aux4,"%03d",c);
+        incdata3(0,0,aux1,1,0);
+        if(!isdigit(row[4][0]))incdata3(0,1,aux1,1,0);
+        else if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,5,0);
+        else if(ituz[gg]!=ituz[vv])incdata3(0,1,aux1,3,0);
+        else incdata3(0,1,aux1,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,2,aux3,1,0);
+        incdata3(0,3,aux2,1,0); incdata3(0,3,aux3,1,0);
+        incdata3(0,4,aux4,1,0);
+        break
     }
   }
   mysql_free_result(res);
