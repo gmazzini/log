@@ -6,7 +6,7 @@ void conscore(MYSQL *con,char **tok,char *mycall){
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300];
   MYSQL_RES *res;
-  MYSQL_ROW row,row1;
+  MYSQL_ROW row;
   int cqz[1000],ituz[1000];
   double lat1,lat2,lon1,lon2;
   
