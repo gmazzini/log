@@ -1,7 +1,7 @@
 // proclog.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
 #include "pconscore.c"
-// Notra sono liberi 13 e 14 mysql_affected_rows(con);
+// Notra sono liberi 13 e 14
 
 int main(void){
   int c,act,vv,gg;
@@ -327,7 +327,7 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     vv=15; gg=adifextract(ff,vv);
-    for(;gg>0;){
+    for(nnn=0;gg>0;){
       if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
       sprintf(aux1,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
       if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
@@ -339,8 +339,10 @@ int main(void){
       printf("%s\n",aux3);
       sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux3);
       mysql_query(con,buf);
+      nnn+=mysql_affected_rows(con);
       gg=adifextract(NULL,vv);
-    }  
+    }
+    printf("New Inserted: %ld\n",nnn);
     printf("</pre>");
     goto end;
   }
