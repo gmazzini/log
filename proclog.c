@@ -646,6 +646,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     conscore(con,tok,mycall);
+    printf("torna\n");
     goto end;
     printf("<pre>");
     printf("<p class=\"myh1\">%s</p>\n",tok[9]);
