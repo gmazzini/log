@@ -54,13 +54,11 @@
       <button class="btn" id="a17">QSL.lotw</button><button class="btn" id="a18">QSL.eqsl</button><button class="btn" id="a19">QSL.qrz</button><br>
     </td>
     <td class="myq1">
-      <button class="btn" id="a13">ReSerialize1m</button><br>
-      <button class="btn" id="a14">ReSerializeAll</button>
+      <span id="o_call"></span>
     </td>
   </table>
 </div>
 <div class="out" id="out"></div>
-<div id="debug"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script type="module">
 const out = document.getElementById("out");
@@ -138,8 +136,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (ota.length === 16) {
         hh2.style.display = "block";
         hh1.style.display = "none";
+        document.getElementById("o_call").innerHTML = l01.value.trim().toUpperCase();
       }
-      debug.innerHTML = `${ota}`;
     });
   }
 });
