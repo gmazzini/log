@@ -10,7 +10,7 @@ int main(void){
   uint8_t in[4];
   uint32_t t;
   time_t epoch,td;
-  long l1,l2,l3,idx,suml[10],lff;
+  long l1,l2,l3,idx,suml[10],lff,nnn;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
