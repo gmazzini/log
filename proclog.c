@@ -4,7 +4,7 @@
 // Notra sono liberi 13 e 14
 
 int main(void){
-  int c,act,vv,gg,contype;
+  int c,act,vv,gg;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
@@ -645,7 +645,7 @@ int main(void){
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    conscore(con,tok);
+    conscore(con,tok,mycall);
     printf("<pre>");
     printf("<p class=\"myh1\">%s</p>\n",tok[9]);
     gg=strlen(data3[0][4][0].lab);
