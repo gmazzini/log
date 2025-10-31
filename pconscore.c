@@ -111,7 +111,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         break;
       case 7: // CQ160
         strcpy(aux1,row[0]);
-        if(!isdigit(row[4][0]))strcpy(aux2,row[4]); else sprintf(aux2,"%d",c,vv);
+        if(!isdigit(row[4][0]))strcpy(aux2,row[4]); else sprintf(aux2,"%d",vv);
         strcpy(aux3,aux2);
         sprintf(aux4,"%03d",c);
         incdata3(0,0,aux1,1,0);
