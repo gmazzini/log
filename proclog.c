@@ -442,7 +442,7 @@ int main(void){
     printf("<pre>");
     aux1[0]=aux2[0]=aux3[0]='\0';
     pp=strtok(ff,"\n");
-    for(;;){
+    for(nnn=0;;){
       if(pp==NULL)break;
       if(pp[0]=='D')strcpy(aux1,pp+1);
       else if(pp[0]=='F')strcpy(aux2,pp+1);
@@ -457,10 +457,12 @@ int main(void){
         sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','',%d)",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8,atoi(row1[2]));
         sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux9);
         mysql_query(con,buf);
+        nnn+=mysql_affected_rows(con);
         printf("%s\n",aux9);
       }
       pp=strtok(NULL,"\n");
     }
+    printf("New Inserted: %ld\n",nnn);
     printf("</pre>");
     goto end;
   }
@@ -472,7 +474,7 @@ int main(void){
     pp=strtok_r(ff,"\n",&save1);
     l1=0;
     gg=1;
-    for(;;){
+    for(nnn=0;;){
       if(pp==NULL)break;
       if(gg && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; gg=0;}
       if(strncmp(pp,"QSO:",4)==0){
@@ -490,11 +492,13 @@ int main(void){
         row1=searchcty(con,aux7);
         sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
         mysql_query(con,buf);
+        nnn+=mysql_affected_rows(con);
         l1++;
       }
       pp=strtok_r(NULL,"\n",&save1);
     }
-    printf("Inserted %ld QSO\n",l1);
+    printf("Processed %ld QSO\n",l1);
+    printf("New Inserted: %ld\n",nnn);
     printf("</pre>");
     goto end;
   }
