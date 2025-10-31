@@ -643,8 +643,8 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080"};
-    for(contype=0;contype<4;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
-    if(contype==4)goto end;
+    for(contype=0;contype<6;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
+    if(contype==6)goto end;
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     printf("<pre>");
     sprintf(buf,"select dxcc,cont,cqzone,ituzone from cty");
