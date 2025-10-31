@@ -41,15 +41,15 @@ int main(void) {
     if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
     if(adif[7][0]=='\0')strcpy(adif[7],adif[6]);
     if(adif[7][4]=='\0'){adif[7][4]='0'; adif[7][5]='0'; adif[7][6]='\0';}
+    con=mysql_init(NULL);
+    if(con==NULL)continue;
+    if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)continue;
     row1=searchcty(con,adif[0]);
     sprintf(aux2,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
     sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",adif[16],adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(row1[2]));
     fp=fopen(LOG,"a");
     if(fp!=NULL){fprintf(fp,"%s\n",aux3); fclose(fp);}
     sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux3);
-    con=mysql_init(NULL);
-    if(con==NULL)continue;
-    if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)continue;
     mysql_query(con,buf);
     mysql_close(con);
   }
