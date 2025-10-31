@@ -1,7 +1,7 @@
 // pconscore.c contest score function by GM @2025 V 2.0
 
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF"};
+  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160"};
   int contype,c,gg,vv,cqz[1000],ituz[1000];
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300];
@@ -101,6 +101,23 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         strcpy(aux3,aux2);
         sprintf(aux4,"%03d",c);
         incdata3(0,0,aux1,1,0);
+        if(!isdigit(row[4][0]))incdata3(0,1,aux1,1,0);
+        else if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,5,0);
+        else if(ituz[gg]!=ituz[vv])incdata3(0,1,aux1,3,0);
+        else incdata3(0,1,aux1,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,2,aux3,1,0);
+        incdata3(0,3,aux2,1,0); incdata3(0,3,aux3,1,0);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 7: // CQ160
+        strcpy(aux1,row[0]);
+        if(!isdigit(row[4][0]))strcpy(aux2,row[4]); else sprintf(aux2,"%d",c,vv);
+        strcpy(aux3,aux2);
+        sprintf(aux4,"%03d",c);
+        incdata3(0,0,aux1,1,0);
+        if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,10,0);
+        else if(vv!=gg)incdata3(0,1,aux1,5,0);
+        else incdata3(0,1,aux1,2,0);
         if(!isdigit(row[4][0]))incdata3(0,1,aux1,1,0);
         else if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,5,0);
         else if(ituz[gg]!=ituz[vv])incdata3(0,1,aux1,3,0);
