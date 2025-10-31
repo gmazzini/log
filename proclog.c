@@ -647,7 +647,6 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     conscore(con,tok,mycall);
     printf("torna\n");
-    goto end;
     printf("<pre>");
     printf("<p class=\"myh1\">%s</p>\n",tok[9]);
     gg=strlen(data3[0][4][0].lab);
@@ -662,7 +661,6 @@ int main(void){
     for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
     printf("<p class=\"myh1\">%*s %5ld %8ld %4ld</p>\n",gg,"ALL",l1,l2,l3);
     printf("<p class=\"myh2\">Score %9ld</p>\n",l2*l3);
-    mysql_free_result(res);
     printf("</pre>");
     goto end;
   }
