@@ -110,7 +110,7 @@ int main(void){
     goto end;
   }
  
-  if(act==9){ // Apply button
+  if(act==9){ // dxcc solve unset button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
