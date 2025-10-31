@@ -721,7 +721,7 @@ int main(void){
         sprintf(aux1,"%02d%2s:%s",c,aux5,row[0]);
         sprintf(aux2,"%02d%2s:%.2s",c,aux5,row[4]);
         sprintf(aux3,"%02d%2s:%.2s",c,aux5,row[4]);
-        sprintf(aux4,"%03d",c);
+        sprintf(aux4,"%02d%2s",c,aux5);
         incdata3(0,0,aux1,1,0);
         if(strncmp(aux5,"PH",2)==0)incdata3(0,1,aux1,1,0);
         else if(strncmp(aux5,"DG",2)==0)incdata3(0,1,aux1,2,0);
