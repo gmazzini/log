@@ -1,6 +1,6 @@
 // pconscore.c contest score function by GM @2025 V 2.0
 
-void conscore(MYSQL *con,char **tok,char *mycall){
+void conscore(MYSQL *con,char tok[][100],char *mycall){
   const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080"};
   int contype,c,gg,vv;
   long l1,l2;
