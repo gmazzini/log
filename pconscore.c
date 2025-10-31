@@ -108,7 +108,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,2,aux2,1,0); incdata3(0,2,aux3,1,0);
         incdata3(0,3,aux2,1,0); incdata3(0,3,aux3,1,0);
         incdata3(0,4,aux4,1,0);
-        break
+        break;
     }
   }
   mysql_free_result(res);
