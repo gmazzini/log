@@ -3,7 +3,7 @@
 // Notra sono liberi 13 e 14
 
 int main(void){
-  int c,act,vv,gg,contype;
+  int c,act,vv,gg,contype,len;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;
   char cont[1000][2];
   int cqz[1000],ituz[1000];
@@ -669,6 +669,7 @@ int main(void){
       c=myband[(int)(atol(row[1])/1000000.0)]/10;
       vv=atoi(row[2]);
       if(contype==0||contype==1){ // CQWWSSB e CQWWCW
+        len=3;
         sprintf(aux1,"%03d:%s",c,row[0]);
         sprintf(aux2,"%03d:%d",c,vv);
         sprintf(aux3,"%03d:Z%d",c,cqz[vv]);
@@ -683,6 +684,7 @@ int main(void){
         incdata3(0,4,aux4,1,0);
       }
       else if(contype==2||contype==3){ // CQWPXSSB e CQWPXCW
+        len=3;
         sprintf(aux1,"%03d:%s",c,row[0]);
         sprintf(aux2,"%03d:%s",c,wpx(row[0]));
         sprintf(aux3,"ALL:%s",wpx(row[0]));
@@ -697,6 +699,7 @@ int main(void){
         incdata3(0,4,aux4,1,0);
       }
       else if(contype==4){ // CQWWDIGI
+        len=3;
         sprintf(aux1,"%03d:%s",c,row[0]);
         lat1=((row[3][1]-'A')*10.0+(row[3][3]-'0')+1.0/48.0-90.0);
         lon1=-((row[3][0]-'A')*20.0+(row[3][2]-'0')*2.0+1.0/24.0-180.0);
@@ -713,6 +716,7 @@ int main(void){
         incdata3(0,4,aux4,1,0);
       }
       else if(contype==5){ // 4080
+        len=4;
         strcpy(aux5,mymode(row[5]));
         sprintf(aux1,"%02d%2s:%s",c,aux5,row[0]);
         sprintf(aux2,"%02d%2s:%.2s",c,aux5,row[4]);
@@ -729,9 +733,9 @@ int main(void){
     }
     printf("<p class=\"myh1\">%s</p>\n",tok[9]);
     for(c=0;c<ndata3[0][4];c++){
-      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][4][c].lab,3)==0)l1+=data3[0][0][idx].num;
-      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][4][c].lab,3)==0)l2+=data3[0][1][idx].num;
-      for(l3=0,idx=0;idx<ndata3[0][2];idx++)if(strncmp(data3[0][2][idx].lab,data3[0][4][c].lab,3)==0)l3+=data3[0][2][idx].num;
+      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][4][c].lab,len)==0)l1+=data3[0][0][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][4][c].lab,len)==0)l2+=data3[0][1][idx].num;
+      for(l3=0,idx=0;idx<ndata3[0][2];idx++)if(strncmp(data3[0][2][idx].lab,data3[0][4][c].lab,len)==0)l3+=data3[0][2][idx].num;
       printf("%3s %5ld %8ld %4ld\n",data3[0][4][c].lab,l1,l2,l3);
     }
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
