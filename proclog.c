@@ -10,7 +10,7 @@ int main(void){
   uint8_t in[4];
   uint32_t t;
   time_t epoch,td;
-  long l1,l2,l3,idx,suml[10],lff,nnn;
+  long l1,l2,l3,idx,suml[10],lff,nnn,ppp;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -327,7 +327,7 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     vv=15; gg=adifextract(ff,vv);
-    for(nnn=0;gg>0;){
+    for(ppp=nnn=0;gg>0;){
       if(adif[6][4]=='\0'){adif[6][4]='0'; adif[6][5]='0'; adif[6][6]='\0';}
       sprintf(aux1,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[13],adif[13]+4,adif[13]+6,adif[6],adif[6]+2,adif[6]+4);
       if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
@@ -340,9 +340,10 @@ int main(void){
       mysql_query(con,buf);
       l1=mysql_affected_rows(con);
       if(l1>0){nnn+=l1; printf("%s\n",aux3);}
+      ppp++;
       gg=adifextract(NULL,vv);
     }
-    printf("New QSO Inserted: %ld\n",nnn);
+    printf("QSO Processed: %ld\nNew QSO Inserted: %ld\n",ppp,nnn);
     printf("</pre>");
     goto end;
   }
@@ -442,7 +443,7 @@ int main(void){
     printf("<pre>");
     aux1[0]=aux2[0]=aux3[0]='\0';
     pp=strtok(ff,"\n");
-    for(nnn=0;;){
+    for(ppp=nnn=0;;){
       if(pp==NULL)break;
       if(pp[0]=='D')strcpy(aux1,pp+1);
       else if(pp[0]=='F')strcpy(aux2,pp+1);
@@ -459,10 +460,11 @@ int main(void){
         mysql_query(con,buf);
         l1=mysql_affected_rows(con);
         if(l1>0){nnn+=l1; printf("%s\n",aux9);}
+        ppp++;
       }
       pp=strtok(NULL,"\n");
     }
-    printf("New QSO Inserted: %ld\n",nnn);
+    printf("QSO Processed: %ld\nNew QSO Inserted: %ld\n",ppp,nnn);
     printf("</pre>");
     goto end;
   }
@@ -472,9 +474,8 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     pp=strtok_r(ff,"\n",&save1);
-    l1=0;
     gg=1;
-    for(nnn=0;;){
+    for(ppp=nnn=0;;){
       if(pp==NULL)break;
       if(gg && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; gg=0;}
       if(strncmp(pp,"QSO:",4)==0){
@@ -493,12 +494,11 @@ int main(void){
         sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
         mysql_query(con,buf);
         nnn+=mysql_affected_rows(con);
-        l1++;
+        ppp++;
       }
       pp=strtok_r(NULL,"\n",&save1);
     }
-    printf("Processed %ld QSO\n",l1);
-    printf("New QSO Inserted: %ld\n",nnn);
+    printf("QSO Processed: %ld\nNew QSO Inserted: %ld\n",ppp,nnn);
     printf("</pre>");
     goto end;
   }
