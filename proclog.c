@@ -334,10 +334,11 @@ int main(void){
       if(adif[14][0]=='\0')strcpy(adif[14],adif[13]);
       if(adif[7][0]=='\0')strcpy(adif[7],adif[6]);
       if(adif[7][4]=='\0'){adif[7][4]='0'; adif[7][5]='0'; adif[7][6]='\0';}
+      row1=searchcty(con,adif[0]);
       sprintf(aux2,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
-      sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12]);
+      sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(row1[2]));
       printf("%s\n",aux3);
-      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value %s",aux3);
+      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux3);
       mysql_query(con,buf);
       gg=adifextract(NULL,vv);
     }  
@@ -450,9 +451,10 @@ int main(void){
         for(qq=aux6;*qq!='\0';qq++)*qq=toupper(*qq);
         if(aux7[0]=='\0')strcpy(aux7,"59");
         if(aux8[0]=='\0')strcpy(aux8,"59");
+        row1=searchcty(con,aux6);
         sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
-        sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','')",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8);
-        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value %s",aux9);
+        sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','',%d)",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8,atoi(row1[2]));
+        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux9);
         mysql_query(con,buf);
         printf("%s\n",aux9);
       }
@@ -484,7 +486,8 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
-        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0);
+        row1=searchcty(con,aux7);
+        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
         mysql_query(con,buf);
         l1++;
       }
@@ -600,7 +603,8 @@ int main(void){
     if(tok[11][0]=='-')tok[11][0]='\0';
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
-    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s')",mycall,tok[4],aux3,aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9]);
+    row1=searchcty(con,tok[4]);
+    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,tok[4],aux3,aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(row1[2]));
     mysql_query(con,buf);
     sprintf(aux2,"update user set p1='' where ota='%s'",tok[0]);
     mysql_query(con,aux2);
