@@ -128,7 +128,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       else out.innerHTML = await r.text();
     });
   }
-  else if (btn.id === "l03") {
+  if (btn.id === "l03") {
     btn.addEventListener("click", async () => {
       const r = await fetch("plogin.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
@@ -143,7 +143,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       }
     });
   }
-  else if (btn.id === "b09") {
+  if (btn.id === "b09") {
     out.innerHTML = "ciao";
   }
 });
