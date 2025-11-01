@@ -700,12 +700,10 @@ int main(void){
         sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
         mysql_free_result(res);
-        /*
         sprintf(buf,"select count(*),sum(lotw+eqsl+qrz),min(timestampdiff(second,start,now())) from log where mycall='%s' and callsign='%s'",mycall,p4);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-        l3=atol(row[0]); l4=atol(row[1]); if(row==NULL)strcpy(aux1,"   "); else strcpy(aux1,myts(atol(row[2])));
+        if(row==NULL){l3=0; l4=0; strcpy(aux1,"   ");} else{l3=atol(row[0]); l4=atol(row[1]); strcpy(aux1,myts(atol(row[2])));}
         mysql_free_result(res);
-*/
         printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %8.1f %7ld %7ld %4ld %4ld %3s (%s)\n",p4,fx,p1,p4,fx,l1,l2,l3,l4,aux1,p2);
         pp=qq+1;
       }
