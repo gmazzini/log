@@ -5,7 +5,7 @@
 
 int main(void){
   int c,act,vv,gg,s;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -686,14 +686,18 @@ int main(void){
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
+      ff[l1]='\0';
+      pp=ff;
       for(;;){
-      pp=strtok(ff,",\n");
-      if(pp==NULL)break;
-      strcpy(aux1,pp);
-      pp=strtok(NULL,",\n"); strcpy(aux2,pp);
-      pp=strtok(NULL,",\n"); strcpy(aux3,pp);
-      pp=strtok(NULL,",\n"); strcpy(aux4,pp);
-        printf("%s %s %s %s\n",aux1,aux2,aux3,aux4);
+        qq=strpbrk(pp,"\n");
+        if(!qq)break;
+        *qq='\0';
+        p1=strtok(pp,",");
+        p2=strtok(NULL,",");
+        p3=strtok(NULL,",");
+        p4=strtok(NULL,",");
+        printf("%s %s %s %s\n",p1,p2,p3,p4);
+        pp=qq+1;
       }
 //    printf("-%.*s-",l1,ff);
     }
