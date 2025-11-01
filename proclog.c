@@ -15,7 +15,7 @@ int main(void){
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
   FILE *fp;
-  double lat1,lat2,lon1,lon2;
+  double lat1,lat2,lon1,lon2,fx;
   struct sockaddr_in a;
   const char *l11[]={"call","band","mode","lotw","eqsl","qrz"};
  
@@ -694,9 +694,9 @@ int main(void){
         *qq='\0';
         p1=strtok(pp,",");
         p2=strtok(NULL,",");
-        p3=strtok(NULL,","); l1=atof(p3)/1000;
+        p3=strtok(NULL,","); fx=atof(p3)/1000;
         p4=strtok(NULL,",");
-        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%s')\"> </button>%s <b>%16s</b> %8.1f (%s)\n",p4,l1,p1,p4,l1,p2);
+        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%f')\"> </button>%s <b>%16s</b> %8.1f (%s)\n",p4,fx,p1,p4,fx,p2);
         pp=qq+1;
       }
     }
