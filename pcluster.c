@@ -13,8 +13,8 @@
 #define DXC_ADDR "ham.homelinux.org"
 #define DXC_PORT "8000"
 #define CALLSIGN "IK4LZH"
-#define WHOIS_ADDR "127.0.0.1"
-#define WHOIS_PORT "8043"
+#define WHOIS_ADDR "185.119.17.36"
+#define WHOIS_PORT "22222"
 #define TIMEOUT_SEC 300
 #define RECONNECT_WAIT 5
 #define ELM 200000
