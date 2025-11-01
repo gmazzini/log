@@ -160,6 +160,21 @@ document.querySelectorAll("button[id]").forEach(btn => {
             document.getElementById("c01").textContent = "Off";
           }
           break;
+        case 8:
+          s08 = !s08;
+          if (s08) {
+            document.getElementById("c08").textContent = "On";
+            document.getElementById("contest").disabled = false;
+            document.getElementById("contx").disabled = false;
+            document.getElementById("conrx").disabled = false;
+          }
+          else {
+            document.getElementById("c08").textContent = "Off";
+            document.getElementById("contest").disabled = true;
+            document.getElementById("contx").disabled = true;
+            document.getElementById("conrx").disabled = true;
+          }
+          break;
         case 9:
           out.innerHTML = "ciao";
           break;
@@ -203,22 +218,6 @@ async function radioread() {
 }
 setInterval(radioread, 10000);
 radioread();
-
-b08.addEventListener("click", () => {
-  s08 = !s08;
-  if (s08) {
-    document.getElementById("c08").textContent = "On";
-    document.getElementById("contest").disabled = false;
-    document.getElementById("contx").disabled = false;
-    document.getElementById("conrx").disabled = false;
-  } 
-  else {
-    document.getElementById("c08").textContent = "Off";
-    document.getElementById("contest").disabled = true;
-    document.getElementById("contx").disabled = true;
-    document.getElementById("conrx").disabled = true;
-  } 
-});
 
 let b02f, b02m, b04f, b04m, b06f, b06m;
 b02.addEventListener("click", () => {
