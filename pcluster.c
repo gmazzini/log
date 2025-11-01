@@ -9,8 +9,8 @@
 #include <netdb.h>
 #include <pthread.h>
 
-#define DXC_ADDR        "ham.homelinux.org"
-#define DXC_PORT        "8000"
+#define DXC_ADDR "ham.homelinux.org"
+#define DXC_PORT "8000"
 #define CALLSIGN "IK4LZH"
 #define WHOIS_ADDR "127.0.0.1"
 #define WHOIS_PORT "8043"
