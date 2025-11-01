@@ -53,8 +53,10 @@ static void *whois_thread(void *arg) {
     if(r<0){close(cs); continue;}
     buf[r]='\0';
     pthread_mutex_lock(&data_mtx);
-    for(i=0;i<ndata;i++)sprintf(out,"%ld,%s,%ld,%s\n",data[i].time,data[i].from,data[i].freq,data[i].dx);
-    send(cs,out,strlen(out),0);
+    for(i=0;i<ndata;i++){
+      sprintf(out,"%ld,%s,%ld,%s\n",data[i].time,data[i].from,data[i].freq,data[i].dx);
+      send(cs,out,strlen(out),0);
+    }
     pthread_mutex_unlock(&data_mtx);
     close(cs);
   }
@@ -112,7 +114,7 @@ reconnect:
     pthread_mutex_lock(&data_mtx);
     strcpy(data[ndata].dx,q3);
     strcpy(data[ndata].from,q1);
-    data[ndata].freq=atof(q3)*1000;
+    data[ndata].freq=atof(q2)*1000;
     data[ndata].time=time(NULL);
     ndata=(ndata+1)%ELM;
     pthread_mutex_unlock(&data_mtx);
