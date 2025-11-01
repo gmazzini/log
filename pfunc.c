@@ -334,4 +334,5 @@ char *myts(long t){
   else if(t<2592000)sprintf(aux,"%2dD",t/86400);
   else if(t<31536000)sprintf(aux,"%2dM",t/2592000);
   else sprintf(aux,"%2dY",t/31536000);
+  return aux;
 }
