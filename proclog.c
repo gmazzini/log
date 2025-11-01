@@ -686,7 +686,7 @@ int main(void){
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
-      printf("%s",aux2);
+      printf("%.*s",l1,ff);
     }
     close(s);
     printf("</pre>");
