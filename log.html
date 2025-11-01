@@ -52,6 +52,9 @@
       <button class="btn" id="a17">QSL.lotw</button><button class="btn" id="a18">QSL.eqsl</button><button class="btn" id="a19">QSL.qrz</button><br>
     </td>
     <td class="myq1">
+      <button class="btn" id="b09">Cluster</button>
+    </td>
+    <td class="myq1">
       <span id="o_call"></span><br>
       <button class="btn" id="a09">Apply</button><button class="btn" id="a10">Report</button><br>
       <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button>
@@ -125,7 +128,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       else out.innerHTML = await r.text();
     });
   }
-  if (btn.id === "l03") {
+  else if (btn.id === "l03") {
     btn.addEventListener("click", async () => {
       const r = await fetch("plogin.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
@@ -139,6 +142,9 @@ document.querySelectorAll("button[id]").forEach(btn => {
         document.getElementById("o_call").innerHTML = l01.value.trim().toUpperCase();
       }
     });
+  }
+  else if (btn.id === "b09") {
+    out.innerHTML = "ciao";
   }
 });
 
