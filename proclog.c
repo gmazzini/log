@@ -700,7 +700,7 @@ int main(void){
         sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
         mysql_free_result(res);
-        sprintf(buf,"select timestampdiff(second,start,now()) from log where mycall='%s' and callsign='%s' order by start desc limit 1",mycall,p4);
+        sprintf(buf,"select min(timestampdiff(second,start,now())) from log where mycall='%s' and callsign='%s'",mycall,p4);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
         if(row==NULL)strcpy(aux1,"   "); else strcpy(aux1,myts(atol(row[0])));
         mysql_free_result(res);
