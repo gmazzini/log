@@ -227,6 +227,11 @@ window.cmd2 = async (a) => {
   document.getElementById("contest").value = a;
 };
 
+window.cmd3 = async (a,b) => {
+  document.getElementById("call").value = a;
+  document.getElementById("freq").value = b;
+};
+
 async function radioread() {
   if (!s01) return;
   const r = await fetch("pradioread.cgi", {
@@ -254,5 +259,4 @@ document.getElementById("sigtx").value = "59";
 document.getElementById("sigrx").value = "59";
   
 </script>
-
 </body>
