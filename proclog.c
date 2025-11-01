@@ -677,7 +677,7 @@ int main(void){
     printf("<pre>");
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
-    a.sin_family=AF_INET; a.sin_port=htons("22222");
+    a.sin_family=AF_INET; a.sin_port=htons(22222);
     inet_pton(AF_INET,"185.119.17.36",&a.sin_addr);
     connect(s,(struct sockaddr*)&a,sizeof(a));
     sprintf(aux1,"10\n");
