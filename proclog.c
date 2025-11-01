@@ -696,7 +696,7 @@ int main(void){
         p2=strtok(NULL,",");
         p3=strtok(NULL,","); l1=atof(p3)/1000;
         p4=strtok(NULL,",");
-        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%s')\">%20s</button>%s <b>%16s</b> %8.1f (%s)\n",p4,l1,p1,l1,p2);
+        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%s')\"> </button>%s <b>%16s</b> %8.1f (%s)\n",p4,l1,p1,l1,p2);
         pp=qq+1;
       }
     }
