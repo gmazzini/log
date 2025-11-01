@@ -146,7 +146,24 @@ document.querySelectorAll("button[id]").forEach(btn => {
   else if (/^b\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
       const num = parseInt(btn.id.slice(1), 10);
-      if (num == 9)out.innerHTML = "ciao";
+      switch (num) {
+        case 1:
+           s01 = !s01;
+          if (s01) {
+            document.getElementById("freq").disabled = true;
+            document.getElementById("mode").disabled = true;
+            document.getElementById("c01").textContent = "On";
+          } 
+          else {
+            document.getElementById("freq").disabled = false;
+            document.getElementById("mode").disabled = false;
+            document.getElementById("c01").textContent = "Off";
+          }
+          break;
+        case 9:
+          out.innerHTML = "ciao";
+          break;
+      }
     });
   }
 });
@@ -187,19 +204,6 @@ async function radioread() {
 setInterval(radioread, 10000);
 radioread();
 
-b01.addEventListener("click", () => {
-  s01 = !s01;
-  if (s01) {
-    document.getElementById("freq").disabled = true;
-    document.getElementById("mode").disabled = true;
-    document.getElementById("c01").textContent = "On";
-  } 
-  else {
-    document.getElementById("freq").disabled = false;
-    document.getElementById("mode").disabled = false;
-    document.getElementById("c01").textContent = "Off";
-  } 
-});
 b08.addEventListener("click", () => {
   s08 = !s08;
   if (s08) {
