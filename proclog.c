@@ -680,13 +680,13 @@ int main(void){
     a.sin_family=AF_INET; a.sin_port=htons(22222);
     inet_pton(AF_INET,"185.119.17.36",&a.sin_addr);
     connect(s,(struct sockaddr*)&a,sizeof(a));
-    sprintf(aux1,"10\n");
+    sprintf(aux1,"30\n");
     send(s,aux1,strlen(aux1),0);
     shutdown(s,SHUT_WR);
     for(;;){
       l1=recv(s,aux2,300,0);
       if(l1==0)break;
-      printf("%s\n",aux2);
+      printf("%s",aux2);
     }
     close(s);
     printf("</pre>");
