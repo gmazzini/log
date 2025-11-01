@@ -31,8 +31,9 @@ static void *whois_thread(void *arg) {
   (void)arg;
   int ls,cs,one,r;
   struct addrinfo hints,*res=NULL;
-  char buf[100],out[100];
+  char buf[100],out[100],aux1[300];
   long i,show,idx;
+  struct tm te,*tm_now;
 
   memset(&hints,0,sizeof(hints));
   hints.ai_family=AF_UNSPEC;
@@ -57,7 +58,9 @@ static void *whois_thread(void *arg) {
     for(i=0;i<show;i++){
       idx=(i-1-n+ELM)%ELM;
       if(data[idx].freq>0){
-        sprintf(out,"%ld,%s,%ld,%s\n",data[idx].time,data[idx].from,data[idx].freq,data[iidx].dx);
+        tm_now=gmtime(&data[idx].time); te=*tm_now; timegm(&te);
+        strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&te);
+        sprintf(out,"%s,%s,%ld,%s\n",aux1,data[idx].from,data[idx].freq,data[iidx].dx);
         send(cs,out,strlen(out),0);
       }
     }
