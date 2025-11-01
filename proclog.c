@@ -691,7 +691,7 @@ int main(void){
       pp=strtok(NULL,",\n"); strcpy(aux2,pp);
       pp=strtok(NULL,",\n"); strcpy(aux3,pp);
       pp=strtok(NULL,",\n"); strcpy(aux4,pp);
-      /*
+      */
       printf("-%.*s-",l1,ff);
     }
     close(s);
