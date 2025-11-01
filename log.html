@@ -52,7 +52,7 @@
       <button class="btn" id="a17">QSL.lotw</button><button class="btn" id="a18">QSL.eqsl</button><button class="btn" id="a19">QSL.qrz</button><br>
     </td>
     <td class="myq1">
-      <button class="btn" id="b09">Cluster</button>
+      <button class="btn" id="a13">Cluster</button>
     </td>
     <td class="myq1">
       <span id="o_call"></span><br>
@@ -67,8 +67,6 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
-const b01 = document.getElementById("b01");
-const b08 = document.getElementById("b08");
 let s01 = false, s08 = false;
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
@@ -81,10 +79,11 @@ inputs.forEach(id => {
     el.value = el.value.replace(/,/g, "").toUpperCase();
   });
 });
-
 let page = 0;
 let mypage = 30;
 let ota = "";
+let b02f, b02m, b04f, b04m, b06f, b06m;
+  
 document.querySelectorAll("button[id]").forEach(btn => {
   if (/^a\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
@@ -160,6 +159,36 @@ document.querySelectorAll("button[id]").forEach(btn => {
             document.getElementById("c01").textContent = "Off";
           }
           break;
+        case 2:
+          b02f = document.getElementById("freq").value;
+          b02m = document.getElementById("mode").value;
+          break;
+        case 3:
+          if (s01 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
+            document.getElementById("freq").value = b02f;
+            document.getElementById("mode").value = b02m;
+          }
+          break;
+        case 4:
+          b04f = document.getElementById("freq").value;
+          b04m = document.getElementById("mode").value;
+          break;
+        case 5:
+          if (s01 && typeof b04f !== "undefined" && typeof b04m !== "undefined") {
+            document.getElementById("freq").value = b04f;
+            document.getElementById("mode").value = b04m;
+          }
+          break;
+        case 6:
+          b06f = document.getElementById("freq").value;
+          b06m = document.getElementById("mode").value;
+          break;
+        case 7:
+          if (s01 && typeof b06f !== "undefined" && typeof b06m !== "undefined") {
+            document.getElementById("freq").value = b06f;
+            document.getElementById("mode").value = b06m;
+          }
+          break;
         case 8:
           s08 = !s08;
           if (s08) {
@@ -174,22 +203,6 @@ document.querySelectorAll("button[id]").forEach(btn => {
             document.getElementById("contx").disabled = true;
             document.getElementById("conrx").disabled = true;
           }
-          break;
-        case 9:
-          const ws = new WebSocket("ws://185.119.17.36:22222");
-          ws.addEventListener("open", () => {
-            console.log("Connesso");
-            ws.send("10");
-          });
-          ws.addEventListener("message", event => {
-            console.log("Ricevuto:", event.data);
-          });
-          ws.addEventListener("close", () => {
-            console.log("Connessione chiusa");
-          });
-          ws.addEventListener("error", err => {
-            console.error("Errore WebSocket:", err);
-          });
           break;
       }
     });
@@ -231,38 +244,6 @@ async function radioread() {
 }
 setInterval(radioread, 10000);
 radioread();
-
-let b02f, b02m, b04f, b04m, b06f, b06m;
-b02.addEventListener("click", () => {
-  b02f = document.getElementById("freq").value;
-  b02m = document.getElementById("mode").value;
-});
-b03.addEventListener("click", () => {
-  if (s01 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
-    document.getElementById("freq").value = b02f;
-    document.getElementById("mode").value = b02m;
-  }
-});
-b04.addEventListener("click", () => {
-  b04f = document.getElementById("freq").value;
-  b04m = document.getElementById("mode").value;
-});
-b05.addEventListener("click", () => {
-  if (s01 && typeof b04f !== "undefined" && typeof b04m !== "undefined") {
-    document.getElementById("freq").value = b04f;
-    document.getElementById("mode").value = b04m;
-  }
-});
-b06.addEventListener("click", () => {
-  b06f = document.getElementById("freq").value;
-  b06m = document.getElementById("mode").value;
-});
-b07.addEventListener("click", () => {
-  if (s01 && typeof b06f !== "undefined" && typeof b06m !== "undefined") {
-    document.getElementById("freq").value = b06f;
-    document.getElementById("mode").value = b06m;
-  }
-});
   
 document.getElementById("c01").textContent = "Off";
 document.getElementById("c08").textContent = "Off";
