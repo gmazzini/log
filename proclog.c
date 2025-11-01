@@ -702,7 +702,7 @@ int main(void){
         mysql_free_result(res);
         sprintf(buf,"select timestampdiff(second,start,now()) from log where mycall='%s' and callsign='%s' order by start desc limit 1",mycall,p4);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-        if(row==NULL)strcpy(aux1,"   "); else strcpy(aux1,myts(atol(row[0])));
+        if(row==NULL)strcpy(aux1,"   "); else strcpy(aux1,"111");
         mysql_free_result(res);
         printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %8.1f %7d %3s (%s)\n",p4,fx,p1,p4,fx,l1,aux1,p2);
         pp=qq+1;
