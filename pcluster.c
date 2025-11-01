@@ -32,7 +32,7 @@ static void *whois_thread(void *arg) {
   int ls,cs,one,r;
   struct addrinfo hints,*res=NULL;
   char buf[100],out[100];
-  long i;
+  long i,show,idx;
 
   memset(&hints,0,sizeof(hints));
   hints.ai_family=AF_UNSPEC;
@@ -52,10 +52,14 @@ static void *whois_thread(void *arg) {
     r=recv(cs,buf,99,0);
     if(r<0){close(cs); continue;}
     buf[r]='\0';
+    show=atol(buf);
     pthread_mutex_lock(&data_mtx);
-    for(i=0;i<ndata;i++){
-      sprintf(out,"%ld,%s,%ld,%s\n",data[i].time,data[i].from,data[i].freq,data[i].dx);
-      send(cs,out,strlen(out),0);
+    for(i=0;i<show;i++){
+      idx=(i-1-n+ELM)%ELM;
+      if(data[idx].freq>0){
+        sprintf(out,"%ld,%s,%ld,%s\n",data[idx].time,data[idx].from,data[idx].freq,data[iidx].dx);
+        send(cs,out,strlen(out),0);
+      }
     }
     pthread_mutex_unlock(&data_mtx);
     close(cs);
@@ -67,7 +71,6 @@ int main(void){
   int sock,rc,one=1; 
   char buf[4096],aux1[300],*p,*q1,*q2,*q3;
   struct timeval to; 
-  size_t len;
   pthread_t th;
   long i;
 
