@@ -686,7 +686,13 @@ int main(void){
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
-      printf("%.*s",l1,ff);
+      /*
+      pp=strtok(ff,",\n"); strcpy(aux1,pp);
+      pp=strtok(NULL,",\n"); strcpy(aux2,pp);
+      pp=strtok(NULL,",\n"); strcpy(aux3,pp);
+      pp=strtok(NULL,",\n"); strcpy(aux4,pp);
+      /*
+      printf("-%.*s-",l1,ff);
     }
     close(s);
     printf("</pre>");
