@@ -21,7 +21,7 @@
 
 struct data {
   char dx[20];
-  char from[20];
+  char spotter[20];
   long freq;
   time_t time;
 } *data;
@@ -61,7 +61,7 @@ static void *whois_thread(void *arg) {
       if(data[idx].freq>0){
         tm_now=gmtime(&data[idx].time); te=*tm_now; timegm(&te);
         strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&te);
-        sprintf(out,"%s,%s,%ld,%s\n",aux1,data[idx].from,data[idx].freq,data[idx].dx);
+        sprintf(out,"%s,%s,%ld,%s\n",aux1,data[idx].spotter,data[idx].freq,data[idx].dx);
         send(cs,out,strlen(out),0);
       }
     }
@@ -120,7 +120,7 @@ reconnect:
     q3=strtok(NULL," ");
     pthread_mutex_lock(&data_mtx);
     strcpy(data[ndata].dx,q3);
-    strcpy(data[ndata].from,q1);
+    strcpy(data[ndata].spotter,q1);
     data[ndata].freq=atof(q2)*1000;
     data[ndata].time=time(NULL);
     ndata=(ndata+1)%ELM;
