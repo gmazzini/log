@@ -697,7 +697,7 @@ int main(void){
         p3=strtok(NULL,","); fx=atof(p3)/1000;
         p4=strtok(NULL,",");
         row=searchcty(con,p4); vv=atoi(row[2]);
-        sprintf(buf,"select count(*),lotw+eqsl+qrz from log where mycall='%s' and dxcc=%d",mycall,vv);
+        sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
         mysql_free_result(res);
         sprintf(buf,"select timestampdiff(second,start,now()) from log where mycall='%s' and callsign='%s' order by start desc limit 1",mycall,p4);
