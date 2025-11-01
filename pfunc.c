@@ -326,3 +326,12 @@ double bearing(double lat1,double lon1,double lat2,double lon2){
   if(b<0)b+=360.0;
   return b;
 }
+
+char *myts(long t){
+  static char aux[10];
+  if(t<3600)sprintf(aux,"%2dm",t/60);
+  else if(t<86400)sprintf(aux,"%2dh",t/3600);
+  else if(t<2592000)sprintf(aux,"%2dD",t/86400);
+  else if(t<31536000)sprintf(aux,"%2dM",t/2592000);
+  else sprintf(aux,"%2dY",t/31536000);
+}
