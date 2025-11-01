@@ -56,11 +56,11 @@ static void *whois_thread(void *arg) {
     show=atol(buf);
     pthread_mutex_lock(&data_mtx);
     for(i=0;i<show;i++){
-      idx=(i-1-n+ELM)%ELM;
+      idx=(i-1-show+ELM)%ELM;
       if(data[idx].freq>0){
         tm_now=gmtime(&data[idx].time); te=*tm_now; timegm(&te);
         strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&te);
-        sprintf(out,"%s,%s,%ld,%s\n",aux1,data[idx].from,data[idx].freq,data[iidx].dx);
+        sprintf(out,"%s,%s,%ld,%s\n",aux1,data[idx].from,data[idx].freq,data[idx].dx);
         send(cs,out,strlen(out),0);
       }
     }
