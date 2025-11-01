@@ -10,6 +10,8 @@
 #include <netdb.h>
 #include <mysql/mysql.h>
 #include <curl/curl.h>
+#include <arpa/inet.h>
+
 #include "log.def"
 #define TOT3 5
 #define TOTL2 400
