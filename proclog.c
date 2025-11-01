@@ -696,7 +696,7 @@ int main(void){
         p2=strtok(NULL,",");
         p3=strtok(NULL,",");
         p4=strtok(NULL,",");
-        printf("%s %16s %9.2f (%16s)\n",p1,p4,atof(p3)/1000,p2);
+        printf("%s %16s %8.1f (%s)\n",p1,p4,atof(p3)/1000,p2);
         pp=qq+1;
       }
     }
