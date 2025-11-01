@@ -143,9 +143,10 @@ document.querySelectorAll("button[id]").forEach(btn => {
       }
     });
   }
-  else if (btn.id === "b09") {
+  else if (/^b\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
-      out.innerHTML = "ciao";
+      const num = parseInt(btn.id.slice(1), 10);
+      if (num == 9)out.innerHTML = "ciao";
     });
   }
 });
