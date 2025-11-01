@@ -176,7 +176,20 @@ document.querySelectorAll("button[id]").forEach(btn => {
           }
           break;
         case 9:
-          out.innerHTML = "ciao";
+          const ws = new WebSocket("ws://185.119.17.36:22222");
+          ws.addEventListener("open", () => {
+            console.log("Connesso");
+            ws.send("10");
+          });
+          ws.addEventListener("message", event => {
+            console.log("Ricevuto:", event.data);
+          });
+          ws.addEventListener("close", () => {
+            console.log("Connessione chiusa");
+          });
+          ws.addEventListener("error", err => {
+            console.error("Errore WebSocket:", err);
+          });
           break;
       }
     });
