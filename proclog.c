@@ -684,7 +684,7 @@ int main(void){
     send(s,aux1,strlen(aux1),0);
     shutdown(s,SHUT_WR);
     for(;;){
-      l1=recv(s,aux2,300,0);
+      l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
       printf("%s",aux2);
     }
