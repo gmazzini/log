@@ -4,7 +4,7 @@
 // Notra sono liberi 13 e 14
 
 int main(void){
-  int c,act,vv,gg;
+  int c,act,vv,gg,s;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
@@ -673,7 +673,7 @@ int main(void){
   if(act==13){ // cluster button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-
+    printf("<pre>");
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
     a.sin_family=AF_INET; a.sin_port=htons("22222");
@@ -683,11 +683,12 @@ int main(void){
     send(s,aux1,strlen(aux1),0);
     shutdown(s,SHUT_WR);
     for(;;){
+      l1=recv(s,aux2,300,0);
+      if(l1==0)break;
+      printf("%s\n",aux2);
     }
-    while((l1 = recv(s, b, sizeof(b), 0)) > 0)
-        write(1, b, n);
-
     close(s);
+    printf("</pre>");
     goto end;
   }
   
