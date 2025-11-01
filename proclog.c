@@ -669,6 +669,27 @@ int main(void){
     printf("</pre>");
     goto end;
   }
+
+  if(act==13){ // cluster button
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+
+    s=socket(AF_INET,SOCK_STREAM,0);
+    memset(&a,0,sizeof(a));
+    a.sin_family=AF_INET; a.sin_port=htons("22222");
+    inet_pton(AF_INET,"185.119.17.36",&a.sin_addr);
+    connect(s,(struct sockaddr*)&a,sizeof(a));
+    sprintf(aux1,"10\n");
+    send(s,aux1,strlen(aux1),0);
+    shutdown(s,SHUT_WR);
+    for(;;){
+    }
+    while((l1 = recv(s, b, sizeof(b), 0)) > 0)
+        write(1, b, n);
+
+    close(s);
+    goto end;
+  }
   
   end:
   mysql_close(con);
