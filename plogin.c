@@ -8,7 +8,7 @@
 #define VALIDITY 86400
 
 int main(void){
-  int c,vv,gg;
+  int c,vv,gg,mypage;
   char buf[1000],aux1[300],tok[2][100];
   time_t epoch;
   MYSQL *con;
@@ -27,10 +27,11 @@ int main(void){
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   epoch=time(NULL);
-  sprintf(buf,"select count(*) from user where mycall='%s' and md5passwd='%s' limit 1",tok[0],tok[1]);
+  sprintf(buf,"select count(*),mypage from user where mycall='%s' and md5passwd='%s' limit 1",tok[0],tok[1]);
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
   if(row==NULL || atoi(row[0])==0)strcpy(aux1,"");
   else {
+    mypage=atoi(row[1]);
     srand((unsigned int)epoch);
     gg=sizeof(charset)-1;
     for(c=0;c<16;c++)aux1[c]=charset[rand()%gg];
@@ -40,7 +41,7 @@ int main(void){
   }
   mysql_free_result(res);
   printf("Content-Type: text/plain\r\n\r\n");
-  printf("%s\n",aux1);
+  printf("%s,%d\n",aux1,mypage);
   mysql_close(con);
   return 0;
 }
