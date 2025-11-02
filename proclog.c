@@ -683,7 +683,6 @@ int main(void){
     sprintf(aux1,"%d\n",atoi(tok[2]));
     send(s,aux1,strlen(aux1),0);
     shutdown(s,SHUT_WR);
-    printf("%s\n",tok[12]);
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
