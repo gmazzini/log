@@ -99,6 +99,7 @@ inputs.forEach(id => {
 let page = 0;
 let mypage = 0;  
 let ota = "";
+let filter = "";
 let b02f, b02m, b04f, b04m, b06f, b06m;
 
 function setchecks() {
@@ -163,13 +164,14 @@ document.querySelectorAll("button[id]").forEach(btn => {
         headers: {"Content-Type": "text/csv"},
         body: [l01.value.trim().toUpperCase(),CryptoJS.MD5(l02.value).toString()].join(",")
       });
-      [ota, mypage] = (await r.text()).trim().split(",");
+      [ota, mypage, filter] = (await r.text()).trim().split(",");
       if (ota.length === 16) {
         hh2.style.display = "block";
         hh1.style.display = "none";
         document.getElementById("o_call").innerHTML = l01.value.trim().toUpperCase();
         document.getElementById("o_ota").innerHTML = ota;
         document.getElementById("mypage").value = mypage;
+        for (let i = 0; i < 13; i++) v[9 + i] = +filer[i];
       }
     });
   }
