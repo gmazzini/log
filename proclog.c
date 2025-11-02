@@ -682,7 +682,6 @@ int main(void){
     connect(s,(struct sockaddr*)&a,sizeof(a));
     sprintf(aux1,"1000\n"); // DA GUARDARE
     send(s,aux1,strlen(aux1),0);
-    shutdown(s,SHUT_WR);
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
@@ -701,9 +700,6 @@ int main(void){
         if(c==nbands)continue;
         if(tok[12][bands[c].band]=='0' || tok[12][bands[c].mode]=='0')continue;
         nnn++;
-
-
-        
         row=searchcty(con,p4); vv=atoi(row[2]);
         sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
