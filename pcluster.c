@@ -32,9 +32,8 @@ static void *whois_thread(void *arg) {
   (void)arg;
   int ls,cs,one,r;
   struct addrinfo hints,*res=NULL;
-  char buf[100],out[100],aux1[300];
+  char buf[100],out[100];
   long i,from,to,idx;
-  struct tm te,*tm_now;
 
   memset(&hints,0,sizeof(hints));
   hints.ai_family=AF_UNSPEC;
