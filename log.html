@@ -81,7 +81,8 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
-let s01 = false, s08 = false;
+let s01 = false;
+let v = new Array(21+1).fill(0);
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
   const el = document.getElementById(id);
@@ -97,7 +98,17 @@ let page = 0;
 let mypage = 30;
 let ota = "";
 let b02f, b02m, b04f, b04m, b06f, b06m;
-  
+
+  function setchecks() {
+  for (let i = 1; i <= 21; i++) {
+    const id = "c" + String(i).padStart(2, "0");
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = v[i] === 1 ? "☑️" : "☐";
+    }
+  }
+}
+ 
 document.querySelectorAll("button[id]").forEach(btn => {
   if (/^a\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
@@ -250,16 +261,6 @@ setInterval(() => {
   if (/^Waiting/i.test(out.textContent)) out.textContent += ".";
 }, 1000);
 
-function setchecks() {
-  for (let i = 1; i <= 21; i++) {
-    const id = "c" + String(i).padStart(2, "0");
-    const el = document.getElementById(id);
-    if (el) {
-      el.textContent = v[i] === 1 ? "☑️" : "☐";
-    }
-  }
-}
-  
 async function radioread() {
   if (!s01) return;
   const r = await fetch("pradioread.cgi", {
@@ -278,8 +279,6 @@ async function radioread() {
 }
 setInterval(radioread, 10000);
 radioread();
-
-let v = new Array(21+1).fill(0);
 setchecks();
 hh2.style.display = "none";
 hh1.style.display = "block";
