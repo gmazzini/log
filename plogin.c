@@ -32,7 +32,7 @@ int main(void){
   if(row==NULL || atoi(row[0])==0)strcpy(aux1,"");
   else {
     mypage=atoi(row[1]);
-    strcpu(filter,row[2]);
+    strcpy(filter,row[2]);
     srand((unsigned int)epoch);
     gg=sizeof(charset)-1;
     for(c=0;c<16;c++)aux1[c]=charset[rand()%gg];
