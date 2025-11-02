@@ -59,9 +59,7 @@ static void *whois_thread(void *arg) {
     for(i=from;i<=to;i++){
       idx=(ndata-1-i+ELM)%ELM;
       if(data[idx].freq>0){
-        tm_now=gmtime(&data[idx].time); te=*tm_now; timegm(&te);
-        strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&te);
-        sprintf(out,"%s,%s,%ld,%s\n",aux1,data[idx].spotter,data[idx].freq,data[idx].dx);
+        sprintf(out,"%ld,%s,%ld,%s\n",data[idx].time,data[idx].spotter,data[idx].freq,data[idx].dx);
         send(cs,out,strlen(out),0);
       }
     }
