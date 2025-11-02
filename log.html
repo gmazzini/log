@@ -116,7 +116,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
         data
       ].join(",");
-      out.innerHTML = "<em>Loading...</em>";
+      out.textContent = "Loading";
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
@@ -233,6 +233,12 @@ window.cmd3 = async (a,b) => {
   document.getElementById("call").value = a;
   document.getElementById("freq").value = b;
 };
+
+out.textContent = "Loading"; // testo iniziale
+
+const timer = setInterval(() => {
+  if (/^Loading/i.test(txt)) out.textContent = txt + ".";
+}, 1000);
 
 async function radioread() {
   if (!s01) return;
