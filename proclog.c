@@ -1,7 +1,7 @@
 // proclog.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
 #include "pconscore.c"
-// Notra sono liberi 13
+// Notra sono liberi 15
 
 int main(void){
   int c,act,vv,gg,s;
@@ -699,6 +699,7 @@ int main(void){
         pp=qq+1;
         for(c=0;c<nbands;c++)if(l1>=bands[c].start && l1<=bands[c].end)break;
         if(c==nbands)continue;
+        if(tok[12][bands[c].band]=='0' || tok[12][bands[c].mode]=='0')continue;
 
 
         
