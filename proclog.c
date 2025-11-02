@@ -681,14 +681,14 @@ int main(void){
     a.sin_family=AF_INET; a.sin_port=htons(22222);
     inet_pton(AF_INET,"127.0.0.1",&a.sin_addr);
     connect(s,(struct sockaddr*)&a,sizeof(a));
-    sprintf(aux1,"0,1000\n"); // DA GUARDARE
+    sprintf(aux1,"%d,%s\n",mypage,tok[12]);
     send(s,aux1,strlen(aux1),0);
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
       ff[l1]='\0';
       pp=ff;
-      for(nnn=0;nnn<mypage;){
+      for(;;){
         qq=strpbrk(pp,"\n");
         if(!qq)break;
         *qq='\0';
@@ -697,10 +697,6 @@ int main(void){
         p3=strtok(NULL,","); l1=atol(p3); fx=l1/1000.0;
         p4=strtok(NULL,",");
         pp=qq+1;
-        for(c=0;c<nbands;c++)if(l1>=bands[c].start && l1<=bands[c].end)break;
-        if(c==nbands)continue;
-        if(tok[12][bands[c].band]=='0' || tok[12][bands[c].mode]=='0')continue;
-        nnn++;
         row=searchcty(con,p4); vv=atoi(row[2]);
         sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
