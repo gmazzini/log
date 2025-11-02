@@ -680,7 +680,7 @@ int main(void){
     a.sin_family=AF_INET; a.sin_port=htons(22222);
     inet_pton(AF_INET,"185.119.17.36",&a.sin_addr);
     connect(s,(struct sockaddr*)&a,sizeof(a));
-    sprintf(aux1,"%d\n",atoi(tok[2]));
+    sprintf(aux1,"30\n"); // DA GUARDARE
     send(s,aux1,strlen(aux1),0);
     shutdown(s,SHUT_WR);
     for(;;){
