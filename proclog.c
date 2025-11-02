@@ -678,7 +678,7 @@ int main(void){
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
     a.sin_family=AF_INET; a.sin_port=htons(22222);
-    inet_pton(AF_INET,"185.119.17.36",&a.sin_addr);
+    inet_pton(AF_INET,"127.0.0.1",&a.sin_addr);
     connect(s,(struct sockaddr*)&a,sizeof(a));
     sprintf(aux1,"0,1000\n"); // DA GUARDARE
     send(s,aux1,strlen(aux1),0);
