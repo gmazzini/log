@@ -689,21 +689,14 @@ int main(void){
       ff[l1]='\0';
       pp=ff;
       for(;;){
-    printf(">0\n");
         qq=strpbrk(pp,"\n");
         if(!qq)break;
         *qq='\0';
-    printf(">1\n");    
         p1=strtok(pp,",");
-    printf("p1 %s\n",p1);
         p2=strtok(NULL,",");
-    printf("p2 %s\n",p2);
         p3=strtok(NULL,","); fx=atof(p3)/1000;
-    printf("p3 %s\n",p3);
         p4=strtok(NULL,",");
-    printf("p4 %s\n",p4);
         row=searchcty(con,p4); vv=atoi(row[2]);
-    printf(">2\n");
         sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
         mysql_free_result(res);
