@@ -4,7 +4,7 @@
 // Notra sono liberi 15
 
 int main(void){
-  int c,act,vv,gg,s;
+  int c,act,vv,gg,s,mypage;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
@@ -47,6 +47,7 @@ int main(void){
     }
   }
   ff[lff]='\0';
+  mypage=atoi(tok[3]);
 
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
@@ -81,9 +82,9 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,atol(tok[3]),atoi(tok[2]));
-    else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,atoi(tok[3]),atol(tok[2]));
-    else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,atoi(tok[3]),atol(tok[2]));
+    if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,mypage,atol(tok[2]));
+    else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,mypage,atol(tok[2]));
+    else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,mypage,atol(tok[2]));
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
@@ -212,7 +213,7 @@ int main(void){
     for(c=0;c<6;c++){
       qsort(data3[0][c],ndata3[0][c],sizeof(struct data3),cmp3);
       printf("<td><pre><b>%7s     #</b>\n",l11[c]);
-      for(l1=0,l2=min(ndata3[0][c],atol(tok[3]));l1<l2;l1++)printf("%7.7s %6ld\n",data3[0][c][l1].lab,data3[0][c][l1].num);
+      for(l1=0,l2=min(ndata3[0][c],mypage);l1<l2;l1++)printf("%7.7s %6ld\n",data3[0][c][l1].lab,data3[0][c][l1].num);
       printf("</pre></td>");
     }
     printf("</table>");
@@ -687,7 +688,7 @@ int main(void){
       if(l1==0)break;
       ff[l1]='\0';
       pp=ff;
-      for(nnn=0;nnn<30;){
+      for(nnn=0;nnn<mypage;){
         qq=strpbrk(pp,"\n");
         if(!qq)break;
         *qq='\0';
