@@ -137,6 +137,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         page,
         mypage,
         ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
+        v.slice(9, 22).join(''),
         data
       ].join(",");
       out.textContent = "Waiting";
