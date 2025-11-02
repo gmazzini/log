@@ -45,7 +45,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
   static MYSQL_RES *res;
   static MYSQL_ROW row;
   int i,n;
-  const char *suffixes[]={"P","M","LH","MM","AM","A","QRP","0","1","2","3","4","5","6","7","8","9"};
+  const char *suffixes[]={"P","M","LH","MM","AM","A","B","QRP","0","1","2","3","4","5","6","7","8","9"};
   n=sizeof(suffixes)/sizeof(suffixes[0]);
   strcpy(call,incall);
   p=strrchr(call,'/');
