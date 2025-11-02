@@ -206,21 +206,20 @@ document.querySelectorAll("button[id]").forEach(btn => {
           }
           break;
         case 8:
-          s08 = !s08;
-          if (s08) {
-            document.getElementById("c08").textContent = "☑️";
+          v[8] = 1 - v[8];
+          if (v[8] === 1) {
             document.getElementById("contest").disabled = false;
             document.getElementById("contx").disabled = false;
             document.getElementById("conrx").disabled = false;
           }
           else {
-            document.getElementById("c08").textContent = "☐";
             document.getElementById("contest").disabled = true;
             document.getElementById("contx").disabled = true;
             document.getElementById("conrx").disabled = true;
           }
           break;
       }
+      setchecks();
     });
   }
 });
