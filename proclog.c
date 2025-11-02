@@ -5,7 +5,7 @@
 
 int main(void){
   int c,act,vv,gg,s;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[12][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -27,12 +27,12 @@ int main(void){
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
-  // 0:ota 1:btn.id 2:page 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:FILE
+  // 0:ota 1:btn.id 2:page 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:cluster 13:FILE
   for(vv=0,gg=0,lff=0;;){
     c=getchar();
     if(c==EOF)break;
     if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
-    if(vv<12)tok[vv][gg++]=(char)c;
+    if(vv<13)tok[vv][gg++]=(char)c;
     else {
       if(c=='=')break;
       in[gg]=c;
@@ -680,9 +680,10 @@ int main(void){
     a.sin_family=AF_INET; a.sin_port=htons(22222);
     inet_pton(AF_INET,"185.119.17.36",&a.sin_addr);
     connect(s,(struct sockaddr*)&a,sizeof(a));
-    sprintf(aux1,"30\n");
+    sprintf(aux1,"%d\n",atoi(tok[2]));
     send(s,aux1,strlen(aux1),0);
     shutdown(s,SHUT_WR);
+    printf("%s\n",tok[12]);
     for(;;){
       l1=recv(s,ff,MAXFF,0);
       if(l1==0)break;
