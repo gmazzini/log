@@ -81,7 +81,6 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
-let s01 = false;
 let v = new Array(21+1).fill(0);
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
@@ -99,7 +98,7 @@ let mypage = 30;
 let ota = "";
 let b02f, b02m, b04f, b04m, b06f, b06m;
 
-  function setchecks() {
+function setchecks() {
   for (let i = 1; i <= 21; i++) {
     const id = "c" + String(i).padStart(2, "0");
     const el = document.getElementById(id);
@@ -174,16 +173,14 @@ document.querySelectorAll("button[id]").forEach(btn => {
       const num = parseInt(btn.id.slice(1), 10);
       switch (num) {
         case 1:
-           s01 = !s01;
-          if (s01) {
+          v[1] = 1 - v[1];
+          if (v[1] === 1) {
             document.getElementById("freq").disabled = true;
             document.getElementById("mode").disabled = true;
-            document.getElementById("c01").textContent = "☑️";
           } 
           else {
             document.getElementById("freq").disabled = false;
             document.getElementById("mode").disabled = false;
-            document.getElementById("c01").textContent = "☐";
           }
           break;
         case 2:
@@ -191,7 +188,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
           b02m = document.getElementById("mode").value;
           break;
         case 3:
-          if (s01 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
+          if (v[1] === 1 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
             document.getElementById("freq").value = b02f;
             document.getElementById("mode").value = b02m;
           }
@@ -201,7 +198,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
           b04m = document.getElementById("mode").value;
           break;
         case 5:
-          if (s01 && typeof b04f !== "undefined" && typeof b04m !== "undefined") {
+          if (v[1] === 1 && typeof b04f !== "undefined" && typeof b04m !== "undefined") {
             document.getElementById("freq").value = b04f;
             document.getElementById("mode").value = b04m;
           }
@@ -211,7 +208,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
           b06m = document.getElementById("mode").value;
           break;
         case 7:
-          if (s01 && typeof b06f !== "undefined" && typeof b06m !== "undefined") {
+          if (v[1] === 1 && typeof b06f !== "undefined" && typeof b06m !== "undefined") {
             document.getElementById("freq").value = b06f;
             document.getElementById("mode").value = b06m;
           }
@@ -265,7 +262,7 @@ setInterval(() => {
 }, 1000);
 
 async function radioread() {
-  if (!s01) return;
+  if (v[1] === 0) return;
   const r = await fetch("pradioread.cgi", {
     method: "POST",
     cache: "no-store",
