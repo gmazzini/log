@@ -52,6 +52,7 @@
       <button class="btn" id="a17">QSL.lotw</button><button class="btn" id="a18">QSL.eqsl</button><button class="btn" id="a19">QSL.qrz</button><br>
     </td>
     <td class="myq1">
+      
       <button class="btn" id="a13">Cluster</button>
     </td>
     <td class="myq1">
@@ -154,12 +155,12 @@ document.querySelectorAll("button[id]").forEach(btn => {
           if (s01) {
             document.getElementById("freq").disabled = true;
             document.getElementById("mode").disabled = true;
-            document.getElementById("c01").textContent = "On";
+            document.getElementById("c01").textContent = "☑️";
           } 
           else {
             document.getElementById("freq").disabled = false;
             document.getElementById("mode").disabled = false;
-            document.getElementById("c01").textContent = "Off";
+            document.getElementById("c01").textContent = "☐";
           }
           break;
         case 2:
@@ -195,13 +196,13 @@ document.querySelectorAll("button[id]").forEach(btn => {
         case 8:
           s08 = !s08;
           if (s08) {
-            document.getElementById("c08").textContent = "On";
+            document.getElementById("c08").textContent = "☑️";
             document.getElementById("contest").disabled = false;
             document.getElementById("contx").disabled = false;
             document.getElementById("conrx").disabled = false;
           }
           else {
-            document.getElementById("c08").textContent = "Off";
+            document.getElementById("c08").textContent = "☐";
             document.getElementById("contest").disabled = true;
             document.getElementById("contx").disabled = true;
             document.getElementById("conrx").disabled = true;
@@ -257,8 +258,8 @@ async function radioread() {
 setInterval(radioread, 10000);
 radioread();
   
-document.getElementById("c01").textContent = "Off";
-document.getElementById("c08").textContent = "Off";
+document.getElementById("c01").textContent = "☐";
+document.getElementById("c08").textContent = "☐";
 hh2.style.display = "none";
 hh1.style.display = "block";
 document.getElementById("sigtx").value = "59";
