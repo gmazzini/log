@@ -269,9 +269,11 @@ async function radioread() {
 }
 setInterval(radioread, 10000);
 radioread();
-  
-document.getElementById("c01").textContent = "☐";
-document.getElementById("c08").textContent = "☐";
+
+for (let i = 1; i <= 21; i++) {
+  const id = "c" + String(i).padStart(2, "0");
+  document.getElementById(id).textContent = "☐";
+}
 hh2.style.display = "none";
 hh1.style.display = "block";
 document.getElementById("sigtx").value = "59";
