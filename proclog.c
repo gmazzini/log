@@ -688,7 +688,7 @@ int main(void){
       if(l1==0)break;
       ff[l1]='\0';
       pp=ff;
-      for(;;){
+      for(nnn=0;nnn<30;){
         qq=strpbrk(pp,"\n");
         if(!qq)break;
         *qq='\0';
@@ -700,6 +700,7 @@ int main(void){
         for(c=0;c<nbands;c++)if(l1>=bands[c].start && l1<=bands[c].end)break;
         if(c==nbands)continue;
         if(tok[12][bands[c].band]=='0' || tok[12][bands[c].mode]=='0')continue;
+        nnn++;
 
 
         
