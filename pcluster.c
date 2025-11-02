@@ -33,7 +33,7 @@ static void *whois_thread(void *arg) {
   int ls,cs,one,r;
   struct addrinfo hints,*res=NULL;
   char buf[100],out[100],aux1[300];
-  long i,show,idx;
+  long i,from,to,idx;
   struct tm te,*tm_now;
 
   memset(&hints,0,sizeof(hints));
@@ -54,9 +54,9 @@ static void *whois_thread(void *arg) {
     r=recv(cs,buf,99,0);
     if(r<0){close(cs); continue;}
     buf[r]='\0';
-    show=atol(buf);
+    sscanf(buf,"%ld,%ld",&from,&to);
     pthread_mutex_lock(&data_mtx);
-    for(i=0;i<show;i++){
+    for(i=from;i<=to;i++){
       idx=(ndata-1-i+ELM)%ELM;
       if(data[idx].freq>0){
         tm_now=gmtime(&data[idx].time); te=*tm_now; timegm(&te);
@@ -125,7 +125,5 @@ reconnect:
     data[ndata].time=time(NULL);
     ndata=(ndata+1)%ELM;
     pthread_mutex_unlock(&data_mtx);
-
-printf("%s %s %s\n",q1,q2,q3);
   }
 }
