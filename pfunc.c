@@ -76,6 +76,7 @@ struct bandplane bands[] = {
   {12,2,5154000,5366000},
   {12,0,5366000,5366500}
 };
+int nbands=sizeof(bands)/sizeof(bands[0]);
 
 MYSQL_ROW searchcty(MYSQL *con,char *incall){
   char buf[1000],*p,call[20];
