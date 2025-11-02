@@ -218,7 +218,6 @@ document.querySelectorAll("button[id]").forEach(btn => {
           break;
         case 8:
           v[8] = 1 - v[8];
-          setchecks();
           if (v[8] === 1) {
             document.getElementById("contest").disabled = false;
             document.getElementById("contx").disabled = false;
@@ -229,6 +228,9 @@ document.querySelectorAll("button[id]").forEach(btn => {
             document.getElementById("contx").disabled = true;
             document.getElementById("conrx").disabled = true;
           }
+          break;
+        default:
+          v[num] = 1 - v[num];
           break;
       }
       setchecks();
