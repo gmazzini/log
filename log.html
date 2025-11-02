@@ -251,6 +251,16 @@ setInterval(() => {
   if (/^Waiting/i.test(out.textContent)) out.textContent += ".";
 }, 1000);
 
+function setcheks() {
+  for (let i = 1; i <= 21; i++) {
+    const id = "c" + String(i).padStart(2, "0");
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = v[i] === 1 ? "☑️" : "☐";
+    }
+  }
+}
+  
 async function radioread() {
   if (!s01) return;
   const r = await fetch("pradioread.cgi", {
@@ -270,11 +280,8 @@ async function radioread() {
 setInterval(radioread, 10000);
 radioread();
 
-for (let i = 1; i <= 21; i++) {
-  const id = "c" + String(i).padStart(2, "0");
-  const el = document.getElementById(id);
-  if (el) el.textContent = "☐";
-}
+let v = new Array(21+1).fill(0);
+setchecks();
 hh2.style.display = "none";
 hh1.style.display = "block";
 document.getElementById("sigtx").value = "59";
