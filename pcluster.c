@@ -26,14 +26,52 @@ struct data {
   time_t time;
 } *data;
 long ndata=0;
+struct bandplane {
+  int band;
+  int mode;
+  long start;
+  long end;
+};
+struct bandplane bands[] = {
+  {8,1,1810000,1838000},
+  {8,2,1838000,1843000},
+  {8,0,1843000,2000000},
+  {7,1,3500000,3570000},
+  {7,2,3570000,3600000},
+  {7,0,3600000,3800000},
+  {6,1,7000000,7040000},
+  {6,2,7040000,7080000},
+  {6,0,7060000,7200000},
+  {5,1,14000000,14070000},
+  {5,2,14070000,14112000},
+  {5,0,14112000,14350000},
+  {4,1,21000000,21070000},
+  {4,2,21070000,21151000},
+  {4,0,21151000,21450000},
+  {3,1,28000000,28070000},
+  {3,2,28070000,28320000},
+  {3,0,28320000,29700000},
+  {11,1,10100000,10130000},
+  {11,2,10130000,10150000},
+  {10,1,18068000,18095000},
+  {10,2,18095000,18111000},
+  {10,0,18111000,18168000},
+  {9,1,24890000,24915000},
+  {9,2,24915000,24931000},
+  {9,0,24931000,24990000},
+  {12,1,5151500,5153000},
+  {12,2,5154000,5366000},
+  {12,0,5366000,5366500}
+};
+int nbands=sizeof(bands)/sizeof(bands[0]);
 pthread_mutex_t data_mtx=PTHREAD_MUTEX_INITIALIZER;
 
-static void *whois_thread(void *arg) {
+static void *answer_thread(void *arg) {
   (void)arg;
-  int ls,cs,one,r;
+  int ls,cs,one,r,c,mypage,xx;
   struct addrinfo hints,*res=NULL;
-  char buf[100],out[100];
-  long i,from,to,idx;
+  char buf[100],out[100],filter[50];
+  long i,idx;
 
   memset(&hints,0,sizeof(hints));
   hints.ai_family=AF_UNSPEC;
@@ -53,13 +91,19 @@ static void *whois_thread(void *arg) {
     r=recv(cs,buf,99,0);
     if(r<0){close(cs); continue;}
     buf[r]='\0';
-    sscanf(buf,"%ld,%ld",&from,&to);
+    sscanf(buf,"%d,%s",&mypage,filter);
     pthread_mutex_lock(&data_mtx);
-    for(i=from;i<=to;i++){
+    xx=0;
+    for(i=0;i<ELM;i++){
       idx=(ndata-1-i+ELM)%ELM;
       if(data[idx].freq>0){
+        for(c=0;c<nbands;c++)if(data[idx].freq>=bands[c].start && data[idx].freq<=bands[c].end)break;
+        if(c==nbands)continue;
+        if(filter[bands[c].band]=='0' || filter[bands[c].mode]=='0')continue;
         sprintf(out,"%ld,%s,%ld,%s\n",data[idx].time,data[idx].spotter,data[idx].freq,data[idx].dx);
         send(cs,out,strlen(out),0);
+        xx++;
+        if(xx>=mypage)break;
       }
     }
     pthread_mutex_unlock(&data_mtx);
@@ -78,7 +122,7 @@ int main(void){
   data=(struct data *)malloc(ELM*sizeof(struct data));
   if(data==NULL)return 0;
   for(i=0;i<ELM;i++)data[i].freq=0;
-  pthread_create(&th,NULL,whois_thread,NULL);
+  pthread_create(&th,NULL,answer_thread,NULL);
   pthread_detach(th);
 
 reconnect:
