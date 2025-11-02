@@ -56,13 +56,13 @@
     </td>
     <td class="myq1">
       <span id="o_call"></span><br>
+      <span id="o_ota"></span><br>
       <button class="btn" id="a09">Apply</button><button class="btn" id="a10">Report</button><br>
       <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button>
     </td>
   </table>
 </div>
 <div class="out" id="out"></div>
-<div id="debug"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script type="module">
 const out = document.getElementById("out");
@@ -116,6 +116,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
         data
       ].join(",");
+      out.innerHTML = "<em>Loading...</em>";
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
@@ -140,7 +141,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         hh2.style.display = "block";
         hh1.style.display = "none";
         document.getElementById("o_call").innerHTML = l01.value.trim().toUpperCase();
-        document.getElementById("out").innerHTML = ota;
+        document.getElementById("o_ota").innerHTML = ota;
       }
     });
   }
