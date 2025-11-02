@@ -82,6 +82,7 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
+const imypage = document.getElementById("mypage");
 let v = new Array(21+1).fill(0);
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
@@ -279,6 +280,11 @@ async function radioread() {
   document.getElementById("freq").value = fff;
   document.getElementById("mode").value = mode;
 }
+
+input.addEventListener("input", () => {
+    mypage = imypage.value;
+});
+  
 setInterval(radioread, 10000);
 radioread();
 setchecks();
