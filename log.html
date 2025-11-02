@@ -116,7 +116,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
         data
       ].join(",");
-      out.textContent = "Loading";
+      out.textContent = "Waiting";
       const r = await fetch("proclog.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
@@ -234,13 +234,8 @@ window.cmd3 = async (a,b) => {
   document.getElementById("freq").value = b;
 };
 
-out.textContent = "Loading"; // testo iniziale
-
 setInterval(() => {
-  const txt = out.textContent || "";
-  if (/^Loading/i.test(txt)) {
-    out.textContent = txt + ".";
-  }
+  if (/^Waiting/i.test(out.textContent)) out.textContent += ".";
 }, 1000);
 
 async function radioread() {
