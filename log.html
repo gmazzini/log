@@ -236,8 +236,11 @@ window.cmd3 = async (a,b) => {
 
 out.textContent = "Loading"; // testo iniziale
 
-const timer = setInterval(() => {
-  if (/^Loading/i.test(txt)) out.textContent = txt + ".";
+setInterval(() => {
+  const txt = out.textContent || "";
+  if (/^Loading/i.test(txt)) {
+    out.textContent = txt + ".";
+  }
 }, 1000);
 
 async function radioread() {
