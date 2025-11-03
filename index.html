@@ -158,9 +158,10 @@ document.querySelectorAll("button[id]").forEach(btn => {
         document.getElementById("a04").click();
       }
       else out.innerHTML = await r.text();
-      if (num == 23){
-        const firstLine = out.innerText.split('\n')[0];
-        start = firstLine.split(':')[1].trim(); 
+      if (num == 23) {
+        const match = out.innerText.match(/Start:\s*(.+)/);
+        if (match) start = match[1].trim();
+        else start = "";
       }
     });
   }
