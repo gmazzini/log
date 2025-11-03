@@ -137,13 +137,14 @@ document.querySelectorAll("button[id]").forEach(btn => {
       }
       if (base < 0) base = 0;
       document.getElementById("base").innerHTML = base;
+      
       const body = [
         ota,
         btn.id,
         base,
         mypage,
         ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
-        v.slice(9, 22).join(''),
+        cmd === 13 ? v.slice(9, 22).join('') : cmd === 26 ? start : '',
         data
       ].join(",");
       out.textContent = "Waiting";
