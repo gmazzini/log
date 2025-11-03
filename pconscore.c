@@ -128,7 +128,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         break;
       case 8: // SPDX
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
-        if(gg==269)sprintf(aux2,"%03d:%d",c,vv); else sprintf(aux2,"%03d:%s",c,row[4]);
+        if(gg==269)sprintf(aux2,"%03d:%d",c,vv); else if(vv==269)sprintf(aux2,"%03d:%s",c,row[4]);
         strcpy(aux3,aux2);
         sprintf(aux4,"%03d",c);        
         incdata3(0,0,aux1,1,0);
