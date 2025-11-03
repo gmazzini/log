@@ -27,7 +27,7 @@ int main(void){
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
-  // 0:ota 1:btn.id 2:page 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:cluster 13:FILE
+  // 0:ota 1:btn.id 2:base 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:cluster 13:FILE
   for(vv=0,gg=0,lff=0;;){
     c=getchar();
     if(c==EOF)break;
