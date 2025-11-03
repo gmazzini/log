@@ -100,6 +100,7 @@ let base = 0;
 let mypage = 0;  
 let ota = "";
 let filter = "";
+let start = "";
 let b02f, b02m, b04f, b04m, b06f, b06m;
 
 function setchecks() {
@@ -156,6 +157,10 @@ document.querySelectorAll("button[id]").forEach(btn => {
         document.getElementById("a04").click();
       }
       else out.innerHTML = await r.text();
+      if (num == 23){
+        const firstLine = out.innerText.split('\n')[0];
+        start = firstLine.split(':')[1].trim(); 
+      }
     });
   }
   else if (btn.id === "l03") {
