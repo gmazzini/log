@@ -163,6 +163,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         if (match) start = match[1].trim();
         else start = "";
       }
+      if (num == 26) start = "";
     });
   }
   else if (btn.id === "l03") {
