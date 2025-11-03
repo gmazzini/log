@@ -27,7 +27,7 @@ int main(void){
   }
   ff=(char *)malloc((MAXFF+1)*sizeof(char));
   // reading elements in csv with last file ff in base64 decoded with assuntion last quartet not usefull
-  // 0:ota 1:btn.id 2:base 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:cluster 13:FILE
+  // 0:ota 1:btn.id 2:base 3:mypage 4:call 5:freq 6:mode 7:sigtx 8:sigrx 9:contest 10:contx 11:conrx 12:cluster|start 13:FILE
   for(vv=0,gg=0,lff=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -602,20 +602,25 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     l1=(long)(atof(tok[5])*1000);
     if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
+    /*
     sprintf(buf,"select p1 from user where ota='%s'",tok[0]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux3,row[0]);
     mysql_free_result(res);
     if(aux3[0]=='\0')goto end;
+                         */
+    if(tok[12]=='\0')goto end;
     if(tok[9][0]=='-')tok[9][0]='\0';
     if(tok[10][0]=='-')tok[10][0]='\0';
     if(tok[11][0]=='-')tok[11][0]='\0';
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
     row1=searchcty(con,tok[4]);
-    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,tok[4],aux3,aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(row1[2]));
+    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(row1[2]));
     mysql_query(con,buf);
+    /*
     sprintf(aux2,"update user set p1='' where ota='%s'",tok[0]);
     mysql_query(con,aux2);
+      */
     printf("%s inserted\n",tok[4]);
     goto end;
   }
