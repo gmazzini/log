@@ -82,7 +82,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("<p class=\"myh1\"> %19s%5s %12s %8s %4s %5s %5s</p>","DATETIME","LEN","CALLSIGN","FREQ","MODE","SIGTX","SIGRX");
+    printf("<p class=\"myh1\">    %19s%5s %12s %8s %4s %5s %5s</p>","DATETIME","LEN","CALLSIGN","FREQ","MODE","SIGTX","SIGRX");
     if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,mypage,atol(tok[2]));
     else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,mypage,atol(tok[2]));
     else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,mypage,atol(tok[2]));
