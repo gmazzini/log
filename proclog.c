@@ -514,11 +514,7 @@ int main(void){
     strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
     sprintf(aux2,"update user set p1='%s' where ota='%s'",aux1,tok[0]);
     mysql_query(con,aux2);
-    printf("%s\n",aux1);
-
-
-
-    
+    printf("Start: %s\n",aux1);
     printf("<table><td>");
     row=searchcty(con,tok[4]);
     vv=atoi(row[2]);
