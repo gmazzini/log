@@ -146,12 +146,12 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else {if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,3,0); else incdata3(0,1,aux1,1,0);}
         if(gg==212){
           sprintf(aux2,"%03d:%d",c,vv);
-          sprintf(aux3,"%03d:Z%d",c,ituz(vv));
+          sprintf(aux3,"%03d:Z%d",c,ituz[vv]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           incdata3(0,2,aux3,1,0); incdata3(0,3,aux3,1,0);
         }
         else {
-          sprintf(aux2,"%03d:Z%d",c,ituz(vv));
+          sprintf(aux2,"%03d:Z%d",c,ituz[vv]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           if(vv==212){
             printf(aux2,"%03d:%s",c,row[4]);
