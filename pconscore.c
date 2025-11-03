@@ -60,8 +60,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else incdata3(0,1,aux1,1,0);
         sprintf(aux2,"%03d:%s",c,wpx(row[0]));
         sprintf(aux3,"ALL:%s",wpx(row[0]));
-        incdata3(0,2,aux2,1,0);
-        incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux3,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
@@ -76,8 +75,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,1,aux1,gg,0);
         sprintf(aux2,"%03d:%.2s",c,row[4]);
         sprintf(aux3,"ALL:%.2s",row[4]);
-        incdata3(0,2,aux2,1,0);
-        incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux3,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
@@ -89,9 +87,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else if(strncmp(aux5,"DG",2)==0)incdata3(0,1,aux1,2,0);
         else if(strncmp(aux5,"CW",2)==0)incdata3(0,1,aux1,3,0);
         sprintf(aux2,"%02d%2s:%.2s",c,aux5,row[4]);
-        strcpy(aux3,aux2);
-        incdata3(0,2,aux2,1,0);
-        incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%02d%2s",c,aux5);
         incdata3(0,4,aux4,1,0);
         break;
@@ -103,9 +99,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else if(ituz[gg]!=ituz[vv])incdata3(0,1,aux1,3,0);
         else incdata3(0,1,aux1,1,0);
         if(!isdigit(row[4][0]))sprintf(aux2,"%03d:%s",c,row[4]); else sprintf(aux2,"%03d:%d",c,ituz[vv]);
-        strcpy(aux3,aux2);
-        incdata3(0,2,aux2,1,0); incdata3(0,2,aux3,1,0);
-        incdata3(0,3,aux2,1,0); incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
@@ -120,9 +114,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else if(ituz[gg]!=ituz[vv])incdata3(0,1,aux1,3,0);
         else incdata3(0,1,aux1,1,0);
         if(!isdigit(row[4][0]))sprintf(aux2,"%03d:%s",c,row[4]); else sprintf(aux2,"%03d:%d",c,vv);
-        strcpy(aux3,aux2);
-        incdata3(0,2,aux2,1,0); incdata3(0,2,aux3,1,0);
-        incdata3(0,3,aux2,1,0); incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux3,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
@@ -133,9 +125,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else if(vv==269)incdata3(0,1,aux1,3,0);
         else incdata3(0,1,aux1,1,0);
         if(gg==269)sprintf(aux2,"%03d:%d",c,vv); else if(vv==269)sprintf(aux2,"%03d:%s",c,row[4]);
-        strcpy(aux3,aux2);
-        incdata3(0,2,aux2,1,0);
-        incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
