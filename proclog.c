@@ -608,7 +608,7 @@ int main(void){
     mysql_free_result(res);
     if(aux3[0]=='\0')goto end;
                          */
-    if(tok[12]=='\0')goto end;
+    if(tok[12][0]=='\0')goto end;
     if(tok[9][0]=='-')tok[9][0]='\0';
     if(tok[10][0]=='-')tok[10][0]='\0';
     if(tok[11][0]=='-')tok[11][0]='\0';
