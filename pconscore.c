@@ -1,7 +1,7 @@
 // pconscore.c contest score function by GM @2025 V 2.0
 
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX"};
+  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW"};
   int contype,c,gg,vv,cqz[1000],ituz[1000];
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300];
@@ -149,6 +149,27 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
         }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 11: // OKOMSSB OK=503 OM=504
+      case 12: // OKOMCW OK=503 OM=504
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        incdata3(0,0,aux1,1,0);
+        if(gg==503||gg==504){
+          if(gg==vv)incdata3(0,1,aux1,2,0);
+          else if(strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,3,0);
+          else incdata3(0,1,aux1,5,0);
+        }
+        else {
+          if(vv==503||vv==504)incdata3(0,1,aux1,10,0);
+          else if(gg==vv)incdata3(0,1,aux1,1,0);
+          else if(strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,3,0);
+          else incdata3(0,1,aux1,5,0);
+        }
+        if(gg==503||gg==504)sprintf(aux2,"%03d:%s",c,row[4]);
+        else sprintf(aux2,"%03d:%d",c,vv);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
