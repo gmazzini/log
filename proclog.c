@@ -81,7 +81,7 @@ int main(void){
   if((act>=1 && act<=8) || (act>=28 && act<=30)){ // List buttons(4: 1 2 3 4) and List Find buttons(3: 5 6 7) and List Contest buttons(3:28 29 30) 
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    printf("<pre>");
+    printf("<pre>\n %19s%5s %12s %8.1f %4s %5s %5s","DATETIME","LEN","CALLSIGN","FREQ","MODE","SIGTX","SIGRX");
     if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,mypage,atol(tok[2]));
     else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,mypage,atol(tok[2]));
     else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,mypage,atol(tok[2]));
@@ -102,7 +102,7 @@ int main(void){
       else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
       else sprintf(aux2,"(%ldh)",td/3600);
       printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
-      printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
+      printf("%s%5s %12s %8.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
       if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
       printf("\n");
