@@ -72,8 +72,8 @@
       <span id="o_ota"></span><br>
       <button class="btn" id="a09">Apply</button><button class="btn" id="a10">Report</button><br>
       <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button><br>
-      <label class="myf1">MyPage </label>
-      <input class="myf2" id="mypage" maxlength="3" size="3" autocomplete="off">
+      <label class="myf1">MyPage </label><input class="myf2" id="mypage" maxlength="3" size="3" autocomplete="off"><br>
+      <label class="myf1">Base </label><span id="base"></span><br>
     </td>
   </table>
 </div>
@@ -96,7 +96,7 @@ inputs.forEach(id => {
     el.value = el.value.replace(/,/g, "").toUpperCase();
   });
 });
-let page = 0;
+let base = 0;
 let mypage = 0;  
 let ota = "";
 let filter = "";
@@ -116,9 +116,9 @@ document.querySelectorAll("button[id]").forEach(btn => {
   if (/^a\d{2}$/.test(btn.id)) {
     btn.addEventListener("click", async () => {
       const num = parseInt(btn.id.slice(1), 10);
-      if (num == 1 || num == 6 || num == 28) page = 0;
-      else if (num == 2 || num == 7 || num == 29) page -= mypage;
-      else if (num == 3 || num == 8 || num == 30) page += mypage;
+      if (num == 1 || num == 6 || num == 28) base = 0;
+      else if (num == 2 || num == 7 || num == 29) base -= mypage;
+      else if (num == 3 || num == 8 || num == 30) base += mypage;
       let data = "";
       if (num >= 15 && num <= 22) {
         const file = document.getElementById("ff").files[0];
@@ -134,11 +134,12 @@ document.querySelectorAll("button[id]").forEach(btn => {
           data = btoa(binary);
         }
       }
-      if (page < 0) page = 0;
+      if (base < 0) base = 0;
+      document.getElementById("base").innerHTML = base;
       const body = [
         ota,
         btn.id,
-        page,
+        base,
         mypage,
         ...inputs.map(id => document.getElementById(id)?.value.trim() || "-"),
         v.slice(9, 22).join(''),
@@ -151,7 +152,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         body
       });
       if (num == 5) {
-        page = parseInt(await r.text(), 10) || 0;
+        base = parseInt(await r.text(), 10) || 0;
         document.getElementById("a04").click();
       }
       else out.innerHTML = await r.text();
