@@ -64,7 +64,8 @@ function loadcty($con){
       
       if($ff[0]=="=")$prefix=substr($ff,1);
       else $prefix=$ff;
-      mysqli_query($con,"insert into cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,prefix) values ('$base','$name',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$prefix')");
+      $xname=mysqli_real_escape_string($con,$name);
+      mysqli_query($con,"insert into cty (base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift,prefix) values ('$base','$xname',$dxcc,'$cont',$cqzone,$ituzone,$latitude,$longitude,$gmtshift,'$prefix')");
     }
   }
   fclose($hh);
