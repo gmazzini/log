@@ -1,7 +1,7 @@
 // pconscore.c contest score function by GM @2025 V 2.0
 
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160","SPDX","LZDX"};
+  const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX"};
   int contype,c,gg,vv,cqz[1000],ituz[1000];
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300];
@@ -103,7 +103,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 7: // CQ160
+      case 7: // CQ160SSB
+      case 8: // CQ160CW
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,10,0);
@@ -114,11 +115,11 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else if(ituz[gg]!=ituz[vv])incdata3(0,1,aux1,3,0);
         else incdata3(0,1,aux1,1,0);
         if(!isdigit(row[4][0]))sprintf(aux2,"%03d:%s",c,row[4]); else sprintf(aux2,"%03d:%d",c,vv);
-        incdata3(0,2,aux2,1,0); incdata3(0,3,aux3,1,0);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 8: // SPDX SP=269
+      case 9: // SPDX SP=269
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(gg==269){if(strncmp(cont[vv],"EU",2)!=0)incdata3(0,1,aux1,3,0); else if(vv!=269)incdata3(0,1,aux1,1,0);}
@@ -129,7 +130,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 9: // LZDX LZ=212
+      case 10: // LZDX LZ=212
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(vv==212){if(gg==212)incdata3(0,1,aux1,1,0); else incdata3(0,1,aux1,10,0);}
