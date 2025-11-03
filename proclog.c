@@ -82,7 +82,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("<p class=\"myh1\">%22s%5s %12s %8s %4s %5s %5s</p>","DATETIME","LEN","CALLSIGN","FREQ","MODE","SIGTX","SIGRX");
+    printf("<p class=\"myh1\">%22s%5s %16s %10s %4s %5s %5s</p>","DATETIME","LEN","CALLSIGN","FREQ","MODE","SIGTX","SIGRX");
     if(act<=5)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by start desc, callsign desc limit %d offset %ld",mycall,mypage,atol(tok[2]));
     else if(act<=8)sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign like '%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[4],mycall,mypage,atol(tok[2]));
     else sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where contest='%s' and mycall='%s' order by start desc, callsign desc limit %d offset %ld",tok[9],mycall,mypage,atol(tok[2]));
@@ -103,7 +103,7 @@ int main(void){
       else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
       else sprintf(aux2,"(%ldh)",td/3600);
       printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
-      printf("%s%5s <b>%12s</b> %8.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
+      printf("%s%5s <b>%16s</b> %10.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
       if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
       printf("\n");
@@ -671,7 +671,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    printf("<p class=\"myh1\">%22s <b>%16s</b> %10s %7s %7s %4s %4s %3s (%s)</p>","DATETIME","CALLSIGN","FREQ","QSODXCC","QSLDXCC","QSO","QSL","LAST","SPOTTER");
+    printf("<p class=\"myh1\">%22s <b>%16s</b> %10s %7s %7s %4s %4s %3s %s</p>","DATETIME","CALLSIGN","FREQ","QSODXCC","QSLDXCC","QSO","QSL","LAST","SPOTTER");
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
     a.sin_family=AF_INET; a.sin_port=htons(22222);
@@ -703,7 +703,7 @@ int main(void){
         mysql_free_result(res);
         epoch=atol(p1); tm_now=gmtime(&epoch); ts=*tm_now; timegm(&ts); 
         strftime(aux2,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
-        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f %7ld %7ld %4ld %4ld %3s (%s)\n",p4,fx,aux2,p4,fx,l1,l2,l3,l4,aux1,p2);
+        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f %7ld %7ld %4ld %4ld %3s %s\n",p4,fx,aux2,p4,fx,l1,l2,l3,l4,aux1,p2);
       }
     }
     close(s);
