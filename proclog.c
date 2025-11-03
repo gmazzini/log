@@ -600,6 +600,10 @@ int main(void){
   if(act==26){ // end button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+
+
+printf("%s %d\n",tok[12],strlen(tok[12]));
+    
     l1=(long)(atof(tok[5])*1000);
     if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
     /*
