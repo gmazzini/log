@@ -671,6 +671,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
+    printf("<p class=\"myh1\">%22s <b>%16s</b> %10s %7ld %7ld %4ld %4ld %3s (%s)</p>","DATETIME","CALLSIGN","FREQ","QSODXCC","QSLDXCC","QSO","QSL","LAST","SPOTTER");
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
     a.sin_family=AF_INET; a.sin_port=htons(22222);
