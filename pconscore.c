@@ -154,7 +154,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           sprintf(aux2,"%03d:Z%d",c,ituz[vv]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           if(vv==212){
-            printf(aux2,"%03d:%s",c,row[4]);
+            sprintf(aux2,"%03d:%s",c,row[4]);
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
         }
