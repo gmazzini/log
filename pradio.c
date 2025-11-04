@@ -39,6 +39,7 @@ int main(void){
   strcpy(ip,row[0]); strcpy(port,row[1]);
   mysql_free_result(rrr);
   mysql_close(con);
+  printf("-\n");
   if(getaddrinfo(ip,port,&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){printf("0,ND\n"); exit(0);}
   fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
   if(fd<0){printf("0,ND\n"); freeaddrinfo(res); exit(0);}
