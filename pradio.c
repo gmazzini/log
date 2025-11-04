@@ -19,7 +19,7 @@ int main(void){
   MYSQL_RES *rrr;
   MYSQL_ROW row;
   
-  printf("Content-Type: text/plain\r\n\r\n0,ND\n");
+  printf("Content-Type: text/plain\r\n\r\n");
   // 0:ota 1:{R=read S=set} 2=freq,mode
   for(vv=0,gg=0;;){
     c=getchar();
@@ -28,8 +28,6 @@ int main(void){
     if(vv<3)tok[vv][gg++]=(char)c;
   }
   tok[vv][gg]='\0';
-
-      printf("-\n");
 
   con=mysql_init(NULL);
   if(con==NULL){printf("0,ND\n"); exit(0);}
