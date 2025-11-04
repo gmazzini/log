@@ -35,8 +35,11 @@
     <td class="myq1">
       <button class="btn" id="b01">RigOO</button><span id="c01"></span><br>
       <button class="btn" id="b02">RTX&#8680;1</button><button class="btn" id="b03">1&#8680;RTX</button><br>
+      <span id="c23"></span><br>
       <button class="btn" id="b04">RTX&#8680;2</button><button class="btn" id="b05">2&#8680;RTX</button><br>
+      <span id="c45"></span><br>
       <button class="btn" id="b06">RTX&#8680;3</button><button class="btn" id="b07">3&#8680;RTX</button><br>
+      <span id="c67"></span>
     </td>
     <td class="myq1">
       <input type="file" id="ff" hidden>
@@ -200,6 +203,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         case 2:
           b02f = document.getElementById("freq").value;
           b02m = document.getElementById("mode").value;
+          document.getElementById("c23").textContent = b02f + ":" + b02m;
           break;
         case 3:
           if (v[1] === 1 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
