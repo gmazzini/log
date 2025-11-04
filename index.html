@@ -294,14 +294,14 @@ async function radioread() {
   document.getElementById("mode").value = mode;
 }
 
-window.radioset = async function() {
+window.radioset = async (a,b) => {
   if (v[1] === 0) return;
   const r = await fetch("pradio.cgi", {
     method: "POST",
     cache: "no-store",
     credentials: "same-origin",
     headers: { "Content-Type": "text/csv" },
-    body: [ota, "S", `${freq}:${mode}`].join(",")
+    body: [ota, "S", `${a}:${b}`].join(",")
   });
   const text = await r.text();
   const [freq, mode] = text.split(",");
