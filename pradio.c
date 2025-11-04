@@ -77,6 +77,8 @@ int main(void){
       sscanf(tok[2],"%ld:%s",&freq,mode);
       sprintf(aux1,"F %ld\n",freq);
       send(fd,aux1,strlen(aux1),0);
+      sprintf(aux1,"M %s 0\n",mode);
+      send(fd,aux1,strlen(aux1),0);
       sprintf(out,"%ld,%s",freq,mode);
       p=out+strlen(out);
     }
