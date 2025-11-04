@@ -301,7 +301,7 @@ async function radioset() {
     cache: "no-store",
     credentials: "same-origin",
     headers: { "Content-Type": "text/csv" },
-    body: [ota, "S", "14500000,LSB"].join(",")
+    body: [ota, "S", "14500000:LSB"].join(",")
   });
   const text = await r.text();
   const [freq, mode] = text.split(",");
