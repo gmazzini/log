@@ -2,18 +2,14 @@
 
 function qrz($con,$Icallsign){
   global $myshow,$qrzuser,$qrzpassword;
-  $qrzkey=trim(myrcl($con,"qrzkey"));    
-  $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
-  $q2=simplexml_load_string($q1);
-  if(isset($q2->Session->Error)&&$q2->Session->Error=="Session Timeout"){
+  
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?username=$qrzuser;password=$qrzpassword;agent=gm01");
     $q2=simplexml_load_string($q1);
     $qrzkey=$q2->Session->Key;
     mysto($con,"qrzkey","$qrzkey\n");
     $q1=mycurlget("http://xmldata.qrz.com/xml/current/?s=$qrzkey;callsign=$Icallsign");
     $q2=simplexml_load_string($q1);
-    if($myshow)echo "Renewed qrz.com key\n";
-  }
+   
   $gfname=mysqli_real_escape_string($con,$q2->Callsign->fname);
   if(strlen($gfname)>0){
     if(isset($q2->Callsign->nickname))$gfname.=' "'.mysqli_real_escape_string($con,$q2->Callsign->nickname).'"';
