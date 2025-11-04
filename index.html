@@ -277,12 +277,12 @@ setInterval(() => {
 
 async function radioread() {
   if (v[1] === 0) return;
-  const r = await fetch("pradioread.cgi", {
+  const r = await fetch("pradio.cgi", {
     method: "POST",
     cache: "no-store",
     credentials: "same-origin",
     headers: { "Content-Type": "text/csv" },
-    body: ota
+    body: [ota, "R", "0,ND"].join(",")
   });
   const text = await r.text();
   const [freq, mode] = text.split(",");
