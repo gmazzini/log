@@ -50,7 +50,6 @@ int main(void){
   
   if(tok[1][0]=='R'){
     send(fd,"sfim\n",5,0);
-    p=out;
     for(i=0;i<5;){
       r=recv(fd,&h,1,0);
       if(r<=0)break;
