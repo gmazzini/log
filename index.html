@@ -302,7 +302,7 @@ async function radioread() {
 
 window.radioset = async (a,b) => {
   if (v[1] === 0) return;
-  const aa = Math.round(s * 1000);
+  const aa = Math.round(a * 1000);
   const r = await fetch("pradio.cgi", {
     method: "POST",
     cache: "no-store",
