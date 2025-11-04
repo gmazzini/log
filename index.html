@@ -294,7 +294,7 @@ async function radioread() {
   document.getElementById("mode").value = mode;
 }
 
-window.radioset = async function(freq, mode) {
+window.radioset = async function() {
   if (v[1] === 0) return;
   const r = await fetch("pradio.cgi", {
     method: "POST",
