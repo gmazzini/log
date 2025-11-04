@@ -135,7 +135,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         }
       }
       if (base < 0) base = 0;
-      document.getElementById("base").innerHTML = base;
+      document.getElementById("base").textContent = base;
       
       const body = [
         ota,
@@ -177,8 +177,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
       if (ota.length === 16) {
         hh2.style.display = "block";
         hh1.style.display = "none";
-        document.getElementById("o_call").innerHTML = l01.value.trim().toUpperCase();
-        document.getElementById("o_ota").innerHTML = ota;
+        document.getElementById("o_call").textContent = l01.value.trim().toUpperCase();
+        document.getElementById("o_ota").textContent = ota;
         document.getElementById("mypage").value = mypage;
         for (let i = 0; i < 13; i++) v[9 + i] = +filter[i];
         setchecks();
@@ -328,6 +328,6 @@ hh2.style.display = "none";
 hh1.style.display = "block";
 document.getElementById("sigtx").value = "59";
 document.getElementById("sigrx").value = "59";
-document.getElementById("base").innerHTML = base;  
+document.getElementById("base").textContent = base;  
 </script>
 </body>
