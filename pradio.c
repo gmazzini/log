@@ -31,61 +31,59 @@ int main(void){
   MYSQL_RES *rrr;
   MYSQL_ROW row;
 
-  if(pipe(fds)==-1){
-    printf("Content-Type: text/plain\r\n\r\n0,ND\n");
-    return 0;
+  
+  
+  
+  
+  printf("Content-Type: text/plain\r\n\r\n0,ND\n");
+  // 0:ota 1:{R=read S=set} 2=freq,mode
+  for(vv=0,gg=0;;){
+    c=getchar();
+    if(c==EOF)break;
+    if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
+    if(vv<3)tok[vv][gg++]=(char)c;
   }
-  child_pid=fork();
-  if(child_pid==0){
-    close(fds[0]);
-    dup2(fds[1],STDOUT_FILENO);
-    close(fds[1]);
-    // 0:ota 1:{R=read S=set} 2=freq,mode
-    for(vv=0,gg=0;;){
-      c=getchar();
-      if(c==EOF)break;
-      if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
-      if(vv<3)tok[vv][gg++]=(char)c;
-     }
-    tok[vv][gg]='\0';
-    con=mysql_init(NULL);
-    if(con==NULL){write(1,"0,ND\n",5); _exit(0);}
-    if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); write(1,"0,ND\n",5); _exit(0);}
-    epoch=time(NULL);
-    sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
-    mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
-    if(row==NULL){mysql_close(con); write(1,"0,ND\n",5); _exit(0);}
-    strcpy(ip,row[0]); strcpy(port,row[1]);
-    mysql_free_result(rrr);
-    mysql_close(con);
-    if(getaddrinfo(ip,port,&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){write(1,"0,ND\n",5); _exit(0);}
-    fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
-    if(fd<0){write(1,"0,ND\n",5); freeaddrinfo(res); _exit(0);}
-    r=connect(fd,res->ai_addr,res->ai_addrlen);
-    if(r==-1){write(1,"0,ND\n",5); close(fd); freeaddrinfo(res); _exit(0);}
-    if(tok[1][0]=='R'){
-      send(fd,"sfim\n",5,0);
-      p=out;
-      for(i=0;i<5;){
-        r=recv(fd,&h,1,0);
-        if(r<=0)break;
-        if(h=='\n'){if(i==2)*p++=','; i++;}
-        else if(i==2||i==4)*p++=h;
-      }
+  tok[vv][gg]='\0';
+  
+  con=mysql_init(NULL);
+  if(con==NULL){printf("0,ND\n"); exit(0);}
+  if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
+  epoch=time(NULL);
+  sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
+  mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
+  if(row==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
+  strcpy(ip,row[0]); strcpy(port,row[1]);
+  mysql_free_result(rrr);
+  mysql_close(con);
+  if(getaddrinfo(ip,port,&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){printf("0,ND\n"); exit(0);}
+  fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
+  if(fd<0){printf("0,ND\n"); freeaddrinfo(res); exit(0);}
+  r=connect(fd,res->ai_addr,res->ai_addrlen);
+  if(r==-1){printf("0,ND\n"); close(fd); freeaddrinfo(res); exit(0);}
+  
+  if(tok[1][0]=='R'){
+    send(fd,"sfim\n",5,0);
+    p=out;
+    for(i=0;i<5;){
+      r=recv(fd,&h,1,0);
+      if(r<=0)break;
+      if(h=='\n'){if(i==2)*p++=','; i++;}
+      else if(i==2||i==4)*p++=h;
     }
-    else if(tok[1][0]=='S'){
-      sscanf(tok[2],"%ld:%s",&freq,mode);
-      sprintf(aux1,"F %ld\n",freq);
-      send(fd,aux1,strlen(aux1),0);
-      sprintf(aux1,"M %s 0\n",mode);
-      send(fd,aux1,strlen(aux1),0);
-      sprintf(out,"%ld,%s",freq,mode);
-      p=out+strlen(out);
-    }
-    else p=out;
-    close(fd);
-    freeaddrinfo(res);
-    *p++='\0';
+  }
+  else if(tok[1][0]=='S'){
+    sscanf(tok[2],"%ld:%s",&freq,mode);
+    sprintf(aux1,"F %ld\n",freq);
+    send(fd,aux1,strlen(aux1),0);
+    sprintf(aux1,"M %s 0\n",mode);
+    send(fd,aux1,strlen(aux1),0);
+    sprintf(out,"%ld,%s",freq,mode);
+    p=out+strlen(out);
+  }
+  else p=out;
+  close(fd);
+  freeaddrinfo(res);
+  *p++='\0';
     if(out[0]!='\0'){
       len=strlen(out);
       if(len>0)write(1,out,len);
