@@ -1,7 +1,7 @@
 // proclog.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
 #include "pconscore.c"
-// Notra sono liberi 15
+// Nota bottoni liberi 15
 
 int main(void){
   int c,act,vv,gg,s,mypage;
@@ -635,10 +635,14 @@ int main(void){
     sprintf(buf,"select contest,min(start),max(start),count(callsign) from log where mycall='%s' and contest<>'' group by contest order by max(start) desc",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
+    vv=sizeof(conid)/sizeof(conid[0]);
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd2('%s')\">%20s</button>: [%4d] %s -> %s\n",row[0],row[0],atoi(row[3]),row[1],row[2]);
+      aux1[0]='\0';
+      for(contype=0;contype<vv;contype++)if(strncmp(row[0],conid[contype],strlen(conid[contype]))==0)break;
+      if(contype<vv)strcpy(aux1,"Scorable");
+      printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd2('%s')\">%20s</button>: [%4d] %s -> %s %s\n",row[0],row[0],atoi(row[3]),row[1],row[2],aux1);
     }
     mysql_free_result(res);
     printf("</pre>");
