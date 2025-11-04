@@ -62,7 +62,7 @@ int main(void){
     if(fd<0){write(1,"0,ND\n",5); freeaddrinfo(res); _exit(0);}
     r=connect(fd,res->ai_addr,res->ai_addrlen);
     if(r==-1){write(1,"0,ND\n",5); close(fd); freeaddrinfo(res); _exit(0);}
-    if(tok[1]=='R'){
+    if(tok[1][0]=='R'){
       send(fd,"sfim\n",5,0);
       p=out;
       for(i=0;i<5;){
@@ -72,7 +72,7 @@ int main(void){
         else if(i==2||i==4)*p++=h;
       }
     }
-    else if(tok[2]=='S'){
+    else if(tok[1][0]=='S'){
       p=out;
     }
     close(fd);
