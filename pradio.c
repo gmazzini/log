@@ -28,7 +28,6 @@ int main(void){
     if(vv<3)tok[vv][gg++]=(char)c;
   }
   tok[vv][gg]='\0';
-  FILE *fp; fp=fopen("/home/www/log/q1.txt","w"); for(c=0;c<3;c++)fprintf(fp,"%d %s\n",c,tok[c]); fclose(fp);
 
   con=mysql_init(NULL);
   if(con==NULL){printf("0,ND\n"); exit(0);}
