@@ -1,6 +1,6 @@
 // proclog.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
-#include "pconscore.c"
+#include "pscore.c"
 // Nota bottoni liberi 15
 
 int main(void){
