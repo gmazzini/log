@@ -278,7 +278,7 @@ window.cmd2 = async (a) => {
 window.cmd3 = async (a,b) => {
   document.getElementById("call").value = a;
   document.getElementById("freq").value = b;
-  radioset(b,"USB");
+  radioset(b,document.getElementById("mode").value);
 };
 
 setInterval(() => {
