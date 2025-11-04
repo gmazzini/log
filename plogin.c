@@ -5,7 +5,6 @@
 #include <time.h>
 #include <mysql/mysql.h>
 #include "log.def"
-#define VALIDITY 86400
 
 int main(void){
   int c,vv,gg,mypage;
@@ -37,7 +36,7 @@ int main(void){
     gg=sizeof(charset)-1;
     for(c=0;c<16;c++)aux1[c]=charset[rand()%gg];
     aux1[16]='\0';
-    sprintf(buf,"update user set ota='%s',lota=%ld where mycall='%s' and md5passwd='%s'",aux1,epoch+VALIDITY,tok[0],tok[1]);
+    sprintf(buf,"update user set ota='%s',lastota=%ld where mycall='%s' and md5passwd='%s'",aux1,epoch,tok[0],tok[1]);
     mysql_query(con,buf);
   }
   mysql_free_result(res);
