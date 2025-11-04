@@ -3,25 +3,15 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
-#include <sys/wait.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <mysql/mysql.h>
 #include "log.def"
 
-static pid_t child_pid=-1;
-static volatile sig_atomic_t timedout=0;
-
-static void on_alarm(int sig){
-  (void)sig;
-  timedout=1;
-  if(child_pid>0)kill(child_pid,SIGKILL);
-}
-
 int main(void){
   int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
+  char h,*p,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
   long freq;
   size_t len;
   time_t epoch;
@@ -30,10 +20,6 @@ int main(void){
   MYSQL *con;
   MYSQL_RES *rrr;
   MYSQL_ROW row;
-
-  
-  
-  
   
   printf("Content-Type: text/plain\r\n\r\n0,ND\n");
   // 0:ota 1:{R=read S=set} 2=freq,mode
@@ -67,9 +53,10 @@ int main(void){
     for(i=0;i<5;){
       r=recv(fd,&h,1,0);
       if(r<=0)break;
-      if(h=='\n'){if(i==2)*p++=','; i++;}
-      else if(i==2||i==4)*p++=h;
+      if(h=='\n'){if(i==2)putchar(','); i++;}
+      else if(i==2||i==4)putchar(h);
     }
+    putchar('\n');
   }
   else if(tok[1][0]=='S'){
     sscanf(tok[2],"%ld:%s",&freq,mode);
@@ -77,36 +64,9 @@ int main(void){
     send(fd,aux1,strlen(aux1),0);
     sprintf(aux1,"M %s 0\n",mode);
     send(fd,aux1,strlen(aux1),0);
-    sprintf(out,"%ld,%s",freq,mode);
-    p=out+strlen(out);
+    printf("%ld,%s\n",freq,mode);
   }
-  else p=out;
+  else printf("0,ND\n");
   close(fd);
   freeaddrinfo(res);
-  *p++='\0';
-    if(out[0]!='\0'){
-      len=strlen(out);
-      if(len>0)write(1,out,len);
-      write(1,"\n",1);
-    } 
-    else write(1,"0,ND\n",5);
-    _exit(0);
-  }
-  close(fds[1]);
-  printf("Content-Type: text/plain\r\n\r\n");
-  memset(&sa,0,sizeof(sa));
-  sa.sa_handler=on_alarm;
-  sigemptyset(&sa.sa_mask);
-  sigaction(SIGALRM,&sa,NULL);
-  alarm(1);
-  printed=0;
-  while((n=read(fds[0],buf,sizeof(buf)))>0){
-    fwrite(buf,1,(size_t)n,stdout);
-    printed=1;
-  }
-  close(fds[0]);
-  alarm(0);
-  waitpid(child_pid,&status,0);
-  if(timedout || !printed)printf("0,ND\n");
-  return 0;
 }
