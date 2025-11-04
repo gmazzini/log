@@ -205,6 +205,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
           if (v[1] === 1 && typeof b02f !== "undefined" && typeof b02m !== "undefined") {
             document.getElementById("freq").value = b02f;
             document.getElementById("mode").value = b02m;
+            radioset(b02f,b02m);
           }
           break;
         case 4:
@@ -215,6 +216,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
           if (v[1] === 1 && typeof b04f !== "undefined" && typeof b04m !== "undefined") {
             document.getElementById("freq").value = b04f;
             document.getElementById("mode").value = b04m;
+            radioset(b04f,b04m);
           }
           break;
         case 6:
@@ -225,6 +227,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
           if (v[1] === 1 && typeof b06f !== "undefined" && typeof b06m !== "undefined") {
             document.getElementById("freq").value = b06f;
             document.getElementById("mode").value = b06m;
+            radioset(b06f,b06m);
           }
           break;
         case 8:
@@ -286,7 +289,22 @@ async function radioread() {
   });
   const text = await r.text();
   const [freq, mode] = text.split(",");
+  const fff = (freq / 1000).toFixed(1);
+  document.getElementById("freq").value = fff;
+  document.getElementById("mode").value = mode;
+}
 
+async function radioset() {
+  if (v[1] === 0) return;
+  const r = await fetch("pradio.cgi", {
+    method: "POST",
+    cache: "no-store",
+    credentials: "same-origin",
+    headers: { "Content-Type": "text/csv" },
+    body: [ota, "S", "14500000,LSB"].join(",")
+  });
+  const text = await r.text();
+  const [freq, mode] = text.split(",");
   const fff = (freq / 1000).toFixed(1);
   document.getElementById("freq").value = fff;
   document.getElementById("mode").value = mode;
