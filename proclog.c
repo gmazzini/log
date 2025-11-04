@@ -140,7 +140,7 @@ int main(void){
     for(;;){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      printf("%s\n",row[0];
+      printf("%s\n",row[0]);
     }
     mysql_free_result(res);
 
