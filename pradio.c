@@ -20,7 +20,7 @@ static void on_alarm(int sig){
 int main(void){
   int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256],tok[1][100],ip[20],port[10];
+  char h,out[100],*p,buf[256],tok[3][100],ip[20],port[10];
   size_t len;
   time_t epoch;
   struct sigaction sa;
@@ -38,11 +38,12 @@ int main(void){
     close(fds[0]);
     dup2(fds[1],STDOUT_FILENO);
     close(fds[1]);
+    // 0:ota 1:{R=read S=set} 2=freq,mode
     for(vv=0,gg=0;;){
       c=getchar();
       if(c==EOF)break;
       if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
-      if(vv<1)tok[vv][gg++]=(char)c;
+      if(vv<3)tok[vv][gg++]=(char)c;
      }
     tok[vv][gg]='\0';
     con=mysql_init(NULL);
@@ -60,13 +61,18 @@ int main(void){
     if(fd<0){write(1,"0,ND\n",5); freeaddrinfo(res); _exit(0);}
     r=connect(fd,res->ai_addr,res->ai_addrlen);
     if(r==-1){write(1,"0,ND\n",5); close(fd); freeaddrinfo(res); _exit(0);}
-    send(fd,"sfim\n",5,0);
-    p=out;
-    for(i=0;i<5;){
-      r=recv(fd,&h,1,0);
-      if(r<=0)break;
-      if(h=='\n'){if(i==2)*p++=','; i++;}
-      else if(i==2||i==4)*p++=h;
+    if(tok[1]=='R'){
+      send(fd,"sfim\n",5,0);
+      p=out;
+      for(i=0;i<5;){
+        r=recv(fd,&h,1,0);
+        if(r<=0)break;
+        if(h=='\n'){if(i==2)*p++=','; i++;}
+        else if(i==2||i==4)*p++=h;
+      }
+    }
+    else if(tok[2]=='S'){
+      p=out;
     }
     close(fd);
     freeaddrinfo(res);
