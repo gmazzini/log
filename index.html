@@ -296,12 +296,13 @@ async function radioread() {
 
 window.radioset = async (a,b) => {
   if (v[1] === 0) return;
+  const aa = Math.round(s * 1000);
   const r = await fetch("pradio.cgi", {
     method: "POST",
     cache: "no-store",
     credentials: "same-origin",
     headers: { "Content-Type": "text/csv" },
-    body: [ota, "S", `${a}:${b}`].join(",")
+    body: [ota, "S", `${aa}:${b}`].join(",")
   });
   const text = await r.text();
   const [freq, mode] = text.split(",");
