@@ -10,7 +10,7 @@
 #include "log.def"
 
 int main(void){
-  int fds[2],fd,r,i,printed,status,vv,gg,c;
+  int fd,r,i,vv,gg,c;
   struct addrinfo *res;
   char h,*p,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
   long freq;
