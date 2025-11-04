@@ -21,7 +21,8 @@ static void on_alarm(int sig){
 int main(void){
   int fds[2],fd,r,i,printed,status,vv,gg,c;
   struct addrinfo *res;
-  char h,out[100],*p,buf[256],tok[3][100],ip[20],port[10];
+  char h,out[100],*p,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
+  long freq;
   size_t len;
   time_t epoch;
   struct sigaction sa;
@@ -73,8 +74,13 @@ int main(void){
       }
     }
     else if(tok[1][0]=='S'){
-      p=out;
+      sscanf(tok[2],"%ld,%s",&freq,mode);
+      sprintf(aux1,"F %ld\n",freq);
+      send(fd,aux1,strlen(aux1),0);
+      sprintf(out,"%ld,%s",freq,mode);
+      p=out+strlen(out);
     }
+    else p=out;
     close(fd);
     freeaddrinfo(res);
     *p++='\0';
