@@ -14,7 +14,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
   if(contype==vv)return;
   for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
   row=searchcty(con,mycall);
-  gg=row[2];
+  gg=atoi(row[2]);
   sprintf(buf,"select dxcc,cont,cqzone,ituzone from cty");
   mysql_query(con,buf);
   res=mysql_store_result(con);
