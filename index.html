@@ -215,6 +215,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         case 4:
           b04f = document.getElementById("freq").value;
           b04m = document.getElementById("mode").value;
+          document.getElementById("c45").textContent = b04f + ":" + b04m;
           break;
         case 5:
           if (v[1] === 1 && typeof b04f !== "undefined" && typeof b04m !== "undefined") {
@@ -226,6 +227,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         case 6:
           b06f = document.getElementById("freq").value;
           b06m = document.getElementById("mode").value;
+          document.getElementById("c67").textContent = b06f + ":" + b06m;
           break;
         case 7:
           if (v[1] === 1 && typeof b06f !== "undefined" && typeof b06m !== "undefined") {
