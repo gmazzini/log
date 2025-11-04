@@ -113,7 +113,7 @@ int main(void){
     goto end;
   }
  
-  if(act==9){ // dxcc solve unset button
+  if(act==9){ // dxcc and qrz solve unset button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -134,6 +134,17 @@ int main(void){
     }
     mysql_free_result(res);
     printf("Set dxcc: %ld\nNot found dxcc: %ld</pre>",l1,l2);
+    sprintf(buf,"select distinct l.callsign from log AS l left join who as w on l.callsign=w.callsign where l.mycall='%s' and (w.email is null or w.callsign is null)",mycall);
+    mysql_query(con,buf);
+    res=mysql_store_result(con);
+    for(;;){
+      row=mysql_fetch_row(res);
+      if(row==NULL)break;
+      printf("%s\n",row[0];
+    }
+    mysql_free_result(res);
+
+    
     goto end;
   }
 
