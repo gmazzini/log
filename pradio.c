@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
+#include <stdlib.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <mysql/mysql.h>
