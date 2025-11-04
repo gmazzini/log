@@ -28,13 +28,13 @@ int main(void){
     if(vv<3)tok[vv][gg++]=(char)c;
   }
   tok[vv][gg]='\0';
-  
+
+      printf("-\n");
+
   con=mysql_init(NULL);
   if(con==NULL){printf("0,ND\n"); exit(0);}
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
   epoch=time(NULL);
-    printf("-\n");
-
   sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
   mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
   if(row==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
