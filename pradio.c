@@ -33,7 +33,7 @@ int main(void){
   if(con==NULL){printf("0,ND\n"); exit(0);}
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
   epoch=time(NULL);
-  sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lota>%ld limit 1",tok[0],epoch);
+  sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],epoch);
   mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
   if(row==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
   strcpy(ip,row[0]); strcpy(port,row[1]);
