@@ -12,12 +12,9 @@
 int main(void){
   int fd,r,i,vv,gg,c;
   struct addrinfo *res;
-  char h,*p,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
+  char h,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
   long freq;
-  size_t len;
   time_t epoch;
-  struct sigaction sa;
-  ssize_t n;
   MYSQL *con;
   MYSQL_RES *rrr;
   MYSQL_ROW row;
