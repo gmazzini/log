@@ -640,8 +640,8 @@ int main(void){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
       aux1[0]='\0';
-      for(contype=0;contype<vv;contype++)if(strncmp(row[0],conid[contype],strlen(conid[contype]))==0)break;
-      if(contype<vv)strcpy(aux1,"Scorable");
+      for(c=0;c<vv;c++)if(strncmp(row[0],conid[c],strlen(conid[c]))==0)break;
+      if(c<vv)strcpy(aux1,"Scorable");
       printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd2('%s')\">%20s</button>: [%4d] %s -> %s %s\n",row[0],row[0],atoi(row[3]),row[1],row[2],aux1);
     }
     mysql_free_result(res);
