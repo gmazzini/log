@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000];
   long l1,l2;
@@ -226,6 +226,29 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux2,"%03d:%d",c,vv);
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         if(vv==281 || vv==21 || vv==32 || vv==29){
+          sprintf(aux2,"%03d:%s",c,row[4]);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 17: // RDAC UAinEU=54 UAinAS=15
+        sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
+        incdata3(0,0,aux1,1,0);
+        if(gg==54 || gg==15){
+          if(vv==gg)incdata3(0,1,aux1,1,0);
+          else if((vv==54 || vv==15) && vv!=gg)incdata3(0,1,aux1,2,0);
+          else if(strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,3,0);
+          else incdata3(0,1,aux1,5,0);
+        }
+        else {
+          if(vv==54 || vv==15)incdata3(0,1,aux1,10,0);
+        }
+        if(gg==54 || gg==15){
+          sprintf(aux2,"%03d:%d",c,vv);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        f(vv==54 || vv==15){
           sprintf(aux2,"%03d:%s",c,row[4]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
