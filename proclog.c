@@ -5,7 +5,7 @@
 
 int main(void){
   int c,act,vv,gg,s,mypage;
-  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],aux10[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -473,7 +473,7 @@ int main(void){
     goto end;
   }
   
-  if(act==22){ // cbr button
+  if(act==22){ // cbr in button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
@@ -495,7 +495,16 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
         row1=searchcty(con,aux7);
-        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
+        printf(buf,"select count(*),start from log where mycall='%s' and callsign='%s' and start between datetime('%s', '-3 minutes') and datetime ('%s', '+3 minutes') limit 1",mycall,aux7,aux3,aux3);
+        mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); strcpy(aux10,row[1]);
+        mysql_free_result(res);
+        if(gg==0)sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,atol(aux1)*1000L,atol(aux1)*1000L,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
+
+
+
+
+
+        
         mysql_query(con,buf);
         nnn+=mysql_affected_rows(con);
         ppp++;
