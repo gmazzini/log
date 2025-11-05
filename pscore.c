@@ -248,7 +248,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           sprintf(aux2,"%03d:%d",c,vv);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
-        f(vv==54 || vv==15){
+        if(vv==54 || vv==15){
           sprintf(aux2,"%03d:%s",c,row[4]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
