@@ -299,8 +299,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
       case 22: // JIDXCW JA=339  
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
-        if((gg==339 || vv==339) && gg!=vv){
-          if(c==160)incdata3(0,1,aux1,4,0);
+        if((gg==339 && vv==339) || (gg!=339 && vv!=339))incdata3(0,1,aux1,0,0);
+        else if(c==160)incdata3(0,1,aux1,4,0);
           else if(c==80 || c==10)if(c==160)incdata3(0,1,aux1,2,0);
           else incdata3(0,1,aux1,1,0);
         }
