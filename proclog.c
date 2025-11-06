@@ -4,7 +4,7 @@
 // Nota bottoni liberi 15
 
 int main(void){
-  int c,act,vv,gg,s,mypage;
+  int c,act,vv,gg,s,mypage,f1;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],aux10[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
@@ -478,10 +478,10 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     pp=strtok_r(ff,"\n",&save1);
-    gg=1;
+    f1=1;
     for(ppp=nnn=0;;){
       if(pp==NULL)break;
-      if(gg && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; gg=0;}
+      if(f1 && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; f1=0;}
       if(strncmp(pp,"QSO:",4)==0){
         c=nfields(pp);
         qq=strtok_r(pp," \t",&save2); // QSO
