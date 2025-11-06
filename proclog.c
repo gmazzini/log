@@ -477,6 +477,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>CIAOOOOOOO\n");
+    goto end;
     pp=strtok_r(ff,"\n",&save1);
     gg=1;
     for(ppp=nnn=0;;){
