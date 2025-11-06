@@ -490,6 +490,7 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux3,qq); // date
         qq=strtok_r(NULL," \t",&save2); strcpy(aux4,qq); // time
         qq=strtok_r(NULL," \t",&save2); // mycall
+        printf("%s %s %s %s\n",aux1,aux2,aux3,aux4); goto end;
         if(c<11){qq=strtok_r(NULL," \t",&save2); strcpy(aux5,qq);} else aux5[0]='\0'; // signaltx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux6,qq); // contesttx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq); // callsign
