@@ -492,7 +492,7 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); // mycall
         if(c>10){qq=strtok_r(NULL," \t",&save2); strcpy(aux5,qq);} else aux5[0]='\0'; // signaltx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux6,qq); // contesttx
-        printf("%d %s %s %s %s %s\n",c,aux1,aux2,aux3,aux4,aux6); goto end;
+   //     printf("%d %s %s %s %s %s\n",c,aux1,aux2,aux3,aux4,aux6); goto end;
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq); // callsign
         if(c>10){qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);} else aux8[0]='\0'; // signalrx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
@@ -500,7 +500,6 @@ int main(void){
 
         row1=searchcty(con,aux7);
         l1=atol(aux1)*1000L;
-        printf(">>>> %d\n",c);
         sprintf(buf,"select count(*),start from log where mycall='%s' and callsign='%s' and start between date_sub('%s %.2s:%.2s:00',interval 3 minute) and date_add('%s %.2s:%.2s:00',interval 3 minute) and freqtx between %ld-1700000 and %ld+1700000 limit 1",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,l1,l1);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)strcpy(aux10,row[1]);
         mysql_free_result(res);
