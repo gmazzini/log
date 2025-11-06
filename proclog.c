@@ -505,7 +505,7 @@ int main(void){
         }
         else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and start='%s' and freqtx=%ld",aux6,aux9,aux0,mycall,aux7,aux10,l1);
         printf("%s\n",buf);
-        mysql_query(con,buf);
+// mysql_query(con,buf);
         ppp++;
       }
       pp=strtok_r(NULL,"\n",&save1);
