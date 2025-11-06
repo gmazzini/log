@@ -336,3 +336,15 @@ char *myts(long t){
   else sprintf(aux,"%2dY",t/31536000);
   return aux;
 }
+
+int nfields(char *s){
+  int count=0,in_token=0;
+  for(;*s;s++){
+    if(isspace(*s))in_token=0;
+    else if(!in_token){
+      in_token=1;
+      count++;
+    }
+  }
+  return count;
+}
