@@ -484,6 +484,7 @@ int main(void){
       if(gg && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; gg=0;}
       if(strncmp(pp,"QSO:",4)==0){
         c=nfields(pp);
+        printf("%d\n",c); goto end;
         qq=strtok_r(pp," \t",&save2); // QSO
         qq=strtok_r(NULL," \t",&save2); strcpy(aux1,qq); // freq
         qq=strtok_r(NULL," \t",&save2); strcpy(aux2,qq); // mode
