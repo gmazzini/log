@@ -496,11 +496,11 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
         row1=searchcty(con,aux7);
         l1=atol(aux1)*1000L;
-        sprintf(buf,"select count(*),start,freqtx from log where mycall='%s' and callsign='%s' and start between date_sub('%s %.2s:%.2s:00',interval 3 minute) and date_add('%s %.2s:%.2s:00',interval 3 minute) and freqtx between %ld-1700000 and %ld+1700000 limit 1",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,l1,l1);
+        sprintf(buf,"select count(*),start from log where mycall='%s' and callsign='%s' and start between date_sub('%s %.2s:%.2s:00',interval 3 minute) and date_add('%s %.2s:%.2s:00',interval 3 minute) and freqtx between %ld-1700000 and %ld+1700000 limit 1",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,l1,l1);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); strcpy(aux10,row[1]);
         mysql_free_result(res);
         if(gg==0){
-          sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
+         // sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(row1[2]));
           nnn++;
         }
         else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and start='%s' and freqtx=%ld",aux6,aux9,aux0,mycall,aux7,aux10,l1);
