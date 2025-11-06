@@ -492,9 +492,10 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); // mycall
         if(c<11){qq=strtok_r(NULL," \t",&save2); strcpy(aux5,qq);} else aux5[0]='\0'; // signaltx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux6,qq); // contesttx
+        printf("%s %s %s %s %s\n",aux1,aux2,aux3,aux4,aux6); goto end;
+
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq); // callsign
         if(c<11){qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);} else aux8[0]='\0'; // signalrx
-printf("%s %s %s %s %s %s\n",aux1,aux2,aux3,aux4,aux6,aux7); goto end;
 
 //        qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
 // printf("%s %s %s %s %s %s %s\n",aux1,aux2,aux3,aux4,aux6,aux7,aux9); goto end;
