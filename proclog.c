@@ -494,8 +494,10 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux6,qq); // contesttx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux7,qq); // callsign
         if(c<11){qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);} else aux8[0]='\0'; // signalrx
-        qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
-printf("%s %s %s %s %s %s %s\n",aux1,aux2,aux3,aux4,aux6,aux7,aux9); goto end;
+printf("%s %s %s %s %s %s\n",aux1,aux2,aux3,aux4,aux6,aux7); goto end;
+
+//        qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
+// printf("%s %s %s %s %s %s %s\n",aux1,aux2,aux3,aux4,aux6,aux7,aux9); goto end;
 
         row1=searchcty(con,aux7);
         l1=atol(aux1)*1000L;
