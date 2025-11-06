@@ -476,7 +476,7 @@ int main(void){
   if(act==22){ // cbr in button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    printf("<pre>");
+    printf("<pre>CIAOOOOOOO\n");
     pp=strtok_r(ff,"\n",&save1);
     gg=1;
     for(ppp=nnn=0;;){
@@ -496,7 +496,7 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq);
         row1=searchcty(con,aux7);
         l1=atol(aux1)*1000L;
-        printf(buf,"select count(*),start,freqtx from log where mycall='%s' and callsign='%s' and start between datetime('%s', '-3 minutes') and datetime ('%s', '+3 minutes') and freqtx between %ld-1700000 and %ld+1700000 limit 1",mycall,aux7,aux3,aux3,l1,l1);
+        sprintf(buf,"select count(*),start,freqtx from log where mycall='%s' and callsign='%s' and start between datetime('%s', '-3 minutes') and datetime ('%s', '+3 minutes') and freqtx between %ld-1700000 and %ld+1700000 limit 1",mycall,aux7,aux3,aux3,l1,l1);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); strcpy(aux10,row[1]);
         mysql_free_result(res);
         if(gg==0){
