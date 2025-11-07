@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000],d;
   long l1,l2;
@@ -394,6 +394,53 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           sprintf(aux2,"%03d:%d",c,atoi(row[4]+2));
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 29: // UBASSB ON=209
+      case 30: // UBACW ON=209
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        incdata3(0,0,aux1,1,0);
+        if(gg==209){
+          if(vv==209)incdata3(0,1,aux1,1,0);
+          else if(strncmp(cont[vv],"EU",2)==0)incdata3(0,1,aux1,2,0);
+          else incdata3(0,1,aux1,3,0);
+        }
+        else {
+          if(vv==209)incdata3(0,1,aux1,10,0);
+          else if(strncmp(cont[vv],"EU",2)==0)incdata3(0,1,aux1,3,0);
+          else incdata3(0,1,aux1,1,0);
+        }
+        if(gg==209){
+          sprintf(aux2,"%03d:%d",c,vv);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        else {
+          sprintf(aux2,"%03d:%s",c,row[4]);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          for(p=row[0];*p!='\0';p++)if(isdigit(*p))break;
+          sprintf(aux2,"%03d:%d:%c",c,vv,*p);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+
+          int lll[] = {215, 497, 257, 272, 256, 149, 230, 281, 21, 29, 245, 52, 227, 79, 95, 169, 63, 239, 248, 225, 254, 146, 212, 206, 224, 211, 183, 503, 504, 221, 263, 499, 284, 269, 236, 45, 40, 180, 214, 145, 275};
+
+
+
+
+          int n = sizeof(dxcc_list) / sizeof(dxcc_list[0]);
+    int found = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (vv == dxcc_list[i]) {
+            found = 1;
+            break;
+        }
+    }
+          
+        }
+
+        
+       
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
