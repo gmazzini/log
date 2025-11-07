@@ -1,10 +1,10 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  int contype,c,gg,vv,cqz[1000],ituz[1000];
+  int contype,c,gg,vv,cqz[1000],ituz[1000],d;
   long l1,l2;
-  char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300];
+  char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
   MYSQL_RES *res;
   MYSQL_ROW row;
   double lat1,lat2,lon1,lon2;
@@ -348,6 +348,32 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else incdata3(0,1,aux1,3,0);
         sprintf(aux2,"%03d:%d",c,vv);
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 25: // WAESSB (no QTC)
+      case 26: // WAECW (no QTC)
+      case 27: // WAERTTY (no QTC)
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        incdata3(0,0,aux1,1,0);
+        incdata3(0,1,aux1,1,0);
+        d=0; if(c==80)d=4; else if(c==40)d=3; else if(c==20||c==15||c==10)d=2;
+        if(strncmp(cont[gg],"EU",2)!=0){
+          if(strncmp(cont[vv],"EU",2)==0){
+            sprintf(aux2,"%03d:%d",c,vv);
+            incdata3(0,2,aux2,d,0); incdata3(0,3,aux2,d,0);
+          }
+        }
+        else {
+          if(strncmp(cont[vv],"EU",2)!=0){
+            if(vv==291||vv==1||vv==150||vv==170||vv==462||vv==339||vv==318||vv==108){
+              for(p=row[0];*p!='\0';p++)if(isdigit(*p))break;
+              sprintf(aux2,"%03d:%d:%c",c,vv,*p);
+            }
+            else sprintf(aux2,"%03d:%d",c,vv);
+            incdata3(0,2,aux2,d,0); incdata3(0,3,aux2,d,0);
+          }
+        }                                
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
