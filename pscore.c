@@ -477,15 +477,15 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         lat2=((row[4][1]-'A')*10.0+(row[4][3]-'0')+1.0/48.0-90.0);
         lon2=-((row[4][0]-'A')*20.0+(row[4][2]-'0')*2.0+1.0/24.0-180.0);
         gg=distance(lat1,lon1,lat2,lon2);
-
-
-        
-        
-        if(c==40)incdata3(0,1,aux1,1,0);
-        else if(c==80||c==20)incdata3(0,1,aux1,2,0);
-        else if(c==160||c==15)incdata3(0,1,aux1,3,0);
-        else if(c==10)incdata3(0,1,aux1,4,0);
-        sprintf(aux2,"%03d:%s:%s",c,row[4],mymode(row[5]));
+        if(c==160)gg*=(int)(((int)gg/500)/10.0+1);
+        else if(c==80)gg*=(int)(((int)gg/1000)/10.0+1);
+        else if(c==10){if(gg>=100&&gg<=800)gg*=10;}
+        else if(c==15){if(gg>=100&&gg<=800)gg*=5;
+        sprintf(aux5,"%.4s",row[4]);
+        if(numdata3(0,5,aux5)==0)gg+=1000;
+        incdata3(0,5,aux5,1,0);           
+        incdata3(0,1,aux2,gg,0);
+        sprintf(aux2,"%03d:%.2s:%s",c,row[4],mymode(row[5]));
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
