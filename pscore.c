@@ -480,10 +480,10 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         if(c==160)gg*=(int)(((int)gg/500)/10.0+1);
         else if(c==80)gg*=(int)(((int)gg/1000)/10.0+1);
         else if(c==10){if(gg>=100&&gg<=800)gg*=10;}
-        else if(c==15){if(gg>=100&&gg<=800)gg*=5;
+        else if(c==15){if(gg>=100&&gg<=800)gg*=5;}
         sprintf(aux5,"%.4s",row[4]);
         if(numdata3(0,5,aux5)==0)gg+=1000;
-        incdata3(0,5,aux5,1,0);           
+        incdata3(0,5,aux5,1,0);
         incdata3(0,1,aux2,gg,0);
         sprintf(aux2,"%03d:%.2s:%s",c,row[4],mymode(row[5]));
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
