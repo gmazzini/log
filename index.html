@@ -29,7 +29,7 @@
       <button class="btn" id="a01">List</button><button class="btn" id="a02">&#8679;</button><button class="btn" id="a03">&#8681;</button><button class="btn" id="a04">R</button><button class="btn" id="a05">G</button><br>
       <button class="btn" id="a06">LFind</button><button class="btn" id="a07">&#8679;</button><button class="btn" id="a08">&#8681;</button><br>
       <button class="btn" id="a28">LCon</button><button class="btn" id="a29">&#8679;</button><button class="btn" id="a30">&#8681;</button><br>
-      <button class="btn" id="b08">ConOO</button><span id="c08"></span><br>
+      <button class="btn" id="b08">ConOO</button><span id="c08"></span><button class="btn" id="b22">ConTX++</button><span id="c22"></span><br>
       <button class="btn" id="a27">ConList</button><button class="btn" id="a31">ConScore</button>
     </td>
     <td class="myq1">
@@ -83,7 +83,7 @@ const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
 const imypage = document.getElementById("mypage");
-let v = new Array(21+1).fill(0);
+let v = new Array(22+1).fill(0);
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
   const el = document.getElementById(id);
@@ -103,7 +103,7 @@ let start = "";
 let b02f, b02m, b04f, b04m, b06f, b06m;
 
 function setchecks() {
-  for (let i = 1; i <= 21; i++) {
+  for (let i = 1; i <= 22; i++) {
     const id = "c" + String(i).padStart(2, "0");
     const el = document.getElementById(id);
     if (el) {
