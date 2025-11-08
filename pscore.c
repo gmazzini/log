@@ -542,7 +542,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
             if(strncmp(cont[vv],"EU",2)==0)incdata3(0,1,aux1,1,0);
             else if(c<=20)incdata3(0,1,aux1,1,0); else incdata3(0,1,aux1,3,0);
             for(p=row[0]+1;*p!='\0';p++)if(isdigit(*p))break;
-            sprintf(aux2,"%03d:%c",c,*p);
+            sprintf(aux2,"%03d:%d:%c",c,vv,*p);
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
         }
