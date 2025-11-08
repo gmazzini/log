@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000],d,n;
   long l1,l2;
@@ -367,7 +367,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else {
           if(strncmp(cont[vv],"EU",2)!=0){
             if(vv==291||vv==1||vv==150||vv==170||vv==462||vv==339||vv==318||vv==108){
-              for(p=row[0];*p!='\0';p++)if(isdigit(*p))break;
+              for(p=row[0]+1;*p!='\0';p++)if(isdigit(*p))break;
               sprintf(aux2,"%03d:%d:%c",c,vv,*p);
             }
             else sprintf(aux2,"%03d:%d",c,vv);
@@ -419,7 +419,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           sprintf(aux2,"%03d:%s",c,row[4]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           if(vv==209){
-            for(p=row[0];*p!='\0';p++)if(isdigit(*p))break;
+            for(p=row[0]+1;*p!='\0';p++)if(isdigit(*p))break;
             sprintf(aux2,"%03d:%d:%c",c,vv,*p);
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
@@ -520,6 +520,32 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux2,"%03d:%s",c,wpx(row[0]));
         sprintf(aux3,"ALL:%s",wpx(row[0]));
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux3,1,0);
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 37: // SACSSB
+      case 38: // SACCW  
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        incdata3(0,0,aux1,1,0);
+        int lll[] = {266, 257, 242, 224, 221, 212, 230, 222, 221, 284, 242};
+        n=sizeof(lll)/sizeof(lll[0]);
+        for(d=0;d<n;d++)if(gg==lll[d])break;
+        if(d<n){
+          if(strncmp(cont[vv],"EU",2)==0)incdata3(0,1,aux1,2,0);
+          else incdata3(0,1,aux1,3,0);
+          sprintf(aux2,"%03d:%d",c,vv);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        else {
+          for(d=0;d<n;d++)if(vv==lll[d])break;
+          if(d<n){
+            if(strncmp(cont[vv],"EU",2)==0)incdata3(0,1,aux1,1,0);
+            else if(c<=20)incdata3(0,1,aux1,1,0); else incdata3(0,1,aux1,3,0);
+            for(p=row[0]+1;*p!='\0';p++)if(isdigit(*p))break;
+            printf(aux2,"%03d:%c",c,*p);
+            incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          }
+        }
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
