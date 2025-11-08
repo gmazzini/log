@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000],d,n;
   long l1,l2;
@@ -484,9 +484,30 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux5,"%.4s",row[4]);
         if(numdata3(0,5,aux5)==0)gg+=1000;
         incdata3(0,5,aux5,1,0);
-        incdata3(0,1,aux2,gg,0);
+        incdata3(0,1,aux1,gg,0);
         sprintf(aux2,"%03d:%.2s:%s",c,row[4],mymode(row[5]));
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 35: // WAG DL=230
+        if(gg!=230&&vv!=230)break;
+        sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
+        incdata3(0,0,aux1,1,0);
+        if(gg!=230)incdata3(0,1,aux1,3,0);
+        else {
+          if(vv==230)incdata3(0,1,aux1,1,0);
+          else if(strncmp(cont[vv],"EU",2)==0)incdata3(0,1,aux1,3,0);
+          else incdata3(0,1,aux1,5,0);
+        }
+        if(gg==230){
+          sprintf(aux2,"%03d:%d:%s",c,vv,mymode(row[5]));
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        else {
+          sprintf(aux2,"%03d:%.2s:%s",c,row[4],mymode(row[5]));
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
