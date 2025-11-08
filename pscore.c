@@ -461,7 +461,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(c==40)incdata3(0,1,aux1,1,0);
-        else if(c==80||c==10)incdata3(0,1,aux1,2,0);
+        else if(c==80||c==20)incdata3(0,1,aux1,2,0);
         else if(c==160||c==15)incdata3(0,1,aux1,3,0);
         else if(c==10)incdata3(0,1,aux1,4,0);
         sprintf(aux2,"%03d:%s:%s",c,row[4],mymode(row[5]));
