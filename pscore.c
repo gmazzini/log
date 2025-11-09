@@ -601,7 +601,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
             if(c==160)incdata3(0,1,aux1,3,0);
             else if(c==80||c==10)incdata3(0,1,aux1,2,0);
             else incdata3(0,1,aux1,1,0);
-            printf(aux2,"%03d:%s",c,wpx(row[0]);
+            printf(aux2,"%03d:%s",c,wpx(row[0]));
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
         }
