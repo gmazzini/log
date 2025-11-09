@@ -1,8 +1,8 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  int contype,c,gg,vv,cqz[1000],ituz[1000],d,n;
+  int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n;
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
   MYSQL_RES *res;
@@ -568,6 +568,40 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           }
           else {
             printf(aux2,"%03d:%d:%s",c,vv,mymode(row[5]));
+            incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          }
+        }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      case 40: // AASSB
+      case 41: // AACW
+        sprintf(aux1,"%03d:%s",c,row[0]);
+        incdata3(0,0,aux1,1,0);
+        int lll[] = {247, 293, 406, 286, 325, 336, 215, 271, 279, 376, 299, 327, 381, 370, 369, 387, 376, 372, 372, 407, 386, 406, 318, 510, 221, 330, 292, 334, 341, 318, 387, 387, 339, 226, 363, 340, 378, 344, 305, 390, 54, 315, 130, 321, 324, 325, 326, 312, 321, 318, 309, 3, 333, 380, 105};
+        n=sizeof(lll)/sizeof(lll[0]);
+        for(d=0;d<n;d++)if(gg==lll[d])break;
+        for(e=0;e<n;e++)if(vv==lll[e])break;
+        if(d<n){
+          if(e<n){
+            if(c==160)incdata3(0,1,aux1,3,0);
+            else if(c==80||c==10)incdata3(0,1,aux1,2,0);
+            else incdata3(0,1,aux1,1,0);
+          }
+          else {
+            if(c==160)incdata3(0,1,aux1,9,0);
+            else if(c==80||c==10)incdata3(0,1,aux1,6,0);
+            else incdata3(0,1,aux1,3,0);
+          }
+          printf(aux2,"%03d:%d",c,vv);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        else {
+          if(e<n){
+            if(c==160)incdata3(0,1,aux1,3,0);
+            else if(c==80||c==10)incdata3(0,1,aux1,2,0);
+            else incdata3(0,1,aux1,1,0);
+            printf(aux2,"%03d:%s",c,wpx(row[0]);
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
         }
