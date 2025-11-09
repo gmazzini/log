@@ -37,7 +37,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
     vv=atoi(row[2]);
     switch(contype){
       case 0: // CQWWSSB
-      case 1: // CQWWCW
+      case 1: { // CQWWCW
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,3,0);
@@ -51,8 +51,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 2: // CQWPXSSB
-      case 3: // CQWPXCW
+      case 3: { // CQWPXCW
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,1,aux1,3,0); else incdata3(0,1,aux1,6,0);}
@@ -65,7 +66,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 4: // CQWWDIGI
+      }
+      case 4: { // CQWWDIGI
         sprintf(aux1,"%03d:%s",c,row[0]);
         lat1=((row[3][1]-'A')*10.0+(row[3][3]-'0')+1.0/48.0-90.0);
         lon1=-((row[3][0]-'A')*20.0+(row[3][2]-'0')*2.0+1.0/24.0-180.0);
@@ -80,7 +82,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 5: // 4080
+      }
+      case 5: { // 4080
         strcpy(aux5,mymode(row[5]));
         sprintf(aux1,"%02d%2s:%s",c,aux5,row[0]);
         incdata3(0,0,aux1,1,0);
@@ -92,7 +95,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%02d%2s",c,aux5);
         incdata3(0,4,aux4,1,0);
         break;
-      case 6: // IARUHF
+      }
+      case 6: { // IARUHF
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(!isdigit(row[4][0]))incdata3(0,1,aux1,1,0);
@@ -104,8 +108,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 7: // CQ160SSB
-      case 8: // CQ160CW
+      case 8: { // CQ160CW
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0)incdata3(0,1,aux1,10,0);
@@ -120,7 +125,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 9: // SPDX SP=269
+      }
+      case 9: { // SPDX SP=269
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(gg==269){if(strncmp(cont[vv],"EU",2)!=0)incdata3(0,1,aux1,3,0); else if(vv!=269)incdata3(0,1,aux1,1,0);}
@@ -131,7 +137,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 10: // LZDX LZ=212
+      }
+      case 10: { // LZDX LZ=212
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(vv==212){if(gg==212)incdata3(0,1,aux1,1,0); else incdata3(0,1,aux1,10,0);}
@@ -153,8 +160,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 11: // OKOMSSB OK=503 OM=504
-      case 12: // OKOMCW OK=503 OM=504
+      case 12: { // OKOMCW OK=503 OM=504
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(gg==503||gg==504){
@@ -174,7 +182,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 13: // HADX HA=239
+      }
+      case 13: { // HADX HA=239
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(vv==239)incdata3(0,1,aux1,10,0);
@@ -189,7 +198,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 14: // ARIDX IT=248
+      }
+      case 14: { // ARIDX IT=248
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(gg==248){
@@ -211,8 +221,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 15: // KOSSSB EA=281 EA6=21 EA9=32 EA8=29
-      case 16: // KOSCW EA=281 EA6=21 EA9=32 EA8=29
+      case 16: { // KOSCW EA=281 EA6=21 EA9=32 EA8=29
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(gg==281 || gg==21 || gg==32 || gg==29){
@@ -232,7 +243,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 17: // RDAC UAinEU=54 UAinAS=15
+      }
+      case 17: { // RDAC UAinEU=54 UAinAS=15
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(gg==54 || gg==15){
@@ -255,8 +267,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 18: // ARRLSSB W=291 VE=1
-      case 19: // ARRLCW W=291 VE=1
+      case 19: { // ARRLCW W=291 VE=1
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux1,3,0);
@@ -271,7 +284,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 20: // RDXC UAinEU=54 UAinAS=15
+      }
+      case 20: { // RDXC UAinEU=54 UAinAS=15
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(gg==54 || gg==15){
@@ -295,8 +309,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 21: // JIDXSSB JA=339
-      case 22: // JIDXCW JA=339  
+      case 22: { // JIDXCW JA=339  
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if((gg==339 && vv==339) || (gg!=339 && vv!=339))incdata3(0,1,aux1,0,0);
@@ -316,7 +331,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 23: // YODX YO=275 
+      }
+      case 23: { // YODX YO=275 
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(gg==275){
@@ -339,7 +355,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 24: // CQM
+      }
+      case 24: { // CQM
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,2,0);
@@ -351,9 +368,10 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 25: // WAESSB (no QTC)
       case 26: // WAECW (no QTC)
-      case 27: // WAERTTY (no QTC)
+      case 27: { // WAERTTY (no QTC)
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux1,1,0);
@@ -377,7 +395,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 28: // CQ28
+      }
+      case 28: { // CQ28
         if(gg!=248||vv!=248)break;
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
@@ -397,8 +416,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 29: // UBASSB ON=209
-      case 30: // UBACW ON=209
+      case 30: { // UBACW ON=209
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(gg==209){
@@ -434,7 +454,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 31: // IOTA (no iscland)
+      }
+      case 31: { // IOTA (no iscland)
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         for(p=row[4];*p!='\0';p++)if(!isdigit(*p))break;
@@ -447,7 +468,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 32: // EUHF
+      }
+      case 32: { // EUHF
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux1,1,0);
@@ -456,7 +478,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 33: // ARISEZ
+      }
+      case 33: { // ARISEZ
         if(gg!=248||vv!=248)break;
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
@@ -469,7 +492,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 34: // EURASIA
+      }
+      case 34: { // EURASIA
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         lat1=((row[3][1]-'A')*10.0+(row[3][3]-'0')+1.0/48.0-90.0);
@@ -490,7 +514,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 35: // WAG DL=230
+      }
+      case 35: { // WAG DL=230
         if(gg!=230&&vv!=230)break;
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
@@ -511,7 +536,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 36: // CQWPXRTTY
+      }
+      case 36: { // CQWPXRTTY
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(strncmp(cont[vv],cont[gg],2)!=0){if(c<=20)incdata3(0,1,aux1,3,0); else incdata3(0,1,aux1,6,0);}
@@ -523,8 +549,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 37: // SACSSB
-      case 38: // SACCW  
+      case 38: { // SACCW  
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         int lll[] = {266, 257, 242, 224, 221, 212, 230, 222, 221, 284, 242};
@@ -549,7 +576,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
-      case 39: // PACC PA=263 (no collasos stesse aree)
+      }
+      case 39: { // PACC PA=263 (no collasos stesse aree)
         if(gg!=263&&vv!=263)break;
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
@@ -574,8 +602,9 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
       case 40: // AASSB
-      case 41: // AACW
+      case 41: { // AACW
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         int lll[] = {247, 293, 406, 286, 325, 336, 215, 271, 279, 376, 299, 327, 381, 370, 369, 387, 376, 372, 372, 407, 386, 406, 318, 510, 221, 330, 292, 334, 341, 318, 387, 387, 339, 226, 363, 340, 378, 344, 305, 390, 54, 315, 130, 321, 324, 325, 326, 312, 321, 318, 309, 3, 333, 380, 105};
@@ -608,6 +637,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
+      }
     }
   }
   mysql_free_result(res);
