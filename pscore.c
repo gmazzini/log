@@ -692,10 +692,10 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           else if(strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,3,0);
           else incdata3(0,1,aux1,5,0);
         }
-        printf(aux2,"%03d:%d",c,vv);
+        sprintf(aux2,"%03d:%d",c,vv);
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         if(e<n){
-          printf(aux2,"%03d:%s",c,row[4]);
+          sprintf(aux2,"%03d:%s",c,row[4]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
         sprintf(aux4,"%03d",c);
