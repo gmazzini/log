@@ -790,7 +790,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         if(!isdigit(row[4][0]))incdata3(0,0,aux1,1,0);
         else if(ituz[gg]==ituz[vv])incdata3(0,0,aux1,2,0);
         else incdata3(0,0,aux1,3,0);
-        if(!isdigit(row[4][0]){
+        if(!isdigit(row[4][0])){
           sprintf(aux2,"%03d:%.3s",c,row[4]);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
