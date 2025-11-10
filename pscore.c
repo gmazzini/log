@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n;
   long l1,l2;
@@ -760,6 +760,26 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           sprintf(aux2,"%03d:%d",c,atoi(row[4]+2));
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      }
+      case 47: { // BSC Black Sea Cup
+        sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
+        incdata3(0,0,aux1,1,0);
+        int lll[] = {206, 251, 27, 212, 501, 239, 230, 286, 248, 502, 179, 269, 54, 275, 504, 499, 390, 288, 497, 514, 503, 287, 296};
+        n=sizeof(lll)/sizeof(lll[0]);
+        for(d=0;d<n;d++)if(gg==lll[d])break;
+        if(d<n||strncmp(row[4],"BS",2)==0)incdata3(0,1,aux1,10,0);
+        else if(ituz[gg]==ituz[vv])incdata3(0,1,aux1,1,0);
+        else if(ituz[gg]!=ituz[vv]&&strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,3,0);
+        else incdata3(0,1,aux1,5,0);
+        if(d<z){
+          printf(aux2,"%03d:@@%d",c,vv);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        sprintf(aux2,"%03d:%s",c,row[4]);
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
         break;
