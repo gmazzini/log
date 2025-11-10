@@ -824,7 +824,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         sprintf(aux2,"%03d:%d",c,vv);
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         if(vv==327){
-          sprintf(aux2,"%03d:%s",c,wpx(vv));
+          sprintf(aux2,"%03d:%s",c,wpx(row[0]));
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
         sprintf(aux4,"%03d",c);
