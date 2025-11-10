@@ -774,7 +774,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else if(ituz[gg]==ituz[vv])incdata3(0,1,aux1,1,0);
         else if(ituz[gg]!=ituz[vv]&&strncmp(cont[vv],cont[gg],2)==0)incdata3(0,1,aux1,3,0);
         else incdata3(0,1,aux1,5,0);
-        if(d<z){
+        if(d<n){
           printf(aux2,"%03d:@@%d",c,vv);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
