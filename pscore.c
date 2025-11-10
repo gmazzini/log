@@ -787,7 +787,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
       case 48: { // RRTC
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
-        if(!isdigit(row[4][0])incdata3(0,0,aux1,1,0);
+        if(!isdigit(row[4][0]))incdata3(0,0,aux1,1,0);
         else if(ituz[gg]==ituz[vv])incdata3(0,0,aux1,2,0);
         else incdata3(0,0,aux1,3,0);
         if(!isdigit(row[4][0]){
