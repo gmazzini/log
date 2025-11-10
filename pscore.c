@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG","ARRL10"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n;
   long l1,l2;
@@ -814,7 +814,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,4,aux4,1,0);
         break;
       }
-       case 50: { // PADANG YB=327
+      case 50: { // PADANG YB=327
         sprintf(aux1,"%03d:%s",c,row[0]);
         incdata3(0,0,aux1,1,0);
         if(strcmp(row[0],"7B5C")==0)incdata3(0,1,aux1,20,0);
@@ -825,6 +825,24 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         if(vv==327){
           sprintf(aux2,"%03d:%s",c,wpx(row[0]));
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      }
+      case 51: { // ARRL10
+        if(c!=10)break;
+        sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
+        incdata3(0,0,aux1,1,0);
+        if(strncmp(aux5,"PH",2)==0)incdata3(0,1,aux1,2,0);
+        else incdata3(0,1,aux1,4,0);
+        sprintf(aux2,"%03d:%d:%s",c,vv,mymode(row[5]));
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        sprintf(aux2,"%03d:Z%d:%s",c,ituz[vv],mymode(row[5]));
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        if(!isdigit(row[4][0])){
+          sprintf(aux2,"%03d:%s:%s",c,row[4],mymode(row[5]));
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
         sprintf(aux4,"%03d",c);
