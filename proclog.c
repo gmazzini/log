@@ -604,10 +604,10 @@ int main(void){
     printf("<p class=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
     suml[1]=suml[2]=suml[3]=suml[4]=0;
     for(idx=0;idx<ndata3[0][0];idx++){
-      l1=data3[0][0][l1].num; suml[1]+=l1;
-      l2=numdata3(0,1,data3[0][0][l1].lab); suml[2]+=l2;
-      l3=numdata3(0,2,data3[0][0][l1].lab); suml[3]+=l3;
-      l4=numdata3(0,3,data3[0][0][l1].lab); suml[4]+=l4;
+      l1=data3[0][0][idx].num; suml[1]+=l1;
+      l2=numdata3(0,1,data3[0][0][idx].lab); suml[2]+=l2;
+      l3=numdata3(0,2,data3[0][0][idx].lab); suml[3]+=l3;
+      l4=numdata3(0,3,data3[0][0][idx].lab); suml[4]+=l4;
       printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,l1,l2,l3,l4);
     }
     printf("<p class=\"myh2\">%6s %8ld %8ld %8ld %8ld</p>","ALL",suml[1],suml[2],suml[3],suml[4]);
