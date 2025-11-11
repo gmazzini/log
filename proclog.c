@@ -532,7 +532,7 @@ int main(void){
     printf("<pre>distance:%5.0f\nbearing:%5.0f\ndeltatime:%d\n</pre>",distance(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),bearing(atof(row[6]),atof(row[7]),atof(row1[6]),atof(row1[7])),atoi(row[8])-atoi(row1[8]));
     printf("</td><td>");    
     sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux1,row[0]);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); if(row!=NULL)strcpy(aux1,row[0]); else aux1[0]='\0';
     mysql_free_result(res);
   goto end;
     sprintf(buf,"select grid from who where callsign='%s'",mycall);
