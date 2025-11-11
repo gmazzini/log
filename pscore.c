@@ -854,12 +854,12 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,0,aux1,1,0);
         incdata3(0,1,aux1,1,0);
         if(isdigit(row[4][0])){
-          sprintf(aux2,"%d",vv);
-          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          sprintf(aux2,"%03d:%d",c,vv); incdata3(0,2,aux2,1,0); 
+          sprintf(aux3,"ALL:%d",vv); incdata3(0,3,aux2,1,0);
         }
         else {
-          sprintf(aux2,"%s",row[4]);
-          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          sprintf(aux2,"%03d:%s",c,row[4]); incdata3(0,2,aux2,1,0);
+          sprintf(aux3,"ALL:%s",row[4]); incdata3(0,3,aux2,1,0);
         }
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
