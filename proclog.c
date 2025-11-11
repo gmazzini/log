@@ -556,7 +556,6 @@ int main(void){
     mysql_free_result(res);
     if(c==0)qrzcom(con,tok[4]);
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image from who where callsign='%s'",tok[4]);
-printf("--%s--\n",buf);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     if(row!=NULL){
       printf("<table><td><pre>");
@@ -603,7 +602,15 @@ printf("--%s--\n",buf);
     }
     mysql_free_result(res);
     printf("<p class=\"myh1\">%6s %8s %8s %8s %8s</p>","B/Mode","QSO","QSL.LOTW","QSL.EQSL","QSL.QRZ");
-    for(l1=0;l1<ndata3[0][0];l1++)printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,data3[0][0][l1].num,numdata3(0,1,data3[0][0][l1].lab),numdata3(0,2,data3[0][0][l1].lab),numdata3(0,3,data3[0][0][l1].lab));
+    suml[1]=suml[2]=suml[3]=suml[4]=0;
+    for(idx=0;idx<ndata3[0][0];idx++){
+      l1=data3[0][0][l1].num; suml[1]+=l1;
+      l2=numdata3(0,1,data3[0][0][l1].lab); suml[2]+=l2;
+      l3=numdata3(0,2,data3[0][0][l1].lab); suml[3]+=l3;
+      l4=numdata3(0,3,data3[0][0][l1].lab); suml[4]+=l4;
+      printf("%6s %8ld %8ld %8ld %8ld\n",data3[0][0][l1].lab,l1,l2,l3,l4);
+    }
+    printf("<p class=\"myh1\">%6s %8ld %8ld %8ld %8ld</p>","ALL",suml[1],suml[2],suml[3],suml[4]);
     printf("</pre>");
     goto end;
   }
