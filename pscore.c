@@ -1,6 +1,6 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
-const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG","ARRL10","ARRLRU","ARRLRTTY","FTROUNDUP","RCC","ARKTIKA"};
+const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG","ARRL10","ARRLRU","ARRLRTTY","FTROUNDUP","RCC","ARKTIKA","9ADX"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n;
   long l1,l2;
@@ -8,6 +8,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
   MYSQL_RES *res;
   MYSQL_ROW row;
   double lat1,lat2,lon1,lon2;
+  struct tm tm;
 
   vv=sizeof(conid)/sizeof(conid[0]);
   for(contype=0;contype<vv;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
@@ -27,7 +28,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
     ituz[c]=atoi(row[3]);
   }
   mysql_free_result(res);
-  sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+  sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode,start from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   for(;;){
@@ -892,6 +893,51 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         else {
           incdata3(0,1,aux1,3,0);
           sprintf(aux2,"%03d:%s",c,row[4]);
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        sprintf(aux4,"%03d",c);
+        incdata3(0,4,aux4,1,0);
+        break;
+      }
+      case 57: { // 9ADX 9A=497
+        sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
+        incdata3(0,0,aux1,1,0);
+        if(gg==497){
+          if(vv==497)incdata3(0,1,aux1,1,0);
+          else if(strncmp(cont[vv],"EU",2)==0){
+            if(c>=80)incdata3(0,1,aux1,4,0);
+            else incdata3(0,1,aux1,2,0);
+          }
+          else {
+            if(c>=80)incdata3(0,1,aux1,10,0);
+            else if(c==40)incdata3(0,1,aux1,8,0);
+            else incdata3(0,1,aux1,6,0);
+          }
+        }
+        else {
+          strptime(row[6],"%Y-%m-%d %H:%M:%S",&tm);
+          e=((tm.tm_hour * 60 + tm.tm_min) >= 23 * 60) || ((tm.tm_hour * 60 + tm.tm_min) <= 4 * 60 + 59) ?2:0;
+          if(vv==497){
+            if(c>=40)incdata3(0,1,aux1,10+e,0);
+            else incdata3(0,1,aux1,6+e,0);
+          }
+          else if(strncmp(cont[gg],cont[vv],2)!=0){
+            if(c>=40)incdata3(0,1,aux1,6+e,0);
+            else incdata3(0,1,aux1,3+e,0);
+          }
+          else {
+            if(c>=40)incdata3(0,1,aux1,2+e,0);
+            else incdata3(0,1,aux1,1+e,0);
+          }
+        }
+        sprintf(aux2,"%03d:%d:%s",c,ituz[vv],mymode(row[5]));
+        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        if(gg==497){
+          sprintf(aux2,"%03d:@%d:%s",c,vv,mymode(row[5]));
+          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+        }
+        else {
+          sprintf(aux2,"%03d:s:%s",c,row[4],mymode(row[5]));
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
         sprintf(aux4,"%03d",c);
