@@ -534,6 +534,7 @@ int main(void){
     sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux1,row[0]);
     mysql_free_result(res);
+  goto end;
     sprintf(buf,"select grid from who where callsign='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(aux2,row[0]);
     mysql_free_result(res);
