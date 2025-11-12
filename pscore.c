@@ -2,7 +2,7 @@
 
 const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG","ARRL10","ARRLRU","ARRLRTTY","FTROUNDUP","RCC","ARKTIKA","9ADX","EIUKDXSSB","EIUKDXCW"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n,h,m;
+  int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n,h,m,z;
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
   MYSQL_RES *res;
@@ -952,14 +952,15 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         for(d=0;d<n;d++)if(gg==lll[d])break;
         for(e=0;e<n;e++)if(vv==lll[e])break;
         if(d<n){
-          // Note : For UK/EI stations only, all QSOs will score double points between the hours of 0100z and 0459z.
+          sscanf(row[6]+11,"%d:%d",&h,&m);
+          z=(((h*60+m)>=1*60) && ((h*60+m)<=4*60+59)) ?2:1;
           if(e<n || strncmp(cont[vv],"EU",2)==0){
-            if(c>=40)incdata3(0,1,aux1,4,0);
-            else incdata3(0,1,aux1,2,0);
+            if(c>=40)incdata3(0,1,aux1,4*z,0);
+            else incdata3(0,1,aux1,2*z,0);
           }
           else {
-            if(c>=40)incdata3(0,1,aux1,8,0);
-            else incdata3(0,1,aux1,4,0);
+            if(c>=40)incdata3(0,1,aux1,8*z,0);
+            else incdata3(0,1,aux1,4*z,0);
           }
         }
         else if(strncmp(cont[gg],"EU",2)==0){
@@ -986,51 +987,16 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
             else incdata3(0,1,aux1,1,0);
           }
         }
-
-7.2 Multipliers - There are 2 types of multipliers
-(i) different DXCC countries and
-(ii) UK/EI District Codes
-The multiplier total is the total of different DXCC countries worked on each band, (excluding the UK/EI DXCC countries EI, G, GD, GI, GJ, GM, GU, GW) plus UK/EI District Codes worked on each band.
-
-
-        
-        if(gg==497){
-          if(vv==497)incdata3(0,1,aux1,1,0);
-          else if(strncmp(cont[vv],"EU",2)==0){
-            if(c>=80)incdata3(0,1,aux1,4,0);
-            else incdata3(0,1,aux1,2,0);
-          }
-          else {
-            if(c>=80)incdata3(0,1,aux1,10,0);
-            else if(c==40)incdata3(0,1,aux1,8,0);
-            else incdata3(0,1,aux1,6,0);
-          }
-        }
-        else {
-          sscanf(row[6]+11,"%d:%d",&h,&m);
-          e=(((h*60+m)>=23*60) || ((h*60+m)<=4*60+59)) ?2:0;
-          if(vv==497){
-            if(c>=40)incdata3(0,1,aux1,10+e,0);
-            else incdata3(0,1,aux1,6+e,0);
-          }
-          else if(strncmp(cont[gg],cont[vv],2)!=0){
-            if(c>=40)incdata3(0,1,aux1,6+e,0);
-            else incdata3(0,1,aux1,3+e,0);
-          }
-          else {
-            if(c>=40)incdata3(0,1,aux1,2+e,0);
-            else incdata3(0,1,aux1,1+e,0);
-          }
-        }
-        sprintf(aux2,"%03d:%d:%s",c,ituz[vv],mymode(row[5]));
-        incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
-        if(gg==497){
-          sprintf(aux2,"%03d:@%d:%s",c,vv,mymode(row[5]));
+        if(e<n){
+          sprintf(aux2,"%03d:%d",c,vv);
           incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
         }
         else {
-          sprintf(aux2,"%03d:s:%s",c,row[4],mymode(row[5]));
-          incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          for(p=row[4];*p!='\0';p++)if(!isdigit(*p))break;
+          if(p!='\0'){
+            sprintf(aux2,"%03d:%s",c,p);
+            incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
+          }
         }
         sprintf(aux4,"%03d",c);
         incdata3(0,4,aux4,1,0);
