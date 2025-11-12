@@ -993,7 +993,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         }
         else {
           for(p=row[4];*p!='\0';p++)if(!isdigit(*p))break;
-          if(p!='\0'){
+          if(*p!='\0'){
             sprintf(aux2,"%03d:%s",c,p);
             incdata3(0,2,aux2,1,0); incdata3(0,3,aux2,1,0);
           }
