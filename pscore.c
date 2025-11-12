@@ -1018,7 +1018,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         incdata3(0,4,aux4,1,0);
         break;
       }
-      case 61: { // ARRLFIELDDAY
+      case 61: { // ARRLFIELDDAY no power declaration so score=0 only qso points
         sprintf(aux1,"%03d:%s:%s",c,row[0],mymode(row[5]));
         incdata3(0,0,aux1,1,0);
         if(strncmp(mymode(row[5]),"PH",2)==0)incdata3(0,1,aux1,1,0);
