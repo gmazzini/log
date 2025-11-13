@@ -37,15 +37,15 @@
       <button class="btn" id="t59+20">59+20</button>
     </td>
     <td class="myq1">
-      <button class="btn" id="dr51">51</button><br>
-      <button class="btn" id="dr53">53</button><br>
-      <button class="btn" id="dr55">55</button><br>
-      <button class="btn" id="dr56">56</button><br>
-      <button class="btn" id="dr57">57</button><br>
-      <button class="btn" id="dr58">58</button><br>
-      <button class="btn" id="dr59">59</button><br>
-      <button class="btn" id="dr59+10">59+10</button><br>
-      <button class="btn" id="dr59+20">59+20</button>
+      <button class="btn" id="r51">51</button><br>
+      <button class="btn" id="r53">53</button><br>
+      <button class="btn" id="r55">55</button><br>
+      <button class="btn" id="r56">56</button><br>
+      <button class="btn" id="r57">57</button><br>
+      <button class="btn" id="r58">58</button><br>
+      <button class="btn" id="r59">59</button><br>
+      <button class="btn" id="r59+10">59+10</button><br>
+      <button class="btn" id="r59+20">59+20</button>
     </td>
     <td class="myq1">
       <button class="btn" id="a01">List</button><button class="btn" id="a02">&#8679;</button><button class="btn" id="a03">&#8681;</button><button class="btn" id="a04">R</button><button class="btn" id="a05">G</button><br>
@@ -284,6 +284,11 @@ document.querySelectorAll("button[id]").forEach(btn => {
   else  if (/^t.*/.test(btn.id)) {
     btn.addEventListener("click", async (t) => {
       document.getElementById("sigtx").value = t.currentTarget.id.slice(1);
+    });
+  }
+  else  if (/^r.*/.test(btn.id)) {
+    btn.addEventListener("click", async (r) => {
+      document.getElementById("sigrx").value = r.currentTarget.id.slice(1);
     });
   }
 });
