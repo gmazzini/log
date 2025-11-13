@@ -363,8 +363,11 @@ window.radioset = async (a,b) => {
   document.getElementById("mode").value = mode;
 }
 
+let actual=100000000;
+  
 window.timeupdate = () => {
-  epochtodate(100000000);
+  epochtodate(actual);
+  actual++;
 }
   
 window.epochtodate = (ts) => {
@@ -375,7 +378,7 @@ window.epochtodate = (ts) => {
   const hHH = String(d.getHours()).padStart(2, '0');
   const mm = String(d.getMinutes()).padStart(2, '0');
   const ss = String(d.getSeconds()).padStart(2, '0');
-  document.getElementById("o_time").textContent = `${YYYY}${MM}${DD} h${hHH}${mm}${ss}`;
+  document.getElementById("o_time").textContent = `${YYYY}-${MM}-${DD} ${hHH}:${mm}:${ss}`;
 }
 
 imypage.addEventListener("input", () => {
