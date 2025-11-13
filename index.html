@@ -90,7 +90,7 @@
     </td>
     <td class="myq1">
       <h1><span id="o_call"></span></h1>
-      <span id="o_time"></span><br>kz4
+      <span id="o_time"></span><br>
       <span id="o_ota"></span><br>
       <button class="btn" id="a09">Apply</button><button class="btn" id="a10">Report</button><br>
       <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button><br>
@@ -364,8 +364,7 @@ window.radioset = async (a,b) => {
 }
 
 window.timeupdate = () => {
-  epochtodate(100000000);
-  document.getElementById("o_time").textContent = "kkk";
+  document.getElementById("o_time").textContent = ota;
 }
   
 window.epochtodate = (ts) => {
@@ -384,8 +383,8 @@ imypage.addEventListener("input", () => {
 });
   
 setInterval(radioread, 10000);
-setInterval(timeupdate, 1000);  
 radioread();
+setInterval(timeupdate, 1000);
 timeupdate();
 setchecks();
 hh2.style.display = "none";
