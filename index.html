@@ -90,6 +90,7 @@
     </td>
     <td class="myq1">
       <h1><span id="o_call"></span></h1>
+      <h2><span id="o_time"></span></h2>
       <span id="o_ota"></span><br>
       <button class="btn" id="a09">Apply</button><button class="btn" id="a10">Report</button><br>
       <button class="btn" id="a11">Curio</button><button class="btn" id="a12">Activity</button><br>
@@ -362,12 +363,29 @@ window.radioset = async (a,b) => {
   document.getElementById("mode").value = mode;
 }
 
+async function timeupdate() {
+  epochtodate(100000000);
+}
+  
+window.epochtodate = async (ts) => {
+  const d = new Date(ts * 1000);
+  const YYYY = d.getFullYear();
+  const MM = String(d.getMonth() + 1).padStart(2, '0');
+  const DD = String(d.getDate()).padStart(2, '0');
+  const hHH = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  const ss = String(d.getSeconds()).padStart(2, '0');
+  document.getElementById("o_time").textContent = `${YYYY}${MM}${DD} h${hHH}${mm}${ss}`;
+}
+
 imypage.addEventListener("input", () => {
     mypage = Number(imypage.value);
 });
   
 setInterval(radioread, 10000);
+setInterval(timeupdate, 1000);  
 radioread();
+timeupdate();
 setchecks();
 hh2.style.display = "none";
 hh1.style.display = "block";
