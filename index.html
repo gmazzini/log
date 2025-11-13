@@ -106,6 +106,7 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
+let actual = Math.floor(Date.now() / 1000);
 const imypage = document.getElementById("mypage");
 let v = new Array(22+1).fill(0);
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
@@ -363,8 +364,6 @@ window.radioset = async (a,b) => {
   document.getElementById("mode").value = mode;
 }
 
-let actual=100000000;
-  
 window.timeupdate = () => {
   epochtodate(actual);
   actual++;
