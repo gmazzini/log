@@ -371,13 +371,13 @@ window.timeupdate = () => {
   
 window.epochtodate = (ts) => {
   const d = new Date(ts * 1000);
-  const YYYY = d.getFullYear();
-  const MM = String(d.getMonth() + 1).padStart(2, '0');
-  const DD = String(d.getDate()).padStart(2, '0');
-  const hHH = String(d.getHours()).padStart(2, '0');
-  const mm = String(d.getMinutes()).padStart(2, '0');
-  const ss = String(d.getSeconds()).padStart(2, '0');
-  document.getElementById("o_time").textContent = `${YYYY}-${MM}-${DD} ${hHH}:${mm}:${ss}`;
+  const YYYY = d.getUTCFullYear();
+  const MM = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const DD = String(d.getUTCDate()).padStart(2, '0');
+  const hHH = String(d.getUTCHours()).padStart(2, '0');
+  const mm = String(d.getUTCMinutes()).padStart(2, '0');
+  const ss = String(d.getUTCSeconds()).padStart(2, '0');
+  document.getElementById("o_time").textContent = `${YYYY}-${MM}-${DD} ${hHH}:${mm}:${ss} UTC`;
 }
 
 imypage.addEventListener("input", () => {
