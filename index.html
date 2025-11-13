@@ -112,6 +112,10 @@ inputs.forEach(id => {
   if (!el) return;
   el.addEventListener("keydown", e => {
     if (e.key === ",") e.preventDefault();
+    if (id === "call" && e.key === "Enter") {
+      e.preventDefault();
+      document.getElementById("a23").click();
+    }
   });
   el.addEventListener("input", () => {
     const pos = el.selectionStart;
