@@ -114,7 +114,11 @@ inputs.forEach(id => {
     if (e.key === ",") e.preventDefault();
   });
   el.addEventListener("input", () => {
-    el.value = el.value.replace(/,/g, "").toUpperCase();
+    const pos = el.selectionStart;
+    const newValue = el.value.replace(/,/g, "").toUpperCase();
+    const diff = el.value.length - newValue.length;
+    el.value = newValue;
+    el.setSelectionRange(pos - diff, pos - diff);
   });
 });
 let base = 0;
