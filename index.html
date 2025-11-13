@@ -363,11 +363,11 @@ window.radioset = async (a,b) => {
   document.getElementById("mode").value = mode;
 }
 
-window.timeupdate = async () => {
+window.timeupdate = () => {
   epochtodate(100000000);
 }
   
-window.epochtodate = async (ts) => {
+window.epochtodate = (ts) => {
   const d = new Date(ts * 1000);
   const YYYY = d.getFullYear();
   const MM = String(d.getMonth() + 1).padStart(2, '0');
