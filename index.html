@@ -106,7 +106,6 @@
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
-let actual = Math.floor(Date.now() / 1000);
 const imypage = document.getElementById("mypage");
 let v = new Array(22+1).fill(0);
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
@@ -363,14 +362,9 @@ window.radioset = async (a,b) => {
   document.getElementById("freq").value = fff;
   document.getElementById("mode").value = mode;
 }
-
+ 
 window.timeupdate = () => {
-  epochtodate(actual);
-  actual++;
-}
-  
-window.epochtodate = (ts) => {
-  const d = new Date(ts * 1000);
+  const d = new Date.now();
   const YYYY = d.getUTCFullYear();
   const MM = String(d.getUTCMonth() + 1).padStart(2, '0');
   const DD = String(d.getUTCDate()).padStart(2, '0');
