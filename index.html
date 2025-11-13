@@ -26,15 +26,15 @@
       <button class="btn" id="a24">QRZ.com</button><button class="btn" id="a25">QRZ.ru</button>
     </td>
     <td class="myq1">
-      <button class="btn" id="ds51">51</button><br>
-      <button class="btn" id="ds53">53</button><br>
-      <button class="btn" id="ds55">55</button><br>
-      <button class="btn" id="ds56">56</button><br>
-      <button class="btn" id="ds57">57</button><br>
-      <button class="btn" id="ds58">58</button><br>
-      <button class="btn" id="ds59">59</button><br>
-      <button class="btn" id="ds59+10">59+10</button><br>
-      <button class="btn" id="ds59+20">59+20</button>
+      <button class="btn" id="t51">51</button><br>
+      <button class="btn" id="t53">53</button><br>
+      <button class="btn" id="t55">55</button><br>
+      <button class="btn" id="t56">56</button><br>
+      <button class="btn" id="t57">57</button><br>
+      <button class="btn" id="t58">58</button><br>
+      <button class="btn" id="t59">59</button><br>
+      <button class="btn" id="t59+10">59+10</button><br>
+      <button class="btn" id="t59+20">59+20</button>
     </td>
     <td class="myq1">
       <button class="btn" id="dr51">51</button><br>
@@ -279,6 +279,11 @@ document.querySelectorAll("button[id]").forEach(btn => {
           break;
       }
       setchecks();
+    });
+  }
+  else  if (/^t.*/.test(btn.id)) {
+    btn.addEventListener("click", async (t) => {
+      document.getElementById("sigtx").value = t.currentTarget.id.slice(1);
     });
   }
 });
