@@ -367,7 +367,7 @@ window.radioset = async (a,b) => {
  
 window.timeupdate = async () => {
   mysync++;
-  if (mysync == 10){
+  if (mysync == 60){
     mysync = 0;
     const r = await fetch("ptime.cgi");
     const t = await r.text();
