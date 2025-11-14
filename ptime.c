@@ -8,14 +8,13 @@
 #define SERVER "pool.ntp.org"
 
 int main(){
-  int sockfd, n;
+  int sockfd,n;
   unsigned char packet[48];
   struct sockaddr_in server_addr;
   struct hostent *server;
   socklen_t addr_len;
   uint32_t secs;
   time_t epoch;
-  unsigned int i;
 
   printf("Content-Type: text/plain\r\n\r\n");
   sockfd=socket(AF_INET,SOCK_DGRAM,IPPROTO_UDP);
