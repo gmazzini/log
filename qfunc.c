@@ -14,7 +14,7 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   if(!newbuf)return 0;
   if(!*buffer)newbuf[0]='\0';
   strncat(newbuf,ptr,realsize);
-  *buffer = newbuf;
+  *buffer=newbuf;
   return realsize;
 }
 
