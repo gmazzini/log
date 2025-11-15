@@ -43,7 +43,7 @@ char *myget(char *url){
   return out;
 }
 
-int readqrz(char *call,long *visit,long *webcon){
+int readqrz(char *call,long *visit,int *webcon){
   char *out,tok[100],*p1,*p2,tmpc,url[200];
 
   *visit=0; *webcon=0; wcn=0;
@@ -75,7 +75,7 @@ int readqrz(char *call,long *visit,long *webcon){
     p2=strstr(p1,"</span></a>");
     if(p2==NULL)*webcon=0;
     else {
-      tmpc=*p2; *p2='\0'; *webcon=atol(p1); *p2=tmpc;
+      tmpc=*p2; *p2='\0'; *webcon=(atol(p1)>0)?1:0; *p2=tmpc;
     }
   } 
   free(out);
