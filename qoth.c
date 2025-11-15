@@ -1,7 +1,7 @@
 #include "qfunc.c"
 
 int main(){
-  long visit;
-  readqrz("ik4lzh",&visit);
-  printf("%ld\n",visit);
+  long visit,webcon;
+  readqrz("ik4lzh",&visit,&webcon);
+  printf("%ld\n%ld\n",visit,webcon);
 }
