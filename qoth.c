@@ -2,8 +2,8 @@
 #define MAXWC 100000
 
 int main(){
-  long visited,webcon,i,minlooked,tt;
-  int zz,c;
+  long visited,i,minlooked,tt;
+  int zz,c,webcon;
   char buf[1000],mycall[16];
   MYSQL *con;
   MYSQL_RES *res,*res1;
@@ -28,7 +28,7 @@ int main(){
       if(row==NULL)break;
       zz=readqrz(row[0],&visited,&webcon);
       tt=time(NULL)/86400;
-      sprintf(buf,"update qrzwebcontact set looked=%d,visited=%ld,Ewc=%ld,Nwc=%d where mycall='%s' and callsign='%s'",tt,visited,webcon,wcn,mycall,row[0]);
+      sprintf(buf,"update qrzwebcontact set looked=%d,visited=%ld,Ewc=%d,Nwc=%ld where mycall='%s' and callsign='%s'",tt,visited,webcon,wcn,mycall,row[0]);
 printf("1> %s\n",buf);
 
       sleep(3+rand()%5);
