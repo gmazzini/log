@@ -4,7 +4,7 @@
 #include <curl/curl.h>
 
 char **wccall;
-long wcn=0;
+long wcn;
 
 static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata) {
   size_t realsize=size * nmemb;
@@ -56,8 +56,6 @@ int readqrz(char *call,long *visit,long *webcon){
   p2=strstr(p1,"</span>");
   if(p2==NULL){free(out); return 0;}
   tmpc=*p2; *p2='\0'; *visit=atol(p1); *p2=tmpc;
-  strncpy(aux,p1,p2-p1);
-  *visit=atol(aux);
   // url
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
@@ -82,6 +80,16 @@ int readqrz(char *call,long *visit,long *webcon){
   // visit webcon page
   out=myget(url);
   if(out==NULL)return 0;
-  printf("%s\n",out);
+  strcpy(tok,"href="https://www.qrz.com/db/");
+  wcn=0;
+  for(p1=out;;){
+    p1=strstr(p1,tok);
+    if(p1==NULL)break;
+    p1+=strlen(tok);
+    p2=strstr(p1,"/");
+    if(p2==NULL)break;
+    strncpy(wccall[wcn++],p1,p2-p1);
+  }
   free(out);
+  return 1;
 }
