@@ -3,9 +3,8 @@
 #include <string.h>
 #include <curl/curl.h>
 
-char **wccall,wrbuf[10000];
+char **wccall;
 long wcn;
-size_t wrused;
 
 static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   size_t realsize=size*nmemb;
