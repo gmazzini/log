@@ -319,6 +319,7 @@ int main(void){
         if(c==0){
           sprintf(buf,"update log set %s=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
           mysql_query(con,buf);
+      printf("%s\n",buf);
           nnn++;
         }
       }
