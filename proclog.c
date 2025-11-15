@@ -10,7 +10,7 @@ int main(void){
   uint8_t in[4];
   uint32_t t;
   time_t epoch,td;
-  long l1,l2,l3,l4,idx,suml[10],lff,nnn,ppp;
+  long l1,l2,l3,l4,idx,suml[10],lff,nnn,ppp,qqq;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -306,26 +306,30 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     vv=4; gg=adifextract(ff,vv);
-    for(ppp=nnn=0;gg>0;){
+    for(ppp=nnn=qqq=0;gg>0;){
       sscanf(adif[2],"%4ld%2ld%2ld",&l1,&l2,&l3); ts.tm_year=l1-1900; ts.tm_mon=l2-1; ts.tm_mday=l3;
       l3=0; sscanf(adif[1],"%2ld%2ld%2ld",&l1,&l2,&l3); ts.tm_hour=l1; ts.tm_min=l2; ts.tm_sec=l3;
       epoch=timegm(&ts);
       epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       if(adif[3][0]!='\0'){
-        sprintf(buf,"select count(*) from log where %s=1 and mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
-        mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]); mysql_free_result(res);
+        sprintf(buf,"select %s from log where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
+        mysql_query(con,buf); 
+        res=mysql_store_result(con); 
+        row=mysql_fetch_row(res); 
+        if(row==NULL)c=-1; else c=atoi(row[0]); 
+        mysql_free_result(res);
         ppp++;
+        if(c==-1)qqq++;
         if(c==0){
           sprintf(buf,"update log set %s=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
           mysql_query(con,buf);
-      printf("%s\n",buf);
           nnn++;
         }
       }
       gg=adifextract(NULL,vv);
     }
-    printf("QSL %s Processed: %ld\nNew QSL %s Inserted: %ld\n",aux4,ppp,aux4,nnn);
+    printf("QSL %s Processed: %ld\nNew QSL %s Inserted: %ld\nQSO %s Missed: %ld\n",aux4,ppp,aux4,nnn,qqq);
     printf("</pre>");
     goto end;
   }
