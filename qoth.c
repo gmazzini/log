@@ -2,6 +2,6 @@
 
 int main(){
   long visit,webcon;
-  readqrz("iu4ict",&visit,&webcon);
+  readqrz("iz4cow",&visit,&webcon);
   printf("%ld\n%ld\n",visit,webcon);
 }
