@@ -3,6 +3,7 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <mysql/mysql.h>
+#include <unistd.h>
 #include "/home/www/data/log.def"
 
 char **wccall;
