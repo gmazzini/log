@@ -53,7 +53,4 @@ printf("3> %s\n",buf);
     }
     mysql_free_result(res);
   }
-
-
-  printf("\n");
 }
