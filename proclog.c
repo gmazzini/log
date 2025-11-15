@@ -329,7 +329,7 @@ int main(void){
       }
       gg=adifextract(NULL,vv);
     }
-    printf("QSL %s Processed: %ld\nNew QSL %s Inserted: %ld\nQSO %s Missed: %ld\n",aux4,ppp,aux4,nnn,qqq);
+    printf("QSL %s Processed: %ld\nNew QSL %s Inserted: %ld\nQSO %s Missed: %ld\n",aux4,ppp,aux4,nnn,aux4,qqq);
     printf("</pre>");
     goto end;
   }
