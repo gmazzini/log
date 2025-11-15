@@ -3,21 +3,17 @@
 #include <string.h>
 #include <curl/curl.h>
 
-char **wccall;
+char **wccall,wrbuf[10000];
 long wcn;
 
-static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata) {
-  size_t realsize=size * nmemb;
-  char **buffer=(char **)userdata;
-  char *newbuf;
-  newbuf=realloc(*buffer, (*buffer ? strlen(*buffer) : 0) + realsize + 1);
-    if (!newbuf) return 0;
 
-    if (!*buffer) newbuf[0] = '\0';
-    strncat(newbuf, ptr, realsize);
-
-    *buffer = newbuf;
-    return realsize;
+size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
+  size_t total=size*nmemb;
+  if(wrused+total>=sizeof(wrbuf))total=sizeof(wrbuf)-wrused-1;
+  memcpy(wrbuf+wrused,ptr,total);
+  wrused+=total;
+  wrbuf[wrused]=0;
+  return size*nmemb;
 }
 
 char *myget(char *url){
