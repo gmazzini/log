@@ -42,10 +42,11 @@ char *myget(char *call){
 }
 
 int readqrz(char *call,long *visit){
-  char *out,tok[100],*p1,*p2,aux[100],tmpc;
+  char *out,tok[100],*p1,*p2,aux[100],tmpc,myurl;
   
   out=myget(call);
   if(out==NULL)return 0;
+  // number of visit
   strcpy(tok,"<span class=\"ml1\">Lookups: ");
   p1=strstr(out,tok);
   if(p1==NULL){free(out); return 0;}
@@ -54,6 +55,21 @@ int readqrz(char *call,long *visit){
   if(p2==NULL){free(out); return 0;}
   tmpc=*p2; *p2='\0'; *visit=atol(p1); *p2=tmpc;
   strncpy(aux,p1,p2-p1);
-  *visit=atol(aux);  
+  *visit=atol(aux);
+  // url
+  strcpy(tok,"var wc_summary = \"");
+  p1=strstr(out,tok);
+  if(p1==NULL){free(out); return 0;}
+  p2=strstr(p1,"\"");
+  if(p2==NULL){free(out); return 0;}
+  strncpy(myurl,p1,p2-p1); myurl[p2-p1]='\0';
+
+  printf("%s\n",myurl);
+  
+  
+  
+
+
+  
   free(out);
 }
