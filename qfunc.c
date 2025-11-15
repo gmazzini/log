@@ -17,16 +17,14 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata) {
     return realsize;
 }
 
-char *myget(char *call){
+char *myget(char *url){
   CURL *ch;
   CURLcode res;
   char *out;
   char agent[256];
-  char url[256];
 
   out=NULL;
   sprintf(agent,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36");
-  sprintf(url,"https://www.qrz.com/lookup/%s",call);
   ch=curl_easy_init();
   if(!ch)return NULL;
   curl_easy_setopt(ch,CURLOPT_URL,url);
@@ -42,9 +40,10 @@ char *myget(char *call){
 }
 
 int readqrz(char *call,long *visit,long *webcon){
-  char *out,tok[100],*p1,*p2,aux[100],tmpc,myurl[200];
-  
-  out=myget(call);
+  char *out,tok[100],*p1,*p2,aux[100],tmpc,url[200];
+
+  sprintf(url,"https://www.qrz.com/lookup/%s",call);
+  out=myget(url);
   if(out==NULL)return 0;
   // number of visit
   strcpy(tok,"<span class=\"ml1\">Lookups: ");
@@ -63,7 +62,7 @@ int readqrz(char *call,long *visit,long *webcon){
   p1+=strlen(tok);
   p2=strstr(p1,"\"");
   if(p2==NULL){free(out); return 0;}
-  strncpy(myurl,p1,p2-p1); myurl[p2-p1]='\0';
+  strncpy(url,p1,p2-p1); url[p2-p1]='\0';
   // webcon
   strcpy(tok,"<a href=\"#t_webcon\">Web <span class=\"f8\">");
   p1=strstr(out,tok);
@@ -78,7 +77,7 @@ int readqrz(char *call,long *visit,long *webcon){
   } 
   free(out);
   // visit webcon page
-  out=myget(myurl);
+  out=myget(url);
   if(out==NULL)return 0;
   printf("%s\n",out);
   free(out);
