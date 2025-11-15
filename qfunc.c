@@ -3,6 +3,9 @@
 #include <string.h>
 #include <curl/curl.h>
 
+char **wccall;
+long wcn=0;
+
 static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata) {
   size_t realsize=size * nmemb;
   char **buffer=(char **)userdata;
