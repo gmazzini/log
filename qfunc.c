@@ -60,6 +60,7 @@ int readqrz(char *call,long *visit){
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
   if(p1==NULL){free(out); return 0;}
+  p1+=strlen(tok);
   p2=strstr(p1,"\"");
   if(p2==NULL){free(out); return 0;}
   strncpy(myurl,p1,p2-p1); myurl[p2-p1]='\0';
