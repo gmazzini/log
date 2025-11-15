@@ -41,7 +41,7 @@ char *myget(char *call){
   return out;
 }
 
-int readqrz(char *call,long *visit){
+int readqrz(char *call,long *visit,long *webcon){
   char *out,tok[100],*p1,*p2,aux[100],tmpc,myurl[200];
   
   out=myget(call);
@@ -64,6 +64,18 @@ int readqrz(char *call,long *visit){
   p2=strstr(p1,"\"");
   if(p2==NULL){free(out); return 0;}
   strncpy(myurl,p1,p2-p1); myurl[p2-p1]='\0';
+  // webcon
+  strcpy(tok,"<a href=\"#t_webcon\">Web <span class=\"f8\">");
+  p1=strstr(out,tok);
+  if(p1==NULL)*webcon=0;
+  else {
+    p1+=strlen(tok);
+    p2=strstr(p1,"</span></a>");
+    if(p2==NULL)*webcon=0;
+    else {
+      tmpc=*p2; *p2='\0'; *webcon=atol(p1); *p2=tmpc;
+    }
+  }
 
   printf("%s\n",myurl);
   
