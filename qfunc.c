@@ -80,7 +80,7 @@ int readqrz(char *call,long *visit,long *webcon){
   // visit webcon page
   out=myget(url);
   if(out==NULL)return 0;
-  strcpy(tok,"href="https://www.qrz.com/db/");
+  strcpy(tok,"href=\"https://www.qrz.com/db/");
   wcn=0;
   for(p1=out;;){
     p1=strstr(p1,tok);
