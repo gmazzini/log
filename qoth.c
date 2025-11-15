@@ -1,5 +1,7 @@
 #include "qfunc.c"
 
 int main(){
-printf("%s\n",simple_qrz_get("ik4lzh"));
+  long visit;
+  readqrz("ik4lzh",&visit);
+  printf("%ld\n",visit);
 }
