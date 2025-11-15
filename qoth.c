@@ -3,7 +3,7 @@
 
 int main(){
   long visited,webcon,i,minlooked,tt;
-  int zz;
+  int zz,c;
   char buf[1000],mycall[16];
   MYSQL *con;
   MYSQL_RES *res,*res1;
