@@ -42,7 +42,7 @@ char *myget(char *call){
 }
 
 int readqrz(char *call,long *visit){
-  char *out,tok[100],*p1,*p2,aux[100],tmpc,myurl;
+  char *out,tok[100],*p1,*p2,aux[100],tmpc,myurl[200];
   
   out=myget(call);
   if(out==NULL)return 0;
