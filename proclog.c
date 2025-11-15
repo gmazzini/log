@@ -313,7 +313,7 @@ int main(void){
       epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       if(adif[3][0]!='\0'){
-        sprintf(buf,"select count(*) where %s=1 and mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
+        sprintf(buf,"select count(*) from log where %s=1 and mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]); mysql_free_result(res);
         ppp++;
         if(c==0){
