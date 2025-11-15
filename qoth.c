@@ -6,8 +6,8 @@ int main(){
   int zz;
   char buf[1000],mycall[16];
   MYSQL *con;
-  MYSQL_RES *res;
-  MYSQL_ROW row;
+  MYSQL_RES *res,*res1;
+  MYSQL_ROW row,row1;
 
   strcpy(mycall,"IK4LZH");
   wccall=(char **)malloc(MAXWC*sizeof(char *));
