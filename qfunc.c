@@ -46,7 +46,7 @@ char *myget(char *url){
 int readqrz(char *call,long *visit,long *webcon){
   char *out,tok[100],*p1,*p2,tmpc,url[200];
 
-  *visit=0; *webcon=0;
+  *visit=0; *webcon=0; wcn=0;
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
   out=myget(url);
   if(out==NULL)return 0;
@@ -83,7 +83,6 @@ int readqrz(char *call,long *visit,long *webcon){
   out=myget(url);
   if(out==NULL)return 0;
   strcpy(tok,"href=\"https://www.qrz.com/db/");
-  wcn=0;
   for(p1=out;;){
     p1=strstr(p1,tok);
     if(p1==NULL)break;
