@@ -40,3 +40,20 @@ char *myget(char *call){
   if(res!=CURLE_OK){free(out); return NULL;}
   return out;
 }
+
+int readqrz(char *call,long *visit){
+  char *out,tok[100],*p1,*p2,aux[100],tmpc;
+  
+  out=myget(call);
+  if(out==NULL)return 0;
+  strcpy(tok,"<span class=\"ml1\">Lookups: ");
+  p1=strstr(out,tok);
+  if(p1==NULL){free(out); return 0;}
+  p1+=strlen(tok);
+  p2=strstr(p1,"</span>");
+  if(p2==NULL){free(out); return 0;}
+  tmpc=*p2; *p2='\0'; *visit=atol(p1); *p2=tmpc;
+  strncpy(aux,p1,p2-p1);
+  *visit=atol(aux);  
+  free(out);
+}
