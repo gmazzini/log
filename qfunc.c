@@ -75,14 +75,11 @@ int readqrz(char *call,long *visit,long *webcon){
     else {
       tmpc=*p2; *p2='\0'; *webcon=atol(p1); *p2=tmpc;
     }
-  }
-
-  printf("%s\n",myurl);
-  
-  
-  
-
-
-  
+  } 
+  free(out);
+  // visit webcon page
+  out=myget(myurl);
+  if(out==NULL)return 0;
+  printf("%s\n",out);
   free(out);
 }
