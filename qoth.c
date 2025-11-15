@@ -20,8 +20,9 @@ int main(){
     sprintf(buf,"select min(looked) from qrzwebcontact where mycall='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     minlooked=atol(row[0]); mysql_free_result(res);
-    sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and looked=$minlooked order by rand()",mycall);
+    sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and looked=%ld order by rand()",mycall,minlooked);
     mysql_query(con,buf);
+printf("%s\n",buf);
     res=mysql_store_result(con);
     for(;;){
       row=mysql_fetch_row(res);
@@ -29,7 +30,7 @@ int main(){
       zz=readqrz(row[0],&visited,&webcon);
       tt=time(NULL)/86400;
       sprintf(buf,"update qrzwebcontact set looked=%d,visited=%ld,Ewc=%ld,Nwc=%d where mycall='%s' and callsign='%s'",tt,visited,webcon,wcn,mycall,row[0]);
-      printf("%s\n",buf);
+printf("%s\n",buf);
 
       sleep(3+rand()%5);
       if(zz==0)continue;
