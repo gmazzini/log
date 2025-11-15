@@ -17,7 +17,7 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata) {
     return realsize;
 }
 
-char *simple_qrz_get(char *call){
+char *myget(char *call){
   CURL *ch;
   CURLcode res;
   char *out;
