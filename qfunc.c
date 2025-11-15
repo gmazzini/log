@@ -38,13 +38,14 @@ char *simple_qrz_get(const char *call) {
     ch = curl_easy_init();
     if (!ch) return NULL;
 
-    curl_easy_setopt(ch, CURLOPT_URL, url);
-    curl_easy_setopt(ch, CURLOPT_RETURNTRANSFER, 1L);
+     curl_easy_setopt(ch, CURLOPT_URL, url);
     curl_easy_setopt(ch, CURLOPT_SSL_VERIFYPEER, 0L);
     curl_easy_setopt(ch, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(ch, CURLOPT_USERAGENT, agent);
+
+    /* essenziali per ricevere il risultato */
     curl_easy_setopt(ch, CURLOPT_WRITEFUNCTION, write_cb);
     curl_easy_setopt(ch, CURLOPT_WRITEDATA, &out);
-    curl_easy_setopt(ch, CURLOPT_USERAGENT, agent);
 
     res = curl_easy_perform(ch);
     curl_easy_cleanup(ch);
