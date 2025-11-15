@@ -28,6 +28,8 @@ int main(){
       if(row==NULL)break;
       zz=readqrz(row[0],&visit,&webcon);
       sleep(3+rand()%5);
+      if(zz==0)continue;
+      
       
     }
     mysql_free_result(res);
