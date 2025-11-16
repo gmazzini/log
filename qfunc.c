@@ -44,7 +44,8 @@ char *myget(char *url){
 }
 
 int readqrz(char *call,long *visit,int *webcon){
-  char *out,tok[100],*p1,*p2,tmpc,url[200];
+  char *out,tok[100],*p1,*p2,*p3,tmpc,url[200];
+  int j;
 
   *visit=0; *webcon=0; wcn=0;
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
@@ -89,7 +90,8 @@ int readqrz(char *call,long *visit,int *webcon){
     p1+=strlen(tok);
     p2=strstr(p1,"/");
     if(p2==NULL)break;
-    strncpy(wccall[wcn++],p1,p2-p1);
+    for(p3=p1;p3<p2;p3++)if((*p3>='A'&&*p3<='Z')||(*p3>='0'&&*p3<='9'))wccall[wcn][p3-p1]=*p3; else break;
+    if(p3==p2){wccall[wcn][p3-p1]='\0'; wcn++;}
   }
   free(out);
   return 1;
