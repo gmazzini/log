@@ -50,6 +50,7 @@ int readqrz(char *call,long *visit,int *webcon){
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
   out=myget(url);
   if(out==NULL)return 0;
+ 
   // number of visit
   strcpy(tok,"<span class=\"ml1\">Lookups: ");
   p1=strstr(out,tok);
@@ -58,6 +59,7 @@ int readqrz(char *call,long *visit,int *webcon){
   p2=strstr(p1,"</span>");
   if(p2==NULL){free(out); return 0;}
   tmpc=*p2; *p2='\0'; *visit=atol(p1); *p2=tmpc;
+  
   // url
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
@@ -66,6 +68,7 @@ int readqrz(char *call,long *visit,int *webcon){
   p2=strstr(p1,"\"");
   if(p2==NULL){free(out); return 0;}
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
+  
   // webcon
   strcpy(tok,"<a href=\"#t_webcon\">Web <span class=\"f8\">");
   p1=strstr(out,tok);
@@ -79,6 +82,7 @@ int readqrz(char *call,long *visit,int *webcon){
     }
   } 
   free(out);
+  
   // visit webcon page
   out=myget(url);
   if(out==NULL)return 0;
@@ -92,6 +96,27 @@ int readqrz(char *call,long *visit,int *webcon){
     for(p3=p1;p3<p2;p3++)if((*p3>='A'&&*p3<='Z')||(*p3>='0'&&*p3<='9'))wccall[wcn][p3-p1]=*p3; else break;
     if(p3-p1>=3&&p3==p2){wccall[wcn][p3-p1]='\0'; wcn++;}
   }
+  free(out);
+  return 1;
+}
+
+inse setqrz(char *call){
+  char *out,tok[100],*p1,*p2,*p3,tmpc,url[200];
+  
+  sprintf(url,"https://www.qrz.com/lookup/%s",call);
+  out=myget(url);
+  if(out==NULL)return 0;
+  // url
+  strcpy(tok,"var wc_summary = \"");
+  p1=strstr(out,tok);
+  if(p1==NULL){free(out); return 0;}
+  p1+=strlen(tok);
+  p2=strstr(p1,"\"");
+  if(p2==NULL){free(out); return 0;}
+  strncpy(url,p1,p2-p1); url[p2-p1]='\0';
+
+printf("%s\n",url);
+  
   free(out);
   return 1;
 }
