@@ -30,7 +30,7 @@ int main(){
       zz=readqrz(row[0],&visited,&webcon);
       tt=time(NULL)/86400;
       sprintf(buf,"update qrzwebcontact set looked=%d,visited=%ld,Ewc=%d,Nwc=%ld where mycall='%s' and callsign='%s'",tt,visited,webcon,wcn,mycall,row[0]);
-      printf("%s\n",buf);
+      printf("%s\n",buf); fflush(stdout);
       mysql_query(con,buf);
       sleep(3+rand()%5);
       if(zz==0)continue;
@@ -45,7 +45,7 @@ int main(){
         if(c==0){
           sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source) value ('%s','%s','oth')",mycall,wccall[i]);
           mysql_query(con,buf);
-          printf("%s\n",buf);
+          printf("%s\n",buf); fflush(stdout);
         }
       }
     }
