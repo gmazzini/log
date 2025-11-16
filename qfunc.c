@@ -100,7 +100,7 @@ int readqrz(char *call,long *visit,int *webcon){
   return 1;
 }
 
-inse setqrz(char *call){
+int setqrz(char *call){
   char *out,tok[100],*p1,*p2,*p3,tmpc,url[200];
   
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
