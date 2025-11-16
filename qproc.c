@@ -2,12 +2,12 @@
 #define MAXWC 100000
 
 int main(){
-  long visited,i,j,minlooked,tt;
+  long visited,i;
   int zz,c,webcon;
   char buf[1000],mycall[16];
   MYSQL *con;
-  MYSQL_RES *res,*res1;
-  MYSQL_ROW row,row1;
+  MYSQL_RES *res;
+  MYSQL_ROW row;
 
   strcpy(mycall,"IK4LZH");
   wccall=(char **)malloc(MAXWC*sizeof(char *));
