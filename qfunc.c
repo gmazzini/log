@@ -138,7 +138,8 @@ int setqrz(char *call){
       if(p1!=NULL){
         *pc++='=';
         p1+=strlen(tok);
-        p2=strstr(p1,"\"");
+        p2=strstr(p1,"\"\n");
+        if(p2==NULL)p2=strstr(p1,"\",\n");
         for(p3=p1;p3<p2;p3++)*pc++=*p3;
         i=0;
         *pc++=';';
