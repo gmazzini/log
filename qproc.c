@@ -17,7 +17,7 @@ int main(){
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
   
-  // insert all new call in the log not just in qrzwc
+  printf("Insert all new call in the log not just in qrzwc\n");
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign not in (select callsign from qrzwebcontact where mycall='%s')",mycall,mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
@@ -29,7 +29,7 @@ int main(){
   }
   mysql_free_result(res);
 
-  // update all call in my log that was in qrcwc but not worked from me
+  printf("Update all call in my log that was in qrcwc but not worked from me\n");
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign in (select callsign from qrzwebcontact where mycall='%s' and source!='me')",mycall,mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
@@ -41,7 +41,7 @@ int main(){
   }
   mysql_free_result(res);
 
-  // chack on my wc and insert or update wc database
+  printf("Check on my wc and insert or update wc database\n");
   zz=readqrz(mycall,&visited,&webcon);
   for(i=0;i<wcn;i++){
     sprintf(buf,"select count(*) from qrzwebcontact where mycall='%s' and callsign='%s'",mycall,wccall[i]);
