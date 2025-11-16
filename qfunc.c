@@ -21,7 +21,7 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   return realsize;
 }
 
-char *myget(char *url){
+char *myget(char *url,char *cookie){
   CURL *ch;
   CURLcode res;
   char *out;
@@ -35,6 +35,7 @@ char *myget(char *url){
   curl_easy_setopt(ch,CURLOPT_SSL_VERIFYPEER,0L);
   curl_easy_setopt(ch,CURLOPT_FOLLOWLOCATION,1L);
   curl_easy_setopt(ch,CURLOPT_USERAGENT,agent);
+  if(cookie!=NULL)curl_easy_setopt(ch,CURLOPT_COOKIE,cookie);
   curl_easy_setopt(ch,CURLOPT_WRITEFUNCTION,write_cb);
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
   res=curl_easy_perform(ch);
@@ -48,7 +49,7 @@ int readqrz(char *call,long *visit,int *webcon){
 
   *visit=0; *webcon=0; wcn=0;
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
-  out=myget(url);
+  out=myget(url,NULL);
   if(out==NULL)return 0;
  
   // number of visit
@@ -84,7 +85,7 @@ int readqrz(char *call,long *visit,int *webcon){
   free(out);
   
   // visit webcon page
-  out=myget(url);
+  out=myget(url,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"href=\"https://www.qrz.com/db/");
   for(p1=out;;){
@@ -116,7 +117,7 @@ int setqrz(char *call){
   int i;
   
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
-  out=myget(url);
+  out=myget(url,NULL);
   if(out==NULL)return 0;
   // url
   strcpy(tok,"var wc_summary = \"");
@@ -127,7 +128,7 @@ int setqrz(char *call){
   if(p2==NULL){free(out); return 0;}
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
 
-  // login with cookie
+  // create cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
   if(fp==NULL){free(out); return 0;}
   pc=cookie;
@@ -157,10 +158,16 @@ int setqrz(char *call){
     }
   }
   fclose(fp);
+  free(out);
+  
   
   printf("%s\n",url);
   printf("%s\n",cookie);
+
+  out=myget(url,cookie);
   
+  sprintf("%s\n",out);
   free(out);
+  
   return 1;
 }
