@@ -101,7 +101,9 @@ int readqrz(char *call,long *visit,int *webcon){
 }
 
 int setqrz(char *call){
-  char *out,tok[100],*p1,*p2,*p3,tmpc,url[200];
+  char *out,tok[100],*p1,*p2,*p3,tmpc,url[200],buf[200],cookie[10000],*pc;
+  FILE *fp;
+  int i;
   
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
   out=myget(url);
@@ -115,7 +117,37 @@ int setqrz(char *call){
   if(p2==NULL){free(out); return 0;}
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
 
-printf("%s\n",url);
+  // login with cookie
+  fp=fopen("/home/www/data/qrz_cookie","r");
+  if(fp==NULL){free(out); return 0;}
+  pc=cookie;
+  for(i=0;fgets(buf,200,fp);){
+    if(i==0){
+      strcpy(tok,"\"name\": \"");
+      p1=strstr(out,tok);
+      if(p1!=NULL){
+        p1+=strlen(tok);
+        p2=strstr(p1,"\"");
+        for(p3=p1;p3<p2;p3++)*pc++=*p3;
+        i=1;
+      }
+    }
+    else {
+      strcpy(tok,"\"value\": \"");
+      p1=strstr(out,tok);
+      if(p1!=NULL){
+        *pc++='=';
+        p1+=strlen(tok);
+        p2=strstr(p1,"\"");
+        for(p3=p1;p3<p2;p3++)*pc++=*p3;
+        i=0;
+        *pc++=';';
+      }
+    }
+  }
+  
+  printf("%s\n",url);
+  printf("%s\n",cookie);
   
   free(out);
   return 1;
