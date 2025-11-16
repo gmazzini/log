@@ -100,8 +100,18 @@ int readqrz(char *call,long *visit,int *webcon){
   return 1;
 }
 
+char *toend(char *s){
+  int escaped=0;
+  for(;*s;s++){
+    if(escaped){escaped=0; continue;}
+    if(*s=='\\'){escaped=1; continue;}
+    if(*s=='"')return s;
+  }
+  return NULL;
+}
+
 int setqrz(char *call){
-  char *out,tok[100],*p1,*p2,*p3,tmpc,url[200],buf[200],cookie[10000],*pc;
+  char *out,tok[100],*p1,*p2,*p3,url[200],buf[200],cookie[10000],*pc;
   FILE *fp;
   int i;
   
@@ -127,7 +137,7 @@ int setqrz(char *call){
       p1=strstr(buf,tok);
       if(p1!=NULL){
         p1+=strlen(tok);
-        p2=strstr(p1,"\"");
+        p2=toend(p1);
         for(p3=p1;p3<p2;p3++)*pc++=*p3;
         i=1;
       }
@@ -138,8 +148,7 @@ int setqrz(char *call){
       if(p1!=NULL){
         *pc++='=';
         p1+=strlen(tok);
-        p2=strstr(p1,"\"\n");
-        if(p2==NULL)p2=strstr(p1,"\",\n");
+        p2=toend(p1);
         for(p3=p1;p3<p2;p3++)*pc++=*p3;
         i=0;
         *pc++=';';
