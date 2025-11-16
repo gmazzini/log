@@ -69,7 +69,7 @@ int main(){
     if(row==NULL)break;
     sprintf(buf,"update qrzwebcontact set me=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
     printf("%s\n",buf);
-    // ----
+    // ---- if(!myqrzsetwebcontact($callsign))continue;
   }
   mysql_free_result(res);
   printf("--- %ld entries\n\n",entry);
