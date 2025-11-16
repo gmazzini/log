@@ -112,7 +112,7 @@ char *toend(char *s){
 }
 
 int setqrz(char *call){
-  char *out,tok[100],*p1,*p2,*p3,url[200],buf[200],cookie[10000],*pc;
+  char *out,tok[100],*p1,*p2,*p3,url[200],buf[10000],cookie[10000],*pc;
   FILE *fp;
   int i;
   
@@ -132,7 +132,7 @@ int setqrz(char *call){
   fp=fopen("/home/www/data/qrz_cookie","r");
   if(fp==NULL){free(out); return 0;}
   pc=cookie;
-  for(i=0;fgets(buf,200,fp);){
+  for(i=0;fgets(buf,10000,fp);){
     if(i==0){
       strcpy(tok,"\"name\": \"");
       p1=strstr(buf,tok);
