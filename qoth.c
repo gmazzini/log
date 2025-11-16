@@ -45,6 +45,7 @@ int main(){
         if(c==0){
           sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source) value ('%s','%s','oth')",mycall,wccall[i]);
           mysql_query(con,buf);
+          printf("%s\n",buf);
         }
       }
     }
