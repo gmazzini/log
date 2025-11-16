@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <mysql/mysql.h>
-#include "log.def"
+#include "/home/www/data/log.def"
 
 int main(void) {
   int c,vv,gg;
