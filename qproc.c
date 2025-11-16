@@ -25,8 +25,7 @@ int main(){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source) value ('%s','%s','me')",mycall,row[0]);
-    // mysql_query(con,buf);
-    printf("%s\n",buf);
+    mysql_query(con,buf);
   }
   mysql_free_result(res);
 
@@ -38,8 +37,7 @@ int main(){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     sprintf(buf,"update qrzwebcontact set source='me' where mycall='%s' and callsign='%s'",mycall,row[0]);
-    // mysql_query(con,buf);
-    printf("%s\n",buf);
+    mysql_query(con,buf);
   }
   mysql_free_result(res);
 
@@ -51,7 +49,9 @@ int main(){
     c=atoi(row[0]); mysql_free_result(res);
     if(c==0)sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source,sent,you) value ('%s','%s','oth',1,1)",mycall,wccall[i]);
     else sprintf(buf,"update qrzwebcontact set sent=1,you=1 where mycall='%s' and callsign='%s'",mycall,wccall[i]);
-    // mysql_query(con,buf);
-    printf("%s\n",buf);
+    mysql_query(con,buf);
   }
+
+
+   printf("DONE\n");
 }
