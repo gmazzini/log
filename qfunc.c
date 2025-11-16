@@ -124,7 +124,7 @@ int setqrz(char *call){
   for(i=0;fgets(buf,200,fp);){
     if(i==0){
       strcpy(tok,"\"name\": \"");
-      p1=strstr(out,tok);
+      p1=strstr(buf,tok);
       if(p1!=NULL){
         p1+=strlen(tok);
         p2=strstr(p1,"\"");
@@ -134,7 +134,7 @@ int setqrz(char *call){
     }
     else {
       strcpy(tok,"\"value\": \"");
-      p1=strstr(out,tok);
+      p1=strstr(buf,tok);
       if(p1!=NULL){
         *pc++='=';
         p1+=strlen(tok);
@@ -145,6 +145,7 @@ int setqrz(char *call){
       }
     }
   }
+  fclose(fp);
   
   printf("%s\n",url);
   printf("%s\n",cookie);
