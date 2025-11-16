@@ -90,7 +90,7 @@ int readqrz(char *call,long *visit,int *webcon){
     p2=strstr(p1,"/");
     if(p2==NULL)break;
     for(p3=p1;p3<p2;p3++)if((*p3>='A'&&*p3<='Z')||(*p3>='0'&&*p3<='9'))wccall[wcn][p3-p1]=*p3; else break;
-    if(p3==p2){wccall[wcn][p3-p1]='\0'; wcn++;}
+    if(p3-p1>=3&&p3==p2){wccall[wcn][p3-p1]='\0'; wcn++;}
   }
   free(out);
   return 1;
