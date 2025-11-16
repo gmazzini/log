@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <mysql/mysql.h>
-#include "log.def"
+#include "/home/www/data/log.def"
 
 int main(void){
   int fd,r,i,vv,gg,c;
