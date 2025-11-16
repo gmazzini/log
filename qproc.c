@@ -16,6 +16,11 @@ int main(){
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
+
+
+  zz=readqrz(mycall,&visited,&webcon);
+  for(i=0;i<10;i++)printf("%ld %s\n",i,wccall[i]); exit(0);
+  
   
   // insert all new call in the log not just in qrzwc
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign not in (select callsign from qrzwebcontact where mycall='%s')",mycall,mycall);
