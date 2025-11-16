@@ -163,6 +163,7 @@ int setqrz(char *call){
   
   printf("%s\n",url);
   printf("%s\n",cookie);
+  return 1;
 
   out=myget(url,cookie);
   
