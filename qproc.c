@@ -49,6 +49,7 @@ int main(){
     sprintf(buf,"select count(*) from qrzwebcontact where mycall='%s' and callsign='%s'",mycall,wccall[i]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     c=atoi(row[0]); mysql_free_result(res);
+if(c==0)printf("--- %ld %s\n",i,wccall[i]);
     if(c==0)sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source,sent,you) value ('%s','%s','oth',1,1)",mycall,wccall[i]);
     else sprintf(buf,"update qrzwebcontact set sent=1,you=1 where mycall='%s' and callsign='%s'",mycall,wccall[i]);
     // mysql_query(con,buf);
