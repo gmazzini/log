@@ -45,7 +45,6 @@ char *myget(char *url){
 
 int readqrz(char *call,long *visit,int *webcon){
   char *out,tok[100],*p1,*p2,*p3,tmpc,url[200];
-  int j;
 
   *visit=0; *webcon=0; wcn=0;
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
