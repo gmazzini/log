@@ -2,7 +2,7 @@
 #define MAXWC 100000
 
 int main(){
-  long visited,i;
+  long visited,i,entry;
   int zz,c,webcon;
   char buf[1000],mycall[16];
   MYSQL *con;
@@ -17,41 +17,63 @@ int main(){
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
   
-  printf("Insert all new call in the log not just in qrzwc\n");
+  printf(">> Insert all new call in the log not just in qrzwc\n");
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign not in (select callsign from qrzwebcontact where mycall='%s')",mycall,mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
-  for(;;){
+  for(entry=0;;entry++){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source) value ('%s','%s','me')",mycall,row[0]);
     mysql_query(con,buf);
+    printf("%s\n",buf);
   }
   mysql_free_result(res);
+  printf("--- %ld entries\n\n",entry);
 
-  printf("Update all call in my log that was in qrcwc but not worked from me\n");
+  printf(">> Update all call in my log that was in qrcwc but not worked from me\n");
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign in (select callsign from qrzwebcontact where mycall='%s' and source!='me')",mycall,mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
-  for(;;){
+  for(entry=0;;entry++){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     sprintf(buf,"update qrzwebcontact set source='me' where mycall='%s' and callsign='%s'",mycall,row[0]);
     mysql_query(con,buf);
+    printf("%s\n",buf);
   }
   mysql_free_result(res);
+  printf("--- %ld entries\n\n",entry);
 
-  printf("Check on my wc and insert or update wc database\n");
+  printf(">> Check on my wc and insert or update wc database\n");
   zz=readqrz(mycall,&visited,&webcon);
-  for(i=0;i<wcn;i++){
+  for(entry=i=0;i<wcn;i++){
     sprintf(buf,"select count(*) from qrzwebcontact where mycall='%s' and callsign='%s'",mycall,wccall[i]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     c=atoi(row[0]); mysql_free_result(res);
-    if(c==0)sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source,sent,you) value ('%s','%s','oth',1,1)",mycall,wccall[i]);
+    if(c==0){
+      sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source,sent,you) value ('%s','%s','oth',1,1)",mycall,wccall[i]);
+      entry++;
+    }
     else sprintf(buf,"update qrzwebcontact set sent=1,you=1 where mycall='%s' and callsign='%s'",mycall,wccall[i]);
     mysql_query(con,buf);
   }
+  printf("--- %ld entries with %ld inserted\n",wcn,entry);
+
+  printf(">> Set me on unset wc\n");
+  sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and looked>0 and me=0 and you=1 and Ewc=1 order by Nwc desc",mycall);
+  mysql_query(con,buf);
+  res=mysql_store_result(con);
+  for(entry=0;;entry++){
+    row=mysql_fetch_row(res);
+    if(row==NULL)break;
+    sprintf(buf,"update qrzwebcontact set me=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
+    printf("%s\n",buf);
+    // ----
+  }
+  mysql_free_result(res);
+  printf("--- %ld entries\n",entry);
 
 
-   printf("DONE\n");
+  printf("DONE\n");
 }
