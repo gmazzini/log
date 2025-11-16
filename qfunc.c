@@ -152,6 +152,7 @@ int setqrz(char *call){
         for(p3=p1;p3<p2;p3++)*pc++=*p3;
         i=0;
         *pc++=';';
+        *pc++=' ';
       }
     }
   }
