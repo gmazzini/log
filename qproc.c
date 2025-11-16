@@ -58,7 +58,7 @@ int main(){
     else sprintf(buf,"update qrzwebcontact set sent=1,you=1 where mycall='%s' and callsign='%s'",mycall,wccall[i]);
     mysql_query(con,buf);
   }
-  printf("--- %ld entries with %ld inserted\n",wcn,entry);
+  printf("--- %ld entries with %ld inserted\n\n",wcn,entry);
 
   printf(">> Set me on unset wc\n");
   sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and looked>0 and me=0 and you=1 and Ewc=1 order by Nwc desc",mycall);
@@ -72,7 +72,7 @@ int main(){
     // ----
   }
   mysql_free_result(res);
-  printf("--- %ld entries\n",entry);
+  printf("--- %ld entries\n\n",entry);
 
 
   printf("DONE\n");
