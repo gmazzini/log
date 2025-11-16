@@ -11,8 +11,8 @@
 #include <mysql/mysql.h>
 #include <curl/curl.h>
 #include <arpa/inet.h>
+#include "/home/www/data/log.def"
 
-#include "log.def"
 #define TOT3 5
 #define TOTL2 400
 #define TOTL3 200000
