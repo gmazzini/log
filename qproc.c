@@ -2,7 +2,7 @@
 #define MAXWC 100000
 
 int main(){
-  long visited,i,entry;
+  long visited,i,entry,updated;
   int zz,c,webcon;
   char buf[1000],mycall[16];
   MYSQL *con;
@@ -64,17 +64,17 @@ int main(){
   sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and looked>0 and me=0 and you=1 and Ewc=1 order by Nwc desc",mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
-  for(entry=0;;entry++){
+  for(updated=entry=0;;entry++){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     if(setqrz(row[0])==0)continue;
     sprintf(buf,"update qrzwebcontact set me=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
     mysql_query(con,buf);
     printf("%s\n",buf);
+    updated++;
   }
   mysql_free_result(res);
-  printf("--- %ld entries\n\n",entry);
-
+  printf("--- %ld entries with %ld updated\n\n",entry,updated);
 
   printf("DONE\n");
 }
