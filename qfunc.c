@@ -40,7 +40,7 @@ static size_t xxxwrite_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   return realsize;
 }
 
-char *myget(char *url,char *cookie){
+char *mypost(char *url,char *cookie,char *post){
   CURL *ch;
   CURLcode res;
   char *out;
@@ -55,6 +55,10 @@ char *myget(char *url,char *cookie){
   curl_easy_setopt(ch,CURLOPT_FOLLOWLOCATION,1L);
   curl_easy_setopt(ch,CURLOPT_USERAGENT,agent);
   if(cookie!=NULL)curl_easy_setopt(ch,CURLOPT_COOKIE,cookie);
+  if(post!=NULL){
+    curl_easy_setopt(curl,CURLOPT_POST,1L);
+    curl_easy_setopt(curl,CURLOPT_POSTFIELDS,post);
+  }
   curl_easy_setopt(ch,CURLOPT_WRITEFUNCTION,write_cb);
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
   res=curl_easy_perform(ch);
