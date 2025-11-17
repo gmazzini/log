@@ -40,6 +40,8 @@ char *myget(char *url,char *cookie){
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
   res=curl_easy_perform(ch);
   curl_easy_cleanup(ch);
+
+  printf("vivo\n");
   if(res!=CURLE_OK){free(out); return NULL;}
   return out;
 }
