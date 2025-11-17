@@ -1,10 +1,11 @@
 #include "qfunc.c"
+#include "pfunc.c"
 #define MAXWC 100000
 
 int main(){
   long visited,i,entry,updated;
   int zz,c,webcon;
-  char buf[1000],mycall[16];
+  char buf[10000],mycall[16],myemail[100],youremail[100];
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
@@ -49,8 +50,7 @@ int main(){
   zz=readqrz(mycall,&visited,&webcon);
   for(entry=i=0;i<wcn;i++){
     sprintf(buf,"select count(*) from qrzwebcontact where mycall='%s' and callsign='%s'",mycall,wccall[i]);
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-    c=atoi(row[0]); mysql_free_result(res);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]); mysql_free_result(res);
     if(c==0){
       sprintf(buf,"insert into qrzwebcontact (mycall,callsign,source,sent,you) value ('%s','%s','oth',1,1)",mycall,wccall[i]);
       entry++;
@@ -77,5 +77,28 @@ int main(){
   mysql_free_result(res);
   printf("--- %ld entries with %ld updated\n\n",entry,updated);
 
+  printf(">> Send email to request xxxx\n");
+  sprintf(buf,"select email from who where callsign='%s'",mycall);
+  mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(myemail,row[0]); mysql_free_result(res);
+  sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and sent=0 and qrzed=0 and source='me' order by rand()",mycall);
+  mysql_query(con,buf);
+  res=mysql_store_result(con);
+  for(entry=0;;entry++){
+    row=mysql_fetch_row(res);
+    if(row==NULL)break;
+    qrzcom(con,row[0]);
+    sprintf(buf,"update qrzwebcontact set qrzed=$%ld where mycall='%s' and callsign='%s'",time(NULL)/86400,mycall,row[0]);
+    printf("%s\n",buf);
+    // xxxx
+    sprintf(buf,"select email from who where callsign='%s'",row[0]);
+    mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); strcpy(youremail,row1[0]) mysql_free_result(res1);
+    sprintf(buf,"select count(email) from qrzwebcontact_email where email='%s'",youremail);
+    mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); c=atoi(row1[0]); mysql_free_result(res1);
+    sleep(3+rand()%5);
+    if(strlen(youremail)>5 && c==0){
+      sprintf(buf,"Hi %s,<br><br> in the past, we have connected and indeed, you are in my log. I noticed that you also have a profile on qrz.com, and I do too. It would really make me happy if you could add your callsign to my qrz.com page called \"Web Contacts,\" where I am collecting a large number of friends. If you decide to proceed, you can: <ul><li>1. log in to the qrz.com website <a href=\"https://www.qrz.com/\"> https://www.qrz.com/</a> with your credentials,</li><li>2. search for my callsign by typing %s or by clicking the link <a href=\"https://www.qrz.com/lookup/%s\">https://www.qrz.com/lookup/$s</a></li><li>3. click on the tab labeled \"Web\",</li><li>4. go to the box labeled \"Add your Web Contact\", and click on the button that says \"DE %s\"</li></ul><br><br>Thank you very much, and I hope to connect with you again soon.<br><br>73 de %s",row[0],mycall,mycall,mycall,mycall,mycall);
+    }
+  }
+  mysql_free_result(res);
   printf("DONE\n");
 }
