@@ -173,7 +173,6 @@ goto next;
   }
   mysql_free_result(res);
   printf("--- %ld call qrzed\n\n",entry);
-
   
   printf("DONE\n");
 }
