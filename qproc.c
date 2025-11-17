@@ -90,7 +90,7 @@ int main(){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     c=qrzcom(con,row[0]);
-    sprintf(buf,"update qrzwebcontact set qrzed=$%ld where mycall='%s' and callsign='%s'",time(NULL)/86400,mycall,row[0]);
+    sprintf(buf,"update qrzwebcontact set qrzed=%ld where mycall='%s' and callsign='%s'",time(NULL)/86400,mycall,row[0]);
     printf("%s\n",buf);
     // xxxx
     entry++;
