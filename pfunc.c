@@ -180,7 +180,7 @@ char *search(char *buf,char *key){
   return out;
 }
 
-void qrzcom(MYSQL *con,char *call){
+int qrzcom(MYSQL *con,char *call){
   struct addrinfo h={0},*r=0;
   int s,n;
   char aux1[300],aux2[300],key[13][201],ee[40];
@@ -209,9 +209,11 @@ void qrzcom(MYSQL *con,char *call){
     now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
     sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],key[8],atoi(key[9]),atoi(key[10]),atoi(key[11]),key[12],ee);
     mysql_query(con,aux2);
+    close(s);
+    return 1;
   }
-  else printf("<pre>Not found\n</pre>");
   close(s);
+  return 0;
 }
 
 size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
@@ -266,7 +268,7 @@ char *cyrlat(char *input){
   return output;
 }
 
-void qrzru(MYSQL *con,char *call){
+int qrzru(MYSQL *con,char *call){
   CURL *h;
   char aux1[300],aux2[300],key[12][201],ee[40];
   int n;
@@ -301,8 +303,9 @@ void qrzru(MYSQL *con,char *call){
     now=time(NULL); utc=gmtime(&now); strftime(ee,39,"%Y-%m-%d %H:%M:%S",utc);
     sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,myupdate,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],"",atoi(key[8]),atoi(key[9]),atoi(key[10]+6),key[11],ee);
     mysql_query(con,aux2);
+    return 1;
   }
-  else printf("<pre>Not found\n</pre>");
+  return 0;
 }
 
 double distance(double lat1,double lon1,double lat2,double lon2){
