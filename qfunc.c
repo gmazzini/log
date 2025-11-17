@@ -197,7 +197,7 @@ int setqrz(char *call){
 
   // set the wc
   sprintf(post,"webcon=1&wc_userid=%s",userid);
-  mypost((url,cookie,post);
+  mypost(url,cookie,post);
 
   return 1;
 }
