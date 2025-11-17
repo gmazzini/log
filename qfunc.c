@@ -146,7 +146,6 @@ int setqrz(char *call){
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
   if(strlen(url)<5)return 0;
   printf("URL: %s\n",url);
-  return 1;
 
   // create cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
