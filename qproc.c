@@ -104,7 +104,7 @@ int main(){
       sprintf(buf,"update qrzwebcontact set sent=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
       printf("%s\n",buf);
       // xxxx
-      printf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
+      sprintf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
       printf("%s\n",buf);
       // xxxx
       sleep(30);
