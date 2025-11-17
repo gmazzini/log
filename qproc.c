@@ -98,10 +98,12 @@ int main(){
     if(strlen(youremail)>5 && c==0){
       sprintf(buf,"Hi %s,<br><br> in the past, we have connected and indeed, you are in my log. I noticed that you also have a profile on qrz.com, and I do too. It would really make me happy if you could add your callsign to my qrz.com page called \"Web Contacts,\" where I am collecting a large number of friends. If you decide to proceed, you can: <ul><li>1. log in to the qrz.com website <a href=\"https://www.qrz.com/\"> https://www.qrz.com/</a> with your credentials,</li><li>2. search for my callsign by typing %s or by clicking the link <a href=\"https://www.qrz.com/lookup/%s\">https://www.qrz.com/lookup/$s</a></li><li>3. click on the tab labeled \"Web\",</li><li>4. go to the box labeled \"Add your Web Contact\", and click on the button that says \"DE %s\"</li></ul><br><br>Thank you very much, and I hope to connect with you again soon.<br><br>73 de %s",row[0],mycall,mycall,mycall,mycall,mycall);
       myemailsend(myemail,myemail,"QRZ Web Contacts request",buf);
-
-      // mysqli_query($con,"update qrzwebcontact set sent=1 where mycall='$mycall' and callsign='$callsign'");
-      // mysqli_query($con,"insert ignore into qrzwebcontact_email (email) values ('$email')");
-
+      sprintf(buf,"update qrzwebcontact set sent=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
+      printf("%s\n",buf);
+      // xxxx
+      printf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
+      printf("%s\n",buf);
+      // xxxx
       sleep(30);
     }
   }
