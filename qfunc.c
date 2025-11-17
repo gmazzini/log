@@ -56,8 +56,8 @@ char *mypost(char *url,char *cookie,char *post){
   curl_easy_setopt(ch,CURLOPT_USERAGENT,agent);
   if(cookie!=NULL)curl_easy_setopt(ch,CURLOPT_COOKIE,cookie);
   if(post!=NULL){
-    curl_easy_setopt(curl,CURLOPT_POST,1L);
-    curl_easy_setopt(curl,CURLOPT_POSTFIELDS,post);
+    curl_easy_setopt(ch,CURLOPT_POST,1L);
+    curl_easy_setopt(ch,CURLOPT_POSTFIELDS,post);
   }
   curl_easy_setopt(ch,CURLOPT_WRITEFUNCTION,write_cb);
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
