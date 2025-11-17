@@ -196,6 +196,7 @@ int setqrz(char *call){
   printf("userid: %s\n",userid);
 
   // set the wc
+  sprintf(url,"https://www.qrz.com/db/%s",call);
   sprintf(post,"webcon=1&wc_userid=%s",userid);
   mypost(url,cookie,post);
 
