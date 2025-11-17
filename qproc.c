@@ -156,6 +156,24 @@ goto next;
   mysql_free_result(res);
   printf("--- %ld set attemped with %ld email sent\n\n",entry,updated);
 
+  printf(">> Check for call never qrzed\n");
+  sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and sent=1 and qrzed=0 order by rand()",mycall);
+  mysql_query(con,buf);
+  res=mysql_store_result(con);
+  for(entry=0;;){
+    row=mysql_fetch_row(res);
+    if(row==NULL)break;
+    sleep(3+rand()%5);
+    c=qrzcom(con,row[0]);
+    if(c==0)continue;
+    sprintf(buf,"update qrzwebcontact set qrzed=%ld where mycall='%s' and callsign='%s'",time(NULL)/86400,mycall,row[0]);
+    mysql_query(con,buf);
+    printf("%s\n",buf);
+    entry++;
+  }
+  mysql_free_result(res);
+  printf("--- %ld call qrzed\n\n",entry);
+
   
   printf("DONE\n");
 }
