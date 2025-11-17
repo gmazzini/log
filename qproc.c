@@ -86,13 +86,15 @@ int main(){
   sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and sent=0 and qrzed=0 and source='me' order by rand()",mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
-  for(entry=0;;entry++){
+  for(updated=entry=0;;){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
-    qrzcom(con,row[0]);
+    c=qrzcom(con,row[0]);
     sprintf(buf,"update qrzwebcontact set qrzed=$%ld where mycall='%s' and callsign='%s'",time(NULL)/86400,mycall,row[0]);
     printf("%s\n",buf);
     // xxxx
+    entry++;
+    if(c==0)continue;
     sprintf(buf,"select email from who where callsign='%s'",row[0]);
     mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); strcpy(youremail,row1[0]); mysql_free_result(res1);
     sprintf(buf,"select count(email) from qrzwebcontact_email where email='%s'",youremail);
@@ -107,9 +109,13 @@ int main(){
       sprintf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
       printf("%s\n",buf);
       // xxxx
+      updated++;
       sleep(30);
     }
   }
   mysql_free_result(res);
+  printf("--- %ld entries found with %ld email sent\n\n",entry,updated);
+
+  
   printf("DONE\n");
 }
