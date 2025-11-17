@@ -202,3 +202,116 @@ int setqrz(char *call){
 
   return 1;
 }
+
+const char *smtp_host     = "s016.mazzini.org";
+const int   smtp_port     = 587;
+const char *mail_user_b64 = "BASE64-USER";   /* base64($mail_user)  */
+const char *mail_pass_b64 = "BASE64-PASS";   /* base64($mail_passwd)*/
+
+int myemailsend(char *from,char *to,char *subject,char *body){
+  int sock;
+  struct hostent *he;
+  struct sockaddr_in addr;
+  SSL_CTX *ctx;
+  SSL *ssl;
+  char buf[8192];
+  int n;
+
+  he=gethostbyname(smtp_host);
+  if(!he)return 0;
+  sock=socket(AF_INET,SOCK_STREAM,0);
+  if(sock<0)return 0;
+  memset(&addr,0,sizeof(addr));
+  addr.sin_family=AF_INET;
+  addr.sin_port=htons(smtp_port);
+  memcpy(&addr.sin_addr,he->h_addr,he->h_length);
+  if(connect(sock,(struct sockaddr *)&addr,sizeof(addr))<0){close(sock); return 0;}
+  n=recv(sock,buf,8191,0);
+  if(n<=0){close(sock); return 0;}
+  buf[n]='\0';
+
+    /* EHLO + STARTTLS in chiaro */
+    send(sock, "EHLO localhost\r\n", 16, 0);
+    n = recv(sock, buf, sizeof(buf)-1, 0);
+    if (n <= 0) { close(sock); return; }
+    buf[n] = 0;
+
+    send(sock, "STARTTLS\r\n", 10, 0);
+    n = recv(sock, buf, sizeof(buf)-1, 0);
+    if (n <= 0) { close(sock); return; }
+    buf[n] = 0;
+
+    /* TLS */
+    SSL_library_init();
+    ctx = SSL_CTX_new(TLS_client_method());
+    if (!ctx) { close(sock); return; }
+    ssl = SSL_new(ctx);
+    SSL_set_fd(ssl, sock);
+    if (SSL_connect(ssl) <= 0) {
+        SSL_free(ssl); SSL_CTX_free(ctx); close(sock); return;
+    }
+
+    /* EHLO dopo TLS */
+    SSL_write(ssl, "EHLO localhost\r\n", 16);
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+    buf[n] = 0;
+
+    /* AUTH LOGIN */
+    SSL_write(ssl, "AUTH LOGIN\r\n", 12);
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+    buf[n] = 0;
+
+    snprintf(buf, sizeof(buf), "%s\r\n", mail_user_b64);
+    SSL_write(ssl, buf, strlen(buf));
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+    buf[n] = 0;
+
+    snprintf(buf, sizeof(buf), "%s\r\n", mail_pass_b64);
+    SSL_write(ssl, buf, strlen(buf));
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+    buf[n] = 0;
+
+    /* MAIL FROM / RCPT TO / DATA */
+    snprintf(buf, sizeof(buf), "MAIL FROM:<%s>\r\n", from);
+    SSL_write(ssl, buf, strlen(buf));
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+
+    snprintf(buf, sizeof(buf), "RCPT TO:<%s>\r\n", to);
+    SSL_write(ssl, buf, strlen(buf));
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+
+    SSL_write(ssl, "DATA\r\n", 6);
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+
+    /* HEADERS + BODY + terminatore */
+    snprintf(buf, sizeof(buf),
+        "Subject: %s\r\n"
+        "From: %s\r\n"
+        "To: %s\r\n"
+        "MIME-Version: 1.0\r\n"
+        "Content-Type: text/html; charset=UTF-8\r\n"
+        "\r\n"
+        "%s\r\n.\r\n",
+        subject, from, to, body);
+
+    SSL_write(ssl, buf, strlen(buf));
+    n = SSL_read(ssl, buf, sizeof(buf)-1);
+    if (n <= 0) goto end;
+
+    /* QUIT */
+    SSL_write(ssl, "QUIT\r\n", 6);
+    SSL_read(ssl, buf, sizeof(buf)-1);
+
+end:
+    SSL_shutdown(ssl);
+    SSL_free(ssl);
+    SSL_CTX_free(ctx);
+    close(sock);
+}
