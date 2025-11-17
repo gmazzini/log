@@ -4,6 +4,12 @@
 #include <curl/curl.h>
 #include <mysql/mysql.h>
 #include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <openssl/ssl.h>
+
 #include "/home/www/data/log.def"
 #define BUFOUT 20000000L
 
