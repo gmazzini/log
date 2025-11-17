@@ -14,6 +14,7 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   size_t realsize=size*nmemb;
   char **buffer=(char **)userdata;
   static char *out=NULL;
+printf(">>>> %ld %ld\n",size,nmemb);
   if(out==NULL){
     out=(char *)malloc(BUFOUT*sizeof(char));
     if(out==NULL)return 0;
@@ -180,7 +181,7 @@ int setqrz(char *call){
   printf("%s\n",cookie);
 
   out=myget(url,cookie);
-  printf("%s\n",out);
+//  printf("%s\n",out);
   
   return 1;
 }
