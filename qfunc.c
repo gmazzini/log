@@ -17,7 +17,7 @@ char **wccall;
 long wcn;
 int newout=1;
 
-static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
+static size_t write_cb2(void *ptr,size_t size,size_t nmemb,void *userdata){
   size_t realsize=size*nmemb;
   char **buffer=(char **)userdata;
   static char *out=NULL;
@@ -31,18 +31,6 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   actpos+=realsize;
   *(out+actpos)='\0'; 
   *buffer=out;
-  return realsize;
-}
-
-static size_t xxxwrite_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
-  size_t realsize=size*nmemb;
-  char **buffer=(char **)userdata;
-  char *newbuf;
-  newbuf=realloc(*buffer,(*buffer?strlen(*buffer):0)+realsize+1);
-  if(!newbuf)return 0;
-  if(!*buffer)newbuf[0]='\0';
-  strncat(newbuf,ptr,realsize);
-  *buffer=newbuf;
   return realsize;
 }
 
@@ -65,7 +53,7 @@ char *mypost(char *url,char *cookie,char *post){
     curl_easy_setopt(ch,CURLOPT_POST,1L);
     curl_easy_setopt(ch,CURLOPT_POSTFIELDS,post);
   }
-  curl_easy_setopt(ch,CURLOPT_WRITEFUNCTION,write_cb);
+  curl_easy_setopt(ch,CURLOPT_WRITEFUNCTION,write_cb2);
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
   res=curl_easy_perform(ch);
   curl_easy_cleanup(ch);
