@@ -16,6 +16,7 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   static char *out=NULL;
   if(out==NULL){
     out=(char *)malloc(BUFOUT*sizeof(char));
+    if(out==NULL)printf("drmma\n"); else printf("Ok\n");
     if(out==NULL)return 0;
   }
   if(!*buffer)out[0]='\0';
@@ -176,7 +177,7 @@ int setqrz(char *call){
   }
   fclose(fp);
 //  free(out);
-
+return 1;
   // read userid
   
   printf("%s\n",url);
