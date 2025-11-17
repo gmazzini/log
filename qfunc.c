@@ -9,18 +9,21 @@
 
 char **wccall;
 long wcn;
+int newout=1;
 
 static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   size_t realsize=size*nmemb;
   char **buffer=(char **)userdata;
   static char *out=NULL;
-printf(">>>> %ld %ld\n",size,nmemb);
+  static size_t actpos=0;
   if(out==NULL){
     out=(char *)malloc(BUFOUT*sizeof(char));
     if(out==NULL)return 0;
   }
-  if(!*buffer)out[0]='\0';
-  strncat(out,ptr,realsize);
+  if(newout){actpos=0; newout=0;}
+  memcpy(out+actpos,ptr,realsize);
+  actpos+=realsize;
+  *(out+actpos)='\0'; 
   *buffer=out;
   return realsize;
 }
@@ -43,7 +46,7 @@ char *myget(char *url,char *cookie){
   char *out;
   char agent[256];
 
-  out=NULL;
+  newout=1;
   sprintf(agent,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36");
   ch=curl_easy_init();
   if(!ch)return NULL;
@@ -147,6 +150,7 @@ int setqrz(char *call){
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
   if(strlen(url)<5)return 0;
   printf("URL: %s\n",url);
+  return 1;
 
   // create cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
