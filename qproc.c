@@ -20,7 +20,7 @@ int main(){
   sprintf(buf,"select email from who where callsign='%s'",mycall);
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(myemail,row[0]); mysql_free_result(res);
 
-//  goto next;
+goto next;
   
   printf(">> Insert all new call in the log not just in qrzwc\n");
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign not in (select callsign from qrzwebcontact where mycall='%s')",mycall,mycall);
