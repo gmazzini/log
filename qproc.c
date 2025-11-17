@@ -117,7 +117,6 @@ goto next;
   mysql_free_result(res);
   printf("--- %ld entries found with %ld email sent\n\n",entry,updated);
 
-  next:
   printf(">> Send email to ask for wc at station with wc but never contacted\n");
   sprintf(buf,"select callsign,Nwc from qrzwebcontact where mycall='%s' and sent=0 and qrzed=0 and source='oth' and me=0 and you=0 and Ewc=1 order by Nwc desc",mycall);
   mysql_query(con,buf);
@@ -155,7 +154,7 @@ goto next;
   }
   mysql_free_result(res);
   printf("--- %ld set attemped with %ld email sent\n\n",entry,updated);
-
+next:
   printf(">> Check for call never qrzed\n");
   sprintf(buf,"select callsign from qrzwebcontact where mycall='%s' and sent=1 and qrzed=0 order by rand()",mycall);
   mysql_query(con,buf);
