@@ -278,7 +278,7 @@ int qrzru(MYSQL *con,char *call){
   
   wrused=0;
   h=curl_easy_init();
-  if(!h)return;
+  if(!h)return 0;
   sprintf(aux1,"https://api.qrz.ru/login?u=%s&p=%s&agent=LZH23",ruuser,rupassword);
   curl_easy_setopt(h,CURLOPT_URL,aux1);
   curl_easy_setopt(h,CURLOPT_FOLLOWLOCATION,1L);
@@ -289,7 +289,7 @@ int qrzru(MYSQL *con,char *call){
   curl_easy_cleanup(h);
   strcpy(aux1,search(wrbuf,"session_id"));
   h=curl_easy_init();
-  if(!h)return;
+  if(!h)return 0;
   sprintf(aux2,"https://api.qrz.ru/callsign?id=%s&callsign=%s",aux1,call);
   curl_easy_setopt(h,CURLOPT_URL,aux2);
   curl_easy_setopt(h,CURLOPT_FOLLOWLOCATION,1L);
