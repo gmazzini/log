@@ -5,11 +5,26 @@
 #include <mysql/mysql.h>
 #include <unistd.h>
 #include "/home/www/data/log.def"
+#define BUFOUT 20000000L
 
 char **wccall;
 long wcn;
 
 static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
+  size_t realsize=size*nmemb;
+  char **buffer=(char **)userdata;
+  static char *out=NULL;
+  if(out==NULL){
+    out=(char *)malloc(BUFOUT*sizeof(char));
+    if(out==NULL)return 0;
+  }
+  if(!*buffer)out[0]='\0';
+  strncat(out,ptr,realsize);
+  *buffer=out;
+  return realsize;
+}
+
+static size_t xxxwrite_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   size_t realsize=size*nmemb;
   char **buffer=(char **)userdata;
   char *newbuf;
@@ -40,10 +55,8 @@ char *myget(char *url,char *cookie){
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
   res=curl_easy_perform(ch);
   curl_easy_cleanup(ch);
-
-  printf("vivo\n");
-  if(res!=CURLE_OK){free(out); return NULL;}
-  printf("vegeto\n");
+  // if(res!=CURLE_OK){free(out); return NULL;}
+  if(res!=CURLE_OK)return NULL;
   return out;
 }
 
@@ -130,6 +143,7 @@ int setqrz(char *call){
   p2=strstr(p1,"\"");
   if(p2==NULL){free(out); return 0;}
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
+  if(strlen(url)<5){free(out); return 0;}
 
   // create cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
@@ -161,16 +175,16 @@ int setqrz(char *call){
     }
   }
   fclose(fp);
-  free(out);
-  
+//  free(out);
+
+  // read userid
   
   printf("%s\n",url);
   printf("%s\n",cookie);
 
   out=myget(url,cookie);
   
-  if(out!=NULL)printf("%s\n",out);
-  free(out);
+//  free(out);
   
   return 1;
 }
