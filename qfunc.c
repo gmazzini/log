@@ -72,7 +72,7 @@ int readqrz(char *call,long *visit,int *webcon){
 
   *visit=0; *webcon=0; wcn=0;
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
-  out=myget(url,NULL);
+  out=myput(url,NULL,NULL);
   if(out==NULL)return 0;
  
   // number of visit
@@ -107,7 +107,7 @@ int readqrz(char *call,long *visit,int *webcon){
   } 
   
   // visit webcon page
-  out=myget(url,NULL);
+  out=myput(url,NULL,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"href=\"https://www.qrz.com/db/");
   for(p1=out;;){
@@ -133,14 +133,13 @@ char *toend(char *s){
 }
 
 int setqrz(char *call){
-  char *out,tok[100],*p1,*p2,*p3,url[200],userid[200],buf[10000],cookie[10000],*pc;
+  char *out,tok[100],*p1,*p2,*p3,url[200],userid[200],post[200],buf[10000],cookie[10000],*pc;
   FILE *fp;
   int i;
-  long vuserid;
 
   // url
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
-  out=myget(url,NULL);
+  out=myput(url,NULL,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
@@ -184,7 +183,7 @@ int setqrz(char *call){
   fclose(fp);  
 
   // look for userid
-  out=myget(url,cookie);
+  out=myput(url,cookie,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"name=\"wc_userid\" value=\"");
   p1=strstr(out,tok);
@@ -194,8 +193,12 @@ int setqrz(char *call){
   if(p2==NULL)return 0;
   strncpy(userid,p1,p2-p1); userid[p2-p1]='\0';
   vuserid=atol(userid);
-  if(vuserid==0)return 0;
-  printf("userid: %ld\n",vuserid);
+  if(atol(vuserid)==0)return 0;
+  printf("userid: %s\n",userid);
+
+  // set the wc
+  sprintf(post,"webcon=1&wc_userid=%s",userid);
+
   
   return 1;
 }
