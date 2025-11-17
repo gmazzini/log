@@ -67,9 +67,10 @@ int main(){
   for(entry=0;;entry++){
     row=mysql_fetch_row(res);
     if(row==NULL)break;
+    if(setqrz(row[0])==0)continue;
     sprintf(buf,"update qrzwebcontact set me=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
+    mysql_query(con,buf);
     printf("%s\n",buf);
-    // ---- if(!myqrzsetwebcontact($callsign))continue;
   }
   mysql_free_result(res);
   printf("--- %ld entries\n\n",entry);
