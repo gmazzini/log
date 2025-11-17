@@ -59,7 +59,6 @@ char *myget(char *url,char *cookie){
   curl_easy_setopt(ch,CURLOPT_WRITEDATA,&out);
   res=curl_easy_perform(ch);
   curl_easy_cleanup(ch);
-  // if(res!=CURLE_OK){free(out); return NULL;}
   if(res!=CURLE_OK)return NULL;
   return out;
 }
@@ -75,19 +74,19 @@ int readqrz(char *call,long *visit,int *webcon){
   // number of visit
   strcpy(tok,"<span class=\"ml1\">Lookups: ");
   p1=strstr(out,tok);
-  if(p1==NULL){free(out); return 0;}
+  if(p1==NULL)return 0;
   p1+=strlen(tok);
   p2=strstr(p1,"</span>");
-  if(p2==NULL){free(out); return 0;}
+  if(p2==NULL)return 0;
   tmpc=*p2; *p2='\0'; *visit=atol(p1); *p2=tmpc;
   
   // url
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
-  if(p1==NULL){free(out); return 0;}
+  if(p1==NULL)return 0;
   p1+=strlen(tok);
   p2=strstr(p1,"\"");
-  if(p2==NULL){free(out); return 0;}
+  if(p2==NULL)return 0;
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
   
   // webcon
@@ -102,7 +101,6 @@ int readqrz(char *call,long *visit,int *webcon){
       tmpc=*p2; *p2='\0'; *webcon=(atol(p1)>0)?1:0; *p2=tmpc;
     }
   } 
-  free(out);
   
   // visit webcon page
   out=myget(url,NULL);
@@ -117,7 +115,6 @@ int readqrz(char *call,long *visit,int *webcon){
     for(p3=p1;p3<p2;p3++)if((*p3>='A'&&*p3<='Z')||(*p3>='0'&&*p3<='9'))wccall[wcn][p3-p1]=*p3; else break;
     if(p3-p1>=3&&p3==p2){wccall[wcn][p3-p1]='\0'; wcn++;}
   }
-  free(out);
   return 1;
 }
 
@@ -150,11 +147,10 @@ int setqrz(char *call){
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
   if(strlen(url)<5)return 0;
   printf("URL: %s\n",url);
-  return 1;
 
   // create cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
-  if(fp==NULL){free(out); return 0;}
+  if(fp==NULL)return 0;
   pc=cookie;
   for(i=0;fgets(buf,10000,fp);){
     if(i==0){
@@ -185,7 +181,7 @@ int setqrz(char *call){
   printf("%s\n",cookie);
 
   out=myget(url,cookie);
-//  printf("%s\n",out);
+  printf("%s\n",out);
   
   return 1;
 }
