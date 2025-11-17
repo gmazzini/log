@@ -203,11 +203,6 @@ int setqrz(char *call){
   return 1;
 }
 
-const char *smtp_host     = "s016.mazzini.org";
-const int   smtp_port     = 587;
-const char *mail_user_b64 = "BASE64-USER";   /* base64($mail_user)  */
-const char *mail_pass_b64 = "BASE64-PASS";   /* base64($mail_passwd)*/
-
 int myemailsend(char *from,char *to,char *subject,char *body){
   int sock;
   struct hostent *he;
