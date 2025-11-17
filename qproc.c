@@ -91,7 +91,7 @@ int main(){
     printf("%s\n",buf);
     // xxxx
     sprintf(buf,"select email from who where callsign='%s'",row[0]);
-    mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); strcpy(youremail,row1[0]) mysql_free_result(res1);
+    mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); strcpy(youremail,row1[0]); mysql_free_result(res1);
     sprintf(buf,"select count(email) from qrzwebcontact_email where email='%s'",youremail);
     mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); c=atoi(row1[0]); mysql_free_result(res1);
     sleep(3+rand()%5);
