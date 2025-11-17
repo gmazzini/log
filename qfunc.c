@@ -129,15 +129,15 @@ char *toend(char *s){
 }
 
 int setqrz(char *call){
-  char *out,tok[100],*p1,*p2,*p3,url[200],buf[10000],cookie[10000],*pc;
+  char *out,tok[100],*p1,*p2,*p3,url[200],userid[200],buf[10000],cookie[10000],*pc;
   FILE *fp;
   int i;
-  
+  long vuserid;
+
+  // url
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
   out=myget(url,NULL);
   if(out==NULL)return 0;
-
-  // url
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
   if(p1==NULL)return 0;
@@ -148,7 +148,7 @@ int setqrz(char *call){
   if(strlen(url)<5)return 0;
   printf("URL: %s\n",url);
 
-  // create cookie
+  // read cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
   if(fp==NULL)return 0;
   pc=cookie;
@@ -178,10 +178,20 @@ int setqrz(char *call){
     }
   }
   fclose(fp);  
-  printf("%s\n",cookie);
 
+  // look for userid
   out=myget(url,cookie);
-  printf("%s\n",out);
+  if(out==NULL)return 0;
+  strcpy(tok,"name=\"wc_userid\" value=\"");
+  p1=strstr(out,tok);
+  if(p1==NULL)return 0;
+  p1+=strlen(tok);
+  p2=strstr(p1,"\"");
+  if(p2==NULL)return 0;
+  strncpy(userid,p1,p2-p1); userid[p2-p1]='\0';
+  vuserid=atol(userid);
+  if(vuserid==0)return 0;
+  printf("userid: %ls\n",vuserid);
   
   return 1;
 }
