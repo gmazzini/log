@@ -136,6 +136,12 @@ int setqrz(char *call){
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
   out=myget(url,NULL);
   if(out==NULL)return 0;
+printf("%s\n",out);
+  return 1;
+
+
+
+  
   // url
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
