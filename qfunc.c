@@ -139,7 +139,7 @@ int setqrz(char *call){
       if(p1!=NULL){
         p1+=strlen(tok);
         p2=toend(p1);
-        for(p3=p1;p3<p2;p3++)*pc++=*p3;
+        for(p3=p1;p3<p2;p3++)if(*p3!='\\' || *(p3+1)!='"')*pc++=*p3; else {*pc++='"'; p3++;} 
         i=1;
       }
     }
@@ -150,7 +150,7 @@ int setqrz(char *call){
         *pc++='=';
         p1+=strlen(tok);
         p2=toend(p1);
-        for(p3=p1;p3<p2;p3++)*pc++=*p3;
+        for(p3=p1;p3<p2;p3++)if(*p3!='\\' || *(p3+1)!='"')*pc++=*p3; else {*pc++='"'; p3++;} 
         i=0;
         *pc++=';';
         *pc++=' ';
