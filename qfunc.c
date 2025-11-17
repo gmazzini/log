@@ -193,7 +193,7 @@ int setqrz(char *call){
   if(p2==NULL)return 0;
   strncpy(userid,p1,p2-p1); userid[p2-p1]='\0';
   vuserid=atol(userid);
-  if(atol(vuserid)==0)return 0;
+  if(atol(userid)==0)return 0;
   printf("userid: %s\n",userid);
 
   // set the wc
