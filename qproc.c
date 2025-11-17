@@ -65,6 +65,7 @@ int main(){
   mysql_query(con,buf);
   res=mysql_store_result(con);
   for(updated=entry=0;;entry++){
+    sleep(10+rand()%10);
     row=mysql_fetch_row(res);
     if(row==NULL)break;
     if(setqrz(row[0])==0)continue;
