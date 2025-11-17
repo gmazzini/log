@@ -43,6 +43,7 @@ char *myget(char *url,char *cookie){
 
   printf("vivo\n");
   if(res!=CURLE_OK){free(out); return NULL;}
+  printf("vegeto\n");
   return out;
 }
 
