@@ -177,16 +177,11 @@ int setqrz(char *call){
       }
     }
   }
-  fclose(fp);
-//  free(out);
-return 1;
-  // read userid
-  
+  fclose(fp);  
   printf("%s\n",cookie);
 
   out=myget(url,cookie);
-  
-//  free(out);
+  printf("%s\n",out);
   
   return 1;
 }
