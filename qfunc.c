@@ -230,88 +230,72 @@ int myemailsend(char *from,char *to,char *subject,char *body){
   if(n<=0){close(sock); return 0;}
   buf[n]='\0';
 
-    /* EHLO + STARTTLS in chiaro */
-    send(sock, "EHLO localhost\r\n", 16, 0);
-    n = recv(sock, buf, sizeof(buf)-1, 0);
-    if (n <= 0) { close(sock); return; }
-    buf[n] = 0;
+  // EHLO + STARTTLS in chiaro
+  send(sock,"EHLO localhost\r\n",16,0);
+  n=recv(sock,buf,8191,0);
+  if(n<=0){close(sock); return 0;}
+  buf[n]='\0';
+  send(sock,"STARTTLS\r\n",10,0);
+  n=recv(sock,buf,8191,0);
+  if(n<=0){close(sock); return 0;}
+  buf[n]='\0';
 
-    send(sock, "STARTTLS\r\n", 10, 0);
-    n = recv(sock, buf, sizeof(buf)-1, 0);
-    if (n <= 0) { close(sock); return; }
-    buf[n] = 0;
+  // TLS
+  SSL_library_init();
+  ctx=SSL_CTX_new(TLS_client_method());
+  if(!ctx){close(sock); return 0;}
+  ssl=SSL_new(ctx);
+  SSL_set_fd(ssl,sock);
+  if(SSL_connect(ssl)<=0){SSL_free(ssl); SSL_CTX_free(ctx); close(sock); return 0;}
 
-    /* TLS */
-    SSL_library_init();
-    ctx = SSL_CTX_new(TLS_client_method());
-    if (!ctx) { close(sock); return; }
-    ssl = SSL_new(ctx);
-    SSL_set_fd(ssl, sock);
-    if (SSL_connect(ssl) <= 0) {
-        SSL_free(ssl); SSL_CTX_free(ctx); close(sock); return;
-    }
+  // EHLO dopo TLS
+  SSL_write(ssl,"EHLO localhost\r\n",16);
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
+  buf[n]='\0';
 
-    /* EHLO dopo TLS */
-    SSL_write(ssl, "EHLO localhost\r\n", 16);
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-    buf[n] = 0;
+  // AUTH LOGIN
+  SSL_write(ssl,"AUTH LOGIN\r\n",12);
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
+  buf[n]='\0';
+  sprintf(buf,"%s\r\n",mail_user_b64);
+  SSL_write(ssl,buf,strlen(buf));
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
+  buf[n]='\0';
+  sprintf(buf,"%s\r\n",mail_pass_b64);
+  SSL_write(ssl,buf,strlen(buf));
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
+  buf[n]='\0';
 
-    /* AUTH LOGIN */
-    SSL_write(ssl, "AUTH LOGIN\r\n", 12);
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-    buf[n] = 0;
+  // MAIL FROM / RCPT TO / DATA
+  sprintf(buf,"MAIL FROM:<%s>\r\n",from);
+  SSL_write(ssl,buf,strlen(buf));
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
+  sprintf(buf,"RCPT TO:<%s>\r\n",to);
+  SSL_write(ssl,buf,strlen(buf));
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
+  SSL_write(ssl,"DATA\r\n",6);
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
 
-    snprintf(buf, sizeof(buf), "%s\r\n", mail_user_b64);
-    SSL_write(ssl, buf, strlen(buf));
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-    buf[n] = 0;
+  // HEADERS + BODY + terminatore
+  sprintf(buf,"Subject: %s\r\nFrom: %s\r\nTo: %s\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n%s\r\n.\r\n",subject,from,to,body);
+  SSL_write(ssl,buf,strlen(buf));
+  n=SSL_read(ssl,buf,8191);
+  if(n<=0)goto end;
 
-    snprintf(buf, sizeof(buf), "%s\r\n", mail_pass_b64);
-    SSL_write(ssl, buf, strlen(buf));
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-    buf[n] = 0;
+  // QUIT
+  SSL_write(ssl,"QUIT\r\n",6);
+  SSL_read(ssl,buf,8191);
 
-    /* MAIL FROM / RCPT TO / DATA */
-    snprintf(buf, sizeof(buf), "MAIL FROM:<%s>\r\n", from);
-    SSL_write(ssl, buf, strlen(buf));
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-
-    snprintf(buf, sizeof(buf), "RCPT TO:<%s>\r\n", to);
-    SSL_write(ssl, buf, strlen(buf));
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-
-    SSL_write(ssl, "DATA\r\n", 6);
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-
-    /* HEADERS + BODY + terminatore */
-    snprintf(buf, sizeof(buf),
-        "Subject: %s\r\n"
-        "From: %s\r\n"
-        "To: %s\r\n"
-        "MIME-Version: 1.0\r\n"
-        "Content-Type: text/html; charset=UTF-8\r\n"
-        "\r\n"
-        "%s\r\n.\r\n",
-        subject, from, to, body);
-
-    SSL_write(ssl, buf, strlen(buf));
-    n = SSL_read(ssl, buf, sizeof(buf)-1);
-    if (n <= 0) goto end;
-
-    /* QUIT */
-    SSL_write(ssl, "QUIT\r\n", 6);
-    SSL_read(ssl, buf, sizeof(buf)-1);
-
-end:
-    SSL_shutdown(ssl);
-    SSL_free(ssl);
-    SSL_CTX_free(ctx);
-    close(sock);
+  end:
+  SSL_shutdown(ssl);
+  SSL_free(ssl);
+  SSL_CTX_free(ctx);
+  close(sock);
 }
