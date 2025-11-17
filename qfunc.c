@@ -191,7 +191,7 @@ int setqrz(char *call){
   strncpy(userid,p1,p2-p1); userid[p2-p1]='\0';
   vuserid=atol(userid);
   if(vuserid==0)return 0;
-  printf("userid: %ls\n",vuserid);
+  printf("userid: %ld\n",vuserid);
   
   return 1;
 }
