@@ -166,7 +166,7 @@ int setqrz(char *call){
 
   out=myget(url,cookie);
   
-  sprintf("%s\n",out);
+  if(out!=NULL)sprintf("%s\n",out);
   free(out);
   
   return 1;
