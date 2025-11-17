@@ -91,8 +91,8 @@ int main(){
     if(row==NULL)break;
     c=qrzcom(con,row[0]);
     sprintf(buf,"update qrzwebcontact set qrzed=%ld where mycall='%s' and callsign='%s'",time(NULL)/86400,mycall,row[0]);
+    mysql_query(con,buf);
     printf("%s\n",buf);
-    // xxxx
     entry++;
     if(c==0)continue;
     sprintf(buf,"select email from who where callsign='%s'",row[0]);
@@ -102,13 +102,13 @@ int main(){
     sleep(3+rand()%5);
     if(strlen(youremail)>5 && c==0){
       sprintf(buf,"Hi %s,<br><br> in the past, we have connected and indeed, you are in my log. I noticed that you also have a profile on qrz.com, and I do too. It would really make me happy if you could add your callsign to my qrz.com page called \"Web Contacts,\" where I am collecting a large number of friends. If you decide to proceed, you can: <ul><li>1. log in to the qrz.com website <a href=\"https://www.qrz.com/\"> https://www.qrz.com/</a> with your credentials,</li><li>2. search for my callsign by typing %s or by clicking the link <a href=\"https://www.qrz.com/lookup/%s\">https://www.qrz.com/lookup/%s</a></li><li>3. click on the tab labeled \"Web\",</li><li>4. go to the box labeled \"Add your Web Contact\", and click on the button that says \"DE %s\"</li></ul><br><br>Thank you very much, and I hope to connect with you again soon.<br><br>73 de %s",row[0],mycall,mycall,mycall,row[0],mycall);
-      myemailsend(myemail,myemail,"QRZ Web Contacts request",buf);
+      myemailsend(myemail,youremail,"QRZ Web Contacts request",buf);
       sprintf(buf,"update qrzwebcontact set sent=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
+      mysql_query(con,buf);
       printf("%s\n",buf);
-      // xxxx
       sprintf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
+      mysql_query(con,buf);
       printf("%s\n",buf);
-      // xxxx
       updated++;
       sleep(30);
     }
