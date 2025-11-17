@@ -16,7 +16,6 @@ static size_t write_cb(void *ptr,size_t size,size_t nmemb,void *userdata){
   static char *out=NULL;
   if(out==NULL){
     out=(char *)malloc(BUFOUT*sizeof(char));
-    if(out==NULL)printf("drmma\n"); else printf("Ok\n");
     if(out==NULL)return 0;
   }
   if(!*buffer)out[0]='\0';
@@ -136,21 +135,18 @@ int setqrz(char *call){
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
   out=myget(url,NULL);
   if(out==NULL)return 0;
-printf("%s\n",out);
-  return 1;
 
-
-
-  
   // url
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
-  if(p1==NULL){free(out); return 0;}
+  if(p1==NULL)return 0;
   p1+=strlen(tok);
   p2=strstr(p1,"\"");
-  if(p2==NULL){free(out); return 0;}
+  if(p2==NULL)return 0;
   strncpy(url,p1,p2-p1); url[p2-p1]='\0';
-  if(strlen(url)<5){free(out); return 0;}
+  if(strlen(url)<5)return 0;
+  printf("URL: %s\n",url);
+  return 1;
 
   // create cookie
   fp=fopen("/home/www/data/qrz_cookie","r");
@@ -186,7 +182,6 @@ printf("%s\n",out);
 return 1;
   // read userid
   
-  printf("%s\n",url);
   printf("%s\n",cookie);
 
   out=myget(url,cookie);
