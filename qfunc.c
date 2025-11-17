@@ -72,7 +72,7 @@ int readqrz(char *call,long *visit,int *webcon){
 
   *visit=0; *webcon=0; wcn=0;
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
-  out=myput(url,NULL,NULL);
+  out=mypost(url,NULL,NULL);
   if(out==NULL)return 0;
  
   // number of visit
@@ -107,7 +107,7 @@ int readqrz(char *call,long *visit,int *webcon){
   } 
   
   // visit webcon page
-  out=myput(url,NULL,NULL);
+  out=mypost(url,NULL,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"href=\"https://www.qrz.com/db/");
   for(p1=out;;){
@@ -139,7 +139,7 @@ int setqrz(char *call){
 
   // url
   sprintf(url,"https://www.qrz.com/lookup/%s",call);
-  out=myput(url,NULL,NULL);
+  out=mypost(url,NULL,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"var wc_summary = \"");
   p1=strstr(out,tok);
@@ -183,7 +183,7 @@ int setqrz(char *call){
   fclose(fp);  
 
   // look for userid
-  out=myput(url,cookie,NULL);
+  out=mypost(url,cookie,NULL);
   if(out==NULL)return 0;
   strcpy(tok,"name=\"wc_userid\" value=\"");
   p1=strstr(out,tok);
