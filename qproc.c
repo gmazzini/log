@@ -96,7 +96,7 @@ int main(){
     mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); 
     if(row1!=NULL)strcpy(youremail,row1[0]); else *youremail='\0'; 
     mysql_free_result(res1);
-    sprintf(buf,"select count(email) from qrzwebcontact_email where email='%s'",youremail);
+    sprintf(buf,"select count(email) from wcsent where email='%s'",youremail);
     mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); c=atoi(row1[0]); mysql_free_result(res1);
     sleep(3+rand()%5);
     if(strlen(youremail)>5 && c==0){
@@ -105,7 +105,7 @@ int main(){
       sprintf(buf,"update qrzwebcontact set sent=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
       mysql_query(con,buf);
       printf("%s\n",buf);
-      sprintf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
+      sprintf(buf,"insert ignore into wcsent (email) values ('%s')",youremail);
       mysql_query(con,buf);
       printf("%s\n",buf);
       updated++;
@@ -135,7 +135,7 @@ int main(){
     mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); 
     if(row1!=NULL)strcpy(youremail,row1[0]); else *youremail='\0'; 
     mysql_free_result(res1);
-    sprintf(buf,"select count(email) from qrzwebcontact_email where email='%s'",youremail);
+    sprintf(buf,"select count(email) from wcsent where email='%s'",youremail);
     mysql_query(con,buf); res1=mysql_store_result(con); row1=mysql_fetch_row(res1); c=atoi(row1[0]); mysql_free_result(res1);
     if(strlen(youremail)>5 && c==0){
       sprintf(buf,"Hi %s,<br><br>I noticed that in your profile on qrz.com you have enabled \"Web Contacts\" and have collected %ld entries, when I visited you. I have also added my callsign to your list with great pleasure. It would really make me happy if you could also add your callsign to my qrz.com page \"Web Contacts,\" where I am collecting a large number of friends. If you decide to proceed, you can: <ul><li>1. log in to the qrz.com website <a href=\"https://www.qrz.com/\">https://www.qrz.com/</a> with your credentials,</li><li>2. search for my callsign by typing %s or by clicking the link <a href=\"https://www.qrz.com/lookup/%s\"> https://www.qrz.com/lookup/%s</a></li><li>3. click on the tab labeled \"Web\",</li><li>4. go to the box labeled \"Add your Web Contact\", and click on the button that says \"DE %s\"</li></ul><br><br>Thank you very much, and I hope to connect with you again soon.<br><br> 73 de %s",row[0],atol(row[1]),mycall,mycall,mycall,row[0],mycall);
@@ -143,7 +143,7 @@ int main(){
       sprintf(buf,"update qrzwebcontact set sent=1 where mycall='%s' and callsign='%s'",mycall,row[0]);
       mysql_query(con,buf);
       printf("%s\n",buf);
-      sprintf(buf,"insert ignore into qrzwebcontact_email (email) values ('%s')",youremail);
+      sprintf(buf,"insert ignore into wcsent (email) values ('%s')",youremail);
       mysql_query(con,buf);
       printf("%s\n",buf);
       updated++;
