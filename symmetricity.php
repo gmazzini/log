@@ -58,6 +58,8 @@ $bb["all"]=1;
       ['ID','X','Y','tot','vv'],
       <?php foreach($cqdata as $ll => $vv){if($ll<201901)continue; foreach($vv as $lll => $vvv){if($lll>0)echo "['',$ll,$lll,$vvv,1],\n"; }} ?>
     ]);
+
+    <?php
 echo "var options={colorAxis:{colors:['yellow','red']},bubble:{textStyle:{fontSize:6}}};\n";
 echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
 echo "chart.draw(data,options);\n";
