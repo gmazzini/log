@@ -40,49 +40,63 @@ $bb["all"]=1;
 <html>
 <head>
 <style>
-body {
+html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #f5f6fa;
-      margin: 0;
     }
 
-    .dashboard-charts-wrapper {
-      width: 100%;
-      overflow-x: auto;
-      padding: 20px 0;
-    }
-
-    .dashboard-charts {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(1400px, 1fr));
-      gap: 24px;
-      padding: 0 20px 10px;
-    }
-
-    .panel {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 16px 20px 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    .section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 16px;
       box-sizing: border-box;
     }
 
-    .panel h2 {
-      margin: 0 0 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
+    .section-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      padding: 12px 16px;
+      box-sizing: border-box;
     }
 
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+
+    .chart-container {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+    }
 
     .chart {
+      flex: 1;
       width: 100%;
-      height: 650px;  
+      height: 100%;
     }
 
-    .dashboard-table {
-      max-width: 900px; 
-      margin: 0 auto 40px;
-      padding: 0 20px 40px;
+    .table-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .table-scroll {
+      flex: 1;
+      overflow: auto;
+      min-height: 0;
     }
 
     table {
@@ -137,64 +151,64 @@ body {
     chart.draw(data,options);
   }
 </script>
-
-<div class="dashboard-charts-wrapper">
-    <div class="dashboard-charts">
-      <!-- Grafico 1 -->
-      <div class="panel">
-        <h2>Grafico 1</h2>
+<div class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Grafico 1</h2>
+      <div class="chart-container">
         <div id="curve1" class="chart"></div>
       </div>
+    </div>
+  </div>
 
-      <!-- Grafico 2 -->
-      <div class="panel">
-        <h2>Grafico 2</h2>
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Characteristic parameter analysis</h2>
+      <div class="table-container">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Band</th>
+                <th>QSOs</th>
+                <th>Average</th>
+                <th>Stdev</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($bb as $ll => $vv) {
+                  $med = 0;
+                  $sqr = 0;
+                  for ($i = $lowrep; $i <= $highrep; $i++) {
+                      $med += $i * $acc[$ll][$i];
+                      $sqr += $i * $i * $acc[$ll][$i];
+                  }
+                  $med = $med / $tot[$ll];
+                  $sqr = sqrt($sqr / $tot[$ll] - $med * $med);
+                  $med_fmt = sprintf("%+7.5f", $med);
+                  $sqr_fmt = sprintf("%7.4f", $sqr);
+              ?>
+                <tr>
+                  <td><?= htmlspecialchars($ll) ?></td>
+                  <td><?= number_format($tot[$ll], 0, ',', '.') ?></td>
+                  <td><?= $med_fmt ?></td>
+                  <td><?= $sqr_fmt ?></td>
+                </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+      <h2 class="section-title">Grafico 2</h2>
+      <div class="chart-container">
         <div id="curve2" class="chart"></div>
       </div>
     </div>
   </div>
 
-  <!-- SEZIONE TABELLA: più piccola, centrata -->
-  <div class="dashboard-table">
-    <div class="panel panel-table">
-      <h2>Characteristic parameter analysis</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Band</th>
-            <th>QSOs</th>
-            <th>Average</th>
-            <th>Stdev</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          // Si assume che $bb, $acc, $tot, $lowrep, $highrep siano già valorizzati prima
-          foreach ($bb as $ll => $vv) {
-              $med = 0;
-              $sqr = 0;
-
-              for ($i = $lowrep; $i <= $highrep; $i++) {
-                  $med += $i * $acc[$ll][$i];
-                  $sqr += $i * $i * $acc[$ll][$i];
-              }
-
-              $med = $med / $tot[$ll];
-              $sqr = sqrt($sqr / $tot[$ll] - $med * $med);
-
-              $med_fmt = sprintf("%+7.5f", $med);
-              $sqr_fmt = sprintf("%7.4f", $sqr);
-          ?>
-            <tr>
-              <td><?= htmlspecialchars($ll) ?></td>
-              <td><?= number_format($tot[$ll], 0, ',', '.') ?></td>
-              <td><?= $med_fmt ?></td>
-              <td><?= $sqr_fmt ?></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </html>
