@@ -193,7 +193,7 @@ html, body {
 </script>
 <div class="section">
     <div class="section-inner">
-      <h2 class="section-title">Grafico 1</h2>
+      <h2 class="section-title">Analysis pf channel differences</h2>
       <div class="chart-container">
         <div id="curve1" class="chart"></div>
       </div>
@@ -244,7 +244,7 @@ html, body {
 
   <div class="section">
     <div class="section-inner">
-      <h2 class="section-title">Grafico 2</h2>
+      <h2 class="section-title">Analysis by CQ zones</h2>
       <div class="chart-container">
         <div id="curve2" class="chart"></div>
       </div>
