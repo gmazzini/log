@@ -47,13 +47,7 @@ $bb["all"]=1;
   function draw1(){
     var data=google.visualization.arrayToDataTable([ 
     ['Delta' <?php foreach($bb as $ll => $vv)echo ",'$ll'"; ?> ],
-<?php 
-  for($i=$lowrep;$i<=$highrep;$i++){
-    echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
-    if($i<$highrep)echo ",";
-    echo "\n";
-  }
-  ?>
+    <?php for($i=$lowrep;$i<=$highrep;$i++){ echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]"; if($i<$highrep)echo ","; echo "\n"; } ?>
   ]);
   var options={title:'TX-RX(dB) pdfs',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};
   var chart=new google.visualization.LineChart(document.getElementById('curve1'));
