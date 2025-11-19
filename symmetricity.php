@@ -181,14 +181,7 @@ html, body {
       ?>
     ]);
     var options={
-      colorAxis: { colors: [
-        '#000004','#05041a','#0a092f','#0f0e44','#141459','#19196e','#1e1f84',
-        '#232699','#282cad','#2d32c1','#3238d5','#383fe8','#3e45fa','#444bff',
-        '#4b50ff','#5255ff','#5959ff','#605dff','#6761ff','#6e65ff','#7569ff',
-        '#7d6cff','#846fff','#8c72ff','#9475ff','#9c78ff','#a47aff','#ac7dff',
-        '#b47ff6','#bc82e3','#c584cf','#cd86ba','#d688a4','#de8a8e','#e68c77',
-        '#ee8e60','#f69049','#fe9231','#ff9519','#ff9900'
-    ] },
+      colorAxis: { colors: ['blu','yellow','red'] },
       bubble: { textStyle: { fontSize: 6 } },
       sizeAxis: { minSize: 5, maxSize: 5 },
       width: container.clientWidth,
