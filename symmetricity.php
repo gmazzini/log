@@ -38,6 +38,61 @@ foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)@$bb[$ll]++;
 $bb["all"]=1;
 ?>
 <html>
+<head>
+<style>
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+  }
+  .dashboard {
+    max-width: 1400px;
+    margin: 20px auto 40px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 24px;
+  }
+  .panel {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  .panel h2 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .chart {
+    width: 100%;
+    height: 420px;
+  }
+  .panel-table {
+    grid-column: 1 / -1;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  thead {
+    background: #f0f2f7;
+  }
+  th, td {
+    padding: 6px 10px;
+    text-align: right;
+    border-bottom: 1px solid #e0e3ea;
+    white-space: nowrap;
+  }
+  th:first-child, td:first-child {
+    text-align: left;
+  }
+  tbody tr:hover {
+    background: #f9fafc;
+  }
+</style>    
+</head>
 <h2>Real time channel symmetricity data analisys on IK4LZH QSOs collection</h2>
 <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
 <script type='text/javascript'>
@@ -64,6 +119,53 @@ $bb["all"]=1;
     chart.draw(data,options);
   }
 </script>
+
+<div class="dashboard">
+    <div class="panel">
+      <h2>Grafico 1</h2>
+      <div id="curve1" class="chart"></div>
+    </div>
+    <div class="panel">
+      <h2>Grafico 2</h2>
+      <div id="curve2" class="chart"></div>
+    </div>
+    <div class="panel panel-table">
+      <h2>Characteristic parameter analysis</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Band</th>
+            <th>QSOs</th>
+            <th>Average</th>
+            <th>Stdev</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($bb as $ll => $vv) {
+              $med = 0;
+              $sqr = 0;
+              for ($i = $lowrep; $i <= $highrep; $i++) {
+                  $med += $i * $acc[$ll][$i];
+                  $sqr += $i * $i * $acc[$ll][$i];
+              }
+              $med = $med / $tot[$ll];
+              $sqr = sqrt($sqr / $tot[$ll] - $med * $med);
+              $med_fmt = sprintf("%+7.5f", $med);
+              $sqr_fmt = sprintf("%7.4f", $sqr);
+          ?>
+            <tr>
+              <td><?= htmlspecialchars($ll) ?></td>
+              <td><?= number_format($tot[$ll], 0, ',', '.') ?></td>
+              <td><?= $med_fmt ?></td>
+              <td><?= $sqr_fmt ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
 <div id='curve1' style='width: 1400px; height: 800px'></div>
 <pre><b>Characteristic parameter analysis</b>
   
