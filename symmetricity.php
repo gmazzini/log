@@ -60,6 +60,7 @@ $bb["all"]=1;
   chart.draw(data,options);
   }
 
+  <?php
 echo "function draw2(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
 echo "['ID','X','Y','tot','vv'],\n";
