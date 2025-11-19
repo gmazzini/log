@@ -59,17 +59,15 @@ $bb["all"]=1;
       <?php foreach($cqdata as $ll => $vv){if($ll<201901)continue; foreach($vv as $lll => $vvv){if($lll>0)echo "['',$ll,$lll,$vvv,1],\n"; }} ?>
       ['',202601,1,1,4]
     ]);
-
-    <?php
-echo "var options={colorAxis:{colors:['yellow','red']},bubble:{textStyle:{fontSize:6}}};\n";
-echo "var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));\n";
-echo "chart.draw(data,options);\n";
-echo "}\n";
-
-echo "</script>\n";
-echo "<div id='curve1' style='width: 1400px; height: 800px'></div>\n";
-
-echo "<pre><b>Characteristic parameter analysis</b>\n";
+    var options={colorAxis:{colors:['yellow','red']},bubble:{textStyle:{fontSize:6}}};
+    var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));
+    chart.draw(data,options);
+  }
+</script>
+<div id='curve1' style='width: 1400px; height: 800px'></div>
+<pre><b>Characteristic parameter analysis</b>
+  
+<?php 
 printf("%4s %9s %7s %7s\n","band","QSOs","average","stdev");
 foreach($bb as $ll => $vv){
   $med=0;
@@ -82,11 +80,10 @@ foreach($bb as $ll => $vv){
   $sqr=sqrt($sqr/$tot[$ll]-$med*$med);
   printf("%4s %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
 }
-echo "</pre>";
-
-echo "<div id='curve2' style='width: 1400px; height: 800px'></div>\n";
-
-echo "</html>\n";
-
 mysqli_close($con);
 ?>
+
+</pre>
+<div id='curve2' style='width: 1400px; height: 800px'></div>
+</html>
+
