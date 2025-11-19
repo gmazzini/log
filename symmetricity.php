@@ -70,7 +70,7 @@ $bb["all"]=1;
 
 .chart {
   width: 100%;
-  height: 600px; /* molto più grande */
+  height: 800px;
 }
 
 table {
