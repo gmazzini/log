@@ -45,9 +45,9 @@ $bb["all"]=1;
   google.charts.setOnLoadCallback(draw1);
   google.charts.setOnLoadCallback(draw2);
   function draw1(){
-  <?php  
-  echo "var data=google.visualization.arrayToDataTable([\n";
-  echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
+    var data=google.visualization.arrayToDataTable([ 
+    ['Delta' <?php foreach($bb as $ll => $vv)echo ",'$ll'"; ?> ],
+<?php 
   for($i=$lowrep;$i<=$highrep;$i++){
     echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
     if($i<$highrep)echo ",";
