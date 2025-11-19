@@ -182,10 +182,14 @@ html, body {
       ['',202601,1,1,4]
     ]);
     var options={
-      colorAxis:{colors:['yellow','red']},
-      bubble:{textStyle:{fontSize:6}},
-      width:container.clientWidth,
-      height:container.clientHeight
+      colorAxis: { colors: ['yellow', 'red'] },
+      bubble: { textStyle: { fontSize: 6 } },
+      sizeAxis: {
+        minSize: 5,
+        maxSize: 25
+      },
+      width: container.clientWidth,
+      height: container.clientHeight
     };
     var chart=new google.visualization.BubbleChart(container);
     chart.draw(data,options);
