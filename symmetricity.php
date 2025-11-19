@@ -40,63 +40,75 @@ $bb["all"]=1;
 <html>
 <head>
 <style>
-  body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f5f6fa;
-  margin: 0;
-}
+body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f6fa;
+      margin: 0;
+    }
 
-.dashboard {
-  max-width: 1600px;
-  margin: 20px auto 40px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 0.6fr;
-  gap: 24px;
-}
+    .dashboard-charts-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      padding: 20px 0;
+    }
 
-.panel {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 16px 20px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
+    .dashboard-charts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(1400px, 1fr));
+      gap: 24px;
+      padding: 0 20px 10px;
+    }
 
-.panel h2 {
-  margin: 0 0 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
+    .panel {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 16px 20px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      box-sizing: border-box;
+    }
 
-.chart {
-  width: 100%;
-  height: 800px;
-}
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.85rem;
-}
 
-thead {
-  background: #f0f2f7;
-}
+    .chart {
+      width: 100%;
+      height: 650px;  
+    }
 
-th, td {
-  padding: 6px 10px;
-  text-align: right;
-  border-bottom: 1px solid #e0e3ea;
-  white-space: nowrap;
-}
+    .dashboard-table {
+      max-width: 900px; 
+      margin: 0 auto 40px;
+      padding: 0 20px 40px;
+    }
 
-th:first-child, td:first-child {
-  text-align: left;
-}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
 
-tbody tr:hover {
-  background: #f9fafc;
-}
+    thead {
+      background: #f0f2f7;
+    }
+
+    th, td {
+      padding: 6px 10px;
+      text-align: right;
+      border-bottom: 1px solid #e0e3ea;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:hover {
+      background: #f9fafc;
+    }
 </style>    
 </head>
 <h2>Real time channel symmetricity data analisys on IK4LZH QSOs collection</h2>
@@ -126,17 +138,27 @@ tbody tr:hover {
   }
 </script>
 
-<div class="dashboard">
-    <div class="panel">
-      <h2>Grafico 1</h2>
-      <div id="curve1" class="chart"></div>
+<div class="dashboard-charts-wrapper">
+    <div class="dashboard-charts">
+      <!-- Grafico 1 -->
+      <div class="panel">
+        <h2>Grafico 1</h2>
+        <div id="curve1" class="chart"></div>
+      </div>
+
+      <!-- Grafico 2 -->
+      <div class="panel">
+        <h2>Grafico 2</h2>
+        <div id="curve2" class="chart"></div>
+      </div>
     </div>
-    <div class="panel">
-      <h2>Grafico 2</h2>
-      <div id="curve2" class="chart"></div>
-    </div>
+  </div>
+
+  <!-- SEZIONE TABELLA: più piccola, centrata -->
+  <div class="dashboard-table">
     <div class="panel panel-table">
       <h2>Characteristic parameter analysis</h2>
+
       <table>
         <thead>
           <tr>
@@ -148,15 +170,19 @@ tbody tr:hover {
         </thead>
         <tbody>
           <?php
+          // Si assume che $bb, $acc, $tot, $lowrep, $highrep siano già valorizzati prima
           foreach ($bb as $ll => $vv) {
               $med = 0;
               $sqr = 0;
+
               for ($i = $lowrep; $i <= $highrep; $i++) {
                   $med += $i * $acc[$ll][$i];
                   $sqr += $i * $i * $acc[$ll][$i];
               }
+
               $med = $med / $tot[$ll];
               $sqr = sqrt($sqr / $tot[$ll] - $med * $med);
+
               $med_fmt = sprintf("%+7.5f", $med);
               $sqr_fmt = sprintf("%7.4f", $sqr);
           ?>
