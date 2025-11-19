@@ -8,7 +8,6 @@ $con=mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
 mysqli_query($con,"SET time_zone='+00:00'");
 $lowrep=-35;
 $highrep=35;
-
 $query=mysqli_query($con,"select cqzone,dxcc from cty");
 for(;;){
   $row=mysqli_fetch_array($query);
@@ -16,7 +15,6 @@ for(;;){
   $mycq[$row["dxcc"]]=$row["cqzone"];
 }
 mysqli_free_result($query);
-
 $query=mysqli_query($con,"select freqtx,signaltx,signalrx,dxcc,start from log where mode='FT8' or mode='MFSK'");
 for(;;){
   $row=mysqli_fetch_array($query);
@@ -38,13 +36,16 @@ ksort($cqdata);
 
 foreach($myband as $ff => $ll)if($ll>=10 && $ll<=160)@$bb[$ll]++;
 $bb["all"]=1;
-echo "<html>\n";
-echo "<h2>Real time channel symmetricity data analisys on IK4LZH QSOs collection</h2>";
-echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>\n";
-echo "<script type='text/javascript'>\n";
-echo "google.charts.load('current',{'packages':['corechart']});\n";
-echo "google.charts.setOnLoadCallback(draw1);\n";
-echo "google.charts.setOnLoadCallback(draw2);\n";
+?>
+<html>
+<h2>Real time channel symmetricity data analisys on IK4LZH QSOs collection</h2>
+<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+<script type='text/javascript'>
+  google.charts.load('current',{'packages':['corechart']});
+  google.charts.setOnLoadCallback(draw1);
+  google.charts.setOnLoadCallback(draw2);
+
+<?php
 
 echo "function draw1(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
