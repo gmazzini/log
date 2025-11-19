@@ -44,22 +44,21 @@ $bb["all"]=1;
   google.charts.load('current',{'packages':['corechart']});
   google.charts.setOnLoadCallback(draw1);
   google.charts.setOnLoadCallback(draw2);
-
-<?php
-
-echo "function draw1(){\n";
-echo "var data=google.visualization.arrayToDataTable([\n";
-echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
-for($i=$lowrep;$i<=$highrep;$i++){
-  echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
-  if($i<$highrep)echo ",";
-  echo "\n";
-}
-echo "]);\n";
-echo "var options={title:'TX-RX(dB) pdfs',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};\n";
-echo "var chart=new google.visualization.LineChart(document.getElementById('curve1'));\n";
-echo "chart.draw(data,options);\n";
-echo "}\n";
+  function draw1(){
+  <?php  
+  echo "var data=google.visualization.arrayToDataTable([\n";
+  echo "['Delta'"; foreach($bb as $ll => $vv)echo ",'$ll'"; echo "],\n";
+  for($i=$lowrep;$i<=$highrep;$i++){
+    echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]";
+    if($i<$highrep)echo ",";
+    echo "\n";
+  }
+  ?>
+  ]);
+  var options={title:'TX-RX(dB) pdfs',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};
+  var chart=new google.visualization.LineChart(document.getElementById('curve1'));
+  chart.draw(data,options);
+  }
 
 echo "function draw2(){\n";
 echo "var data=google.visualization.arrayToDataTable([\n";
