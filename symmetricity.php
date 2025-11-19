@@ -129,25 +129,65 @@ html, body {
 <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
 <script type='text/javascript'>
   google.charts.load('current',{'packages':['corechart']});
-  google.charts.setOnLoadCallback(draw1);
-  google.charts.setOnLoadCallback(draw2);
-  function draw1(){
-    var data=google.visualization.arrayToDataTable([ 
-    ['Delta' <?php foreach($bb as $ll => $vv)echo ",'$ll'"; ?> ],
-    <?php for($i=$lowrep;$i<=$highrep;$i++){ echo "[$i"; foreach($bb as $ll => $vv){echo ","; echo $acc[$ll][$i]/$tot[$ll];} echo "]"; if($i<$highrep)echo ","; echo "\n"; } ?>
-  ]);
-  var options={title:'TX-RX(dB) pdfs',curveType:'function',vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},legend:{position:'bottom'}};
-  var chart=new google.visualization.LineChart(document.getElementById('curve1'));
-  chart.draw(data,options);
+  google.charts.setOnLoadCallback(drawAll);
+
+  function drawAll(){
+    draw1();
+    draw2();
   }
+
+  window.addEventListener('resize', drawAll);
+
+  function draw1(){
+    var container=document.getElementById('curve1');
+    var data=google.visualization.arrayToDataTable([ 
+      ['Delta' <?php foreach($bb as $ll => $vv)echo ",'$ll'"; ?> ],
+      <?php
+      for($i=$lowrep;$i<=$highrep;$i++){
+        echo "[$i";
+        foreach($bb as $ll => $vv){
+          echo ",";
+          echo $acc[$ll][$i]/$tot[$ll];
+        }
+        echo "]";
+        if($i<$highrep)echo ",";
+        echo "\n";
+      }
+      ?>
+    ]);
+    var options={
+      title:'TX-RX(dB) pdfs',
+      curveType:'function',
+      vAxis:{viewWindowMode:'explicit',viewWindow:{min:0.0}},
+      legend:{position:'bottom'},
+      width:container.clientWidth,
+      height:container.clientHeight
+    };
+    var chart=new google.visualization.LineChart(container);
+    chart.draw(data,options);
+  }
+
   function draw2(){
+    var container=document.getElementById('curve2');
     var data=google.visualization.arrayToDataTable([
       ['ID','X','Y','tot','vv'],
-      <?php foreach($cqdata as $ll => $vv){if($ll<201901)continue; foreach($vv as $lll => $vvv){if($lll>0)echo "['',$ll,$lll,$vvv,1],\n"; }} ?>
+      <?php
+      foreach($cqdata as $ll => $vv){
+        if($ll<201901)continue;
+        foreach($vv as $lll => $vvv){
+          if($lll>0)echo "['',$ll,$lll,$vvv,1],\n";
+        }
+      }
+      ?>
       ['',202601,1,1,4]
     ]);
-    var options={colorAxis:{colors:['yellow','red']},bubble:{textStyle:{fontSize:6}}};
-    var chart=new google.visualization.BubbleChart(document.getElementById('curve2'));
+    var options={
+      colorAxis:{colors:['yellow','red']},
+      bubble:{textStyle:{fontSize:6}},
+      width:container.clientWidth,
+      height:container.clientHeight
+    };
+    var chart=new google.visualization.BubbleChart(container);
     chart.draw(data,options);
   }
 </script>
