@@ -179,7 +179,6 @@ html, body {
         }
       }
       ?>
-      ['',202601,1,1,4]
     ]);
     var options={
       colorAxis: { colors: ['yellow', 'red'] },
