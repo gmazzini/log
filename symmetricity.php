@@ -57,6 +57,7 @@ $bb["all"]=1;
     var data=google.visualization.arrayToDataTable([
       ['ID','X','Y','tot','vv'],
       <?php foreach($cqdata as $ll => $vv){if($ll<201901)continue; foreach($vv as $lll => $vvv){if($lll>0)echo "['',$ll,$lll,$vvv,1],\n"; }} ?>
+      ['',202601,1,1,4]
     ]);
 
     <?php
