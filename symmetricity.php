@@ -181,7 +181,7 @@ html, body {
       ?>
     ]);
     var options={
-      colorAxis: { colors: ['yellow', 'red'] },
+      colorAxis: { colors: ['blue', 'cyan', 'yellow', 'orange', 'red'] },
       bubble: { textStyle: { fontSize: 6 } },
       sizeAxis: { minSize: 5, maxSize: 5 },
       width: container.clientWidth,
