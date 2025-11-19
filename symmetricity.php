@@ -41,56 +41,62 @@ $bb["all"]=1;
 <head>
 <style>
   body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #f5f6fa;
-    margin: 0;
-  }
-  .dashboard {
-    max-width: 1400px;
-    margin: 20px auto 40px;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-    gap: 24px;
-  }
-  .panel {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 16px 20px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  }
-  .panel h2 {
-    margin: 0 0 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-  .chart {
-    width: 100%;
-    height: 420px;
-  }
-  .panel-table {
-    grid-column: 1 / -1;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  thead {
-    background: #f0f2f7;
-  }
-  th, td {
-    padding: 6px 10px;
-    text-align: right;
-    border-bottom: 1px solid #e0e3ea;
-    white-space: nowrap;
-  }
-  th:first-child, td:first-child {
-    text-align: left;
-  }
-  tbody tr:hover {
-    background: #f9fafc;
-  }
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+}
+
+.dashboard {
+  max-width: 1600px;
+  margin: 20px auto 40px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.6fr;
+  gap: 24px;
+}
+
+.panel {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px 20px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.chart {
+  width: 100%;
+  height: 600px; /* molto più grande */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead {
+  background: #f0f2f7;
+}
+
+th, td {
+  padding: 6px 10px;
+  text-align: right;
+  border-bottom: 1px solid #e0e3ea;
+  white-space: nowrap;
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+tbody tr:hover {
+  background: #f9fafc;
+}
 </style>    
 </head>
 <h2>Real time channel symmetricity data analisys on IK4LZH QSOs collection</h2>
@@ -165,27 +171,4 @@ $bb["all"]=1;
       </table>
     </div>
   </div>
-  
-<div id='curve1' style='width: 1400px; height: 800px'></div>
-<pre><b>Characteristic parameter analysis</b>
-  
-<?php 
-printf("%4s %9s %7s %7s\n","band","QSOs","average","stdev");
-foreach($bb as $ll => $vv){
-  $med=0;
-  $sqr=0;
-  for($i=$lowrep;$i<=$highrep;$i++){
-    $med+=$i*$acc[$ll][$i];
-    $sqr+=$i*$i*$acc[$ll][$i];
-  }
-  $med=$med/$tot[$ll];
-  $sqr=sqrt($sqr/$tot[$ll]-$med*$med);
-  printf("%4s %9d %+7.5f %7.4f\n",$ll,$tot[$ll],$med,$sqr);
-}
-mysqli_close($con);
-?>
-
-</pre>
-<div id='curve2' style='width: 1400px; height: 800px'></div>
 </html>
-
