@@ -184,8 +184,8 @@ html, body {
       colorAxis: { colors: ['yellow', 'red'] },
       bubble: { textStyle: { fontSize: 6 } },
       sizeAxis: {
-        minSize: 5,
-        maxSize: 25
+        minSize: 3,
+        maxSize: 3
       },
       width: container.clientWidth,
       height: container.clientHeight
