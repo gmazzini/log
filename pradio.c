@@ -10,6 +10,7 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include "/home/www/data/log.def"
+static void alarm_handler(int sig){(void)sig;}
 
 int main(void){
   int i,vv,gg,c,s;
@@ -45,7 +46,7 @@ int main(void){
 
   p1=strtok(buf,",");
   if(strcmp(p1,"TS890S")==0){
-    ip=strtok(para,"|");
+    ip=strtok(NULL,"|");
     port=atol(strtok(NULL,"|"));
     user=strtok(NULL,"|");
     pass=strtok(NULL,"|");
