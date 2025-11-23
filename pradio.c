@@ -72,8 +72,8 @@ int main(void){
     }
     alarm(0);
     tv.tv_sec=2; tv.tv_usec=0;
-    setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
-    setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
+   // setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
+   // setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 
     printf("3\n");
 
