@@ -46,8 +46,6 @@ int main(void){
   mysql_free_result(rrr);
   mysql_close(con);
 
-  printf("%s\n",buf);
-
   p1=strtok(buf,",");
   if(strcmp(p1,"TS890S")==0){
     ip=strtok(NULL,"|");
@@ -61,6 +59,7 @@ int main(void){
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
 
+    printf("ciao\n");
     signal(SIGALRM,alarm_handler);
     alarm(2);
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
