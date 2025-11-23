@@ -105,7 +105,7 @@ int main(void){
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
       *strchr(b,';')='\0';
 
-      fprintf(2,"%s\n",b);
+      fprintf(stderr,"%s\n",b);
       freq=atol(b+2);
       
       sprintf(cmd,"OM0;");
