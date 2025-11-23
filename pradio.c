@@ -15,7 +15,7 @@ static void alarm_handler(int sig){(void)sig;}
 static const char *modets890s[16] = {"Unused","LSB","USB","CW","FM","AM","FSK","CW-R","Unused","FSK-R","PSK","PSK-R","LSB-D","USB-D","FM-D","AM-D"};
 
 int main(void){
-  int i,vv,gg,s,m;
+  int i,vv,gg,s,m,loop;
   struct sockaddr_in a;
   char c,buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
   long port,freq;
