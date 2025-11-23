@@ -91,7 +91,7 @@ int main(void){
       sprintf(cmd,"OM0;");
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
-      m=(b[4]>='0'&&b[4]<='9')?b[4]-'0':b[4]-'A'+10;
+      m=(b[3]>='0'&&b[3]<='9')?b[3]-'0':b[3]-'A'+10;
 
       printf("%ld,%s\n",freq,modets890s[m]);
     }
