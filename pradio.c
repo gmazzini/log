@@ -8,10 +8,8 @@
 #include <netdb.h>
 #include <mysql/mysql.h>
 #include <arpa/inet.h>
-#include <signal.h>
 #include "/home/www/data/log.def"
 
-static void alarm_handler(int sig){(void)sig;}
 static const char *modets890s[16] = {"Unused","LSB","USB","CW","FM","AM","FSK","CW-R","Unused","FSK-R","PSK","PSK-R","LSB-D","USB-D","FM-D","AM-D"};
 
 int main(void){
@@ -58,16 +56,10 @@ int main(void){
     a.sin_family=AF_INET;
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
-    
-    signal(SIGALRM,alarm_handler);
-    alarm(3);
-    if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
-      alarm(0);
-      close(s);
-      return 0;
-    }
-    alarm(0);
-    tv.tv_sec=3; tv.tv_usec=0;
+
+    tv.tv_sec=2; tv.tv_usec=0;
+    setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
+    if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){close(s); return 0;}
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 
@@ -134,15 +126,9 @@ int main(void){
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
 
-    signal(SIGALRM,alarm_handler);
-    alarm(2);
-    if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
-      alarm(0);
-      close(s);
-      return 0;
-    }
-    alarm(0);
     tv.tv_sec=2; tv.tv_usec=0;
+    setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
+    if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){close(s); return 0;}
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 
