@@ -7,13 +7,15 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <mysql/mysql.h>
+#include <arpa/inet.h>
+#include <signal.h>
 #include "/home/www/data/log.def"
 
 int main(void){
-  int fd,r,i,vv,gg,c,s;
+  int i,vv,gg,c,s;
   struct sockaddr_in a;
-  char h,buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
-  long freq,port;
+  char buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
+  long port;
   time_t epoch;
   MYSQL *con;
   MYSQL_RES *rrr;
