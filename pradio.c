@@ -35,8 +35,6 @@ int main(void){
   }
   tok[vv][gg]='\0';
 
-  printf("%s %s %s\n",tok[0],tok[1],tok[2]);
-
   con=mysql_init(NULL);
   if(con==NULL){printf("0,ND\n"); exit(0);}
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
@@ -47,6 +45,8 @@ int main(void){
   strcpy(buf,row[0]);
   mysql_free_result(rrr);
   mysql_close(con);
+
+  printf("%s\n",buf);
 
   p1=strtok(buf,",");
   if(strcmp(p1,"TS890S")==0){
