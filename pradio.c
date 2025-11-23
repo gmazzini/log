@@ -52,6 +52,8 @@ int main(void){
     port=atol(strtok(NULL,","));
     user=strtok(NULL,",");
     pass=strtok(NULL,",");
+
+    printf("1\n");
     
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
@@ -59,6 +61,8 @@ int main(void){
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
 
+    printf("2\n");
+    
     signal(SIGALRM,alarm_handler);
     alarm(2);
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
@@ -71,10 +75,16 @@ int main(void){
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 
+    printf("3\n");
+
+
     sprintf(cmd,"##CN;");
     write(s,cmd,strlen(cmd));
     for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
     if(strcmp(b,"##CN1;")!=0){close(s); return 0;}
+
+    printf("%s\n",b);
+
 
     sprintf(cmd,"##ID0%02d%02d%s%s;",strlen(user),strlen(pass),user,pass);
     write(s,cmd,strlen(cmd));
