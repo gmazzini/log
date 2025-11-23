@@ -700,7 +700,7 @@ int main(void){
     printf("<p class=\"myh2\">Score %9ld</p>\n",l2*l3);
     for(idx=0;idx<ndata3[0][3];idx++){
       printf("%s ",data3[0][3][idx].lab);
-      if(idx%9==0)printf("\n");
+      if(idx>0 && idx%9==0)printf("\n");
     }
     printf("\n");
     printf("</pre>");
