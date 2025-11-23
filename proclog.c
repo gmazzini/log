@@ -698,7 +698,7 @@ int main(void){
     for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
     printf("<p class=\"myh1\">%*s %5ld %8ld %4ld</p>\n",gg,"ALL",l1,l2,l3);
     printf("<p class=\"myh2\">Score %9ld</p>\n",l2*l3);
-    for(idx=0;idx<ndata3[0][3];idx++)printf("%s ",data3[0][3].lab); printf("\n");
+    for(idx=0;idx<ndata3[0][3];idx++)printf("%s ",data3[0][3][idx].lab); printf("\n");
     printf("</pre>");
     goto end;
   }
