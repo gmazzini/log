@@ -53,7 +53,7 @@ int main(void){
     user=strtok(NULL,",");
     pass=strtok(NULL,",");
 
-    printf("1\n");
+    printf("%s %ld %s %s\n",ip,port,user,pass);
     
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
