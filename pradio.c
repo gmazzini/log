@@ -80,7 +80,11 @@ int main(void){
 
     sprintf(cmd,"##CN;");
     write(s,cmd,strlen(cmd));
+        printf("4\n");
+
     for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+        printf("%s\n",b);
+
     if(strcmp(b,"##CN1;")!=0){close(s); return 0;}
 
     printf("%s\n",b);
