@@ -26,7 +26,7 @@ int main(void){
   struct timeval tv;
   
   printf("Content-Type: text/plain\r\n\r\n");
-  // 0:ota 1:{R=read S=set} 2=freq,mode
+  // 0:ota 1:{R=read S=set} 2=freq:mode
   for(vv=0,gg=0;;){
     c=getchar();
     if(c==EOF)break;
@@ -83,6 +83,24 @@ int main(void){
  
     if(tok[1][0]=='R'){
       sprintf(cmd,"FA;");
+      write(s,cmd,strlen(cmd));
+      for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+      *strchr(b,';')='\0';
+      freq=atol(b+2);
+      
+      sprintf(cmd,"OM0;");
+      write(s,cmd,strlen(cmd));
+      for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+      m=(b[3]>='0'&&b[3]<='9')?b[3]-'0':b[3]-'A'+10;
+
+      printf("%ld,%s\n",freq,modets890s[m]);
+    }
+    else if(tok[1][0]=='S'){
+      p1=strtok(tok[2],":");
+      freq=atol(p1);
+      // missed mode
+      
+      sprintf(cmd,"FA%11ld;",freq);
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
       *strchr(b,';')='\0';
