@@ -15,7 +15,7 @@ static void alarm_handler(int sig){(void)sig;}
 static const char *modets890s[16] = {"Unused","LSB","USB","CW","FM","AM","FSK","CW-R","Unused","FSK-R","PSK","PSK-R","LSB-D","USB-D","FM-D","AM-D"};
 
 int main(void){
-  int i,vv,gg,c,s;
+  int i,vv,gg,c,s,m;
   struct sockaddr_in a;
   char buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
   long port,freq;
@@ -86,14 +86,14 @@ int main(void){
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
       *strchr(b,';')='\0';
-      freq=atoi(b+2);
+      freq=atol(b+2);
       
       sprintf(cmd,"OM0;");
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
-      c=(b[4]>='0'&&b[4]<='9')?b[4]-'0':b[4]-'A'+10;
+      m=(b[4]>='0'&&b[4]<='9')?b[4]-'0':b[4]-'A'+10;
 
-      printf("%ld,%s\n",freq,modets890s[c]);
+      printf("%ld,%s\n",freq,modets890s[m]);
     }
   }
   else if(strcmp(p1,"RIGCTLD")==0){
