@@ -48,10 +48,10 @@ int main(void){
 
   p1=strtok(buf,",");
   if(strcmp(p1,"TS890S")==0){
-    ip=strtok(NULL,"|");
-    port=atol(strtok(NULL,"|"));
-    user=strtok(NULL,"|");
-    pass=strtok(NULL,"|");
+    ip=strtok(NULL,",");
+    port=atol(strtok(NULL,","));
+    user=strtok(NULL,",");
+    pass=strtok(NULL,",");
     
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
@@ -59,7 +59,6 @@ int main(void){
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
 
-    printf("ciao\n");
     signal(SIGALRM,alarm_handler);
     alarm(2);
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
