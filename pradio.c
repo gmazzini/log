@@ -18,7 +18,7 @@ int main(void){
   int i,vv,gg,c,s;
   struct sockaddr_in a;
   char buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
-  long port;
+  long port,freq;
   time_t epoch;
   MYSQL *con;
   MYSQL_RES *rrr;
