@@ -100,7 +100,7 @@ int main(void){
       freq=atol(p1);
       // missed mode
       
-      sprintf(cmd,"FA%11ld;",freq);
+      sprintf(cmd,"FA%011ld;",freq);
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
       *strchr(b,';')='\0';
