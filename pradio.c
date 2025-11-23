@@ -121,19 +121,43 @@ int main(void){
       m=(b[3]>='0'&&b[3]<='9')?b[3]-'0':b[3]-'A'+10;
 
       printf("%ld,%s\n",freq,modets890s[m]);
+      close(s);
     }
   }
-  else if(strcmp(p1,"RIGCTLD")==0){
+  else if(strcmp(p1,"RIGCTRLD")==0){
+    ip=strtok(NULL,",");
+    port=atol(strtok(NULL,","));
+
+    s=socket(AF_INET,SOCK_STREAM,0);
+    memset(&a,0,sizeof(a));
+    a.sin_family=AF_INET;
+    a.sin_port=htons(port);
+    inet_pton(AF_INET,ip,&a.sin_addr);
+
+    signal(SIGALRM,alarm_handler);
+    alarm(2);
+    if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
+      alarm(0);
+      close(s);
+      return 0;
+    }
+    alarm(0);
+    tv.tv_sec=2; tv.tv_usec=0;
+    setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
+    setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
+
+    printf(cmd,"sfim\n");
+    write(s,cmd,strlen(cmd));
+    for(loop=i=0;i<100 && loop<20;)if(recv(s,&c,1,MSG_DONTWAIT)==1){b[i++]=c; loop=0;} else {usleep(10000); loop++;} b[i]='\0';
+
+printf("%s\n",b);
+
+    close(s);    
   }
   else printf("0,ND\n");
 
   /*
   
-  if(getaddrinfo(ip,port,&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){printf("0,ND\n"); exit(0);}
-  fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
-  if(fd<0){printf("0,ND\n"); freeaddrinfo(res); exit(0);}
-  r=connect(fd,res->ai_addr,res->ai_addrlen);
-  if(r==-1){printf("0,ND\n"); close(fd); freeaddrinfo(res); exit(0);}
   
   if(tok[1][0]=='R'){
     send(fd,"sfim\n",5,0);
