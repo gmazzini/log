@@ -98,7 +98,7 @@ int main(void){
     else if(tok[1][0]=='S'){
       p1=strtok(tok[2],":");
       freq=atol(p1);
-      // missed mode
+      p1=strtok(NULL,":");
       
       sprintf(cmd,"FA%011ld;",freq);
       write(s,cmd,strlen(cmd));
@@ -107,7 +107,14 @@ int main(void){
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
       *strchr(b,';')='\0';
       freq=atol(b+2);
-      
+
+      if(p1!=NULL){
+        for(i=0;i<16;i++)if(strcmp(modets890s[i],p1)==0)break;
+        if(i<16){
+          sprintf(cmd,"OM0%c;",(i<10)?'0'+i:'A'+i-10);
+          write(s,cmd,strlen(cmd));
+        }
+      }
       sprintf(cmd,"OM0;");
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
