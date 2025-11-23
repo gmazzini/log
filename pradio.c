@@ -80,6 +80,8 @@ int main(void){
     write(s,cmd,strlen(cmd));
     for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
     if(strcmp(b,"##ID1;")!=0){close(s); return 0;}
+
+    printf("%s\n",b);
  
     if(tok[1][0]=='R'){
       sprintf(cmd,"FA;");
