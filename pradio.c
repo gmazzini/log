@@ -101,12 +101,11 @@ int main(void){
       // missed mode
       
       sprintf(cmd,"FA%011ld;",freq);
-      fprintf(stderr,"%s\n",cmd);
+      write(s,cmd,strlen(cmd));
+      sprintf(cmd,"FA;",freq);
       write(s,cmd,strlen(cmd));
       for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
       *strchr(b,';')='\0';
-
-      fprintf(stderr,"%s\n",b);
       freq=atol(b+2);
       
       sprintf(cmd,"OM0;");
