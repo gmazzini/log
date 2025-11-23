@@ -10,14 +10,15 @@
 #include "/home/www/data/log.def"
 
 int main(void){
-  int fd,r,i,vv,gg,c;
-  struct addrinfo *res;
-  char h,buf[256],tok[3][100],ip[20],port[10],mode[10],aux1[300];
-  long freq;
+  int fd,r,i,vv,gg,c,s;
+  struct sockaddr_in a;
+  char h,buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
+  long freq,port;
   time_t epoch;
   MYSQL *con;
   MYSQL_RES *rrr;
   MYSQL_ROW row;
+  struct timeval tv;
   
   printf("Content-Type: text/plain\r\n\r\n");
   // 0:ota 1:{R=read S=set} 2=freq,mode
@@ -33,12 +34,56 @@ int main(void){
   if(con==NULL){printf("0,ND\n"); exit(0);}
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
   epoch=time(NULL);
-  sprintf(buf,"select rigctld_ip,rigctld_port from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],epoch);
+  sprintf(buf,"select radio from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],epoch);
   mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
   if(row==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
-  strcpy(ip,row[0]); strcpy(port,row[1]);
+  strcpy(buf,row[0]);
   mysql_free_result(rrr);
   mysql_close(con);
+
+  p1=strtok(buf,",");
+  if(strcmp(p1,"TS890S")==0){
+    ip=strtok(para,"|");
+    port=atol(strtok(NULL,"|"));
+    user=strtok(NULL,"|");
+    pass=strtok(NULL,"|");
+    
+    s=socket(AF_INET,SOCK_STREAM,0);
+    memset(&a,0,sizeof(a));
+    a.sin_family=AF_INET;
+    a.sin_port=htons(port);
+    inet_pton(AF_INET,ip,&a.sin_addr);
+
+    signal(SIGALRM,alarm_handler);
+    alarm(2);
+    if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
+      alarm(0);
+      close(s);
+      return 0;
+    }
+    alarm(0);
+    tv.tv_sec=2; tv.tv_usec=0;
+    setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
+    setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
+
+    sprintf(cmd,"##CN;");
+    write(s,cmd,strlen(cmd));
+    for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+    if(strcmp(b,"##CN1;")!=0){close(s); return 0;}
+
+    sprintf(cmd,"##ID0%02d%02d%s%s;",strlen(user),strlen(pass),user,pass);
+    write(s,cmd,strlen(cmd));
+    for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+    if(strcmp(b,"##ID1;")!=0){close(s); return 0;}
+
+
+  }
+  else if(strcmp(p1,"RIGCTLD")==0){
+  }
+  else printf("0,ND\n");
+
+  /*
+  
   if(getaddrinfo(ip,port,&(struct addrinfo){.ai_socktype=SOCK_STREAM},&res)!=0){printf("0,ND\n"); exit(0);}
   fd=socket(res->ai_family,res->ai_socktype,res->ai_protocol);
   if(fd<0){printf("0,ND\n"); freeaddrinfo(res); exit(0);}
@@ -66,4 +111,7 @@ int main(void){
   else printf("0,ND\n");
   close(fd);
   freeaddrinfo(res);
+*/
+
+  
 }
