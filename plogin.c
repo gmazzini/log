@@ -22,6 +22,9 @@ int main(void){
     if(vv<2)tok[vv][gg++]=(char)c;
   }
   tok[vv][gg]='\0';
+
+  *aux1=*filter='\0';
+  mypag=0;
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
@@ -40,6 +43,7 @@ int main(void){
     mysql_query(con,buf);
   }
   mysql_free_result(res);
+  
   printf("Content-Type: text/plain\r\n\r\n");
   printf("%s,%d,%s\n",aux1,mypage,filter);
   mysql_close(con);
