@@ -146,34 +146,22 @@ int main(void){
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 
-    printf(cmd,"sfim\n");
-    write(s,cmd,strlen(cmd));
-    for(loop=i=0;i<100 && loop<20;)if(recv(s,&c,1,MSG_DONTWAIT)==1){b[i++]=c; loop=0;} else {usleep(10000); loop++;} b[i]='\0';
-    p1=strtok(b,"\n");
-    p1=strtok(b,"\n");
-    p1=strtok(b,"\n");
-    printf("%ld,",atol(p1));
-    p1=strtok(b,"\n");
-    p1=strtok(b,"\n");
-    printf("%s\n",p1);
-    p1=strtok(b,"\n");
+    if(tok[1][0]=='R'){
+      printf(cmd,"sfim\n");
+      write(s,cmd,strlen(cmd));
+      for(loop=i=0;i<100 && loop<20;)if(recv(s,&c,1,MSG_DONTWAIT)==1){b[i++]=c; loop=0;} else {usleep(10000); loop++;} b[i]='\0';
+      p1=strtok(b,"\n"); p1=strtok(b,"\n"); p1=strtok(b,"\n");
+      printf("%ld,",atol(p1));
+      p1=strtok(b,"\n"); p1=strtok(b,"\n");
+      printf("%s\n",p1);
+    }
     close(s);    
   }
   else printf("0,ND\n");
 
   /*
   
-  
-  if(tok[1][0]=='R'){
-    send(fd,"sfim\n",5,0);
-    for(i=0;i<5;){
-      r=recv(fd,&h,1,0);
-      if(r<=0)break;
-      if(h=='\n'){if(i==2)putchar(','); i++;}
-      else if(i==2||i==4)putchar(h);
-    }
-    putchar('\n');
-  }
+
   else if(tok[1][0]=='S'){
     sscanf(tok[2],"%ld:%s",&freq,mode);
     sprintf(aux1,"F %ld\n",freq);
