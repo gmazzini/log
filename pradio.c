@@ -10,7 +10,9 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include "/home/www/data/log.def"
+
 static void alarm_handler(int sig){(void)sig;}
+static const char *modets890s[16] = {"Unused","LSB","USB","CW","FM","AM","FSK","CW-R","Unused","FSK-R","PSK","PSK-R","LSB-D","USB-D","FM-D","AM-D"};
 
 int main(void){
   int i,vv,gg,c,s;
@@ -78,8 +80,21 @@ int main(void){
     write(s,cmd,strlen(cmd));
     for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
     if(strcmp(b,"##ID1;")!=0){close(s); return 0;}
+ 
+    if(tok[1][0]=='R'){
+      sprintf(cmd,"FA;");
+      write(s,cmd,strlen(cmd));
+      for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+      *strchr(b,';')='\0';
+      freq=atoi(b+2);
+      
+      sprintf(cmd,"OM0;");
+      write(s,cmd,strlen(cmd));
+      for(i=0;i<100 && read(s,&c,1)==1;){b[i++]=c; if(c==';')break;} b[i]='\0';
+      c=(b[4]>='0'&&b[4]<='9')?b[4]-'0':b[4]-'A'+10;
 
-
+      printf("%ld,%s\n",freq,modets890s[c]);
+    }
   }
   else if(strcmp(p1,"RIGCTLD")==0){
   }
