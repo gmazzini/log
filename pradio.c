@@ -60,14 +60,14 @@ int main(void){
     inet_pton(AF_INET,ip,&a.sin_addr);
     
     signal(SIGALRM,alarm_handler);
-    alarm(2);
+    alarm(3);
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){
       alarm(0);
       close(s);
       return 0;
     }
     alarm(0);
-    tv.tv_sec=2; tv.tv_usec=0;
+    tv.tv_sec=3; tv.tv_usec=0;
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 
