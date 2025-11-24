@@ -67,6 +67,7 @@ MYSQL_ROW searchcty(MYSQL *con,char *incall){
     res=mysql_store_result(con);
     row=mysql_fetch_row(res);
     if(row!=NULL)break;
+    mysql_free_result(res);
   }
   return row;
 }
