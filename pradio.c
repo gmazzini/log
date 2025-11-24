@@ -113,8 +113,8 @@ int main(void){
       m=(b[3]>='0'&&b[3]<='9')?b[3]-'0':b[3]-'A'+10;
 
       printf("%ld,%s\n",freq,modets890s[m]);
-      close(s);
     }
+    close(s);
   }
   else if(strcmp(p1,"RIGCTRLD")==0){
     ip=strtok(NULL,",");
@@ -141,25 +141,18 @@ int main(void){
       p1=strtok(NULL,"\n"); p1=strtok(NULL,"\n");
       printf("%s\n",p1);
     }
+    else if(tok[1][0]=='S'){
+      p1=strtok(tok[2],":");
+      freq=atol(p1);
+      p1=strtok(NULL,":");
+      
+      sprintf(cmd,"F %ld\n",freq);
+      write(s,cmd,strlen(cmd));
+      sprintf(cmd,"M %s 0\n",p1);
+      write(s,cmd,strlen(cmd));
+      printf("%ld,%s\n",freq,p1;
+    }
     close(s);    
   }
-  else printf("0,ND\n");
-
-  /*
-  
-
-  else if(tok[1][0]=='S'){
-    sscanf(tok[2],"%ld:%s",&freq,mode);
-    sprintf(aux1,"F %ld\n",freq);
-    send(fd,aux1,strlen(aux1),0);
-    sprintf(aux1,"M %s 0\n",mode);
-    send(fd,aux1,strlen(aux1),0);
-    printf("%ld,%s\n",freq,mode);
-  }
-  else printf("0,ND\n");
-  close(fd);
-  freeaddrinfo(res);
-*/
-
-  
+  else printf("0,ND\n"); 
 }
