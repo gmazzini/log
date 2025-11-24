@@ -150,7 +150,7 @@ int main(void){
       write(s,cmd,strlen(cmd));
       sprintf(cmd,"M %s 0\n",p1);
       write(s,cmd,strlen(cmd));
-      printf("%ld,%s\n",freq,p1;
+      printf("%ld,%s\n",freq,p1);
     }
     close(s);    
   }
