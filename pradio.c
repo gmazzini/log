@@ -116,7 +116,7 @@ int main(void){
     }
     close(s);
   }
-  else if(strcmp(p1,"RIGCTRLD")==0){
+  else if(strcmp(p1,"RIGCTLD")==0){
     ip=strtok(NULL,",");
     port=atol(strtok(NULL,","));
 
