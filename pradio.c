@@ -138,6 +138,7 @@ printf("2\n");
       for(loop=i=0;i<100 && loop<20;)if(recv(s,&c,1,MSG_DONTWAIT)==1){b[i++]=c; loop=0;} else {usleep(10000); loop++;} b[i]='\0';
 
 printf("%s\n");
+      return 1;
       
       p1=strtok(b,"\n"); p1=strtok(NULL,"\n"); p1=strtok(NULL,"\n");
       printf("%ld,",atol(p1));
