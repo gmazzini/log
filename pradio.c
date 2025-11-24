@@ -120,6 +120,9 @@ int main(void){
     ip=strtok(NULL,",");
     port=atol(strtok(NULL,","));
 
+    printf("%s %ld\n",ip,port);
+    
+
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
     a.sin_family=AF_INET;
