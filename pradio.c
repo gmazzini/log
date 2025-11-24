@@ -128,12 +128,13 @@ int main(void){
     a.sin_family=AF_INET;
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
-
+printf("1\n");
     tv.tv_sec=2; tv.tv_usec=0;
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){close(s); return 0;}
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
+printf("2\n");
 
     if(tok[1][0]=='R'){
       printf(cmd,"sfim\n");
