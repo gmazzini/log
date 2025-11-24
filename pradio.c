@@ -128,8 +128,6 @@ int main(void){
     tv.tv_sec=2; tv.tv_usec=0;
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){close(s); return 0;}
-
-    tv.tv_sec=2; tv.tv_usec=0;
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,&tv,sizeof(tv));
 printf("2\n");
@@ -138,6 +136,9 @@ printf("2\n");
       printf(cmd,"sfim\n");
       write(s,cmd,strlen(cmd));
       for(loop=i=0;i<100 && loop<20;)if(recv(s,&c,1,MSG_DONTWAIT)==1){b[i++]=c; loop=0;} else {usleep(10000); loop++;} b[i]='\0';
+
+printf("%s\n");
+      
       p1=strtok(b,"\n"); p1=strtok(NULL,"\n"); p1=strtok(NULL,"\n");
       printf("%ld,",atol(p1));
       p1=strtok(NULL,"\n"); p1=strtok(NULL,"\n");
