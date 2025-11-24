@@ -120,15 +120,11 @@ int main(void){
     ip=strtok(NULL,",");
     port=atol(strtok(NULL,","));
 
-    printf("%s %ld\n",ip,port);
-    
-
     s=socket(AF_INET,SOCK_STREAM,0);
     memset(&a,0,sizeof(a));
     a.sin_family=AF_INET;
     a.sin_port=htons(port);
     inet_pton(AF_INET,ip,&a.sin_addr);
-printf("1\n");
     tv.tv_sec=2; tv.tv_usec=0;
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,&tv,sizeof(tv));
     if(connect(s,(struct sockaddr*)&a,sizeof(a))<0){close(s); return 0;}
@@ -142,9 +138,9 @@ printf("2\n");
       printf(cmd,"sfim\n");
       write(s,cmd,strlen(cmd));
       for(loop=i=0;i<100 && loop<20;)if(recv(s,&c,1,MSG_DONTWAIT)==1){b[i++]=c; loop=0;} else {usleep(10000); loop++;} b[i]='\0';
-      p1=strtok(b,"\n"); p1=strtok(b,"\n"); p1=strtok(b,"\n");
+      p1=strtok(b,"\n"); p1=strtok(NULL,"\n"); p1=strtok(NULL,"\n");
       printf("%ld,",atol(p1));
-      p1=strtok(b,"\n"); p1=strtok(b,"\n");
+      p1=strtok(NULL,"\n"); p1=strtok(NULL,"\n");
       printf("%s\n",p1);
     }
     close(s);    
