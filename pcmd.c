@@ -63,7 +63,7 @@ int main(void) {
   }
   else if(strcmp(p,"DTE")==0 || strcmp(p,"DATETIMEEND")==0){
     p=strtok(NULL,"=");
-    if(p!=NULL)sprintf(buf,"update log set end='%s' where mycall='%s' and callsign='%s' and open=%lld",p,mycall,tok[2],atoll(tok[1]));
+    if(p!=NULL)sprintf(buf,"update log set end=%lld where mycall='%s' and callsign='%s' and open=%lld",dtc2e(p),mycall,tok[2],atoll(tok[1]));
   }  
   else if(strcmp(p,"CO")==0 || strcmp(p,"CONTEST")==0){
     p=strtok(NULL,"=");
