@@ -567,7 +567,7 @@ int main(void){
       printf("%s %s %s\n",row[4],row[5],row[6]);
       printf("%s\n%s\n",row[7],row[8]);
       printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
-      printf("%s\n",e2dtc(atoll(row[14])));
+    //  printf("%s\n",e2dtc(atoll(row[14])));
       printf("</pre></td>");
       if(row[13][0]!='\0')printf("<td><img align=\top\" src=\"%s\" width=\"200\"></a></td>",row[13]);
       printf("</table>\n");
