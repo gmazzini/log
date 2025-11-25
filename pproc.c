@@ -69,7 +69,7 @@ int main(void){
 
   if(act==5){ // Go button with date in format YYYYMMDD
     printf("Content-Type: text/plain\r\n\r\n");
-    sprintf(buf,"select count(*) from log where mycall='%s' and open>=%lld order by open",mycall,dte2(tok[4],"00:00:00"));
+    sprintf(buf,"select count(*) from log where mycall='%s' and open>=%lld order by open",mycall,dt2e(tok[4],"00:00:00"));
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     l1=atol(row[0]);
     mysql_free_result(res);
