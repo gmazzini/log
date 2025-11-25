@@ -1,4 +1,4 @@
-// proclog.c log data processing by GM @2025 V 2.0
+// pproc.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
 #include "pscore.c"
 // remember that button 15 is available
