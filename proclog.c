@@ -728,13 +728,11 @@ int main(void){
         qq=strpbrk(pp,"\n");
         if(!qq)break;
         *qq='\0';
-        p1=strtok(pp,","); 
-        p2=strtok(NULL,",");
-        p3=strtok(NULL,","); l1=atol(p3); fx=l1/1000.0;
-        p4=strtok(NULL,",");
+        p1=strtok(pp,","); p2=strtok(NULL,","); p3=strtok(NULL,","); p4=strtok(NULL,",");
+        l1=atol(p3); fx=l1/1000.0;
         pp=qq+1;
         searchcty(con,p4); vv=atoi(mycty[2]);
-        sprintf(buf,"select count(*),sum(lotw+eqsl+qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
+        sprintf(buf,"select count(*),sum(lotw)+sum(eqsl)+sum(qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
         mysql_free_result(res);
         sprintf(buf,"select count(*),sum(lotw)+sum(eqsl)+sum(qrz),timestampdiff(second,max(start),now()) from log where mycall='%s' and callsign='%s'",mycall,p4);
