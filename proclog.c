@@ -540,7 +540,7 @@ int main(void){
     if(mycty[0][0]!='\0')printf("<pre>base:%s\nname:%s\ndxcc:%s\ncont:%s\ncqzone:%s\nituzone:%s\nlatitude:%s\nlongitude:%s\ngmtshift:%s\n</pre>",mycty[0],mycty[1],mycty[2],mycty[3],mycty[4],mycty[5],mycty[6],mycty[7],mycty[8]);
     printf("</td><td>");
     searchcty(con,mycall);
-    printf("<pre>distance:%5.0f\nbearing:%5.0f\ndeltatime:%.0f\n</pre>",distance(f6,f7,atof(mycty[6]),atof(mycty[7])),bearing(f6,f7,atof(mycty[6]),atof(mycty[7])),f8-atof(mycty[8]));
+    printf("<pre>distance:%5.0f\nbearing:%5.0f\ndeltatime:%.0f\n</pre>",distance(f6,f7,atof(mycty[6]),atof(mycty[7])),bearing(f6,f7,atof(mycty[6]),atof(mycty[7])),atof(mycty[8])-f8);
     printf("</td><td>");    
     sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); if(row!=NULL)strcpy(aux1,row[0]); else aux1[0]='\0';
