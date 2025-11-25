@@ -558,6 +558,9 @@ int main(void){
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
     mysql_free_result(res);
     if(c==0)qrzcom(con,tok[4]);
+
+
+    goto end;
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image,time from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     if(row!=NULL){
