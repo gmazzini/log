@@ -181,7 +181,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
         data
       ].join(",");
       out.textContent = "Waiting";
-      const r = await fetch("proclog.cgi", {
+      const r = await fetch("proc.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
         body
