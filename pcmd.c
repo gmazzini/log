@@ -47,7 +47,7 @@ int main(void) {
   }
   else if(strcmp(p,"M")==0 || strcmp(p,"MODE")==0){
     p=strtok(NULL,"=");
-    if(p!=NULL)sprintf(buf,"update log set mode='%s' where mycall='%s' and callsign='%s' and open=%lld",p,mycall,tok[2],atoll(tok[1]();
+    if(p!=NULL)sprintf(buf,"update log set mode='%s' where mycall='%s' and callsign='%s' and open=%lld",p,mycall,tok[2],atoll(tok[1]));
   }
   else if(strcmp(p,"ST")==0 || strcmp(p,"SIGNALTX")==0){
     p=strtok(NULL,"=");
