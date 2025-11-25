@@ -2,7 +2,7 @@
 
 const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG","ARRL10","ARRLRU","ARRLRTTY","FTROUNDUP","RCC","ARKTIKA","9ADX","EIUKDXSSB","EIUKDXCW","RAC","ARRLFIELDDAY"};
 void conscore(MYSQL *con,char tok[][100],char *mycall){
-  int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n,h,m,z;
+  int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n,z;
   long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
   MYSQL_RES *res;
