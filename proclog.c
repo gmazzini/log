@@ -743,6 +743,7 @@ int main(void){
           mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
           mysql_free_result(res);
           sprintf(buf,"replace into aux1 (qso,qsl,time,mycall,dxcc) values (%ld,%ld,%lld,'%s',%d)",l1,l2,time(NULL),mycall,vv);
+          mysql_query(con,buf);
         }
 
     
