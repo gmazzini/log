@@ -8,6 +8,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
   MYSQL_RES *res;
   MYSQL_ROW row;
   double lat1,lat2,lon1,lon2;
+  time_t epoch;
+  struct tm *t;
 
   vv=sizeof(conid)/sizeof(conid[0]);
   for(contype=0;contype<vv;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
@@ -27,7 +29,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
     ituz[c]=atoi(row[3]);
   }
   mysql_free_result(res);
-  sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode,start from log where contest='%s' and mycall='%s' order by start desc",tok[9],mycall);
+  sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode,open from log where contest='%s' and mycall='%s' order by open desc",tok[9],mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   for(;;){
@@ -914,8 +916,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
           }
         }
         else {
-          sscanf(row[6]+11,"%d:%d",&h,&m);
-          e=(((h*60+m)>=23*60) || ((h*60+m)<=4*60+59)) ?2:0;
+          epoch=atoll(row[6]); t=gmtime(&epoch); 
+          e=(((t->tm_hour*60+t->tm_min)>=23*60) || ((t->tm_hour*60+t->tm_min)<=4*60+59)) ?2:0;
           if(vv==497){
             if(c>=40)incdata3(0,1,aux1,10+e,0);
             else incdata3(0,1,aux1,6+e,0);
@@ -952,8 +954,8 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
         for(d=0;d<n;d++)if(gg==lll[d])break;
         for(e=0;e<n;e++)if(vv==lll[e])break;
         if(d<n){
-          sscanf(row[6]+11,"%d:%d",&h,&m);
-          z=(((h*60+m)>=1*60) && ((h*60+m)<=4*60+59)) ?2:1;
+          epoch=atoll(row[6]); t=gmtime(&epoch); 
+          z=(((t->tm_hour*60+t->tm_min)>=1*60) && ((t->tm_hour*60+t->tm_min)<=4*60+59)) ?2:1;
           if(e<n || strncmp(cont[vv],"EU",2)==0){
             if(c>=40)incdata3(0,1,aux1,4*z,0);
             else incdata3(0,1,aux1,2*z,0);
