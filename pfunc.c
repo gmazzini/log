@@ -272,11 +272,9 @@ char *cyrlat(char *input){
 
 int qrzru(MYSQL *con,char *call){
   CURL *h;
-  char aux1[300],aux2[300],key[12][201],ee[40];
+  char aux1[300],aux2[300],key[12][201];
   int n;
   const char *qrzkey[12]={"name","surname","street","city","state","zip","country","qthloc","cq_zone","itu_zone","birthday","file"};
-  time_t now;
-  struct tm *utc;
   
   wrused=0;
   h=curl_easy_init();
