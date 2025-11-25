@@ -11,7 +11,7 @@ int main(void) {
   struct sockaddr_in server_addr,client_addr;
   socklen_t addr_len=sizeof(client_addr);
   ssize_t len;
-  char buffer[1000],buf[1000],aux1[300],aux2[300],aux3[300];
+  char buffer[1000],buf[1000],aux1[300];
   MYSQL *con;
   FILE *fp;
 
@@ -43,10 +43,10 @@ int main(void) {
     if(con==NULL)continue;
     if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)continue;
     searchcty(con,adif[0]);
-    sprintf(aux3,"('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",adif[16],adif[0],adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(mycty[2]),dt2e(adif[13],adif[6]),dt2e(adif[14],adif[7]));
+    sprintf(aux1,"('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",adif[16],adif[0],adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(mycty[2]),dt2e(adif[13],adif[6]),dt2e(adif[14],adif[7]));
     fp=fopen(LOG,"a");
-    if(fp!=NULL){fprintf(fp,"%s\n",aux3); fclose(fp);}
-    sprintf(buf,"insert ignore into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value %s",aux3);
+    if(fp!=NULL){fprintf(fp,"%s\n",aux1); fclose(fp);}
+    sprintf(buf,"insert ignore into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value %s",aux1);
     mysql_query(con,buf);
     mysql_close(con);
   }
