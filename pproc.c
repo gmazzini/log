@@ -67,7 +67,7 @@ int main(void){
   mysql_free_result(res);
   act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
 
-  if(act==5){ // Go button with date in format YYYYMMDD
+  if(act==5){ // Go button with date in call input and format YYYYMMDD
     printf("Content-Type: text/plain\r\n\r\n");
     sprintf(buf,"select count(*) from log where mycall='%s' and open>=%lld order by open",mycall,dt2e(tok[4],"00:00:00"));
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
@@ -115,7 +115,7 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     l1=l2=0;
-    sprintf(buf,"select start,callsign from log where mycall='%s' and dxcc=0",mycall);
+    sprintf(buf,"select open,callsign from log where mycall='%s' and dxcc=0",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(;;){
@@ -123,7 +123,7 @@ int main(void){
       if(row==NULL)break;
       searchcty(con,row[1]);
       if(mycty[0][0]!='\0'){
-        sprintf(aux1,"Update log set dxcc=%d where mycall='%s' and start='%s' and callsign='%s' and dxcc=0",atoi(row1[2]),mycall,row[0],row[1]);
+        sprintf(aux1,"Update log set dxcc=%d where mycall='%s' and open=%lld and callsign='%s' and dxcc=0",atoi(row1[2]),mycall,atoll(row[0]),row[1]);
         mysql_query(con,aux1);
         l1++;
       }
@@ -307,10 +307,8 @@ int main(void){
       sscanf(adif[2],"%4ld%2ld%2ld",&l1,&l2,&l3); ts.tm_year=l1-1900; ts.tm_mon=l2-1; ts.tm_mday=l3;
       l3=0; sscanf(adif[1],"%2ld%2ld%2ld",&l1,&l2,&l3); ts.tm_hour=l1; ts.tm_min=l2; ts.tm_sec=l3;
       epoch=timegm(&ts);
-      epoch-=QSLWIN; strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
-      epoch+=2*QSLWIN; strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",gmtime(&epoch));
       if(adif[3][0]!='\0'){
-        sprintf(buf,"select %s from log where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
+        sprintf(buf,"select %s from log where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld",aux4,mycall,adif[0],epoch-QSLWIN,epoch+QSLWIN);
         mysql_query(con,buf); 
         res=mysql_store_result(con); 
         row=mysql_fetch_row(res); 
@@ -319,7 +317,7 @@ int main(void){
         ppp++;
         if(c==-1)qqq++;
         if(c==0){
-          sprintf(buf,"update log set %s=1 where mycall='%s' and callsign='%s' and start>='%s' and start<='%s'",aux4,mycall,adif[0],aux1,aux2);
+          sprintf(buf,"update log set %s=1 where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld",aux4,mycall,adif[0],epoch-QSLWIN,epoch+QSLWIN);
           mysql_query(con,buf);
           nnn++;
         }
@@ -372,7 +370,7 @@ int main(void){
      fp=fopen(aux2,"w");
      strcpy(aux3,"PROGRAMID"); fprintf(fp,"<LZHlogger:%d>%s\n",strlen(aux3),aux3);
      fprintf(fp,"<EOH>\n\n");
-     if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and open>=%lld and open<=%lld order by start",mycall,dtc2e(adif[0]),dtc2e(adif[1]));
+     if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and open>=%lld and open<=%lld order by ",mycall,dtc2e(adif[0]),dtc2e(adif[1]));
      else sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and contest='%s' order by open",mycall,adif[2]);
      mysql_query(con,buf);
      res=mysql_store_result(con);
@@ -414,7 +412,7 @@ int main(void){
     sprintf(aux1,"%d%d%d%d.cbr",rand(),rand(),rand(),rand());
     sprintf(aux2,"/home/www/log/files/%s",aux1);
     fp=fopen(aux2,"w");
-    fprintf(fp,"START-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
+    fprintf(fp,"-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
     fprintf(fp,"CONTEST: xxxxxx\nCALLSIGN: %s\nOPERATORS: %s\n",mycall,mycall);
     fprintf(fp,"CATEGORY-OPERATOR: SINGLE-OP\nCATEGORY-ASSISTED: ASSISTED\nCATEGORY-BAND: ALL\nCATEGORY-POWER: LOW\nCATEGORY-TRANSMITTER: ONE\n");    
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='%s'",mycall);
@@ -428,14 +426,15 @@ int main(void){
     if(row[6][0]!='\0')fprintf(fp,"ADDRESS-COUNTRY: %s\n",row[6]);
     fprintf(fp,"CLUB: Italian Contest Club\n");
     mysql_free_result(res);
-    if(adif[2][0]=='\0')sprintf(buf,"select start,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and start>='%s' and start<='%s' order by start",mycall,adif[0],adif[1]);
-    else sprintf(buf,"select start,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and contest='%s' order by start",mycall,adif[2]);
+    if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and open>=%lld and open<=%lld order by open",mycall,atoll(adif[0]),atoll(adif[1]));
+    else sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and contest='%s' order by open",mycall,adif[2]);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     for(l1=0;;l1++){
       row=mysql_fetch_row(res);
       if(row==NULL)break;
-      fprintf(fp,"QSO: %5ld %2s %.4s-%.2s-%.2s %.2s%.2s",atol(row[2])/1000L,mymode(row[3]),row[0],row[0]+5,row[0]+8,row[0]+11,row[0]+14);
+      p1=e2dtc(atoll(row[0]));
+      fprintf(fp,"QSO: %5ld %2s %.4s-%.2s-%.2s %.2s%.2s",atol(row[2])/1000L,mymode(row[3]),p1,p1+5,p1+8,p1+11,p1+14);
       fprintf(fp," %-13s %3s %-6s %-13s %3s %-6s 0\n",mycall,row[4],row[6],row[1],row[5],row[7]);
     }
     res=mysql_store_result(con);
@@ -505,15 +504,16 @@ int main(void){
         if(c>10){qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);} else aux8[0]='\0'; // signalrx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
         searchcty(con,aux7);
+        epoch=dt2e(aux3,aux4);
         l1=atol(aux1)*1000L;
-        sprintf(buf,"select count(*),start from log where mycall='%s' and callsign='%s' and start between date_sub('%s %.2s:%.2s:00',interval 3 minute) and date_add('%s %.2s:%.2s:00',interval 3 minute) and freqtx between %ld-1700000 and %ld+1700000 limit 1",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,l1,l1);
-        mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)strcpy(aux10,row[1]);
+        sprintf(buf,"select count(*),open from log where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld and freqtx>=%ld and freqtx<=%ld limit 1",mycall,aux7,epoch-180,epoch+180,l1-1700000,l1+1700000);
+        mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)epoch=atoll(row[1]);
         mysql_free_result(res);
         if(gg==0){
           sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]),dt2e(aux3,aux4),dt2e(aux3,aux4));
           nnn++;
         }
-        else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and start='%s'",aux6,aux9,aux0,mycall,aux7,aux10);
+        else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and open=%lld",aux6,aux9,aux0,mycall,aux7,epoch);
         mysql_query(con,buf);
         ppp++;
       }
@@ -659,7 +659,7 @@ int main(void){
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
-    sprintf(buf,"select contest,min(start),max(start),count(callsign) from log where mycall='%s' and contest<>'' group by contest order by max(start) desc",mycall);
+    sprintf(buf,"select contest,min(open),max(open),count(callsign) from log where mycall='%s' and contest<>'' group by contest order by max(open) desc",mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     vv=sizeof(conid)/sizeof(conid[0]);
@@ -669,7 +669,9 @@ int main(void){
       aux1[0]='\0';
       for(c=0;c<vv;c++)if(strncmp(row[0],conid[c],strlen(conid[c]))==0)break;
       if(c<vv)strcpy(aux1,"Scorable");
-      printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd2('%s')\">%20s</button>: [%4d] %s -> %s %s\n",row[0],row[0],atoi(row[3]),row[1],row[2],aux1);
+      printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd2('%s')\">%20s</button>: [%4d] ",row[0],row[0],atoi(row[3]));
+      printf("%s -> ",e2dtc(atoll(row[1])));
+      printf("%s %s\n",e2dtc(atoll(row[2])),aux1);
     }
     mysql_free_result(res);
     printf("</pre>");
