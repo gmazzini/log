@@ -742,9 +742,7 @@ int main(void){
         if(row[2]==NULL){l3=0; l4=0; strcpy(aux1,"   ");} else{l3=atol(row[0]); l4=atol(row[1]); strcpy(aux1,myts(time(NULL)-atoll(row[2])));}
         mysql_free_result(res);
         
-        epoch=atol(p1); tm_now=gmtime(&epoch); ts=*tm_now; timegm(&ts); 
-        strftime(aux2,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
-        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f ",p4,fx,aux2,p4,fx);
+        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f ",p4,fx,e2dtc(atoll(p1)),p4,fx);
         if(cached)printf("<span style=\"color: red;\">%7ld %7ld</span> ",l1,l2); else printf("%7ld %7ld ",l1,l2);
         printf("%4ld %4ld %3s %s\n",l3,l4,aux1,p2);
       }
