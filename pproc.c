@@ -101,7 +101,7 @@ int main(void){
       else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
       else sprintf(aux2,"(%ldh)",td/3600);
       printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
-      printf("%s%5s <b>%16s</b> %10.1f %4s %5s %5s %-3s ",e2dtc(row[0]),aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
+      printf("%s%5s <b>%16s</b> %10.1f %4s %5s %5s %-3s ",e2dtc(atoll(row[0])),aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
       if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
       if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
       printf("\n");
