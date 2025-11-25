@@ -566,7 +566,7 @@ int main(void){
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); c=atoi(row[0]);
     mysql_free_result(res);
     if(c==0)qrzcom(con,tok[4]);
-    sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image,myupdate from who where callsign='%s'",tok[4]);
+    sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,src,image,time from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
     if(row!=NULL){
       printf("<table><td><pre>");
@@ -575,7 +575,7 @@ int main(void){
       printf("%s %s %s\n",row[4],row[5],row[6]);
       printf("%s\n%s\n",row[7],row[8]);
       printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
-      printf("%s\n",row[14]);
+      epoch=atoll(row[14]); strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&epoch)); printf("%s\n",aux1);
       printf("</pre></td>");
       if(row[13][0]!='\0')printf("<td><img align=\top\" src=\"%s\" width=\"200\"></a></td>",row[13]);
       printf("</table>\n");
