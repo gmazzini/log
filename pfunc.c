@@ -368,7 +368,7 @@ time_t dtc2e(char *datetime){
 
 char *e2dtc(time_t e){
   static char out[20];
-  strftime(out,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&e));
+  strftime(out,sizeof(20),"%Y-%m-%d %H:%M:%S",gmtime(&e));
   return out;
 }
 }
