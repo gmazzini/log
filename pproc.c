@@ -537,9 +537,6 @@ int main(void){
     sprintf(buf,"select grid from who where callsign='%s'",tok[4]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); if(row!=NULL)strcpy(aux1,row[0]); else aux1[0]='\0';
     mysql_free_result(res);
-
-goto end; // uuu
-    
     sprintf(buf,"select grid from who where callsign='%s'",mycall);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); if(row!=NULL)strcpy(aux2,row[0]); else aux2[0]='\0';
     mysql_free_result(res);
@@ -551,6 +548,9 @@ goto end; // uuu
       lon2=-((aux2[0]-'A')*20.0+(aux2[2]-'0')*2.0+(aux2[4]-'a')/12.0+1.0/24.0-180.0);
       printf("distance:%5.0f\nbearing:%5.0f\n</pre>",distance(lat1,lon1,lat2,lon2),bearing(lat1,lon1,lat1,lon2),atoi(row[8])-atoi(row1[8]));
     }
+
+
+    goto end; // uuu
     printf("</td></table>");
     sprintf(buf,"select count(*) from log where mycall='%s' and dxcc=%d",mycall,vv);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]);
