@@ -304,8 +304,7 @@ int qrzru(MYSQL *con,char *call){
   curl_easy_cleanup(h);
   for(n=0;n<12;n++)strcpy(key[n],cyrlat(search(wrbuf,(char *)qrzkey[n])));
   if(key[6][0]!='\0'){
-    sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,time,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%s
-      lld','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],"",atoi(key[8]),atoi(key[9]),atoi(key[10]+6),key[11],time(NULL));
+    sprintf(aux2,"replace into who (callsign,firstname,lastname,addr1,addr2,state,zip,country,grid,email,cqzone,ituzone,born,image,time,src) value ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,'%s','%lld','qrz.com')",call,key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7],"",atoi(key[8]),atoi(key[9]),atoi(key[10]+6),key[11],time(NULL));
     mysql_query(con,aux2);
     return 1;
   }
