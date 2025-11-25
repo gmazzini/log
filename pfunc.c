@@ -18,6 +18,7 @@
 #define TOTL3 200000
 #define MAXFF 20000000L
 #define QSLWIN 240
+#define TIMEOUT_AUX1 3600
 
 struct data3 {char lab[20]; long num; long idx;} ***data3;
 long **ndata3;
