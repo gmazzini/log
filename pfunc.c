@@ -365,3 +365,10 @@ time_t dtc2e(char *datetime){
   t.tm_year-=1900; t.tm_mon-=1; t.tm_isdst=0;
   return timegm(&t);
 }
+
+char *e2dtc(time_t e){
+  static char out[20];
+  strftime(out,sizeof(aux1),"%Y-%m-%d %H:%M:%S",gmtime(&e));
+  return out;
+}
+}
