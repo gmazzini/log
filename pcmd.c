@@ -1,9 +1,5 @@
 // pcmd.c command processor by GM @2025 V 2.0
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <mysql/mysql.h>
+#include "pfunc.c"
 #include "/home/www/data/log.def"
 
 int main(void) {
