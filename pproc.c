@@ -4,7 +4,7 @@
 // remember that button 15 is available
 
 int main(void){
-  int c,act,vv,gg,s,mypage,f1;
+  int c,act,vv,gg,s,mypage,f1,cached;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],aux10[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,te,*tm_now;
   uint8_t in[4];
@@ -734,11 +734,12 @@ int main(void){
         searchcty(con,p4); vv=atoi(mycty[2]);
 
         l1=l2=0;
+        cached=0;
         sprintf(buf,"select qso,qsl,time from aux1 where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-        if(row!=NULL && time(NULL)-atoll(row[2])<TIMEOUT_AUX1){l1=atol(row[0]); l2=atol(row[1]);}
+        if(row!=NULL && time(NULL)-atoll(row[2])<TIMEOUT_AUX1){cached=1; l1=atol(row[0]); l2=atol(row[1]);}
         mysql_free_result(res);
-        if(l1==0){
+        if(cached==0){
           sprintf(buf,"select count(*),sum(lotw)+sum(eqsl)+sum(qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
           mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
           mysql_free_result(res);
@@ -753,7 +754,9 @@ int main(void){
         
         epoch=atol(p1); tm_now=gmtime(&epoch); ts=*tm_now; timegm(&ts); 
         strftime(aux2,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
-        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f %7ld %7ld %4ld %4ld %3s %s\n",p4,fx,aux2,p4,fx,l1,l2,l3,l4,aux1,p2);
+        printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f ",p4,fx,aux2,p4,fx);
+        if(cached)printf("<span style=\"color: red;\">%7ld %7ld</span> ",l1,l2); else printf("%7ld %7ld ",l1,l2);
+        printf("%4ld %4ld %3s %s\n",l3,l4,aux1,p2);
       }
     }
     close(s);
