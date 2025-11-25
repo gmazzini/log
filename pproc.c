@@ -524,9 +524,8 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     l1=(long)(atof(tok[5])*1000);
     if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
-    epoch=time(NULL); tm_now=gmtime(&epoch); ts=*tm_now; timegm(&ts);
-    strftime(aux1,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
-    printf("Start: %s\n",aux1);
+    epoch=time(NULL); 
+    printf("Start: %s\n",e2dtc(epoch));
     printf("<table><td>");
     searchcty(con,tok[4]);
     vv=atoi(mycty[2]); f6=atof(mycty[6]); f7=atof(mycty[7]); f8=atof(mycty[8]);
