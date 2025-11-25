@@ -736,7 +736,7 @@ int main(void){
         l1=l2=0;
         sprintf(buf,"select qso,qsl,time from aux1 where mycall='%s' and dxcc=%d",mycall,vv);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
-        if(row!=NULL && time(NULL)-atoll(row[2])<300){l1=atol(row[0]); l2=atol(row[1]);}
+        if(row!=NULL && time(NULL)-atoll(row[2])<TIMEOUT_AUX1){l1=atol(row[0]); l2=atol(row[1]);}
         mysql_free_result(res);
         if(l1==0){
           sprintf(buf,"select count(*),sum(lotw)+sum(eqsl)+sum(qrz) from log where mycall='%s' and dxcc=%d",mycall,vv);
@@ -745,12 +745,12 @@ int main(void){
           sprintf(buf,"replace into aux1 (qso,qsl,time,mycall,dxcc) values (%ld,%ld,%lld,'%s',%d)",l1,l2,time(NULL),mycall,vv);
           mysql_query(con,buf);
         }
-
     
         sprintf(buf,"select count(*),sum(lotw)+sum(eqsl)+sum(qrz),timestampdiff(second,max(start),now()) from log where mycall='%s' and callsign='%s'",mycall,p4);
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
         if(row[2]==NULL){l3=0; l4=0; strcpy(aux1,"   ");} else{l3=atol(row[0]); l4=atol(row[1]); strcpy(aux1,myts(atol(row[2])));}
         mysql_free_result(res);
+        
         epoch=atol(p1); tm_now=gmtime(&epoch); ts=*tm_now; timegm(&ts); 
         strftime(aux2,sizeof(aux1),"%Y-%m-%d %H:%M:%S",&ts);
         printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd3('%s','%.1f')\"> </button> %s <b>%16s</b> %10.1f %7ld %7ld %4ld %4ld %3s %s\n",p4,fx,aux2,p4,fx,l1,l2,l3,l4,aux1,p2);
