@@ -188,9 +188,7 @@ char *search(char *buf,char *key){
 int qrzcom(MYSQL *con,char *call){
   struct addrinfo h={0},*r=0;
   int s,n;
-  char aux1[300],aux2[300],key[13][201],ee[40];
-  time_t now;
-  struct tm *utc;
+  char aux1[300],aux2[300],key[13][201];
   const char *qrzkey[13]={"fname","name","addr1","addr2","state","zip","country","grid","email","cqzone","ituzone","born","image"};
   
   h.ai_socktype=SOCK_STREAM;
