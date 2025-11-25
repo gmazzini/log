@@ -351,7 +351,7 @@ int nfields(char *s){
   return count;
 }
 
-time_t dt2e(chat *date,char *time){
+time_t dt2e(char *date,char *time){
   struct tm t={0};
   sscanf(date,"%4d%2d%2d",&t.tm_year,&t.tm_mon,&t.tm_mday);
   sscanf(time,"%2d%2d%2d",&t.tm_hour,&t.tm_min,&t.tm_sec);
