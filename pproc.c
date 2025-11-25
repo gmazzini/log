@@ -53,8 +53,7 @@ int main(void){
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
-  epoch=time(NULL);
-  sprintf(buf,"select mycall from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],epoch);
+  sprintf(buf,"select mycall from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],time(NULL));
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
   if(row==NULL){
     printf("Status: 200 OK\r\n");
@@ -224,8 +223,7 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     printf("<pre>");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
-    epoch=time(NULL);
-    tm_now=gmtime(&epoch); ts=*tm_now;
+    epoch=time(NULL); tm_now=gmtime(&epoch); ts=*tm_now;
     ts.tm_year-=2; timegm(&ts);
     strftime(aux3,sizeof(aux3),"%Y-%m",&ts);
     strftime(aux4,sizeof(aux4),"%Y-%m",tm_now);
@@ -629,7 +627,6 @@ int main(void){
     if(tok[9][0]=='-')tok[9][0]='\0';
     if(tok[10][0]=='-')tok[10][0]='\0';
     if(tok[11][0]=='-')tok[11][0]='\0';
-    tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     searchcty(con,tok[4]);
     sprintf(buf,"insert into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,tok[4],tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]),dtc2e(tok[12]),time(NULL));
     mysql_query(con,buf);
