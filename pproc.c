@@ -542,6 +542,9 @@ int main(void){
     mysql_free_result(res);
     if(aux1!='\0'&&aux2[0]!='\0'){
       printf("<pre>gridyou:%s\ngridme:%s\n",aux1,aux2);
+
+      goto end; // uuu
+      
       lat1=((aux1[1]-'A')*10.0+(aux1[3]-'0')+(aux1[5]-'a')/24.0+1.0/48.0-90.0);
       lat2=((aux2[1]-'A')*10.0+(aux2[3]-'0')+(aux2[5]-'a')/24.0+1.0/48.0-90.0);
       lon1=-((aux1[0]-'A')*20.0+(aux1[2]-'0')*2.0+(aux1[4]-'a')/12.0+1.0/24.0-180.0);
@@ -550,7 +553,6 @@ int main(void){
     }
 
 
-    goto end; // uuu
     printf("</td></table>");
     sprintf(buf,"select count(*) from log where mycall='%s' and dxcc=%d",mycall,vv);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]);
