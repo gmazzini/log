@@ -373,8 +373,8 @@ int main(void){
      fp=fopen(aux2,"w");
      strcpy(aux3,"PROGRAMID"); fprintf(fp,"<LZHlogger:%d>%s\n",strlen(aux3),aux3);
      fprintf(fp,"<EOH>\n\n");
-     if(adif[2][0]=='\0')sprintf(buf,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx,contest from log where mycall='%s' and start>='%s' and start<='%s' order by start",mycall,adif[0],adif[1]);
-     else sprintf(buf,"select start,callsign,freqtx,mode,signaltx,signalrx,end,freqrx,contesttx,contestrx,contest from log where mycall='%s' and contest='%s' order by start",mycall,adif[2]);
+     if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and open>=%lld and open<=%lld order by start",mycall,dtc2e(adif[0]),dtc2e(adif[1]));
+     else sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and contest='%s' order by open",mycall,adif[2]);
      mysql_query(con,buf);
      res=mysql_store_result(con);
      for(l1=0;;l1++){
@@ -581,7 +581,7 @@ int main(void){
     }
     mysql_free_result(res);
     printf("<pre>");
-    sprintf(buf,"select start,end,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='%s' and mycall='%s' order by start desc",tok[4],mycall);
+    sprintf(buf,"select open,close,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where callsign='%s' and mycall='%s' order by open desc",tok[4],mycall);
     mysql_query(con,buf);
     res=mysql_store_result(con);
     vv=0;
@@ -597,15 +597,13 @@ int main(void){
       if(atoi(row[9])==1){strcat(aux1,"E"); incdata3(0,2,aux3,1,1);}
       if(atoi(row[10])==1){strcat(aux1,"Q"); incdata3(0,3,aux3,1,1);}
       if(++vv<=5){
-        sscanf(row[1],"%d-%d-%d %d:%d:%d",&te.tm_year,&te.tm_mon,&te.tm_mday,&te.tm_hour,&te.tm_min,&te.tm_sec); te.tm_year-=1900; te.tm_mon-=1;
-        sscanf(row[0],"%d-%d-%d %d:%d:%d",&ts.tm_year,&ts.tm_mon,&ts.tm_mday,&ts.tm_hour,&ts.tm_min,&ts.tm_sec); ts.tm_year-=1900; ts.tm_mon-=1;
-        td=timegm(&te)-timegm(&ts);
+        td=atoll(row[1])-atoll(row[0]);
         if(td==0)strcpy(aux2,"(0s)");
         else if(td<60)sprintf(aux2,"(%lds)",td);
         else if(td<3600)sprintf(aux2,"(%ldm)",td/60);
         else sprintf(aux2,"(%ldh)",td/3600);
         printf("<button type=\"button\" class=\"myb2\" onclick=\"cmd1('%s','%s')\"> </button> ",row[0],row[2]);
-        printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",row[0],aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
+        printf("%s%5s %12s %7.1f %4s %5s %5s %-3s ",e2dtc(atoll(row[0])),aux2,row[2],atol(row[3])/1000.0,row[5],row[6],row[7],aux1);
         if(row[13][0]!='\0')printf(" (%s,%s,%s)",row[13],row[11],row[12]);
         if(atol(row[4])>0&&atol(row[4])!=atol(row[3]))printf(" [%+.1f]",(atol(row[4])-atol(row[3]))/1000.0);
         printf("\n");
@@ -638,7 +636,7 @@ int main(void){
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
     searchcty(con,tok[4]);
-    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]),dtc2e(tok[12]),time(NULL));
+    sprintf(buf,"insert into log (mycall,callsign,start,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]),dtc2e(tok[12]),time(NULL));
     mysql_query(con,buf);
     printf("%s inserted\n",tok[4]);
     goto end;
