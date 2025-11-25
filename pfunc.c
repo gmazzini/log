@@ -371,4 +371,3 @@ char *e2dtc(time_t e){
   strftime(out,sizeof(20),"%Y-%m-%d %H:%M:%S",gmtime(&e));
   return out;
 }
-}
