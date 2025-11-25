@@ -640,7 +640,7 @@ int main(void){
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
     searchcty(con,tok[4]);
-    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]),0,time(NULL));
+    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]),dt2e(tok[12]),time(NULL));
     mysql_query(con,buf);
     printf("%s inserted\n",tok[4]);
     goto end;
