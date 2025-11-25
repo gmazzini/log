@@ -40,15 +40,15 @@ static const uint8_t B64DEC[256] = {
   ['-']=62, ['_']=63
 };
 
-char *searchcty(MYSQL *con,char *incall){
+char mycty[9][50];
+void searchcty(MYSQL *con,char *incall){
   char buf[1000],*p,call[20];
-  static char out[9][50];
   static MYSQL_RES *res;
   static MYSQL_ROW row;
   int i,n;
   const char *suffixes[]={"P","M","LH","MM","AM","A","B","QRP","0","1","2","3","4","5","6","7","8","9"};
   n=sizeof(suffixes)/sizeof(suffixes[0]);
-  for(i=0;i<9;i++)out[i][0]='\0';
+  for(i=0;i<9;i++)mycty[i][0]='\0';
   strcpy(call,incall);
   p=strrchr(call,'/');
   if(p){
@@ -71,9 +71,8 @@ char *searchcty(MYSQL *con,char *incall){
     if(row!=NULL)break;
     mysql_free_result(res);
   }
-  for(i=0;i<9;i++)strcpy(out[i],row[i]);
+  for(i=0;i<9;i++)strcpy(mycty[i],row[i]);
   mysql_free_result(res);
-  return out;
 }
 
 long incdata3(int cha,int idx,char *key,long ss,long dd){
