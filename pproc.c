@@ -350,8 +350,8 @@ int main(void){
       if(adif[7][4]=='\0'){adif[7][4]='0'; adif[7][5]='0'; adif[7][6]='\0';}
       searchcty(con,adif[0]);
       sprintf(aux2,"%.4s-%.2s-%.2s %.2s:%.2s:%.2s",adif[14],adif[14]+4,adif[14]+6,adif[7],adif[7]+2,adif[7]+4);
-      sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(mycty[2]));
-      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux3);
+      sprintf(aux3,"('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,adif[0],aux1,aux2,adif[5],(long)(atof(adif[1])*1000000.0),(long)(atof(adif[2])*1000000.0),adif[3],adif[4],(adif[8][0]=='\0')?adif[9]:adif[8],(adif[10][0]=='\0')?adif[11]:adif[10],adif[12],atoi(mycty[2]),dt2e(adif[13],adif[6]),dt2e(adif[14],adif[7]));
+      sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value %s",aux3);
       mysql_query(con,buf);
       l1=mysql_affected_rows(con);
       if(l1>0){nnn+=l1; printf("%s\n",aux3);}
@@ -469,9 +469,10 @@ int main(void){
         if(aux7[0]=='\0')strcpy(aux7,"59");
         if(aux8[0]=='\0')strcpy(aux8,"59");
         searchcty(con,aux6);
+        strcat(aux5,":00"); 
         sprintf(aux4,"%.4s-%.2s-%.2s %.2s:%.2s",aux1,aux1+4,aux1+6,aux5,aux5+2);
-        sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','',%d)",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8,atoi(mycty[2]));
-        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value %s",aux9);
+        sprintf(aux9,"('%s','%s','%s:00','%s:59','%s',%ld,%ld,'%s','%s','','','',%d,%lld,%lld)",mycall,aux6,aux4,aux4,aux3,atol(aux2)*1000L,atol(aux2)*1000L,aux7,aux8,atoi(mycty[2]),dt2e(aux1,aux5),dt2e(aux1,aux5));
+        sprintf(buf,"insert ignore into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value %s",aux9);
         mysql_query(con,buf);
         l1=mysql_affected_rows(con);
         if(l1>0){nnn+=l1; printf("%s\n",aux9);}
@@ -499,7 +500,7 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux1,qq); // freq
         qq=strtok_r(NULL," \t",&save2); strcpy(aux2,qq); // mode
         qq=strtok_r(NULL," \t",&save2); strcpy(aux3,qq); // date
-        qq=strtok_r(NULL," \t",&save2); strcpy(aux4,qq); // time
+        qq=strtok_r(NULL," \t",&save2); strcpy(aux4,qq); strcat(aux4,":00"); // time
         qq=strtok_r(NULL," \t",&save2); // mycall
         if(c>10){qq=strtok_r(NULL," \t",&save2); strcpy(aux5,qq);} else aux5[0]='\0'; // signaltx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux6,qq); // contesttx
@@ -512,7 +513,7 @@ int main(void){
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)strcpy(aux10,row[1]);
         mysql_free_result(res);
         if(gg==0){
-          sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]));
+          sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s %.2s:%.2s:00','%s %.2s:%.2s:00','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,aux7,aux3,aux4,aux4+2,aux3,aux4,aux4+2,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]),dt2e(aux3,aux4),dt2e(aux3,aux4));
           nnn++;
         }
         else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and start='%s'",aux6,aux9,aux0,mycall,aux7,aux10);
@@ -639,7 +640,7 @@ int main(void){
     tm_now=gmtime(&epoch); te=*tm_now; timegm(&te);
     strftime(aux2,sizeof(aux2),"%Y-%m-%d %H:%M:%S",&te);
     searchcty(con,tok[4]);
-    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]));
+    sprintf(buf,"insert into log (mycall,callsign,start,end,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,tok[4],tok[12],aux2,tok[6],l1,l1,tok[7],tok[8],tok[10],tok[11],tok[9],atoi(mycty[2]),0,time(NULL));
     mysql_query(con,buf);
     printf("%s inserted\n",tok[4]);
     goto end;
