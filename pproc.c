@@ -502,8 +502,12 @@ int main(void){
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
         searchcty(con,aux7);
         epoch=dt2e(aux3,aux4);
-        l1=atol(aux1)*1000L;
+        l1=atol(aux1)*1000L;        
         sprintf(buf,"select count(*),open from log where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld and freqtx>=%ld and freqtx<=%ld limit 1",mycall,aux7,epoch-180,epoch+180,l1-1700000,l1+1700000);
+
+FILE *fpp; fpp=fopen("/home/www/log/q1.txt","a"); fprintf(fpp,"%s\n",buf); flose(fpp);
+
+        
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)epoch=atoll(row[1]);
         mysql_free_result(res);
         if(gg==0){
