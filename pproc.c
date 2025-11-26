@@ -486,7 +486,7 @@ int main(void){
     f1=1;
     for(ppp=nnn=0;;){
       if(pp==NULL)break;
-      if(f1 && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strlen(aux0)]='\0'; f1=0;}
+      if(f1 && strncmp(pp,"CONTEST:",8)==0){strcpy(aux0,pp+9); aux0[strcspn(aux0,"\n")]='\0'; f1=0;}
       if(strncmp(pp,"QSO:",4)==0){
         c=nfields(pp);
         qq=strtok_r(pp," \t",&save2); // QSO
