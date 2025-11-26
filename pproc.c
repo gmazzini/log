@@ -507,7 +507,8 @@ int main(void){
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)epoch=atoll(row[1]);
         mysql_free_result(res);
         if(gg==0){
-          sprintf(buf,"insert into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,aux7,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]),dt2e(aux3,aux4),dt2e(aux3,aux4));
+          epoch=dt2e(aux3,aux4);
+          sprintf(buf,"insert into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,aux7,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]),epoch,epoch);
           nnn++;
         }
         else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and open=%lld",aux6,aux9,aux0,mycall,aux7,epoch);
