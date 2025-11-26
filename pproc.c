@@ -366,7 +366,7 @@ int main(void){
      fp=fopen(aux2,"w");
      strcpy(aux3,"PROGRAMID"); fprintf(fp,"<LZHlogger:%d>%s\n",strlen(aux3),aux3);
      fprintf(fp,"<EOH>\n\n");
-     if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and open>=%lld and open<=%lld order by ",mycall,dtc2e(adif[0]),dtc2e(adif[1]));
+     if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and open>=%lld and open<=%lld order by open",mycall,dtc2e(adif[0]),dtc2e(adif[1]));
      else sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,close,freqrx,contesttx,contestrx,contest from log where mycall='%s' and contest='%s' order by open",mycall,adif[2]);
      mysql_query(con,buf);
      res=mysql_store_result(con);
