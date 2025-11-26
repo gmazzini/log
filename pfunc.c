@@ -63,7 +63,7 @@ void searchcty(MYSQL *con,char *incall){
     else strcpy(call,p+1);
   }
   n=strlen(call);
-  for(i=n;i>0;i--){
+  for(i=n;i>1;i--){
     call[i]='\0';
     sprintf(buf,"select base,name,dxcc,cont,cqzone,ituzone,latitude,longitude,gmtshift from cty where prefix='%s' limit 1",call);
     mysql_query(con,buf);
@@ -72,7 +72,7 @@ void searchcty(MYSQL *con,char *incall){
     if(row!=NULL)break;
     mysql_free_result(res);
   }
-  for(i=0;i<9;i++)strcpy(mycty[i],row[i]);
+  if(row!=NULL)for(i=0;i<9;i++)strcpy(mycty[i],row[i]);
   mysql_free_result(res);
 }
 
