@@ -501,7 +501,7 @@ int main(void){
         if(c>10){qq=strtok_r(NULL," \t",&save2); strcpy(aux8,qq);} else aux8[0]='\0'; // signalrx
         qq=strtok_r(NULL," \t",&save2); strcpy(aux9,qq); // contestrx
         searchcty(con,aux7);
-        epoch=dt2e(aux3,aux4);
+        epoch=ddt2e(aux3,aux4);
         l1=atol(aux1)*1000L;        
         sprintf(buf,"select count(*),open from log where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld and freqtx>=%ld and freqtx<=%ld limit 1",mycall,aux7,epoch-180,epoch+180,l1-1700000,l1+1700000);        
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)epoch=atoll(row[1]);
