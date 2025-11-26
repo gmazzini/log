@@ -503,19 +503,20 @@ int main(void){
         searchcty(con,aux7);
         epoch=dt2e(aux3,aux4);
         l1=atol(aux1)*1000L;        
-        sprintf(buf,"select count(*),open from log where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld and freqtx>=%ld and freqtx<=%ld limit 1",mycall,aux7,epoch-180,epoch+180,l1-1700000,l1+1700000);
-
-FILE *fpp; fpp=fopen("/home/www/log/q1.txt","a"); fprintf(fpp,"%s\n",buf); fclose(fpp);
-
-        
+        sprintf(buf,"select count(*),open from log where mycall='%s' and callsign='%s' and open>=%lld and open<=%lld and freqtx>=%ld and freqtx<=%ld limit 1",mycall,aux7,epoch-180,epoch+180,l1-1700000,l1+1700000);        
         mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); gg=atoi(row[0]); if(gg>0)epoch=atoll(row[1]);
         mysql_free_result(res);
         if(gg==0){
-          epoch=dt2e(aux3,aux4);
           sprintf(buf,"insert into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,aux7,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]),epoch,epoch);
           nnn++;
         }
         else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and open=%lld",aux6,aux9,aux0,mycall,aux7,epoch);
+
+
+        FILE *fpp; fpp=fopen("/home/www/log/q1.txt","a"); fprintf(fpp,"%s\n",buf); fclose(fpp);
+
+
+        
         mysql_query(con,buf);
         ppp++;
       }
