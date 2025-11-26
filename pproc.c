@@ -509,14 +509,15 @@ int main(void){
         if(gg==0){
           sprintf(buf,"insert into log (mycall,callsign,mode,freqtx,freqrx,signaltx,signalrx,contesttx,contestrx,contest,dxcc,open,close) value ('%s','%s','%s',%ld,%ld,'%s','%s','%s','%s','%s',%d,%lld,%lld)",mycall,aux7,aux2,l1,l1,aux5,aux8,aux6,aux9,aux0,atoi(mycty[2]),epoch,epoch);
           nnn++;
-        }
-        else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and open=%lld",aux6,aux9,aux0,mycall,aux7,epoch);
 
 
         FILE *fpp; fpp=fopen("/home/www/log/q1.txt","a"); fprintf(fpp,"%s\n",buf); fclose(fpp);
 
 
-        
+
+          
+        }
+        else sprintf(buf,"update log set contesttx='%s',contestrx='%s',contest='%s' where mycall='%s' and callsign='%s' and open=%lld",aux6,aux9,aux0,mycall,aux7,epoch);        
         mysql_query(con,buf);
         ppp++;
       }
