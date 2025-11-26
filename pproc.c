@@ -410,7 +410,7 @@ int main(void){
     sprintf(aux1,"%d%d%d%d.cbr",rand(),rand(),rand(),rand());
     sprintf(aux2,"/home/www/log/files/%s",aux1);
     fp=fopen(aux2,"w");
-    fprintf(fp,"-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
+    fprintf(fp,"START-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
     fprintf(fp,"CONTEST: xxxxxx\nCALLSIGN: %s\nOPERATORS: %s\n",mycall,mycall);
     fprintf(fp,"CATEGORY-OPERATOR: SINGLE-OP\nCATEGORY-ASSISTED: ASSISTED\nCATEGORY-BAND: ALL\nCATEGORY-POWER: LOW\nCATEGORY-TRANSMITTER: ONE\n");    
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='%s'",mycall);
@@ -424,7 +424,7 @@ int main(void){
     if(row[6][0]!='\0')fprintf(fp,"ADDRESS-COUNTRY: %s\n",row[6]);
     fprintf(fp,"CLUB: Italian Contest Club\n");
     mysql_free_result(res);
-    if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and open>=%lld and open<=%lld order by open",mycall,atoll(adif[0]),atoll(adif[1]));
+    if(adif[2][0]=='\0')sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and open>=%lld and open<=%lld order by open",mycall,dtc2e(adif[0]),dtc2e(adif[1]));
     else sprintf(buf,"select open,callsign,freqtx,mode,signaltx,signalrx,contesttx,contestrx from log where mycall='%s' and contest='%s' order by open",mycall,adif[2]);
     mysql_query(con,buf);
     res=mysql_store_result(con);
