@@ -69,11 +69,13 @@ void searchcty(MYSQL *con,char *incall){
     mysql_query(con,buf);
     res=mysql_store_result(con);
     row=mysql_fetch_row(res);
-    if(row!=NULL)break;
+    if(row!=NULL){
+      for(i=0;i<9;i++)strcpy(mycty[i],row[i]);
+      mysql_free_result(res);
+      break;
+    }
     mysql_free_result(res);
   }
-  if(row!=NULL)for(i=0;i<9;i++)strcpy(mycty[i],row[i]);
-  mysql_free_result(res);
 }
 
 long incdata3(int cha,int idx,char *key,long ss,long dd){
