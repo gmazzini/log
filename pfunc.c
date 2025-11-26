@@ -351,7 +351,7 @@ int nfields(char *s){
   return count;
 }
 
-time_t dt2e(char *date,char *time){
+time_t dt2e(char *date,char *time){ // date=YYYYMMDD time=HHMMSS
   struct tm t={0};
   sscanf(date,"%4d%2d%2d",&t.tm_year,&t.tm_mon,&t.tm_mday);
   sscanf(time,"%2d%2d%2d",&t.tm_hour,&t.tm_min,&t.tm_sec);
@@ -359,7 +359,15 @@ time_t dt2e(char *date,char *time){
   return timegm(&t);
 }
 
-time_t dtc2e(char *datetime){
+time_t ddt2e(char *date,char *time){ // date=YYYY-MM-DD time=HHMMSS
+  struct tm t={0};
+  sscanf(date,"%4d-%2d-%2d",&t.tm_year,&t.tm_mon,&t.tm_mday);
+  sscanf(time,"%2d%2d%2d",&t.tm_hour,&t.tm_min,&t.tm_sec);
+  t.tm_year-=1900; t.tm_mon-=1; t.tm_isdst=0;
+  return timegm(&t);
+}
+
+time_t dtc2e(char *datetime){ // datetime=YYYY-MM-DD HH:MM:SS
   struct tm t={0};
   sscanf(datetime,"%4d-%2d-%2d %2d:%2d:%2d",&t.tm_year,&t.tm_mon,&t.tm_mday,&t.tm_hour,&t.tm_min,&t.tm_sec);
   t.tm_year-=1900; t.tm_mon-=1; t.tm_isdst=0;
