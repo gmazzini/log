@@ -120,7 +120,7 @@ inputs.forEach(id => {
       document.getElementById("a23").click();
     }
   });
-  el.addEventListener("input", () => {
+  el.addEventListener("input", async () => {
     const pos = el.selectionStart;
     const newValue = el.value.replace(/,/g, "").toUpperCase();
     const diff = el.value.length - newValue.length;
