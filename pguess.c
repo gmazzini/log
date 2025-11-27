@@ -82,10 +82,10 @@ int main(void) {
     if(row==NULL)break;
     strncpy(v[i].callsign,row[0],7); v[i].callsign[7]='\0';
     v[i].common=row[1]?atoi(row[1]):0;
-    v[i].lev=levenshtein_nodyn(v[i].callsign,in);
+    v[i].lev=levenshtein(v[i].callsign,in);
     lenC=strlen(v[i].callsign);
     mx=(lenC>gg)?lenC:gg;
-    v[i].nd=(mx>0)?((double)v[i].lev /(double)mx):0.0;
+    v[i].nd=(mx>0)?((double)v[i].lev/(double)mx):0.0;
   }
   qsort(v,i,sizeof(Cand),cmp_cand);
   top=(i<25)?i:25;
