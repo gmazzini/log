@@ -91,7 +91,7 @@ int main(void) {
   qsort(v,i,sizeof(Cand),cmp_cand);
   top=(i<MAXOUT)?i:MAXOUT;
   printf("<pre>");
-  for(i=0;i<top;i++){printf("%6s ", v[i].callsign); if(i%5==4)printf("\n");}
+  for(i=0;i<top;i++){printf("%6s   ", v[i].callsign); if(i%5==4)printf("\n");}
   mysql_free_result(res);
   printf("\n</pre>");
   mysql_close(con);
