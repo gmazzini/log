@@ -22,6 +22,7 @@ int main(void) {
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   sprintf(buf,"SET @in = '%s'; SELECT callsign, common FROM (SELECT a.callsign, COUNT(*) AS common FROM aux3 a WHERE CHAR_LENGTH(@in) >= 3 AND a.gram IN (SELECT DISTINCT SUBSTRING(@in, n.n, 3) FROM (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) n WHERE n.n <= CHAR_LENGTH(@in) - 2) GROUP BY a.callsign UNION ALL SELECT a.callsign, COUNT(*) AS common FROM aux2 a WHERE CHAR_LENGTH(@in) = 2 AND a.gram = @in GROUP BY a.callsign ) x ORDER BY common DESC, callsign LIMIT 200;",in);
+  printf("%s\n",buf);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   for(;;){
