@@ -108,6 +108,7 @@ const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
 const imypage = document.getElementById("mypage");
 let v = new Array(22+1).fill(0);
+  
 const inputs = ["call", "freq", "mode", "sigtx", "sigrx", "contest", "contx", "conrx"];
 inputs.forEach(id => {
   const el = document.getElementById(id);
@@ -125,8 +126,19 @@ inputs.forEach(id => {
     const diff = el.value.length - newValue.length;
     el.value = newValue;
     el.setSelectionRange(pos - diff, pos - diff);
+    if (id === "call") {
+      const r = await fetch("pguess.cgi", {
+        method: "POST",
+        cache: "no-store",
+        credentials: "same-origin",
+        headers: { "Content-Type": "text/plain" },
+        body: el.value
+       });
+       out.innerHTML = await r.text();
+    }
   });
 });
+  
 let base = 0;
 let mypage = 0;
 let mysync = 0;
