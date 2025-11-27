@@ -340,6 +340,10 @@ window.cmd3 = async (a,b) => {
   radioset(b,document.getElementById("mode").value);
 };
 
+window.cmd4 = async (a) => {
+  document.getElementById("call").value = a;
+};
+
 setInterval(() => {
   if (/^Waiting/i.test(out.textContent)) out.textContent += ".";
 }, 333);
