@@ -6,10 +6,14 @@ SELECT DISTINCT
        SUBSTRING(c.callsign, n.n, 2) AS gram
 FROM (
     SELECT DISTINCT
-           LEFT(UPPER(TRIM(callsign)), 6) AS callsign
-    FROM log
-    WHERE callsign IS NOT NULL
-      AND callsign <> ''
+           cs AS callsign
+    FROM (
+        SELECT LEFT(UPPER(TRIM(callsign)), 6) AS cs
+        FROM log
+        WHERE callsign IS NOT NULL
+          AND callsign <> ''
+    ) t
+    WHERE cs REGEXP '^[A-Z0-9]+$'
 ) AS c
 JOIN (
     SELECT 1 AS n UNION ALL
@@ -28,10 +32,14 @@ SELECT DISTINCT
        SUBSTRING(c.callsign, n.n, 3) AS gram
 FROM (
     SELECT DISTINCT
-           LEFT(UPPER(TRIM(callsign)), 6) AS callsign
-    FROM log
-    WHERE callsign IS NOT NULL
-      AND callsign <> ''
+           cs AS callsign
+    FROM (
+        SELECT LEFT(UPPER(TRIM(callsign)), 6) AS cs
+        FROM log
+        WHERE callsign IS NOT NULL
+          AND callsign <> ''
+    ) t
+    WHERE cs REGEXP '^[A-Z0-9]+$'
 ) AS c
 JOIN (
     SELECT 1 AS n UNION ALL
