@@ -4,6 +4,7 @@
 
 #define MAXL 16
 #define MAXCAND 300
+#define MAXOUT 30
 
 static int prev[MAXL+1];
 static int curr[MAXL+1];
@@ -88,7 +89,7 @@ int main(void) {
     v[i].nd=(mx>0)?((double)v[i].lev/(double)mx):0.0;
   }
   qsort(v,i,sizeof(Cand),cmp_cand);
-  top=(i<25)?i:25;
+  top=(i<MAXOUT)?i:MAXOUT;
   for(i=0;i<top;i++)printf("%s ", v[i].callsign);
   mysql_free_result(res);
   printf("\n");
