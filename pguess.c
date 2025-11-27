@@ -3,8 +3,8 @@
 #include "/home/www/data/log.def"
 
 #define MAXL 16
-#define MAXCAND 300
-#define MAXOUT 30
+#define MAXCAND 400
+#define MAXOUT 50
 
 static int prev[MAXL+1];
 static int curr[MAXL+1];
