@@ -3,23 +3,26 @@
 #include "/home/www/data/log.def"
 
 int main(void) {
-  int c,vv,gg;
-  char buf[1000],tok[4][100],mycall[16],*p;
+  int c,gg;
+  char in[20];
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row;
-  time_t epoch;
 
-  for(vv=0,gg=0;;){
+  for(gg=0;;){
     c=getchar();
     if(c==EOF)break;
-    if(c==','){tok[vv][gg]='\0'; vv++; gg=0; continue;}
-    if(vv<4)tok[vv][gg++]=(char)c;
+    in[gg++]=(char)c;
   }
-  tok[vv][gg]='\0';
-  
+  in[gg]='\0';
+
+  printf("Content-Type: text/plain\r\n\r\n");
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
+
+printf("%s\n",in);
+
+  
   mysql_close(con);
 }
