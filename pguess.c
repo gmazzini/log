@@ -74,7 +74,7 @@ int main(void) {
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
-  sprintf(buf,"SELECT callsign, SUM(common) AS common FROM (SELECT a.callsign, COUNT(*) AS common FROM aux3 a WHERE %d >= 3 AND a.gram IN (SELECT DISTINCT SUBSTRING('%s', n.n, 3) FROM (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) n WHERE n.n <= %d - 2) GROUP BY a.callsign UNION ALL SELECT a.callsign, COUNT(*) AS common FROM aux2 a WHERE %d >= 3 AND a.gram IN (SELECT DISTINCT SUBSTRING('%s', n.n, 2) FROM (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) n WHERE n.n <= %d - 1) GROUP BY a.callsign UNION ALL SELECT a.callsign, COUNT(*) AS common FROM aux2 a WHERE %d = 2 AND a.gram = '%s' GROUP BY a.callsign) x GROUP BY callsign ORDER BY common DESC, callsign LIMIT 300;",gg,in,gg,gg,in,gg,gg,in);
+  sprintf(buf,"SELECT callsign, SUM(common) AS common FROM (SELECT a.callsign, COUNT(*) AS common FROM aux3 a WHERE %d >= 3 AND a.gram IN (SELECT DISTINCT SUBSTRING('%s', n.n, 3) FROM (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) n WHERE n.n <= %d - 2) GROUP BY a.callsign UNION ALL SELECT a.callsign, COUNT(*) AS common FROM aux2 a WHERE %d >= 3 AND a.gram IN (SELECT DISTINCT SUBSTRING('%s', n.n, 2) FROM (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) n WHERE n.n <= %d - 1) GROUP BY a.callsign UNION ALL SELECT a.callsign, COUNT(*) AS common FROM aux2 a WHERE %d = 2 AND a.gram = '%s' GROUP BY a.callsign) x GROUP BY callsign ORDER BY common DESC, callsign LIMIT %d;",gg,in,gg,gg,in,gg,gg,in,MAXCAND);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   for(i=0;i<MAXCAND;i++){
