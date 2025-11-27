@@ -92,7 +92,7 @@ int main(void) {
   top=(i<MAXOUT)?i:MAXOUT;
   printf("<pre>");
   for(i=0;i<top;i++){
-    printf("<button type=\"button\" class=\"guess\" onclick="cmd4('%s')">%6s</button>   ",v[i].callsign,v[i].callsign); 
+    printf("<button type=\"button\" class=\"guess\" onclick=\"cmd4('%s')\">%6s</button>   ",v[i].callsign,v[i].callsign); 
     if(i%5==4)printf("\n");
   }
   mysql_free_result(res);
