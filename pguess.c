@@ -90,7 +90,7 @@ int main(void) {
   }
   qsort(v,i,sizeof(Cand),cmp_cand);
   top=(i<MAXOUT)?i:MAXOUT;
-  for(i=0;i<top;i++)printf("%s ", v[i].callsign);
+  for(i=0;i<top;i++){printf("%s ", v[i].callsign); if(i%5==4)printf("\n");}
   mysql_free_result(res);
   printf("\n");
   mysql_close(con);
