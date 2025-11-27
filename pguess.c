@@ -17,6 +17,7 @@ int main(void) {
   in[gg]='\0';
 
   printf("Content-Type: text/plain\r\n\r\n");
+  printf("%s\n",in);
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
