@@ -34,7 +34,7 @@ void conscore_setup(MYSQL *con,char tok[][100],char *mycall){
   mysql_free_result(res);
 }
 
-void conscore(MYSQL *con,char tok[][100],char *mycall){
+void conscore(MYSQL *con,char tok[][100],char *mycall,long long start,long long end){
   int c,gg,vv,d,e,n,z;
   char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
   MYSQL_RES *res;
