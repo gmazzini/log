@@ -44,7 +44,7 @@ void conscore(MYSQL *con,char tok[][100],char *mycall,long long start,long long 
   struct tm *t;
 
   if(contype==-1)return;
-  sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode,open from log where contest='%s' and mycall='%s' and open>=%lld and open<?%lld order by open desc",tok[9],mycall,start,end);
+  sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode,open from log where contest='%s' and mycall='%s' and open>=%lld and open<=%lld order by open desc",tok[9],mycall,start,end);
   mysql_query(con,buf);
   res=mysql_store_result(con);
   for(;;){
