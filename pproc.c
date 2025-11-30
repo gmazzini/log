@@ -674,6 +674,7 @@ int main(void){
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    conscore_setup(con,tok,mycall);
     conscore(con,tok,mycall);
     printf("<pre>");
     printf("<p class=\"myh1\">%s</p>\n",tok[9]);
@@ -701,6 +702,7 @@ int main(void){
   if(act==14){ // contest graph button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    conscore_setup(con,tok,mycall);
     conscore(con,tok,mycall);
     printf("<pre>");
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
