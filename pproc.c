@@ -10,7 +10,7 @@ int main(void){
   uint32_t t;
   time_t epoch,td;
   long l1,l2,l3,l4,idx,suml[10],lff,nnn,ppp,qqq;
-  long long ll1,ll2;
+  long long ll1,ll2,ll3;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -710,12 +710,14 @@ int main(void){
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
     mysql_free_result(res);
-    conscore(con,tok,mycall,ll1,ll2);
     printf("<pre>");
-    for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
-    for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
-    for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
-    printf("\n");
+    for(ll3=ll1;ll3<=ll2;ll3+=900){
+      conscore(con,tok,mycall,ll3,ll3+899);
+      for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
+      for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
+      printf("%lld %ld %ld %ld\n",ll3,l1,l2,l3);
+    }
     printf("</pre>");
     goto end;
   }
