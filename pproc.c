@@ -10,6 +10,7 @@ int main(void){
   uint32_t t;
   time_t epoch,td;
   long l1,l2,l3,l4,idx,suml[10],lff,nnn,ppp,qqq;
+  long long ll1,ll2;
   MYSQL *con;
   MYSQL_RES *res;
   MYSQL_ROW row,row1;
@@ -676,9 +677,9 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     conscore_setup(con,tok,mycall);
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
     mysql_free_result(res);
-    conscore(con,tok,mycall,l1,l2);
+    conscore(con,tok,mycall,ll1,ll2);
     printf("<pre>");
     printf("<p class=\"myh1\">%s</p>\n",tok[9]);
     gg=strlen(data3[0][4][0].lab);
@@ -707,9 +708,9 @@ int main(void){
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     conscore_setup(con,tok,mycall);
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); l1=atol(row[0]); l2=atol(row[1]);
+    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
     mysql_free_result(res);
-    conscore(con,tok,mycall,l1,l2);
+    conscore(con,tok,mycall,ll1,ll2);
     printf("<pre>");
     for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
     for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
