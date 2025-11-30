@@ -698,7 +698,7 @@ int main(void){
     goto end;
   }
 
-  if(act==15){ // contest graph button
+  if(act==14){ // contest graph button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     conscore(con,tok,mycall);
