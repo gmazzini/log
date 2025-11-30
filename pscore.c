@@ -1,19 +1,20 @@
 // pscore.c contest score function by GM @2025 V 2.0
 
 const char *conid[]={"CQWWSSB","CQWWCW","CQWPXSSB","CQWPXCW","CQWWDIGI","4080","IARUHF","CQ160SSB","CQ160CW","SPDX","LZDX","OKOMSSB","OKOMCW","HADX","ARIDX","KOSSSB","KOSCW","RDAC","ARRLSSB","ARRLCW","RDXC","JIDXSSB","JIDXCW","YODX","CQM","WAESSB","WAECW","WAERTTY","CQ28","UBASSB","UBACW","IOTA","EUHF","ARISEZ","EURASIA","WAG","CQWPXRTTY","SACSSB","SACCW","PACC","AASSB","AACW","HOLYLANDDX","EUDX","UNDX","URDXC","CQBB","BSC","RRTC","UCC","PADANG","ARRL10","ARRLRU","ARRLRTTY","FTROUNDUP","RCC","ARKTIKA","9ADX","EIUKDXSSB","EIUKDXCW","RAC","ARRLFIELDDAY"};
-void conscore(MYSQL *con,char tok[][100],char *mycall){
-  int contype,c,gg,vv,cqz[1000],ituz[1000],d,e,n,z;
-  long l1,l2;
-  char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
+int cqz[1000],ituz[1000],contype=-1;
+
+void conscore_setup(MYSQL *con,char tok[][100],char *mycall){
+  int vv,gg,c;
+  char buf[1000];
   MYSQL_RES *res;
   MYSQL_ROW row;
-  double lat1,lat2,lon1,lon2;
-  time_t epoch;
-  struct tm *t;
-
+  
   vv=sizeof(conid)/sizeof(conid[0]);
   for(contype=0;contype<vv;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
-  if(contype==vv)return;
+  if(contype==vv){
+    contype==-1;
+    return;
+  }
   for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
   searchcty(con,mycall);
   gg=atoi(mycty[2]);
@@ -29,6 +30,19 @@ void conscore(MYSQL *con,char tok[][100],char *mycall){
     ituz[c]=atoi(row[3]);
   }
   mysql_free_result(res);
+}
+
+void conscore(MYSQL *con,char tok[][100],char *mycall){
+  int c,gg,vv,d,e,n,z;
+  long l1,l2;
+  char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
+  MYSQL_RES *res;
+  MYSQL_ROW row;
+  double lat1,lat2,lon1,lon2;
+  time_t epoch;
+  struct tm *t;
+
+  if(contype==-1)return;
   sprintf(buf,"select callsign,freqtx,dxcc,contesttx,contestrx,mode,open from log where contest='%s' and mycall='%s' order by open desc",tok[9],mycall);
   mysql_query(con,buf);
   res=mysql_store_result(con);
