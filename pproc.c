@@ -706,8 +706,9 @@ int main(void){
   if(act==14){ // contest graph button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-    goto end;
     conscore_setup(con,tok,mycall);
+        goto end;
+
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
     mysql_free_result(res);
