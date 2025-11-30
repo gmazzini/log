@@ -710,13 +710,40 @@ int main(void){
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
     mysql_free_result(res);
+
+
+puts(
+"<!doctype html><html><head><meta charset=utf-8>"
+"<script src=https://www.gstatic.com/charts/loader.js></script>"
+"<script>google.charts.load('current',{packages:['corechart']});"
+"google.charts.setOnLoadCallback(function(){"
+"var d=new google.visualization.DataTable();"
+"d.addColumn('datetime','T');d.addColumn('number','QSO');"
+"d.addColumn('number','Punti');d.addColumn('number','Molt');"
+"d.addColumn('number','Score');"
+"d.addRows(["
+"[new Date(2025,10,30,8,0),12,24,3,72],"
+"[new Date(2025,10,30,9,0),25,50,5,250],"
+"[new Date(2025,10,30,10,0),41,82,7,574]"
+"]);"
+"var o={title:'Contest',legend:{position:'bottom'},"
+"hAxis:{title:'Tempo',format:'HH:mm'},"
+"vAxes:{0:{title:'QSO/Punti/Molt'},1:{title:'Score'}},"
+"series:{0:{targetAxisIndex:0,pointsVisible:1},"
+"1:{targetAxisIndex:0,pointsVisible:1},"
+"2:{targetAxisIndex:0,pointsVisible:1},"
+"3:{targetAxisIndex:1,pointsVisible:1}}};"
+"new google.visualization.LineChart(document.getElementById('c')).draw(d,o);"
+"});</script></head><body><div id=c style='width:100%;height:520px'></div></body></html>"
+);
+    
    
     for(ll3=ll1;ll3<=ll2;ll3+=900){
       conscore(con,tok,mycall,ll3,ll3+899);
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
       for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
       for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
-     printf("%lld %ld %ld %ld %ld\n",ll3-ll1,l1,l2,l3,l2*l3);
+     // printf("%lld %ld %ld %ld %ld\n",ll3-ll1,l1,l2,l3,l2*l3);
     }
     
     goto end;
