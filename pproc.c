@@ -1,7 +1,6 @@
 // pproc.c log data processing by GM @2025 V 2.0
 #include "pfunc.c"
 #include "pscore.c"
-// remember that button 15 is available
 
 int main(void){
   int c,act,vv,gg,s,mypage,f1,cached;
@@ -673,6 +672,33 @@ int main(void){
   }
 
   if(act==31){ // contest score button
+    printf("Status: 200 OK\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    conscore(con,tok,mycall);
+    printf("<pre>");
+    printf("<p class=\"myh1\">%s</p>\n",tok[9]);
+    gg=strlen(data3[0][4][0].lab);
+    for(c=0;c<ndata3[0][4];c++){
+      for(l1=0,idx=0;idx<ndata3[0][0];idx++)if(strncmp(data3[0][0][idx].lab,data3[0][4][c].lab,gg)==0)l1+=data3[0][0][idx].num;
+      for(l2=0,idx=0;idx<ndata3[0][1];idx++)if(strncmp(data3[0][1][idx].lab,data3[0][4][c].lab,gg)==0)l2+=data3[0][1][idx].num;
+      for(l3=0,idx=0;idx<ndata3[0][2];idx++)if(strncmp(data3[0][2][idx].lab,data3[0][4][c].lab,gg)==0)l3+=data3[0][2][idx].num;
+      printf("%*s %5ld %8ld %4ld\n",gg,data3[0][4][c].lab,l1,l2,l3);
+    }
+    for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
+    for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
+    for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
+    printf("<p class=\"myh1\">%*s %5ld %8ld %4ld</p>\n",gg,"ALL",l1,l2,l3);
+    printf("<p class=\"myh2\">Score %9ld</p>\n",l2*l3);
+    for(idx=0;idx<ndata3[0][3];idx++){
+      printf("%s ",data3[0][3][idx].lab);
+      if(idx>0 && idx%9==0)printf("\n");
+    }
+    printf("\n");
+    printf("</pre>");
+    goto end;
+  }
+
+  if(act==15){ // contest graph button
     printf("Status: 200 OK\r\n");
     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
     conscore(con,tok,mycall);
