@@ -736,7 +736,7 @@ puts(
 "new google.visualization.LineChart(document.getElementById('c')).draw(d,o);"
 "});</script></head><body><div id=c style='width:100%;height:520px'></div></body></html>"
 );
-    
+    goto end;
    
     for(ll3=ll1;ll3<=ll2;ll3+=900){
       conscore(con,tok,mycall,ll3,ll3+899);
