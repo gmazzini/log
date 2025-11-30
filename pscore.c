@@ -8,6 +8,7 @@ void conscore_setup(MYSQL *con,char tok[][100],char *mycall){
   char buf[1000];
   MYSQL_RES *res;
   MYSQL_ROW row;
+  long l1,l2;
   
   vv=sizeof(conid)/sizeof(conid[0]);
   for(contype=0;contype<vv;contype++)if(strncmp(tok[9],conid[contype],strlen(conid[contype]))==0)break;
@@ -34,7 +35,6 @@ void conscore_setup(MYSQL *con,char tok[][100],char *mycall){
 
 void conscore(MYSQL *con,char tok[][100],char *mycall){
   int c,gg,vv,d,e,n,z;
-  long l1,l2;
   char buf[1000],cont[1000][2],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],*p;
   MYSQL_RES *res;
   MYSQL_ROW row;
