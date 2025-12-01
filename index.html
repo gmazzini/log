@@ -427,15 +427,15 @@ function renderCharts(root=document){
     root.querySelectorAll(".gchart").forEach(el=>{
       const rows = JSON.parse(el.dataset.rows);
       const d = new google.visualization.DataTable();
-      d.addColumn('number','Secondi');
+      d.addColumn('number','Secs');
       d.addColumn('number','QSO');
-      d.addColumn('number','Punti');
-      d.addColumn('number','Molt');
+      d.addColumn('number','Points');
+      d.addColumn('number','Mults');
       d.addColumn('number','Score');
       d.addRows(rows); 
       const o = {
         legend:{position:'bottom'},
-        hAxis:{ title:'Secondi dall’inizio', gridlines:{count:8} },
+        hAxis:{ title:'Time', gridlines:{count:8} },
         vAxes:{0:{title:'QSO/Punti/Molt'},1:{title:'Score'}},
         series:{
           0:{targetAxisIndex:0,pointsVisible:1},
