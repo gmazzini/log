@@ -435,7 +435,7 @@ function renderCharts(root=document){
       }
       const rowsFmt = rows.map(r => [ fmtDDHHMM(r[0]), r[1], r[2], r[3], r[4] ])
       const d = new google.visualization.DataTable();
-      d.addColumn('number','Secs');
+      d.addColumn('string','Time');
       d.addColumn('number','QSO');
       d.addColumn('number','Points');
       d.addColumn('number','Mults');
