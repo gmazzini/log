@@ -718,7 +718,6 @@ int main(void){
       for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
       printf("%c[ %lld,%ld,%ld,%ld,%ld ]\n",(ll3-ll1>0)?',':' ',ll3-ll1,l1,l2,l3,l2*l3);
     }
-    // printf("[ %lld,%ld,%ld,%ld,%ld ]\n",ll3-ll1,l1,l2,l3,l2*l3);
     printf("]' style=\"width:100%;height:520px\"></div>");
     goto end;
   }
