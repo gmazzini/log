@@ -710,18 +710,15 @@ int main(void){
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
     mysql_free_result(res);
-
- printf("<div class=\"gchart\" data-rows='[ [\"2025-11-30T08:00:00\",12,24,3,72], [\"2025-11-30T09:00:00\",25,50,5,250] ]' style=\"width:100%;height:520px\"></div>");
-    goto end;
-   
+    printf("<div class=\"gchart\" data-rows='[ ");
     for(ll3=ll1;ll3<=ll2;ll3+=900){
       conscore(con,tok,mycall,ll3,ll3+899);
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
       for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
       for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
-      printf("%lld %ld %ld %ld %ld\n",ll3-ll1,l1,l2,l3,l2*l3);
+      printf("[ %lld,%ld,%ld,%ld,%ld ],\n",ll3-ll1,l1,l2,l3,l2*l3);
     }
-    
+    printf("]' style=\"width:100%;height:520px\"></div>");
     goto end;
   }
 
