@@ -426,13 +426,21 @@ function renderCharts(root=document){
   google.charts.setOnLoadCallback(()=> {
     root.querySelectorAll(".gchart").forEach(el=>{
       const rows = JSON.parse(el.dataset.rows);
+      function fmtDDHHMM(epochSec){
+        const d = new Date(epochSec * 1000);
+        const dd = String(d.getDate()).padStart(2,'0');
+        const hh = String(d.getHours()).padStart(2,'0');
+        const mm = String(d.getMinutes()).padStart(2,'0');
+        return `${dd}-${hh}:${mm}`;
+      }
+      const rowsFmt = rows.map(r => [ fmtDDHHMM(r[0]), r[1], r[2], r[3], r[4] ])
       const d = new google.visualization.DataTable();
       d.addColumn('number','Secs');
       d.addColumn('number','QSO');
       d.addColumn('number','Points');
       d.addColumn('number','Mults');
       d.addColumn('number','Score');
-      d.addRows(rows); 
+      d.addRows(rowsFmt); 
       const o = {
         backgroundColor: { fill: 'transparent' },
         chartArea: { backgroundColor: { fill: 'transparent' } },
