@@ -103,6 +103,7 @@
 </div>
 <div class="out" id="out"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="module">
 const out = document.getElementById("out");
 const l01 = document.getElementById("l01");
@@ -415,5 +416,34 @@ document.getElementById("sigtx").value = "59";
 document.getElementById("sigrx").value = "59";
 document.getElementById("base").textContent = base;
 document.getElementById("release").textContent = "xxxxxxxx";
+
+google.charts.load('current',{packages:['corechart']});
+
+function renderCharts(root=document){
+  google.charts.setOnLoadCallback(()=> {
+    root.querySelectorAll(".gchart").forEach(el=>{
+      const rows = JSON.parse(el.dataset.rows);
+      const d = new google.visualization.DataTable();
+      d.addColumn('datetime','T');
+      d.addColumn('number','QSO');
+      d.addColumn('number','Punti');
+      d.addColumn('number','Molt');
+      d.addColumn('number','Score');
+      d.addRows(rows.map(r=>[new Date(r[0]), r[1], r[2], r[3], r[4]]));
+      new google.visualization.LineChart(el).draw(d,{
+        legend:{position:'bottom'},
+        hAxis:{format:'HH:mm'},
+        vAxes:{0:{title:'QSO/Punti/Molt'},1:{title:'Score'}},
+        series:{
+          0:{targetAxisIndex:0,pointsVisible:1},
+          1:{targetAxisIndex:0,pointsVisible:1},
+          2:{targetAxisIndex:0,pointsVisible:1},
+          3:{targetAxisIndex:1,pointsVisible:1}
+        }
+      });
+    });
+  });
+}
+  
 </script>
 </body>
