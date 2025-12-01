@@ -210,9 +210,12 @@ document.querySelectorAll("button[id]").forEach(btn => {
         if (match) start = match[1].trim();
         else start = "";
       }
-      if (num == 26) {
+      else if (num == 26) {
         start = "";
         if (v[22] === 1) document.getElementById("contx").value = parseInt(document.getElementById("contx").value) + 1;
+      }
+      else if (num == 14) {
+        renderCharts(out);
       }
     });
   }
