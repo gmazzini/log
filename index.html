@@ -427,15 +427,15 @@ function renderCharts(root=document){
     root.querySelectorAll(".gchart").forEach(el=>{
       const rows = JSON.parse(el.dataset.rows);
       const d = new google.visualization.DataTable();
-      d.addColumn('datetime','T');
+      d.addColumn('number','Secondi');
       d.addColumn('number','QSO');
-      d.addColumn('number','Points');
-      d.addColumn('number','Mults');
+      d.addColumn('number','Punti');
+      d.addColumn('number','Molt');
       d.addColumn('number','Score');
-      d.addRows(rows);
-      new google.visualization.LineChart(el).draw(d,{
+      d.addRows(rows); 
+      const o = {
         legend:{position:'bottom'},
-        hAxis:{format:'HH:mm'},
+        hAxis:{ title:'Secondi dall’inizio', gridlines:{count:8} },
         vAxes:{0:{title:'QSO/Punti/Molt'},1:{title:'Score'}},
         series:{
           0:{targetAxisIndex:0,pointsVisible:1},
@@ -443,7 +443,10 @@ function renderCharts(root=document){
           2:{targetAxisIndex:0,pointsVisible:1},
           3:{targetAxisIndex:1,pointsVisible:1}
         }
-      });
+      };
+      const chart = new google.visualization.LineChart(el);
+      chart.draw(d,o);
+      window.addEventListener('resize', ()=>chart.draw(d,o));
     });
   });
 }
