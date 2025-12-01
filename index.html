@@ -434,6 +434,8 @@ function renderCharts(root=document){
       d.addColumn('number','Score');
       d.addRows(rows); 
       const o = {
+        backgroundColor: { fill: 'transparent' },
+        chartArea: { backgroundColor: { fill: 'transparent' } },
         legend:{position:'bottom'},
         hAxis:{ title:'Time', gridlines:{count:8} },
         vAxes:{
