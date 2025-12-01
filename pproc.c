@@ -716,7 +716,7 @@ int main(void){
       for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
       for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
       for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
-     // if(ll3>ll1)printf(",");
+      if(ll3>ll1)printf(",");
       printf("[ %lld,%ld,%ld,%ld,%ld ]\n",ll3-ll1,l1,l2,l3,l2*l3);
     }
     printf("]' style=\"width:100%;height:520px\"></div>");
