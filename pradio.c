@@ -15,7 +15,7 @@ static const char *modets890s[16] = {"Unused","LSB","USB","CW","FM","AM","FSK","
 int main(void){
   int i,vv,gg,s,m,loop;
   struct sockaddr_in a;
-  char c,buf[256],tok[3][100],b[100],cmd[128],*ip,*user,*pass,*p1;
+  char c,buf[256],tok[3][100],b[100],cmd[128],udef1[20],udef2[20],*ip,*user,*pass,*p1;
   long port,freq;
   time_t epoch;
   MYSQL *con;
@@ -37,10 +37,12 @@ int main(void){
   if(con==NULL){printf("0,ND\n"); exit(0);}
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
   epoch=time(NULL);
-  sprintf(buf,"select radio from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],epoch);
+  sprintf(buf,"select radio,udef1,udef2 from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],epoch);
   mysql_query(con,buf); rrr=mysql_store_result(con); row=mysql_fetch_row(rrr);
   if(row==NULL){mysql_close(con); printf("0,ND\n"); exit(0);}
   strcpy(buf,row[0]);
+  strcpy(udef1,row[1]);
+  strcpy(udef2,row[2]);
   mysql_free_result(rrr);
   mysql_close(con);
 
@@ -113,6 +115,11 @@ int main(void){
       m=(b[3]>='0'&&b[3]<='9')?b[3]-'0':b[3]-'A'+10;
 
       printf("%ld,%s\n",freq,modets890s[m]);
+    }
+    else if(tok[1][0]=='U'){
+      i=atoi(tok[2]);
+      if(i==1)write(s,udef1,strlen(udef1));
+      else if(i==2)write(s,udef2,strlen(udef2));
     }
     close(s);
   }
