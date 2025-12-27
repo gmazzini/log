@@ -4,7 +4,7 @@
 
 int main(void){
   int c,act,vv,gg,s,mypage,f1,cached;
-  char buf[1000],udef1[20],udef2[20],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
+  char buf[1000],aux1[300],aux2[300],aux3[300],aux4[300],aux5[300],aux6[300],aux7[300],aux8[300],aux9[300],aux0[300],tok[13][100],mycall[16],*ff,*pp,*qq,*save1,*save2,*p1,*p2,*p3,*p4;
   struct tm ts,*tm_now;
   uint8_t in[4];
   uint32_t t;
@@ -53,7 +53,7 @@ int main(void){
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
-  sprintf(buf,"select mycall,udef1,udef2 from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],time(NULL));
+  sprintf(buf,"select mycall from user where ota='%s' and lastota+durationota>%ld limit 1",tok[0],time(NULL));
   mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res);
   if(row==NULL){
     printf("Status: 200 OK\r\n");
@@ -62,11 +62,7 @@ int main(void){
     mysql_free_result(res);
     goto end;
   }
-  else {
-    strcpy(mycall,row[0]);
-    strcpy(udef1,row[1]);
-    strcpy(udef2,row[2]);
-  }
+  else strcpy(mycall,row[0]);
   mysql_free_result(res);
   act=0; if(tok[1][0]=='a')act=atoi(tok[1]+1);
 
@@ -778,27 +774,6 @@ int main(void){
     }
     close(s);
     printf("</pre>");
-    goto end;
-  }
-
-  if(act==32 || act==33){ // user define radio button
-    printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
-
-     
-    sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
-     
-    mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
-    mysql_free_result(res);
-    printf("<div class=\"gchart\" data-rows='[ ");
-    for(ll3=ll1;ll3<=ll2;ll3+=900){
-      conscore(con,tok,mycall,ll3,ll3+899);
-      for(l1=0,idx=0;idx<ndata3[0][0];idx++)l1+=data3[0][0][idx].num;
-      for(l2=0,idx=0;idx<ndata3[0][1];idx++)l2+=data3[0][1][idx].num;
-      for(l3=0,idx=0;idx<ndata3[0][3];idx++)l3+=data3[0][3][idx].num;
-      printf("%c[ %lld,%ld,%ld,%ld,%ld ]\n",(ll3-ll1>0)?',':' ',ll3,l1,l2,l3,l2*l3);
-    }
-    printf("]' style=\"width:100%;height:520px\"></div>");
     goto end;
   }
   
