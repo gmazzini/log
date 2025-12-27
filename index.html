@@ -63,7 +63,7 @@
       <span id="c45"></span><br>
       <button class="btn" id="b06">RTX&#8680;3</button><button class="btn" id="b07">3&#8680;RTX</button><br>
       <span id="c67"></span><br>
-      <button class="btn" id="a32">Udef1</button><button class="btn" id="a33">Udef2</button>
+      <button class="btn" onclick="cmd5(1)">Udef1</button><button class="btn" onclick="cmd5(2)">Udef2</button>
     </td>
     <td class="myq1">
       <input type="file" id="ff" hidden>
@@ -348,6 +348,17 @@ window.cmd3 = async (a,b) => {
 
 window.cmd4 = async (a) => {
   document.getElementById("call").value = a;
+};
+
+window.cmd5 = async (a) => {
+  if (v[1] === 0) return;
+  const r = await fetch("pradio.cgi", {
+    method: "POST",
+    cache: "no-store",
+    credentials: "same-origin",
+    headers: { "Content-Type": "text/csv" },
+    body: [ota, "U", `${a}`].join(",")
+  });
 };
 
 setInterval(() => {
