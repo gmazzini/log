@@ -1,7 +1,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>LOG by IK4LZH v2.0</title>
+  <title>LOG by IK4LZH v2.1</title>
   <link rel="stylesheet" href="log.css?v=118">
 </head>
 <body>
@@ -109,7 +109,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="module">
-const out = document.getElementById("out");
+let out = null;
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
 const imypage = document.getElementById("mypage");
@@ -140,7 +140,7 @@ inputs.forEach(id => {
         headers: { "Content-Type": "text/plain" },
         body: el.value
        });
-       out.innerHTML = await r.text();
+       document.getElementById("out").innerHTML = await r.text();
     }
   });
 });
@@ -186,6 +186,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
           data = btoa(binary);
         }
       }
+      if (num >= 9 && num <= 22) out = document.getElementById("out2");
+      else out = document.getElementById("out");
       if (base < 0) base = 0;
       document.getElementById("base").textContent = base;
       
