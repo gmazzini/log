@@ -488,7 +488,7 @@ function renderCharts(root=document){
   });
 }
 
-function openImgExact(url){
+window.openImgExact = function (url) {
   const win = window.open("", "img", "resizable=1,scrollbars=0");
   if (!win) return false;
   win.document.write("<!doctype html><title>Image</title><p>Loading...</p>");
@@ -496,7 +496,7 @@ function openImgExact(url){
   const img = new Image();
   img.onload = function () {
     let w = img.naturalWidth, h = img.naturalHeight;
-    const maxW = screen.availWidth  - 40;
+    const maxW = screen.availWidth - 40;
     const maxH = screen.availHeight - 80;
     if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
     if (h > maxH) { w = Math.round(w * (maxH / h)); h = maxH; }
@@ -510,7 +510,7 @@ function openImgExact(url){
   };
   img.src = url;
   return false;
-}
+};
   
 </script>
 </body>
