@@ -410,7 +410,7 @@ int main(void){
     sprintf(aux1,"%d%d%d%d.cbr",rand(),rand(),rand(),rand());
     sprintf(aux2,"/home/www/log/files/%s",aux1);
     fp=fopen(aux2,"w");
-    fprintf(fp,"START-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
+    fprintf(fp,"-OF-LOG: 3.0\nCREATED-BY: IK4LZH logger\n");
     fprintf(fp,"CONTEST: xxxxxx\nCALLSIGN: %s\nOPERATORS: %s\n",mycall,mycall);
     fprintf(fp,"CATEGORY-OPERATOR: SINGLE-OP\nCATEGORY-ASSISTED: ASSISTED\nCATEGORY-BAND: ALL\nCATEGORY-POWER: LOW\nCATEGORY-TRANSMITTER: ONE\n");    
     sprintf(buf,"select firstname,lastname,addr1,addr2,state,zip,country,email from who where callsign='%s'",mycall);
@@ -571,7 +571,7 @@ int main(void){
       printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
     //  printf("%s\n",e2dtc(atoll(row[14])));
       printf("</pre></td>");
-      if(row[13][0]!='\0')printf("<td><a href=\"#\" onclick=\"return openImgExact('%s')\">" "<img src=\"%s\" width=\"200\" style=\"cursor:zoom-in\"></a></td>",row[13],row[13]);
+      if(row[13][0]!='\0')printf("<td><img src=\"%s\" width=\"200\" style=\"cursor:zoom-in\" onclick=\"openImgExact(this.src)\"></td>",row[13]);
       printf("</table>\n");
     }
     mysql_free_result(res);
