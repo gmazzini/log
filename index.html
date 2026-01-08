@@ -185,8 +185,8 @@ document.querySelectorAll("button[id]").forEach(btn => {
           data = btoa(binary);
         }
       }
-      if (num >= 9 && num <= 22) document.getElementById("out2") = "Waiting";
-      else document.getElementById("out") = "Waiting";
+      if (num >= 9 && num <= 22) document.getElementById("out2").textContent = "Waiting";
+      else document.getElementById("out").textContent = "Waiting";
       if (base < 0) base = 0;
       document.getElementById("base").textContent = base;
       const body = [
