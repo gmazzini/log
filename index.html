@@ -500,7 +500,9 @@ window.openImgExact = function (url) {
     const maxH = screen.availHeight - 80;
     if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
     if (h > maxH) { w = Math.round(w * (maxH / h)); h = maxH; }
-    win.resizeTo(w + 16, h + 88);
+    const extraW = win.outerWidth - win.innerWidth;
+    const extraH = win.outerHeight - win.innerHeight;
+    win.resizeTo(w + extraW, h + extraH);
     win.document.open();
     win.document.write(`<!doctype html><title>Image</title>
       <style>html,body{margin:0;background:#000} img{display:block}</style>
