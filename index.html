@@ -488,35 +488,29 @@ function renderCharts(root=document){
   });
 }
 
-window.openImgExact = function (url) {
+window.openImgExact = (url) => {
   const win = window.open("", "img", "width=200,height=200,resizable=1,scrollbars=0");
   if (!win) return false;
-
   win.document.open();
   win.document.write(`<!doctype html><title>Image</title>
-    <style>html,body{margin:0;overflow:hidden} img{display:block}</style>
-    <img id="i" src="">
+    <style>html,body{margin:0;padding:0;overflow:hidden} img{display:block}</style>
+    <img id="i" src="${url}">
   `);
   win.document.close();
-
-  const img = new Image();
-  img.onload = function () {
-    const w = img.naturalWidth;
-    const h = img.naturalHeight;
-
-    const im = win.document.getElementById("i");
-    im.src = url;
-
-    setTimeout(() => {
-      win.resizeTo(win.outerWidth + (w - win.innerWidth),
-                   win.outerHeight + (h - win.innerHeight));
-    }, 0);
+  const im = win.document.getElementById("i");
+  im.onload = () => {
+    const w = im.naturalWidth;
+    const h = im.naturalHeight;
+    const fit = () => win.resizeTo(
+      win.outerWidth + (w - win.innerWidth),
+      win.outerHeight + (h - win.innerHeight)
+    );
+    fit();
+    requestAnimationFrame(fit);
+    setTimeout(fit, 50);
   };
-  img.src = url;
-
   return false;
 };
-
   
 </script>
 </body>
