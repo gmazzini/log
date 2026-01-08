@@ -78,7 +78,7 @@ int main(void){
 
   if((act>=1 && act<=8) || (act>=28 && act<=30)){ // List buttons(4: 1 2 3 4) and List Find buttons(3: 5 6 7) and List Contest buttons(3:28 29 30) 
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n@%d@",act);
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     printf("<p class=\"myh1\">%22s%5s %16s %10s %4s %5s %5s</p>","DATETIME","LEN","CALLSIGN","FREQ","MODE","SIGTX","SIGRX");
     if(act<=5)sprintf(buf,"select open,close,callsign,freqtx,freqrx,mode,signaltx,signalrx,lotw,eqsl,qrz,contesttx,contestrx,contest from log where mycall='%s' order by open desc, callsign desc limit %d offset %ld",mycall,mypage,atol(tok[2]));
