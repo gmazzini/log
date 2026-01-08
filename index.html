@@ -210,7 +210,13 @@ document.querySelectorAll("button[id]").forEach(btn => {
         base = parseInt(await r.text(), 10) || 0;
         document.getElementById("a04").click();
       }
-      else out.innerHTML = await r.text();
+      else {
+        const html = await r.text();
+        const outnum = +/<!--\s*(\d+)\s*-->/.exec(html)[1];
+        if (outnum >= 9 && outnum <= 22) out = document.getElementById("out2");
+        else out = document.getElementById("out");
+        out.innerHTML = html;
+      }
       if (num == 23) {
         const match = out.innerText.match(/Start:\s*(.+)/);
         if (match) start = match[1].trim();
