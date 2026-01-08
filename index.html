@@ -492,37 +492,28 @@ window.openImgExact = function (url) {
   const win = window.open("", "img", "width=200,height=200,resizable=1,scrollbars=0");
   if (!win) return false;
 
+  win.document.open();
+  win.document.write(`<!doctype html><title>Image</title>
+    <style>html,body{margin:0;overflow:hidden} img{display:block}</style>
+    <img id="i" src="">
+  `);
+  win.document.close();
+
   const img = new Image();
   img.onload = function () {
-    let w = img.naturalWidth, h = img.naturalHeight;
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
 
-    const maxW = screen.availWidth - 40;
-    const maxH = screen.availHeight - 80;
-    if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
-    if (h > maxH) { w = Math.round(w * (maxH / h)); h = maxH; }
-
-    win.document.open();
-    win.document.write(`<!doctype html><title>Image</title>
-      <style>
-        html,body{margin:0; padding:0; overflow:hidden; background:transparent;}
-        img{display:block; width:${w}px; height:${h}px;}
-      </style>
-      <img src="${url}">
-    `);
-    win.document.close();
+    const im = win.document.getElementById("i");
+    im.src = url;
 
     setTimeout(() => {
-      const dw = w - win.innerWidth;
-      const dh = h - win.innerHeight;
-
-      const newOuterW = win.outerWidth + dw;
-      const newOuterH = win.outerHeight + dh;
-
-      win.resizeTo(newOuterW, newOuterH);
+      win.resizeTo(win.outerWidth + (w - win.innerWidth),
+                   win.outerHeight + (h - win.innerHeight));
     }, 0);
   };
-
   img.src = url;
+
   return false;
 };
 
