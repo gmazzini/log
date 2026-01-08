@@ -571,7 +571,7 @@ int main(void){
       printf("%s %s %s %s\n",row[9],row[10],row[11],row[12]);
     //  printf("%s\n",e2dtc(atoll(row[14])));
       printf("</pre></td>");
-      if(row[13][0]!='\0')printf("<td><img align=\top\" src=\"%s\" width=\"200\"></a></td>",row[13]);
+      if(row[13][0]!='\0')printf("<td><a href=\"#\" onclick=\"window.open('%s','img','width=900,height=700,resizable=1,scrollbars=1');return false;\"><img src=\"%s\" width=\"200\" style=\"cursor:zoom-in\" /></a></td>",row[13],row[13]);
       printf("</table>\n");
     }
     mysql_free_result(res);
