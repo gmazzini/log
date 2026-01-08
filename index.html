@@ -489,23 +489,23 @@ function renderCharts(root=document){
 }
 
 function openImgExact(url){
+  const win = window.open("", "img", "resizable=1,scrollbars=0");
+  if (!win) return false;
+  win.document.write("<!doctype html><title>Image</title><p>Loading...</p>");
+  win.document.close();
   const img = new Image();
   img.onload = function () {
-    let w = img.naturalWidth;
-    let h = img.naturalHeight;
+    let w = img.naturalWidth, h = img.naturalHeight;
     const maxW = screen.availWidth  - 40;
     const maxH = screen.availHeight - 80;
     if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
     if (h > maxH) { w = Math.round(w * (maxH / h)); h = maxH; }
-    const win = window.open("", "img",
-      `width=${w},height=${h},resizable=1,scrollbars=0`);
-    if (!win) return; // popup bloccato
-    win.document.write(
-      `<!doctype html><title>Image</title>
-       <style>html,body{margin:0;height:100%;background:#000}
-              img{display:block;margin:0;max-width:100%;max-height:100%}</style>
-       <img src="${url}">`
-    );
+    win.resizeTo(w + 16, h + 88);
+    win.document.open();
+    win.document.write(`<!doctype html><title>Image</title>
+      <style>html,body{margin:0;background:#000} img{display:block}</style>
+      <img src="${url}" width="${w}" height="${h}">
+    `);
     win.document.close();
   };
   img.src = url;
