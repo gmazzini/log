@@ -111,7 +111,7 @@ int main(void){
  
   if(act==9){ // dxcc and qrz solve unset button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     l1=l2=0;
     sprintf(buf,"select open,callsign from log where mycall='%s' and dxcc=0",mycall);
@@ -136,7 +136,7 @@ int main(void){
 
   if(act==10){ // Report button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
@@ -188,7 +188,7 @@ int main(void){
 
   if(act==11){ // Curio button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     sprintf(buf,"select callsign,freqtx,mode,lotw,eqsl,qrz,dxcc from log where mycall='%s'",mycall);
     mysql_query(con,buf);
@@ -220,7 +220,7 @@ int main(void){
 
   if(act==12){ // Activity button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     for(l1=0;l1<TOT3;l1++)for(l2=0;l2<TOTL2;l2++)ndata3[l1][l2]=0;
     epoch=time(NULL); tm_now=gmtime(&epoch); ts=*tm_now;
@@ -298,7 +298,7 @@ int main(void){
     else if(act==18){strcpy(adif1[3],"EQSL_QSLRDATE"); strcpy(aux4,"eqsl");}
     else if(act==19){strcpy(adif1[3],"app_qrzlog_status"); strcpy(aux4,"qrz");}
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     vv=4; gg=adifextract(ff,vv);
     for(ppp=nnn=qqq=0;gg>0;){
@@ -332,7 +332,7 @@ int main(void){
     strcpy(adif1[6],"time_on"); strcpy(adif1[7],"time_off"); strcpy(adif1[8],"stx_string"); strcpy(adif1[9],"stx"); strcpy(adif1[10],"srx_string"); strcpy(adif1[11],"srx");
     strcpy(adif1[12],"contest_id"); strcpy(adif1[13],"qso_date"); strcpy(adif1[14],"qso_date_off");
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     vv=15; gg=adifextract(ff,vv);
     for(ppp=nnn=0;gg>0;){
@@ -357,7 +357,7 @@ int main(void){
    if(act==20){ // adi out button
      strcpy(adif1[0],"export_from"); strcpy(adif1[1],"export_to"); strcpy(adif1[2],"export_contest");
      printf("Status: 200 OK\r\n");
-     printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+     printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
      vv=3; gg=adifextract(ff,vv);
      if(gg==0)goto end;
      srand((unsigned)time(NULL));
@@ -403,7 +403,7 @@ int main(void){
   if(act==21){ // cbr out button
     strcpy(adif1[0],"export_from"); strcpy(adif1[1],"export_to"); strcpy(adif1[2],"export_contest");
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     vv=3; gg=adifextract(ff,vv);
     if(gg==0)goto end;
     srand((unsigned)time(NULL));
@@ -448,7 +448,7 @@ int main(void){
   
   if(act==16){ // lzh in button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     aux1[0]=aux2[0]=aux3[0]='\0';
     pp=strtok(ff,"\n");
@@ -480,7 +480,7 @@ int main(void){
   
   if(act==22){ // cbr in button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     pp=strtok_r(ff,"\n",&save1);
     f1=1;
@@ -523,7 +523,7 @@ int main(void){
 
   if(act==23){ // start button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     l1=(long)(atof(tok[5])*1000);
     if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
     epoch=time(NULL); 
@@ -621,7 +621,7 @@ int main(void){
 
   if(act==26){ // end button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     l1=(long)(atof(tok[5])*1000);
     if(strlen(tok[4])<3 || strlen(tok[6])<2 || strlen(tok[7])<2 || strlen(tok[8])<2 || l1==0)goto end;
     if(tok[12][0]=='\0')goto end;
@@ -637,21 +637,21 @@ int main(void){
 
   if(act==24){ // QRZ.com button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     qrzcom(con,tok[4]);
     goto end;
   }
 
   if(act==25){ // QRZ.ru button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     qrzru(con,tok[4]);
     goto end;
   }
 
   if(act==27){ // contest list button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     sprintf(buf,"select contest,min(open),max(open),count(callsign) from log where mycall='%s' and contest<>'' group by contest order by max(open) desc",mycall);
     mysql_query(con,buf);
@@ -674,7 +674,7 @@ int main(void){
 
   if(act==31){ // contest score button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     conscore_setup(con,tok,mycall);
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
@@ -705,7 +705,7 @@ int main(void){
 
   if(act==14){ // contest graph button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     conscore_setup(con,tok,mycall);
     sprintf(buf,"select min(open),max(open) from log where mycall='%s' and contest='%s'",mycall,tok[9]);
     mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); ll1=atoll(row[0]); ll2=atoll(row[1]);
@@ -724,7 +724,7 @@ int main(void){
 
   if(act==13){ // cluster button
     printf("Status: 200 OK\r\n");
-    printf("Content-Type: text/html; charset=utf-8\r\n\r\n");
+    printf("Content-Type: text/html; charset=utf-8\r\n\r\n<!--%d-->",act);
     printf("<pre>");
     printf("<p class=\"myh1\">%22s <b>%16s</b> %10s %7s %7s %4s %4s %3s %s</p>","DATETIME","CALLSIGN","FREQ","QSODXCC","QSLDXCC","QSO","QSL","LAST","SPOTTER");
     s=socket(AF_INET,SOCK_STREAM,0);
