@@ -109,7 +109,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="module">
-let out = null;
 const l01 = document.getElementById("l01");
 const l02 = document.getElementById("l02");
 const imypage = document.getElementById("mypage");
@@ -186,11 +185,10 @@ document.querySelectorAll("button[id]").forEach(btn => {
           data = btoa(binary);
         }
       }
-      if (num >= 9 && num <= 22) out = document.getElementById("out2");
-      else out = document.getElementById("out");
+      if (num >= 9 && num <= 22) document.getElementById("out2") = "Waiting";
+      else document.getElementById("out") = "Waiting";
       if (base < 0) base = 0;
       document.getElementById("base").textContent = base;
-      
       const body = [
         ota,
         btn.id,
@@ -200,7 +198,6 @@ document.querySelectorAll("button[id]").forEach(btn => {
         num === 13 ? v.slice(9, 22).join('') : num === 26 ? start : '',
         data
       ].join(",");
-      out.textContent = "Waiting";
       const r = await fetch("pproc.cgi", {
         method: "POST", cache: "no-store", credentials: "same-origin",
         headers: {"Content-Type": "text/csv"},
@@ -213,6 +210,7 @@ document.querySelectorAll("button[id]").forEach(btn => {
       else {
         const html = await r.text();
         const outnum = +/<!--\s*(\d+)\s*-->/.exec(html)[1];
+        let out = null;
         if (outnum >= 9 && outnum <= 22) out = document.getElementById("out2");
         else out = document.getElementById("out");
         out.innerHTML = html;
@@ -373,7 +371,10 @@ window.cmd5 = async (a) => {
 };
 
 setInterval(() => {
-  if (/^Waiting/i.test(out.textContent)) out.textContent += ".";
+  for (const id of ["out","out2"]) {
+    const el = document.getElementById(id);
+    if (el && /^Waiting/i.test(el.textContent)) el.textContent += ".";
+  }
 }, 333);
 
 async function radioread() {
