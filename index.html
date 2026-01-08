@@ -489,12 +489,8 @@ function renderCharts(root=document){
 }
 
 window.openImgExact = function (url) {
-  const win = window.open("", "img", "resizable=1,scrollbars=0");
+  const win = window.open("", "img", "width=200,height=200,resizable=1,scrollbars=0");
   if (!win) return false;
-
-  win.document.open();
-  win.document.write("<!doctype html><title>Image</title><p>Loading...</p>");
-  win.document.close();
 
   const img = new Image();
   img.onload = function () {
@@ -507,21 +503,29 @@ window.openImgExact = function (url) {
 
     win.document.open();
     win.document.write(`<!doctype html><title>Image</title>
-      <style>html,body{margin:0;background:#000} img{display:block}</style>
-      <img src="${url}" width="${w}" height="${h}">
+      <style>
+        html,body{margin:0; padding:0; overflow:hidden; background:transparent;}
+        img{display:block; width:${w}px; height:${h}px;}
+      </style>
+      <img src="${url}">
     `);
     win.document.close();
 
     setTimeout(() => {
-      const extraW = win.outerWidth - win.innerWidth;
-      const extraH = win.outerHeight - win.innerHeight;
-      win.resizeTo(w + extraW, h + extraH);
+      const dw = w - win.innerWidth;
+      const dh = h - win.innerHeight;
+
+      const newOuterW = win.outerWidth + dw;
+      const newOuterH = win.outerHeight + dh;
+
+      win.resizeTo(newOuterW, newOuterH);
     }, 0);
   };
 
   img.src = url;
   return false;
 };
+
   
 </script>
 </body>
