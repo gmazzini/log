@@ -11,14 +11,13 @@ int main(){
   MYSQL_ROW row,row1;
 
   strcpy(mycall,"IK4LZH");
+  strcpy(myemail,"gianluca@mazzini.org");
   wccall=(char **)malloc(MAXWC*sizeof(char *));
   for(i=0;i<MAXWC;i++)wccall[i]=(char *)malloc(20*sizeof(char));
   con=mysql_init(NULL);
   if(con==NULL)exit(1);
   if(mysql_real_connect(con,dbhost,dbuser,dbpassword,dbname,0,NULL,0)==NULL)exit(1);
   mysql_query(con,"SET time_zone='+00:00'");
-  sprintf(buf,"select email from who where callsign='%s'",mycall);
-  mysql_query(con,buf); res=mysql_store_result(con); row=mysql_fetch_row(res); strcpy(myemail,row[0]); mysql_free_result(res);
   
   printf(">> Insert all new call in the log not just in qrzwc\n");
   sprintf(buf,"select distinct callsign from log where mycall='%s' and callsign not in (select callsign from wc where mycall='%s')",mycall,mycall);
