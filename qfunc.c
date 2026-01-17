@@ -9,6 +9,8 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <openssl/ssl.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "/home/www/data/log.def"
 #define BUFOUT 20000000L
@@ -198,13 +200,14 @@ int setqrz(char *call){
 }
 
 int myemailsend(char *from,char *to,char *subject,char *body){
-  int sock;
+  int sock,n;
   struct hostent *he;
   struct sockaddr_in addr;
   SSL_CTX *ctx;
   SSL *ssl;
-  char buf[8192];
-  int n;
+  char buf[8192],datehdr[128],msgid[256];
+  time_t now;
+  struct tm tm;
 
   he=gethostbyname(smtp_host);
   if(!he)return 0;
@@ -272,8 +275,25 @@ int myemailsend(char *from,char *to,char *subject,char *body){
   n=SSL_read(ssl,buf,8191);
   if(n<=0)goto end;
 
+  // Date e Message-ID (minimale)
+  now=time(NULL);
+  localtime_r(&now,&tm);
+  strftime(datehdr,sizeof(datehdr),"%a, %d %b %Y %H:%M:%S %z",&tm);
+  sprintf(msgid,"<%ld.%d@mazzini.org>",(long)now,getpid());
+
   // HEADERS + BODY + terminatore
-  sprintf(buf,"Subject: %s\r\nFrom: %s\r\nTo: %s\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n%s\r\n.\r\n",subject,from,to,body);
+  sprintf(buf,
+    "Subject: %s\r\n"
+    "From: %s\r\n"
+    "To: %s\r\n"
+    "Date: %s\r\n"
+    "Message-ID: %s\r\n"
+    "MIME-Version: 1.0\r\n"
+    "Content-Type: text/html; charset=UTF-8\r\n"
+    "\r\n"
+    "%s\r\n.\r\n",
+    subject,from,to,datehdr,msgid,body
+  );
   SSL_write(ssl,buf,strlen(buf));
   n=SSL_read(ssl,buf,8191);
   if(n<=0)goto end;
@@ -288,3 +308,4 @@ int myemailsend(char *from,char *to,char *subject,char *body){
   SSL_CTX_free(ctx);
   close(sock);
 }
+
