@@ -15,7 +15,7 @@ for(;;){
   $mycq[$row["dxcc"]]=$row["cqzone"];
 }
 mysqli_free_result($query);
-$query=mysqli_query($con,"select freqtx,signaltx,signalrx,dxcc,start from log where mode='FT8' or mode='MFSK'");
+$query=mysqli_query($con,"select freqtx,signaltx,signalrx,dxcc,open from log where mode='FT8' or mode='MFSK'");
 for(;;){
   $row=mysqli_fetch_array($query);
   if($row==null)break;
@@ -29,7 +29,7 @@ for(;;){
   @$acc["all"][$signaltx-$signalrx]++;
   @$tot[$myband[$freqMHZ]]++;
   @$tot["all"]++;
-  @$cqdata[substr($row["start"],0,4)*100+(int)((substr($row["start"],5,2)-1)*100/12)][$mycq[$row["dxcc"]]]++;
+  @$cqdata[date("Y",$row["open"])*100+(int)((date("n",$row["open"])-1)*100/12)][$mycq[$row["dxcc"]]]++;
 }
 mysqli_free_result($query);
 ksort($cqdata);
