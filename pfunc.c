@@ -117,12 +117,27 @@ long numdata3(int cha,int idx,char *key){
   return 0;
 }
 
-// MANCA analisi degli slash
-char * wpx(char *s){
-  int i;
+char *wpx(char *s){
+  int i,j;
   static char out[20];
+  char *p;
   strcpy(out,s);
-  for(i=strlen(out)-1;i>=0;i--)if(out[i]>'0' && out[i]<='9')break;
+  p=strchr(out,'/');
+  if(p){
+    if((p[1]>='0'&&p[1]<='9')&&p[2]=='\0'){
+      *p='\0';
+      for(j=0;out[j];j++)if(out[j]>='0' && out[j]<='9') break;
+      out[j]='\0';
+      strcat(out,p+1);
+      return out;
+    }
+    *p='\0';
+    if(!strpbrk(out,"0123456789")){
+      strcat(out,"0");
+      return out;
+    }
+  }
+  for(i=strlen(out)-1;i>=0;i--)if(out[i]>='0'&&out[i]<='9')break;
   out[i+1]='\0';
   return out;
 }
